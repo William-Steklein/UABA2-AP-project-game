@@ -1,5 +1,5 @@
-#ifndef GAME_ENGINE_CONSTANTS_H
-#define GAME_ENGINE_CONSTANTS_H
+#ifndef GAME_ENGINE_CONSTANTS_RENDERER_H
+#define GAME_ENGINE_CONSTANTS_RENDERER_H
 
 
 #include <string>
@@ -16,4 +16,4 @@ namespace renderer {
 
 } // renderer
 
-#endif //GAME_ENGINE_CONSTANTS_H
+#endif //GAME_ENGINE_CONSTANTS_RENDERER_H

@@ -1,17 +1,35 @@
-#include "Engine.h"
+#include "engine/Engine.h"
 
 namespace engine {
-    Engine::Engine() {
+    Engine::Engine() : _physics_delta_time(1.f/60.f), _physics_time(0.f), _accumulator(0.f), _physics_speed(1.f) {
 
     }
 
     Engine::~Engine() = default;
 
     void Engine::sleep() {
-
+        Stopwatch::getInstance().sleepFrame();
     }
 
     void Engine::update() {
+        // engine update
+        update(Stopwatch::getInstance().getTime(), Stopwatch::getInstance().getDeltaTime());
 
+        // physics update
+        _accumulator += Stopwatch::getInstance().getDeltaTime() * _physics_speed;
+        while (_accumulator >= _physics_delta_time) {
+            physicsUpdate(_physics_time, _physics_delta_time);
+
+            _accumulator -= _physics_delta_time;
+            _physics_time += _physics_delta_time;
+        }
+    }
+
+    void Engine::update(double t, float dt) {
+        std::cout << "game update!" << std::endl;
+    }
+
+    void Engine::physicsUpdate(double t, float dt) {
+        std::cout << "physics update!" << std::endl;
     }
 } // engine

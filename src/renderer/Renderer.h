@@ -7,8 +7,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Game.h"
-#include "constants.h"
+#include "game/Game.h"
+#include "renderer/constants/constants.h"
 
 namespace renderer {
 

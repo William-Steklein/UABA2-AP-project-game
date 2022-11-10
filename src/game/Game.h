@@ -1,7 +1,7 @@
 #ifndef GAME_ENGINE_GAME_H
 #define GAME_ENGINE_GAME_H
 
-#include "Engine.h"
+#include <engine/Engine.h>
 
 namespace game {
 
