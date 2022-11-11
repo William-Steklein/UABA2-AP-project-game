@@ -2,7 +2,9 @@
 
 namespace engine {
     Engine::Engine() : _physics_delta_time(1.f/60.f), _physics_time(0.f), _accumulator(0.f), _physics_speed(1.f) {
-
+        LOGDEBUG("Hello world!");
+        LOGINFO("Hello world!");
+        LOGERROR("failed!");
     }
 
     Engine::~Engine() = default;
@@ -26,10 +28,10 @@ namespace engine {
     }
 
     void Engine::update(double t, float dt) {
-        std::cout << "game update!" << std::endl;
+//        LOGDEBUG("game update!");
     }
 
     void Engine::physicsUpdate(double t, float dt) {
-        std::cout << "physics update!" << std::endl;
+//        LOGDEBUG("physics update!");
     }
 } // engine

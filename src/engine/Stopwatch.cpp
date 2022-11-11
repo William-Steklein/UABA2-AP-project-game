@@ -29,13 +29,14 @@ namespace engine {
                     std::chrono::nanoseconds(std::chrono::duration_cast<std::chrono::nanoseconds>(sleep_time)));
 #endif
 
-//            std::cout << "sleep time: " << sleep_time.count() << std::endl;
+//            LOGDEBUG(sleep_time.count() << std::endl);
         }
 
         _b = std::chrono::steady_clock::now();
         std::chrono::duration<float> time_slept = _b - _a;
         _delta_time = (work_time + time_slept).count();
-//        std::cout << "time slept: " << time_slept.count() << std::endl;
+
+//        LOGDEBUG(time_slept.count() << std::endl);
 
         // average framerate counter
         _frame_count++;

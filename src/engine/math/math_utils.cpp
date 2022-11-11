@@ -7,11 +7,11 @@ namespace engine {
         return {lerp(p0.x, p1.x, alpha), lerp(p0.y, p1.y, alpha)};
     }
 
-    float to_radian(float angle) { return angle * static_cast<float>(M_PI) / 180.f; }
+    float toRadian(float angle) { return angle * static_cast<float>(M_PI) / 180.f; }
 
-    float to_degree(float angle) { return angle * 180.f / static_cast<float>(M_PI); }
+    float toDegree(float angle) { return angle * 180.f / static_cast<float>(M_PI); }
 
-    void degree_mod(float &angle) {
+    void degreeMod(float &angle) {
         if (angle > 0) {
             while (angle > 360) {
                 angle -= 360;
@@ -23,7 +23,7 @@ namespace engine {
         }
     }
 
-    void radian_mod(float &angle) {
+    void radianMod(float &angle) {
         if (angle > 0) {
             while (angle > 2 * M_PI) {
                 angle -= 2 * M_PI;

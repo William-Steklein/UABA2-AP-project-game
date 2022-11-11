@@ -8,24 +8,11 @@
 
 #include "engine/constants/constants.h"
 #include "engine/utils/windows_timersleep.h"
+#include "engine/logging/logging.h"
 
 namespace engine {
 
     class Stopwatch {
-        std::chrono::steady_clock::time_point _a;
-        std::chrono::steady_clock::time_point _b;
-        float _frame_duration_limit;
-        bool _cap_framerate;
-        float _delta_time;
-        double _time;
-
-        float _sample_duration;
-        float _duration;
-        float _frame_count;
-        float _average_framerate;
-
-        Stopwatch();
-
     public:
         Stopwatch(const Stopwatch &) = delete;
 
@@ -50,6 +37,21 @@ namespace engine {
         float getAverageFps() const;
 
         float getAverageMs() const;
+
+    private:
+        Stopwatch();
+
+        std::chrono::steady_clock::time_point _a;
+        std::chrono::steady_clock::time_point _b;
+        float _frame_duration_limit;
+        bool _cap_framerate;
+        float _delta_time;
+        double _time;
+
+        float _sample_duration;
+        float _duration;
+        float _frame_count;
+        float _average_framerate;
     };
 
 } // engine

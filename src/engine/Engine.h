@@ -3,6 +3,7 @@
 
 
 #include "engine/Stopwatch.h"
+#include "engine/logging/logging.h"
 
 namespace engine {
 
