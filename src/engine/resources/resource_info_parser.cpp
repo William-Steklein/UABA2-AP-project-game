@@ -2,6 +2,7 @@
 
 namespace engine {
     TextureResource parse_texture_info(const std::string &filepath) {
+        nlohmann::json j;
         return {};
     }
 

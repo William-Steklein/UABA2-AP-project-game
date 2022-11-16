@@ -16,6 +16,7 @@ if (WIN32)
     endif ()
 endif ()
 
+add_subdirectory(external/json-3.11.2)
 add_subdirectory(src)
 
 # data

@@ -2,6 +2,8 @@
 #define GAME_ENGINE_RESOURCE_PARSER_H
 
 
+#include <nlohmann/json.hpp>
+
 #include "engine/resources/TextureResource.h"
 #include "engine/resources/AnimationResource.h"
 #include "engine/resources/AudioResource.h"
