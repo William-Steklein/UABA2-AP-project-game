@@ -7,8 +7,10 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "game/Game.h"
+#include <game/Game.h>
+
 #include "renderer/constants/constants.h"
+#include "renderer/resources/ResourceManager.h"
 
 namespace renderer {
 
@@ -27,6 +29,7 @@ namespace renderer {
 
         std::unique_ptr<sf::RenderWindow> _window;
 
+        std::shared_ptr<ResourceManager> _resource_manager;
         std::unique_ptr<game::Game> _game;
 
         void draw();

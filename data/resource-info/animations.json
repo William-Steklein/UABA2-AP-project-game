@@ -1,0 +1,81 @@
+{
+  "explosion": {
+    "circle_explosion": [
+      0.20,
+      [
+        "data/sprites/circle-explosion/Circle_explosion1.png",
+        "data/sprites/circle-explosion/Circle_explosion2.png",
+        "data/sprites/circle-explosion/Circle_explosion3.png",
+        "data/sprites/circle-explosion/Circle_explosion4.png",
+        "data/sprites/circle-explosion/Circle_explosion5.png",
+        "data/sprites/circle-explosion/Circle_explosion6.png",
+        "data/sprites/circle-explosion/Circle_explosion7.png",
+        "data/sprites/circle-explosion/Circle_explosion8.png",
+        "data/sprites/circle-explosion/Circle_explosion9.png",
+        "data/sprites/circle-explosion/Circle_explosion10.png"
+      ]
+    ],
+    "ground_explosion": [
+      0.20,
+      [
+        "data/sprites/ground-explosion/Explosion1.png",
+        "data/sprites/ground-explosion/Explosion2.png",
+        "data/sprites/ground-explosion/Explosion3.png",
+        "data/sprites/ground-explosion/Explosion4.png",
+        "data/sprites/ground-explosion/Explosion5.png",
+        "data/sprites/ground-explosion/Explosion6.png",
+        "data/sprites/ground-explosion/Explosion7.png",
+        "data/sprites/ground-explosion/Explosion8.png",
+        "data/sprites/ground-explosion/Explosion9.png",
+        "data/sprites/ground-explosion/Explosion10.png"
+      ]
+    ]
+  },
+  "adventurer": {
+    "crouch": [
+      0.10,
+      [
+        "data/sprites/adventurer/adventurer-crouch-00.png",
+        "data/sprites/adventurer/adventurer-crouch-01.png",
+        "data/sprites/adventurer/adventurer-crouch-02.png",
+        "data/sprites/adventurer/adventurer-crouch-03.png"
+      ]
+    ],
+    "fall": [
+      0.10,
+      [
+        "data/sprites/adventurer/adventurer-fall-00.png",
+        "data/sprites/adventurer/adventurer-fall-01.png"
+      ]
+    ],
+    "idle": [
+      0.10,
+      [
+        "data/sprites/adventurer/adventurer-idle-00.png",
+        "data/sprites/adventurer/adventurer-idle-01.png",
+        "data/sprites/adventurer/adventurer-idle-02.png",
+        "data/sprites/adventurer/adventurer-idle-03.png"
+      ]
+    ],
+    "jump": [
+      0.10,
+      [
+        "data/sprites/adventurer/adventurer-jump-00.png",
+        "data/sprites/adventurer/adventurer-jump-01.png",
+        "data/sprites/adventurer/adventurer-jump-02.png",
+        "data/sprites/adventurer/adventurer-jump-03.png"
+      ]
+    ],
+    "run": [
+      0.10,
+      [
+        "data/sprites/adventurer/adventurer-run-00.png",
+        "data/sprites/adventurer/adventurer-run-01.png",
+        "data/sprites/adventurer/adventurer-run-02.png",
+        "data/sprites/adventurer/adventurer-run-03.png",
+        "data/sprites/adventurer/adventurer-run-04.png",
+        "data/sprites/adventurer/adventurer-run-05.png"
+      ]
+    ]
+  }
+}

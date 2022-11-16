@@ -1,5 +1,5 @@
-#ifndef GAME_ENGINE_LOGGING_H
-#define GAME_ENGINE_LOGGING_H
+#ifndef GAME_ENGINE_LOGGER_H
+#define GAME_ENGINE_LOGGER_H
 
 #include <iostream>
 #include <string>
@@ -46,4 +46,4 @@ namespace engine {
 
 #define LOGERROR(message) *engine::Logger::getInstance().getErrorStream() << message << std::endl
 
-#endif //GAME_ENGINE_LOGGING_H
+#endif //GAME_ENGINE_LOGGER_H

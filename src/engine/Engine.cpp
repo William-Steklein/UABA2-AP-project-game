@@ -1,10 +1,10 @@
 #include "engine/Engine.h"
 
 namespace engine {
-    Engine::Engine() : _physics_delta_time(1.f/60.f), _physics_time(0.f), _accumulator(0.f), _physics_speed(1.f) {
-        LOGDEBUG("Hello world!");
-        LOGINFO("Hello world!");
-        LOGERROR("failed!");
+    Engine::Engine(std::shared_ptr<IResourceManager> resource_manager)
+            : _resource_manager(std::move(resource_manager)), _physics_delta_time(1.f / 60.f), _physics_time(0.f),
+              _accumulator(0.f), _physics_speed(1.f) {
+
     }
 
     Engine::~Engine() = default;
@@ -28,10 +28,14 @@ namespace engine {
     }
 
     void Engine::update(double t, float dt) {
-//        LOGDEBUG("game update!");
+        for (const auto &entity: _entities) {
+            entity->update();
+        }
     }
 
     void Engine::physicsUpdate(double t, float dt) {
-//        LOGDEBUG("physics update!");
+        for (const auto &physics_entity: _physics_entities) {
+            physics_entity->update();
+        }
     }
 } // engine

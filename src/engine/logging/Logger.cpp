@@ -1,4 +1,4 @@
-#include "logging.h"
+#include "Logger.h"
 
 namespace engine {
     Logger &Logger::getInstance() {

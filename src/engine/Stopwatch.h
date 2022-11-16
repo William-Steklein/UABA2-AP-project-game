@@ -8,7 +8,7 @@
 
 #include "engine/constants/constants.h"
 #include "engine/utils/windows_timersleep.h"
-#include "engine/logging/logging.h"
+#include "engine/logging/Logger.h"
 
 namespace engine {
 

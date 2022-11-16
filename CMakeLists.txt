@@ -9,12 +9,12 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
 endif ()
 
-#if (WIN32)
-#    if (CMAKE_BUILD_TYPE MATCHES "Release")
-#        # -mwindows removes the console window
-#        set(CMAKE_CXX_FLAGS "-pthread -mwindows")
-#    endif ()
-#endif ()
+if (WIN32)
+    if (CMAKE_BUILD_TYPE MATCHES "Release")
+        # -mwindows removes the console window
+        set(CMAKE_CXX_FLAGS "-pthread -mwindows")
+    endif ()
+endif ()
 
 add_subdirectory(src)
 

@@ -1,7 +1,7 @@
 #ifndef GAME_ENGINE_ENTITY_H
 #define GAME_ENGINE_ENTITY_H
 
-namespace renderer {
+namespace engine {
 
     class Entity {
     public:

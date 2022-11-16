@@ -1,6 +1,6 @@
-#include "engine/entity/Entity.h"
+#include "engine/entities/Entity.h"
 
-namespace renderer {
+namespace engine {
     Entity::Entity() {
 
     }

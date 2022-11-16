@@ -2,30 +2,42 @@
 #define GAME_ENGINE_ENGINE_H
 
 
+#include <memory>
+#include <set>
+#include <utility>
+
 #include "engine/Stopwatch.h"
-#include "engine/logging/logging.h"
+#include "engine/logging/Logger.h"
+#include "engine/entities/Entity.h"
+#include "engine/resources/IResourceManager.h"
 
 namespace engine {
 
     class Engine {
     public:
-        Engine();
+        Engine(std::shared_ptr<IResourceManager> resource_manager);
 
         ~Engine();
 
         static void sleep();
 
-        void update();
+        virtual void update();
+
+    protected:
+        std::set<std::shared_ptr<Entity>> _entities;
+        std::set<std::shared_ptr<Entity>> _physics_entities;
+
+        std::shared_ptr<IResourceManager> _resource_manager;
+
+        virtual void update(double t, float dt);
+
+        virtual void physicsUpdate(double t, float dt);
 
     private:
         float _physics_delta_time;
         double _physics_time;
         float _accumulator;
         float _physics_speed;
-
-        void update(double t, float dt);
-
-        void physicsUpdate(double t, float dt);
     };
 
 } // engine

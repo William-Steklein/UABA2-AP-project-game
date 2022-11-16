@@ -6,7 +6,8 @@ namespace renderer {
         _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(_screen_width, _screen_height),
                                                      constants::window_title);
 
-        _game = std::make_unique<game::Game>();
+        _resource_manager = std::make_shared<ResourceManager>();
+        _game = std::make_unique<game::Game>(_resource_manager);
     }
 
     Renderer::~Renderer() = default;
