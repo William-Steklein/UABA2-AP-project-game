@@ -29,9 +29,9 @@ namespace engine {
     private:
         Logger();
 
-        std::ostream* _debug_stream;
-        std::ostream* _info_stream;
-        std::ostream* _error_stream;
+        std::ostream *_debug_stream;
+        std::ostream *_info_stream;
+        std::ostream *_error_stream;
     };
 
 } // engine

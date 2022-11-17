@@ -19,6 +19,8 @@ namespace game {
         void update(double t, float dt) override;
 
         void physicsUpdate(double t, float dt) override;
+
+        void loadResources();
     };
 
 } // game

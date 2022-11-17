@@ -1,6 +1,7 @@
 #include "engine/entities/Entity.h"
 
 namespace engine {
+
     Entity::Entity() {
 
     }
@@ -10,4 +11,5 @@ namespace engine {
     void Entity::update() {
 
     }
-} // renderer
+
+} // engine

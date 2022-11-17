@@ -1,6 +1,7 @@
 #include "engine/Engine.h"
 
 namespace engine {
+
     Engine::Engine(std::shared_ptr<IResourceManager> resource_manager)
             : _resource_manager(std::move(resource_manager)), _physics_delta_time(1.f / 60.f), _physics_time(0.f),
               _accumulator(0.f), _physics_speed(1.f) {
@@ -38,4 +39,5 @@ namespace engine {
             physics_entity->update();
         }
     }
+
 } // engine

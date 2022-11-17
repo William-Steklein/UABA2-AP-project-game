@@ -3,6 +3,7 @@
 #ifdef WIN32
 
 namespace engine {
+
     void timerSleep(double seconds) {
         using namespace std::chrono;
 
@@ -37,6 +38,7 @@ namespace engine {
         auto start = high_resolution_clock::now();
         while (static_cast<double>((high_resolution_clock::now() - start).count()) / 1e9 < seconds);
     }
+
 } // engine
 
 #endif

@@ -2,19 +2,23 @@
 #define GAME_ENGINE_RESOURCE_PARSER_H
 
 
+#include <iostream>
+#include <fstream>
+
 #include <nlohmann/json.hpp>
 
+#include "engine/utils/file_io.h"
 #include "engine/resources/TextureResource.h"
 #include "engine/resources/AnimationResource.h"
 #include "engine/resources/AudioResource.h"
 
 namespace engine {
 
-    TextureResource parse_texture_info(const std::string &filepath);
+    std::vector<TextureResource> parseTextureInfo(const std::string &filepath);
 
-    AnimationResourceGroup parse_animation_info(const std::string &filepath);
+    std::vector<AnimationResourceGroup> parseAnimationInfo(const std::string &filepath);
 
-    AudioResource parse_audio_info(const std::string &filepath);
+    std::vector<AudioResource> parseAudioInfo(const std::string &filepath);
 
 } // engine
 

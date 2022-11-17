@@ -1,3 +1,5 @@
 {
-
+  "menu": "data/ui/menu.png",
+  "button": "data/ui/button.png",
+  "hamburger": "data/ui/hamburger.png"
 }

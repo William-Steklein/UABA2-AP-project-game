@@ -1,6 +1,7 @@
 #include "math_utils.h"
 
 namespace engine {
+
     float lerp(float x0, float x1, float alpha) { return (1 - alpha) * x0 + alpha * x1; }
 
     Vector2f lerp(const Vector2f &p0, const Vector2f &p1, float alpha) {
@@ -110,4 +111,5 @@ namespace engine {
         float euler = 2.71828;
         return 1 / (1 + std::pow(euler, -(a * x) + b));
     }
+
 } // engine

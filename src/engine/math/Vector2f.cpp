@@ -1,6 +1,7 @@
 #include "engine/math/Vector2f.h"
 
 namespace engine {
+
     Vector2f::Vector2f() : x(0), y(0) {}
 
     Vector2f::Vector2f(float _x, float _y) : x(_x), y(_y) {}
@@ -178,4 +179,5 @@ namespace engine {
     std::string Vector2f::toString() const {
         return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
     }
+
 } // engine

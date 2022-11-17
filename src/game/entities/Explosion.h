@@ -4,9 +4,13 @@
 
 #include <Engine/entities/Entity.h>
 
-class Explosion: public engine::Entity {
+namespace game {
 
-};
+    class Explosion : public engine::Entity {
+
+    };
+
+} // game
 
 
 #endif //GAME_ENGINE_EXPLOSION_H

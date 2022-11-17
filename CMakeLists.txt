@@ -16,8 +16,11 @@ if (WIN32)
     endif ()
 endif ()
 
-add_subdirectory(external/json-3.11.2)
+add_subdirectory(external)
 add_subdirectory(src)
+
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE renderer_lib)
 
 # data
 file(COPY "./data" DESTINATION "${CMAKE_BINARY_DIR}")

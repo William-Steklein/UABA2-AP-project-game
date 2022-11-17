@@ -12,6 +12,6 @@ namespace engine {
         void update();
     };
 
-} // renderer
+} // engine
 
 #endif //GAME_ENGINE_ENTITY_H

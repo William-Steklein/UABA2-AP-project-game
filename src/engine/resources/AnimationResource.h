@@ -8,8 +8,9 @@
 namespace engine {
 
     struct AnimationResource {
-        std::vector<std::string> frame_paths;
+        std::string name;
         float frame_time;
+        std::vector<std::string> frame_paths;
     };
 
     struct AnimationResourceGroup {

@@ -1,9 +1,9 @@
 #include "game/Game.h"
 
 namespace game {
+
     Game::Game(std::shared_ptr<engine::IResourceManager> resource_manager) : Engine(std::move(resource_manager)) {
-        _resource_manager->loadAnimationResourceGroups(
-                engine::parse_animation_info("data/resource-info/animations.json"));
+        loadResources();
 
         std::shared_ptr<engine::Entity> new_entity = std::make_shared<engine::Entity>(engine::Entity());
 //        new_entity.addAudioComponent = ;
@@ -24,4 +24,12 @@ namespace game {
     void Game::physicsUpdate(double t, float dt) {
         Engine::physicsUpdate(t, dt);
     }
+
+    void Game::loadResources() {
+        _resource_manager->loadTextureResources(engine::parseTextureInfo("data/resource-info/textures.json"));
+        _resource_manager->loadAnimationResourceGroups(
+                engine::parseAnimationInfo("data/resource-info/animations.json"));
+        _resource_manager->loadAudioResources(engine::parseAudioInfo("data/resource-info/audio.json"));
+    }
+
 } // game

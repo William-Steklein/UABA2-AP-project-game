@@ -1,7 +1,6 @@
 #include "renderer/Renderer.h"
 
-int main()
-{
+int main() {
     renderer::Renderer app;
     app.run();
 
