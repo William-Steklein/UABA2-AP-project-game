@@ -3,19 +3,26 @@
 
 
 #include "engine/resources/resource_info_parser.h"
+#include "engine/resources/Animation.h"
+#include "engine/constants/constants.h"
 
 namespace engine {
 
     class IResourceManager {
     public:
-        virtual void loadTextureResources(const std::vector<TextureResource> &texture_resource) = 0;
+        virtual void loadTextureResources(const std::vector<TextureResource> &texture_resources) = 0;
 
         virtual void
-        loadAnimationResourceGroups(const std::vector<AnimationResourceGroup> &animation_resource_group) = 0;
+        loadAnimationResourceGroups(const std::vector<AnimationResourceGroup> &animation_resource_groups);
 
-        virtual void loadAudioResources(const std::vector<AudioResource> &audio_resource) = 0;
+        std::shared_ptr<AnimationGroup> getAnimationGroup(const std::string &animation_id);
+
+        virtual void loadAudioResources(const std::vector<AudioResource> &audio_resources) = 0;
 
         // todo: font loading
+
+    private:
+        std::map<std::string, std::shared_ptr<AnimationGroup>> _animation_groups;
     };
 
 } // engine

@@ -7,7 +7,12 @@
 namespace game {
 
     class Explosion : public engine::Entity {
+    public:
+        Explosion(std::shared_ptr<engine::IEntityView> view, std::shared_ptr<engine::EntityAnimation> animation);
 
+        ~Explosion();
+
+        void update(double t, float dt) override;
     };
 
 } // game

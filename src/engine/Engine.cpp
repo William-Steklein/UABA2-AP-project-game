@@ -2,8 +2,10 @@
 
 namespace engine {
 
-    Engine::Engine(std::shared_ptr<IResourceManager> resource_manager)
-            : _resource_manager(std::move(resource_manager)), _physics_delta_time(1.f / 60.f), _physics_time(0.f),
+    Engine::Engine(std::shared_ptr<IResourceManager> resource_manager,
+                   std::shared_ptr<IEntityViewCreator> entity_view_creator)
+            : _resource_manager(std::move(resource_manager)), _entity_view_creator(std::move(entity_view_creator)),
+              _physics_delta_time(1.f / 60.f), _physics_time(0.f),
               _accumulator(0.f), _physics_speed(1.f) {
 
     }
@@ -30,13 +32,13 @@ namespace engine {
 
     void Engine::update(double t, float dt) {
         for (const auto &entity: _entities) {
-            entity->update();
+            entity->update(t, dt);
         }
     }
 
     void Engine::physicsUpdate(double t, float dt) {
         for (const auto &physics_entity: _physics_entities) {
-            physics_entity->update();
+            physics_entity->update(t, dt);
         }
     }
 

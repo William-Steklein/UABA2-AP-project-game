@@ -9,6 +9,8 @@ namespace engine {
 
         const float sample_duration = 0.5f;
 
+        const float animation_frame_time_minimum = 0.001f;
+
     } // constants
 
 } // engine

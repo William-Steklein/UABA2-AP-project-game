@@ -4,12 +4,15 @@
 
 #include <engine/Engine.h>
 #include <engine/entities/Entity.h>
+#include <engine/entities/components/EntityAnimation.h>
+#include "game/entities/Explosion.h"
 
 namespace game {
 
     class Game : public engine::Engine {
     public:
-        Game(std::shared_ptr<engine::IResourceManager> resource_manager);
+        Game(std::shared_ptr<engine::IResourceManager> resource_manager,
+             std::shared_ptr<engine::IEntityViewCreator> entity_view_creator);
 
         ~Game();
 

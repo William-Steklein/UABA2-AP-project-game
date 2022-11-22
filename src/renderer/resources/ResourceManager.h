@@ -17,10 +17,14 @@ namespace renderer {
 
         void loadAudioResources(const std::vector<engine::AudioResource> &audio_resources) override;
 
+        std::vector<std::shared_ptr<sf::Texture>> getTextureGroup(const std::string &texture_group_id);
+
     private:
         std::map<std::string, std::vector<std::shared_ptr<sf::Texture>>> _texture_groups;
 
-        bool checkTextureNameExists(const std::string &texture_name) const;
+        bool checkTextureGroupIdLoaded(const std::string &texture_group_id) const;
+
+        void checkTextureGroupIdExists(const std::string &texture_group_id);
     };
 
 } // renderer

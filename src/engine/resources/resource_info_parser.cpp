@@ -19,7 +19,7 @@ namespace engine {
         for (const auto &item: j.items()) {
             TextureResource texture_resource;
 
-            texture_resource.name = item.key();
+            texture_resource.id = item.key();
             texture_resource.texture_path = item.value();
 
             texture_info.push_back(texture_resource);
@@ -36,19 +36,18 @@ namespace engine {
         for (const auto &item: j.items()) {
             AnimationResourceGroup animation_resource_group;
 
-            animation_resource_group.name = item.key();
+            animation_resource_group.id = item.key();
 
             for (const auto &animation: item.value().items()) {
                 AnimationResource animation_resource;
 
-                animation_resource.name = animation.key();
                 animation_resource.frame_time = animation.value()[0];
 
                 for (const auto &frame: animation.value()[1]) {
                     animation_resource.frame_paths.push_back(frame);
                 }
 
-                animation_resource_group.animation_resources.push_back(animation_resource);
+                animation_resource_group.animation_resources[animation.key()] = animation_resource;
             }
 
             animation_info.push_back(animation_resource_group);
@@ -65,7 +64,7 @@ namespace engine {
         for (const auto &item: j.items()) {
             AudioResource audio_resource;
 
-            audio_resource.name = item.key();
+            audio_resource.id = item.key();
             audio_resource.audio_path = item.value();
 
             audio_info.push_back(audio_resource);

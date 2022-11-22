@@ -8,9 +8,7 @@
 #include <nlohmann/json.hpp>
 
 #include "engine/utils/file_io.h"
-#include "engine/resources/TextureResource.h"
-#include "engine/resources/AnimationResource.h"
-#include "engine/resources/AudioResource.h"
+#include "engine/resources/Resources.h"
 
 namespace engine {
 

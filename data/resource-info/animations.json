@@ -1,7 +1,7 @@
 {
   "explosion": {
     "circle_explosion": [
-      0.20,
+      0.10,
       [
         "data/sprites/circle-explosion/Circle_explosion1.png",
         "data/sprites/circle-explosion/Circle_explosion2.png",
@@ -16,7 +16,7 @@
       ]
     ],
     "ground_explosion": [
-      0.20,
+      0.10,
       [
         "data/sprites/ground-explosion/Explosion1.png",
         "data/sprites/ground-explosion/Explosion2.png",

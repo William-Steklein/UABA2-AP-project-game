@@ -10,12 +10,14 @@
 #include "engine/logging/Logger.h"
 #include "engine/entities/Entity.h"
 #include "engine/resources/IResourceManager.h"
+#include "engine/entities/IEntityViewCreator.h"
 
 namespace engine {
 
     class Engine {
     public:
-        Engine(std::shared_ptr<IResourceManager> resource_manager);
+        Engine(std::shared_ptr<IResourceManager> resource_manager,
+               std::shared_ptr<IEntityViewCreator> entity_view_creator);
 
         ~Engine();
 
@@ -28,6 +30,7 @@ namespace engine {
         std::set<std::shared_ptr<Entity>> _physics_entities;
 
         std::shared_ptr<IResourceManager> _resource_manager;
+        std::shared_ptr<IEntityViewCreator> _entity_view_creator;
 
         virtual void update(double t, float dt);
 
