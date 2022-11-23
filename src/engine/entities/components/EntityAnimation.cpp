@@ -41,12 +41,16 @@ namespace engine {
             }
         }
 
-        if (update_view) changeView();
+        if (update_view) updateViewTexture();
     }
 
-    void EntityAnimation::setView(std::weak_ptr<IEntityView> view) {
+    void EntityAnimation::setView(std::shared_ptr<IEntityView> view) {
         _view = std::move(view);
-        changeView();
+        updateViewTexture();
+    }
+
+    std::shared_ptr<IEntityView> EntityAnimation::getView() const {
+        return _view;
     }
 
     void EntityAnimation::start(const std::string &animation_id, bool loop, bool mirror_h, bool mirror_v) {
@@ -64,7 +68,7 @@ namespace engine {
         _finished = false;
         _loop_finished = false;
 
-        changeView();
+        updateViewTexture();
     }
 
     void EntityAnimation::setLoop(bool loop) {
@@ -103,9 +107,9 @@ namespace engine {
         return _current_id;
     }
 
-    void EntityAnimation::changeView() {
-        if (!_view.expired()) {
-            _view.lock()->setTexture(_current_frame, _mirror_h, _mirror_v);
+    void EntityAnimation::updateViewTexture() {
+        if (_view.get()) {
+            _view->setTexture(_current_frame, _mirror_h, _mirror_v);
         } else {
             throw std::runtime_error("An EntityAnimation with animation_group_id \"" + _animation_group->id +
                                      "\" does not have an EntityView");

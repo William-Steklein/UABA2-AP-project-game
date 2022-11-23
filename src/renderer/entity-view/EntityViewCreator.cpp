@@ -9,7 +9,7 @@ namespace renderer {
 
     EntityViewCreator::~EntityViewCreator() = default;
 
-    std::shared_ptr<engine::IEntityView> EntityViewCreator::create(unsigned int layer, const std::string &texture_id) {
+    std::shared_ptr<engine::IEntityView> EntityViewCreator::create(const std::string &texture_id, unsigned int layer) {
         std::shared_ptr<EntityView> entity_view = std::make_shared<EntityView>(
                 _resource_manager->getTextureGroup(texture_id));
 

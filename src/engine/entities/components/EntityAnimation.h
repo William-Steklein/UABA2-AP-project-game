@@ -19,7 +19,9 @@ namespace engine {
 
         void update(double t, float dt, Entity &entity) override;
 
-        void setView(std::weak_ptr<IEntityView> view);
+        void setView(std::shared_ptr<IEntityView> view);
+
+        std::shared_ptr<IEntityView> getView() const;
 
         void start(const std::string &animation_id, bool loop, bool mirror_h, bool mirror_v);
 
@@ -40,6 +42,7 @@ namespace engine {
         std::string getCurrentAnimationId() const;
 
     private:
+        std::shared_ptr<IEntityView> _view;
         std::shared_ptr<AnimationGroup> _animation_group;
 
         std::string _current_id;
@@ -52,9 +55,7 @@ namespace engine {
         bool _mirror_h;
         bool _mirror_v;
 
-        std::weak_ptr<IEntityView> _view;
-
-        void changeView();
+        void updateViewTexture();
     };
 
 } // engine

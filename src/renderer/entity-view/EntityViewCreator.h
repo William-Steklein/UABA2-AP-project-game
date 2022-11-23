@@ -18,7 +18,7 @@ namespace renderer {
 
         ~EntityViewCreator();
 
-        std::shared_ptr<engine::IEntityView> create(unsigned int layer, const std::string &texture_id) override;
+        std::shared_ptr<engine::IEntityView> create(const std::string &texture_id, unsigned int layer) override;
 
         std::vector<std::shared_ptr<EntityView>> getEntityViews();
 

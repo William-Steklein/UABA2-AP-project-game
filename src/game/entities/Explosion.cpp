@@ -1,9 +1,11 @@
 #include "Explosion.h"
 
 namespace game {
-    Explosion::Explosion(std::shared_ptr<engine::IEntityView> view, std::shared_ptr<engine::EntityAnimation> animation)
-            : engine::Entity(std::move(view), std::move(animation)) {
-        // animation name, loop, mirror_h, mirror_v
+    Explosion::Explosion(const engine::Transform &transform,
+                         std::shared_ptr<engine::EntityAnimation> animation)
+            : engine::Entity(transform, nullptr, std::move(animation)) {
+        checkComponent(_view);
+        checkComponent(_animation);
         _animation->start("circle_explosion", false, false, false);
 //        _audio.play("explosion", false);
     }
@@ -12,13 +14,12 @@ namespace game {
 
     void Explosion::update(double t, float dt) {
         if (_animation->isFinished()) {
-//            LOGDEBUG(true);
             _animation->start("ground_explosion", true, false, false);
         }
 
         if (_animation->isLoopFinished()) {
             _animation->setMirrorV(!_animation->getMirrorV());
-            LOGDEBUG("loop finished");
+//            setRotation(_rotation + 20);
         }
 
         Entity::update(t, dt);

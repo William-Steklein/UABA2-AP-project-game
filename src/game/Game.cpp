@@ -8,12 +8,12 @@ namespace game {
         loadResources();
 
 //        std::shared_ptr<engine::Entity> new_entity = std::make_shared<engine::Entity>(engine::Entity(
-//                _entity_view_creator->create(0, "explosion"),
-//                std::make_shared<engine::EntityAnimation>(_resource_manager->getAnimationGroup("explosion"))
+//                {{0, 0}, {1, 1}, 0},
+//                _entity_view_creator->create("explosion", 0)
 //        ));
         std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
-                _entity_view_creator->create(0, "explosion"),
-                std::make_shared<engine::EntityAnimation>(_resource_manager->getAnimationGroup("explosion"))
+                {{0, 0}, {1, 1}, 0},
+                _entity_animation_creator->create("explosion", 0)
         ));
         _physics_entities.insert(new_entity);
     }

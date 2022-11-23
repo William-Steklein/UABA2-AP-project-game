@@ -11,6 +11,7 @@
 #include "engine/entities/Entity.h"
 #include "engine/resources/IResourceManager.h"
 #include "engine/entities/IEntityViewCreator.h"
+#include "engine/entities/components/EntityAnimationCreator.h"
 
 namespace engine {
 
@@ -31,6 +32,7 @@ namespace engine {
 
         std::shared_ptr<IResourceManager> _resource_manager;
         std::shared_ptr<IEntityViewCreator> _entity_view_creator;
+        std::shared_ptr<EntityAnimationCreator> _entity_animation_creator;
 
         virtual void update(double t, float dt);
 

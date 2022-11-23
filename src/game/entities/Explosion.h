@@ -8,7 +8,8 @@ namespace game {
 
     class Explosion : public engine::Entity {
     public:
-        Explosion(std::shared_ptr<engine::IEntityView> view, std::shared_ptr<engine::EntityAnimation> animation);
+        Explosion(const engine::Transform &transform,
+                  std::shared_ptr<engine::EntityAnimation> animation = nullptr);
 
         ~Explosion();
 

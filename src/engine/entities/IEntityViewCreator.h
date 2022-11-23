@@ -8,7 +8,7 @@ namespace engine {
 
     class IEntityViewCreator {
     public:
-        virtual std::shared_ptr<IEntityView> create(unsigned int layer, const std::string &texture_id) = 0;
+        virtual std::shared_ptr<IEntityView> create(const std::string &texture_id, unsigned int layer) = 0;
     };
 
 } // engine

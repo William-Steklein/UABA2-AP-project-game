@@ -5,7 +5,7 @@
 #include <memory>
 #include <utility>
 
-#include "engine/math/Vector2f.h"
+#include "engine/entities/components/Transform.h"
 #include "engine/entities/components/IEntityView.h"
 #include "engine/entities/components/EntityAnimation.h"
 
@@ -13,11 +13,14 @@ namespace engine {
 
     class Entity {
     public:
-        Entity(std::shared_ptr<IEntityView> view, std::shared_ptr<EntityAnimation> animation);
+        Entity(const Transform &transform,
+               std::shared_ptr<IEntityView> view = nullptr, std::shared_ptr<EntityAnimation> animation = nullptr);
 
         ~Entity();
 
         virtual void update(double t, float dt);
+
+        const Transform &getTransform() const;
 
         const Vector2f &getPosition() const;
 
@@ -31,13 +34,18 @@ namespace engine {
 
         void setRotation(const float &rotation);
 
-        void setView(std::shared_ptr<IEntityView> view);
+        void setViewComponent(std::shared_ptr<IEntityView> view);
+
+        void setAnimationComponent(std::shared_ptr<EntityAnimation> animation);
+
+//        void setAudioComponent(std::shared_ptr<IEntityAudio> audio);
+
+//        void setRigidBodyComponent(std::shared_ptr<EntityRigidBody> rigid_body);
+
+        void checkComponent(const std::shared_ptr<IEntityComponent> &component);
 
     protected:
-        // transform
-        Vector2f _position;
-        Vector2f _scale;
-        float _rotation;
+        Transform _transform;
 
         // components
         std::shared_ptr<IEntityView> _view;

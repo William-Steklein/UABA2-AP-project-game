@@ -12,7 +12,7 @@ namespace renderer {
 //            engine::Vector2f new_position = entity_shared->getScreenPosition();
 //            _sprite.setPosition(new_position.x, new_position.y);
 
-//        auto texture_size = _sprite->getTexture()->getSize();
+        auto texture_size = _sprite->getTexture()->getSize();
         engine::Vector2f entity_size = entity.getScale();
 
 //            float x_scale_factor = entity_shared->getScreenViewSize().x /
