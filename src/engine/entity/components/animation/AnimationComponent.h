@@ -1,27 +1,27 @@
-#ifndef GAME_ENGINE_ENTITYANIMATION_H
-#define GAME_ENGINE_ENTITYANIMATION_H
+#ifndef GAME_ENGINE_ANIMATIONCOMPONENT_H
+#define GAME_ENGINE_ANIMATIONCOMPONENT_H
 
 
 #include <utility>
 
-#include "engine/entities/components/IEntityComponent.h"
-#include "engine/entities/components/IEntityView.h"
+#include "engine/entity/components/IComponent.h"
+#include "engine/entity/components/view/IViewComponent.h"
 #include "engine/resources/Animation.h"
 #include "engine/logging/Logger.h"
 
 namespace engine {
 
-    class EntityAnimation : public IEntityComponent {
+    class AnimationComponent : public IComponent {
     public:
-        EntityAnimation(std::shared_ptr<AnimationGroup> animation_group);
+        AnimationComponent(std::shared_ptr<AnimationGroup> animation_group);
 
-        ~EntityAnimation() = default;
+        ~AnimationComponent() = default;
 
         void update(double t, float dt, Entity &entity) override;
 
-        void setView(std::shared_ptr<IEntityView> view);
+        void setView(std::shared_ptr<IViewComponent> component);
 
-        std::shared_ptr<IEntityView> getView() const;
+        std::shared_ptr<IViewComponent> getView() const;
 
         void start(const std::string &animation_id, bool loop, bool mirror_h, bool mirror_v);
 
@@ -42,7 +42,7 @@ namespace engine {
         std::string getCurrentAnimationId() const;
 
     private:
-        std::shared_ptr<IEntityView> _view;
+        std::shared_ptr<IViewComponent> _view;
         std::shared_ptr<AnimationGroup> _animation_group;
 
         std::string _current_id;
@@ -60,4 +60,4 @@ namespace engine {
 
 } // engine
 
-#endif //GAME_ENGINE_ENTITYANIMATION_H
+#endif //GAME_ENGINE_ANIMATIONCOMPONENT_H

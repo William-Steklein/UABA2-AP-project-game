@@ -2,7 +2,8 @@
 
 namespace renderer {
     EntityView::EntityView(std::vector<std::shared_ptr<sf::Texture>> texture_group)
-            : engine::IEntityView(), _texture_group(std::move(texture_group)), _sprite(std::make_shared<sf::Sprite>()) {
+            : engine::IViewComponent(), _texture_group(std::move(texture_group)),
+              _sprite(std::make_shared<sf::Sprite>()) {
         updateSpriteTexture();
     }
 
@@ -30,7 +31,7 @@ namespace renderer {
     }
 
     void EntityView::setTexture(unsigned int texture_index, bool mirror_h, bool mirror_v) {
-        IEntityView::setTexture(texture_index, mirror_h, mirror_v);
+        IViewComponent::setTexture(texture_index, mirror_h, mirror_v);
 
         updateSpriteTexture();
     }

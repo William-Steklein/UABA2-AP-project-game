@@ -1,9 +1,8 @@
 #include "game/Game.h"
 
 namespace game {
-
     Game::Game(std::shared_ptr<engine::IResourceManager> resource_manager,
-               std::shared_ptr<engine::IEntityViewCreator> entity_view_creator)
+               std::shared_ptr<engine::IViewComponentCreator> entity_view_creator)
             : Engine(std::move(resource_manager), std::move(entity_view_creator)) {
         loadResources();
 
@@ -38,5 +37,4 @@ namespace game {
                 engine::parseAnimationInfo("data/resource-info/animations.json"));
         _resource_manager->loadAudioResources(engine::parseAudioInfo("data/resource-info/audio.json"));
     }
-
 } // game

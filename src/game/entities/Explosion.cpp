@@ -2,7 +2,7 @@
 
 namespace game {
     Explosion::Explosion(const engine::Transform &transform,
-                         std::shared_ptr<engine::EntityAnimation> animation)
+                         std::shared_ptr<engine::AnimationComponent> animation)
             : engine::Entity(transform, nullptr, std::move(animation)) {
         checkComponent(_view);
         checkComponent(_animation);

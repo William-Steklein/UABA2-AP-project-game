@@ -1,7 +1,6 @@
 #include "Logger.h"
 
 namespace engine {
-
     Logger &Logger::getInstance() {
         static Logger instance;
         return instance;
@@ -34,5 +33,4 @@ namespace engine {
     void Logger::setErrorStream(std::ostream *errorStream) {
         _error_stream = errorStream;
     }
-
 } // engine

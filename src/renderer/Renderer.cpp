@@ -1,7 +1,6 @@
 #include "renderer/Renderer.h"
 
 namespace renderer {
-
     Renderer::Renderer() : _screen_width(constants::screen_width), _screen_height(constants::screen_height),
                            _running(true) {
         _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(_screen_width, _screen_height),
@@ -58,5 +57,4 @@ namespace renderer {
         _window->close();
         _running = false;
     }
-
 } // renderer

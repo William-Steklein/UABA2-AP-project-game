@@ -6,19 +6,20 @@
 #include <vector>
 #include <map>
 
-#include <engine/entities/IEntityViewCreator.h>
+#include <engine/entity/components/view/IViewComponentCreator.h>
+
 #include "renderer/entity-view/EntityView.h"
 #include "renderer/resources/ResourceManager.h"
 
 namespace renderer {
 
-    class EntityViewCreator : public engine::IEntityViewCreator {
+    class EntityViewCreator : public engine::IViewComponentCreator {
     public:
         EntityViewCreator(std::shared_ptr<ResourceManager> resource_manager);
 
         ~EntityViewCreator();
 
-        std::shared_ptr<engine::IEntityView> create(const std::string &texture_id, unsigned int layer) override;
+        std::shared_ptr<engine::IViewComponent> create(const std::string &texture_id, unsigned int layer) override;
 
         std::vector<std::shared_ptr<EntityView>> getEntityViews();
 

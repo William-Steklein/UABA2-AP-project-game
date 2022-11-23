@@ -1,7 +1,6 @@
 #include "ResourceManager.h"
 
 namespace renderer {
-
     inline std::shared_ptr<sf::Texture> loadTextureFromFile(const std::string &filepath) {
         std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
 
@@ -68,6 +67,4 @@ namespace renderer {
             throw std::runtime_error("Unable to get texture group with id \"" + texture_group_id + "\"");
         }
     }
-
-
 } // renderer

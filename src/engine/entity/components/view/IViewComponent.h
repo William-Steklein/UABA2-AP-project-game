@@ -1,15 +1,15 @@
-#ifndef GAME_ENGINE_IENTITYVIEW_H
-#define GAME_ENGINE_IENTITYVIEW_H
+#ifndef GAME_ENGINE_IVIEWCOMPONENT_H
+#define GAME_ENGINE_IVIEWCOMPONENT_H
 
 
-#include "engine/entities/components/IEntityComponent.h"
 #include "engine/math/Vector2f.h"
+#include "engine/entity/components/IComponent.h"
 
 namespace engine {
 
-    class IEntityView : public IEntityComponent {
+    class IViewComponent : public IComponent {
     public:
-        IEntityView();
+        IViewComponent();
 
         void update(double t, float dt, Entity &entity) override = 0;
 
@@ -25,4 +25,4 @@ namespace engine {
 
 } // engine
 
-#endif //GAME_ENGINE_IENTITYVIEW_H
+#endif //GAME_ENGINE_IVIEWCOMPONENT_H

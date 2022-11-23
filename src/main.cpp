@@ -1,4 +1,4 @@
-#include "renderer/Renderer.h"
+#include <renderer/Renderer.h>
 
 int main() {
     renderer::Renderer app;

@@ -9,13 +9,13 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include <engine/entities/Entity.h>
-#include <engine/entities/components/IEntityView.h>
+#include <engine/entity/Entity.h>
+#include <engine/entity/components/view/IViewComponent.h>
 #include <engine/math/math_utils.h>
 
 namespace renderer {
 
-    class EntityView : public engine::IEntityView {
+    class EntityView : public engine::IViewComponent {
     public:
         EntityView(std::vector<std::shared_ptr<sf::Texture>> texture_group);
 

@@ -2,14 +2,14 @@
 #define GAME_ENGINE_EXPLOSION_H
 
 
-#include <Engine/entities/Entity.h>
+#include <engine/entity/Entity.h>
 
 namespace game {
 
     class Explosion : public engine::Entity {
     public:
         Explosion(const engine::Transform &transform,
-                  std::shared_ptr<engine::EntityAnimation> animation = nullptr);
+                  std::shared_ptr<engine::AnimationComponent> animation = nullptr);
 
         ~Explosion();
 

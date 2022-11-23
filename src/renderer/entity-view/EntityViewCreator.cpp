@@ -1,7 +1,6 @@
 #include "EntityViewCreator.h"
 
 namespace renderer {
-
     EntityViewCreator::EntityViewCreator(std::shared_ptr<ResourceManager> resource_manager)
             : _resource_manager(std::move(resource_manager)) {
 
@@ -9,7 +8,8 @@ namespace renderer {
 
     EntityViewCreator::~EntityViewCreator() = default;
 
-    std::shared_ptr<engine::IEntityView> EntityViewCreator::create(const std::string &texture_id, unsigned int layer) {
+    std::shared_ptr<engine::IViewComponent>
+    EntityViewCreator::create(const std::string &texture_id, unsigned int layer) {
         std::shared_ptr<EntityView> entity_view = std::make_shared<EntityView>(
                 _resource_manager->getTextureGroup(texture_id));
 
@@ -41,5 +41,4 @@ namespace renderer {
 
         return render_views;
     }
-
 } // renderer

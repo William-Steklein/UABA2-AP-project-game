@@ -1,5 +1,5 @@
-#ifndef GAME_ENGINE_IENTITYCOMPONENT_H
-#define GAME_ENGINE_IENTITYCOMPONENT_H
+#ifndef GAME_ENGINE_ICOMPONENT_H
+#define GAME_ENGINE_ICOMPONENT_H
 
 
 #include <memory>
@@ -9,7 +9,7 @@ namespace engine {
 
     class Entity;
 
-    class IEntityComponent {
+    class IComponent {
     public:
         virtual void update(double t, float dt, Entity &entity) = 0;
     };
@@ -17,4 +17,4 @@ namespace engine {
 } // engine
 
 
-#endif //GAME_ENGINE_IENTITYCOMPONENT_H
+#endif //GAME_ENGINE_ICOMPONENT_H

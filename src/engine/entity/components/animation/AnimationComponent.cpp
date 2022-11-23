@@ -1,23 +1,22 @@
-#include "EntityAnimation.h"
+#include "AnimationComponent.h"
 
 namespace engine {
-
-    EntityAnimation::EntityAnimation(std::shared_ptr<AnimationGroup> animation_group)
+    AnimationComponent::AnimationComponent(std::shared_ptr<AnimationGroup> animation_group)
             : _animation_group(std::move(animation_group)),
               _current_time(0),
               _loop(false), _mirror_h(false), _mirror_v(false),
               _finished(false), _loop_finished(false) {
         if (!_animation_group.get()) {
-            throw std::runtime_error("An EntityAnimation has no animation_group");
+            throw std::runtime_error("An animation component has no animation group");
         } else if (_animation_group->animations.empty()) {
-            throw std::runtime_error("An EntityAnimation has an empty animation_group");
+            throw std::runtime_error("An animation component has an empty animation group");
         }
 
         _current_id = _animation_group->animations.begin()->first;
         _current_frame = _animation_group->animations.begin()->second.start_frame;
     }
 
-    void EntityAnimation::update(double t, float dt, Entity &entity) {
+    void AnimationComponent::update(double t, float dt, Entity &entity) {
         if (_finished) return;
 
         bool update_view{false};
@@ -44,18 +43,18 @@ namespace engine {
         if (update_view) updateViewTexture();
     }
 
-    void EntityAnimation::setView(std::shared_ptr<IEntityView> view) {
-        _view = std::move(view);
+    void AnimationComponent::setView(std::shared_ptr<IViewComponent> component) {
+        _view = std::move(component);
         updateViewTexture();
     }
 
-    std::shared_ptr<IEntityView> EntityAnimation::getView() const {
+    std::shared_ptr<IViewComponent> AnimationComponent::getView() const {
         return _view;
     }
 
-    void EntityAnimation::start(const std::string &animation_id, bool loop, bool mirror_h, bool mirror_v) {
+    void AnimationComponent::start(const std::string &animation_id, bool loop, bool mirror_h, bool mirror_v) {
         if (_animation_group->animations.find(animation_id) == _animation_group->animations.end()) {
-            throw std::runtime_error("An EntityAnimation was unable to start animation \"" + animation_id + "\"");
+            throw std::runtime_error("An animation component was unable to start animation \"" + animation_id + "\"");
         }
 
         _current_id = animation_id;
@@ -71,31 +70,31 @@ namespace engine {
         updateViewTexture();
     }
 
-    void EntityAnimation::setLoop(bool loop) {
+    void AnimationComponent::setLoop(bool loop) {
         _loop = loop;
     }
 
-    bool EntityAnimation::getMirrorH() const {
+    bool AnimationComponent::getMirrorH() const {
         return _mirror_h;
     }
 
-    void EntityAnimation::setMirrorH(bool mirror_h) {
+    void AnimationComponent::setMirrorH(bool mirror_h) {
         _mirror_h = mirror_h;
     }
 
-    bool EntityAnimation::getMirrorV() const {
+    bool AnimationComponent::getMirrorV() const {
         return _mirror_v;
     }
 
-    void EntityAnimation::setMirrorV(bool mirror_v) {
+    void AnimationComponent::setMirrorV(bool mirror_v) {
         _mirror_v = mirror_v;
     }
 
-    bool EntityAnimation::isFinished() const {
+    bool AnimationComponent::isFinished() const {
         return _finished;
     }
 
-    bool EntityAnimation::isLoopFinished() {
+    bool AnimationComponent::isLoopFinished() {
         if (_loop_finished) {
             _loop_finished = false;
             return true;
@@ -103,17 +102,16 @@ namespace engine {
         return false;
     }
 
-    std::string EntityAnimation::getCurrentAnimationId() const {
+    std::string AnimationComponent::getCurrentAnimationId() const {
         return _current_id;
     }
 
-    void EntityAnimation::updateViewTexture() {
+    void AnimationComponent::updateViewTexture() {
         if (_view.get()) {
             _view->setTexture(_current_frame, _mirror_h, _mirror_v);
         } else {
-            throw std::runtime_error("An EntityAnimation with animation_group_id \"" + _animation_group->id +
-                                     "\" does not have an EntityView");
+            throw std::runtime_error("An animation component with id \"" + _animation_group->id +
+                                     "\" does not have a view component");
         }
     }
-
 } // engine

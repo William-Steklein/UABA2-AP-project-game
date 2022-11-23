@@ -1,7 +1,6 @@
 #include "resource_info_parser.h"
 
 namespace engine {
-
     inline nlohmann::json loadJsonFromFile(const std::string &filepath) {
         std::ifstream info_file = read_file(filepath);
         nlohmann::json j;
@@ -72,5 +71,4 @@ namespace engine {
 
         return audio_info;
     }
-
 } // engine

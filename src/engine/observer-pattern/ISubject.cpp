@@ -1,7 +1,6 @@
 #include "ISubject.h"
 
 namespace engine {
-
     void ISubject::addObserver(const std::shared_ptr<IObserver> &observer) { _observers.insert(observer); }
 
     void ISubject::removeObserver(const std::shared_ptr<IObserver> &observer) { _observers.erase(observer); }

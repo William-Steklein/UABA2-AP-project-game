@@ -1,7 +1,6 @@
 #include "engine/constants/constants.h"
 
 namespace engine {
-
     namespace constants {
 
         const float framerate_limit = 60.f;
@@ -12,5 +11,4 @@ namespace engine {
         const float animation_frame_time_minimum = 0.001f;
 
     } // constants
-
 } // engine

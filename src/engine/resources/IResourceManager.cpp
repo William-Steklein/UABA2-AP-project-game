@@ -1,9 +1,7 @@
 #include "IResourceManager.h"
 
 namespace engine {
-
-    void
-    IResourceManager::loadAnimationResourceGroups(
+    void IResourceManager::loadAnimationResourceGroups(
             const std::vector<AnimationResourceGroup> &animation_resource_groups) {
         for (const auto &animation_resource_group: animation_resource_groups) {
             std::shared_ptr<AnimationGroup> animation_group = std::make_shared<AnimationGroup>();
@@ -33,6 +31,10 @@ namespace engine {
     }
 
     std::shared_ptr<AnimationGroup> IResourceManager::getAnimationGroup(const std::string &animation_id) {
+        if (_animation_groups.find(animation_id) == _animation_groups.end()) {
+            throw std::runtime_error("Unable to find animation group with id \"" + animation_id + "\"");
+        }
+
         return _animation_groups[animation_id];
     }
 

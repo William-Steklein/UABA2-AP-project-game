@@ -6,19 +6,19 @@
 #include <set>
 #include <utility>
 
-#include "engine/Stopwatch.h"
 #include "engine/logging/Logger.h"
-#include "engine/entities/Entity.h"
+#include "engine/Stopwatch.h"
+#include "engine/entity/Entity.h"
 #include "engine/resources/IResourceManager.h"
-#include "engine/entities/IEntityViewCreator.h"
-#include "engine/entities/components/EntityAnimationCreator.h"
+#include "engine/entity/components/view/IViewComponentCreator.h"
+#include "engine/entity/components/animation/AnimationComponentCreator.h"
 
 namespace engine {
 
     class Engine {
     public:
         Engine(std::shared_ptr<IResourceManager> resource_manager,
-               std::shared_ptr<IEntityViewCreator> entity_view_creator);
+               std::shared_ptr<IViewComponentCreator> entity_view_creator);
 
         ~Engine();
 
@@ -31,8 +31,8 @@ namespace engine {
         std::set<std::shared_ptr<Entity>> _physics_entities;
 
         std::shared_ptr<IResourceManager> _resource_manager;
-        std::shared_ptr<IEntityViewCreator> _entity_view_creator;
-        std::shared_ptr<EntityAnimationCreator> _entity_animation_creator;
+        std::shared_ptr<IViewComponentCreator> _entity_view_creator;
+        std::shared_ptr<AnimationComponentCreator> _entity_animation_creator;
 
         virtual void update(double t, float dt);
 

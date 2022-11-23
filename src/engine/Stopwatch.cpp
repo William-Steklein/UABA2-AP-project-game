@@ -1,7 +1,6 @@
 #include "Stopwatch.h"
 
 namespace engine {
-
     Stopwatch::Stopwatch()
             : _a(std::chrono::steady_clock::now()), _b(std::chrono::steady_clock::now()),
               _frame_duration_limit(1.f / constants::framerate_limit), _cap_framerate(constants::cap_framerate),
@@ -29,15 +28,11 @@ namespace engine {
             std::this_thread::sleep_for(
                     std::chrono::nanoseconds(std::chrono::duration_cast<std::chrono::nanoseconds>(sleep_time)));
 #endif
-
-//            LOGDEBUG(sleep_time.count() << std::endl);
         }
 
         _b = std::chrono::steady_clock::now();
         std::chrono::duration<float> time_slept = _b - _a;
         _delta_time = (work_time + time_slept).count();
-
-//        LOGDEBUG(time_slept.count() << std::endl);
 
         // average framerate counter
         _frame_count++;
@@ -84,5 +79,4 @@ namespace engine {
     float Stopwatch::getAverageMs() const {
         return 1 / _average_framerate;
     }
-
 } // engine

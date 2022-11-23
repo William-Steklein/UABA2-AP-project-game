@@ -1,7 +1,6 @@
 #include "file_io.h"
 
 namespace engine {
-
     std::ifstream read_file(const std::string &filepath) {
         std::ifstream f(filepath);
 
@@ -21,5 +20,4 @@ namespace engine {
 
         return f;
     }
-
 } // engine
