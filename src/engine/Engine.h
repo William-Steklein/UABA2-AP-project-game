@@ -12,12 +12,14 @@
 #include "engine/resources/IResourceManager.h"
 #include "engine/entity/components/view/IViewComponentCreator.h"
 #include "engine/entity/components/animation/AnimationComponentCreator.h"
+#include "engine/camera/Camera.h"
 
 namespace engine {
 
     class Engine {
     public:
-        Engine(std::shared_ptr<IResourceManager> resource_manager,
+        Engine(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
+               std::shared_ptr<IResourceManager> resource_manager,
                std::shared_ptr<IViewComponentCreator> view_component_creator);
 
         ~Engine();
@@ -33,6 +35,8 @@ namespace engine {
         std::shared_ptr<IResourceManager> _resource_manager;
         std::shared_ptr<IViewComponentCreator> _view_component_creator;
         std::shared_ptr<AnimationComponentCreator> _animation_component_creator;
+
+        std::shared_ptr<Camera> _camera;
 
         virtual void update(double t, float dt);
 

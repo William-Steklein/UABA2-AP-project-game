@@ -9,7 +9,8 @@ namespace renderer {
         _resource_manager = std::make_shared<ResourceManager>();
         _entity_view_creator = std::make_shared<ViewComponentCreator>(_resource_manager);
 
-        _game = std::make_unique<game::Game>(_resource_manager, _entity_view_creator);
+        _game = std::make_unique<game::Game>(0, _screen_width, _screen_height, 0,
+                                             _resource_manager, _entity_view_creator);
     }
 
     Renderer::~Renderer() = default;

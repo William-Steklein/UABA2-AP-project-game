@@ -17,7 +17,8 @@ namespace renderer {
 
     class ViewComponent : public engine::IViewComponent {
     public:
-        ViewComponent(std::vector<std::shared_ptr<sf::Texture>> texture_group);
+        ViewComponent(std::weak_ptr<engine::Camera> camera,
+                      std::vector<std::shared_ptr<sf::Texture>> texture_group);
 
         void update(double t, float dt, engine::Entity &entity) override;
 

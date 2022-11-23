@@ -1,31 +1,35 @@
 #include "ViewComponent.h"
 
 namespace renderer {
-    ViewComponent::ViewComponent(std::vector<std::shared_ptr<sf::Texture>> texture_group)
-            : engine::IViewComponent(), _texture_group(std::move(texture_group)),
+    ViewComponent::ViewComponent(std::weak_ptr<engine::Camera> camera,
+                                 std::vector<std::shared_ptr<sf::Texture>> texture_group)
+            : engine::IViewComponent(std::move(camera)), _texture_group(std::move(texture_group)),
               _sprite(std::make_shared<sf::Sprite>()) {
         updateSpriteTexture();
     }
 
     void ViewComponent::update(double t, float dt, engine::Entity &entity) {
-        // transform
-        engine::Vector2f pos = entity.getPosition();
-//            engine::Vector2f new_position = entity_shared->getScreenPosition();
-//            _sprite.setPosition(new_position.x, new_position.y);
+        if (_camera.expired()) {
+            throw std::runtime_error("A view component has no camera");
+        }
+
+        std::shared_ptr<engine::Camera> camera_shared = _camera.lock();
+
+        // update sprite transform
+        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(entity.getPosition());
+        _sprite->setPosition(screen_position.x, screen_position.y);
 
         auto texture_size = _sprite->getTexture()->getSize();
-        engine::Vector2f entity_size = entity.getScale();
 
-//            float x_scale_factor = entity_shared->getScreenViewSize().x /
-//                                   static_cast<float>(texture_size.x) *
-//                                   entity_size.x;
-//
-//            float y_scale_factor = entity_shared->getScreenViewSize().y /
-//                                   static_cast<float>(texture_size.y) *
-//                                   entity_size.y;
+        engine::Vector2f camera_size = entity.getScale();
+        engine::Vector2f screen_size = camera_shared->projectSizeWorldToSubScreen(entity.getScale());
 
-//            _sprite.setScale(_mirror_h ? -x_scale_factor : x_scale_factor,
-//                             _mirror_v ? -y_scale_factor : y_scale_factor);
+        float x_scale_factor = screen_size.x / (camera_size.x * static_cast<float>(texture_size.x));
+
+        float y_scale_factor = screen_size.y / (camera_size.y * static_cast<float>(texture_size.y));
+
+        _sprite->setScale(_mirror_h ? -x_scale_factor : x_scale_factor,
+                          _mirror_v ? -y_scale_factor : y_scale_factor);
 
         _sprite->setRotation(engine::toDegree(entity.getRotation()));
     }

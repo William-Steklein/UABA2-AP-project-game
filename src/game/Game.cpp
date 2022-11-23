@@ -1,9 +1,11 @@
 #include "game/Game.h"
 
 namespace game {
-    Game::Game(std::shared_ptr<engine::IResourceManager> resource_manager,
+    Game::Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
+               std::shared_ptr<engine::IResourceManager> resource_manager,
                std::shared_ptr<engine::IViewComponentCreator> view_component_creator)
-            : Engine(std::move(resource_manager), std::move(view_component_creator)) {
+            : Engine(screen_x_min, screen_x_max, screen_y_min, screen_y_max,
+                     std::move(resource_manager), std::move(view_component_creator)) {
         loadResources();
 
 //        std::shared_ptr<engine::Entity> new_entity = std::make_shared<engine::Entity>(engine::Entity(

@@ -11,7 +11,7 @@ namespace renderer {
     std::shared_ptr<engine::IViewComponent>
     ViewComponentCreator::create(const std::string &texture_id, unsigned int layer) {
         std::shared_ptr<ViewComponent> entity_view = std::make_shared<ViewComponent>(
-                _resource_manager->getTextureGroup(texture_id));
+                _camera, _resource_manager->getTextureGroup(texture_id));
 
         std::weak_ptr<ViewComponent> entity_view_weak = entity_view;
         if (_view_components.count(layer)) {

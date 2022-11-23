@@ -1,14 +1,17 @@
 #include "engine/Engine.h"
 
 namespace engine {
-    Engine::Engine(std::shared_ptr<IResourceManager> resource_manager,
+    Engine::Engine(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
+                   std::shared_ptr<IResourceManager> resource_manager,
                    std::shared_ptr<IViewComponentCreator> view_component_creator)
-            : _resource_manager(std::move(resource_manager)), _view_component_creator(std::move(view_component_creator)),
+            : _resource_manager(std::move(resource_manager)),
+              _view_component_creator(std::move(view_component_creator)),
               _animation_component_creator(
                       std::make_shared<AnimationComponentCreator>(_resource_manager, _view_component_creator)),
+              _camera(std::make_shared<Camera>(screen_x_min, screen_x_max, screen_y_min, screen_y_max)),
               _physics_delta_time(1.f / 60.f), _physics_time(0.f),
               _accumulator(0.f), _physics_speed(1.f) {
-
+        _view_component_creator->setCamera(_camera);
     }
 
     Engine::~Engine() = default;
