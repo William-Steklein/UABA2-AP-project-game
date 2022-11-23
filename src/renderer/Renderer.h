@@ -11,7 +11,7 @@
 
 #include "renderer/constants/constants.h"
 #include "renderer/resources/ResourceManager.h"
-#include "renderer/entity-view/EntityViewCreator.h"
+#include "renderer/components/view/ViewComponentCreator.h"
 
 namespace renderer {
 
@@ -31,7 +31,7 @@ namespace renderer {
         std::unique_ptr<sf::RenderWindow> _window;
 
         std::shared_ptr<ResourceManager> _resource_manager;
-        std::shared_ptr<EntityViewCreator> _entity_view_creator;
+        std::shared_ptr<ViewComponentCreator> _entity_view_creator;
         std::unique_ptr<game::Game> _game;
 
         void draw();

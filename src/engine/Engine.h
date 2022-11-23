@@ -18,7 +18,7 @@ namespace engine {
     class Engine {
     public:
         Engine(std::shared_ptr<IResourceManager> resource_manager,
-               std::shared_ptr<IViewComponentCreator> entity_view_creator);
+               std::shared_ptr<IViewComponentCreator> view_component_creator);
 
         ~Engine();
 
@@ -31,8 +31,8 @@ namespace engine {
         std::set<std::shared_ptr<Entity>> _physics_entities;
 
         std::shared_ptr<IResourceManager> _resource_manager;
-        std::shared_ptr<IViewComponentCreator> _entity_view_creator;
-        std::shared_ptr<AnimationComponentCreator> _entity_animation_creator;
+        std::shared_ptr<IViewComponentCreator> _view_component_creator;
+        std::shared_ptr<AnimationComponentCreator> _animation_component_creator;
 
         virtual void update(double t, float dt);
 

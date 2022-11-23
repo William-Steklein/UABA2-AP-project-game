@@ -2,8 +2,8 @@
 
 namespace game {
     Game::Game(std::shared_ptr<engine::IResourceManager> resource_manager,
-               std::shared_ptr<engine::IViewComponentCreator> entity_view_creator)
-            : Engine(std::move(resource_manager), std::move(entity_view_creator)) {
+               std::shared_ptr<engine::IViewComponentCreator> view_component_creator)
+            : Engine(std::move(resource_manager), std::move(view_component_creator)) {
         loadResources();
 
 //        std::shared_ptr<engine::Entity> new_entity = std::make_shared<engine::Entity>(engine::Entity(
@@ -12,7 +12,7 @@ namespace game {
 //        ));
         std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
                 {{0, 0}, {1, 1}, 0},
-                _entity_animation_creator->create("explosion", 0)
+                _animation_component_creator->create("explosion", 0)
         ));
         _physics_entities.insert(new_entity);
     }

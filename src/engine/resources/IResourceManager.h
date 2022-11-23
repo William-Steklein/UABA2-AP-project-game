@@ -15,11 +15,11 @@ namespace engine {
         virtual void
         loadAnimationResourceGroups(const std::vector<AnimationResourceGroup> &animation_resource_groups);
 
-        std::shared_ptr<AnimationGroup> getAnimationGroup(const std::string &animation_id);
-
         virtual void loadAudioResources(const std::vector<AudioResource> &audio_resources) = 0;
 
         // todo: font loading
+
+        std::shared_ptr<AnimationGroup> getAnimationGroup(const std::string &animation_group_id);
 
     private:
         std::map<std::string, std::shared_ptr<AnimationGroup>> _animation_groups;

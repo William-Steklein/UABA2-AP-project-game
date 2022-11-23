@@ -7,7 +7,8 @@ namespace renderer {
                                                      constants::window_title);
 
         _resource_manager = std::make_shared<ResourceManager>();
-        _entity_view_creator = std::make_shared<EntityViewCreator>(_resource_manager);
+        _entity_view_creator = std::make_shared<ViewComponentCreator>(_resource_manager);
+
         _game = std::make_unique<game::Game>(_resource_manager, _entity_view_creator);
     }
 

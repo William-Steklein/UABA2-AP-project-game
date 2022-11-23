@@ -13,7 +13,7 @@ namespace game {
     class Game : public engine::Engine {
     public:
         Game(std::shared_ptr<engine::IResourceManager> resource_manager,
-             std::shared_ptr<engine::IViewComponentCreator> entity_view_creator);
+             std::shared_ptr<engine::IViewComponentCreator> view_component_creator);
 
         ~Game();
 

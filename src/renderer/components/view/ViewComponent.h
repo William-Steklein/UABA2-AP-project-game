@@ -1,5 +1,5 @@
-#ifndef GAME_ENGINE_ENTITYVIEW_H
-#define GAME_ENGINE_ENTITYVIEW_H
+#ifndef GAME_ENGINE_VIEWCOMPONENT_H
+#define GAME_ENGINE_VIEWCOMPONENT_H
 
 
 #include <utility>
@@ -9,15 +9,15 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include <engine/entity/Entity.h>
-#include <engine/entity/components/view/IViewComponent.h>
-#include <engine/math/math_utils.h>
+#include "engine/math/math_utils.h"
+#include "engine/entity/Entity.h"
+#include "engine/entity/components/view/IViewComponent.h"
 
 namespace renderer {
 
-    class EntityView : public engine::IViewComponent {
+    class ViewComponent : public engine::IViewComponent {
     public:
-        EntityView(std::vector<std::shared_ptr<sf::Texture>> texture_group);
+        ViewComponent(std::vector<std::shared_ptr<sf::Texture>> texture_group);
 
         void update(double t, float dt, engine::Entity &entity) override;
 
@@ -35,4 +35,4 @@ namespace renderer {
 
 } // renderer
 
-#endif //GAME_ENGINE_ENTITYVIEW_H
+#endif //GAME_ENGINE_VIEWCOMPONENT_H

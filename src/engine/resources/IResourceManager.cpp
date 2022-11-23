@@ -30,12 +30,12 @@ namespace engine {
         }
     }
 
-    std::shared_ptr<AnimationGroup> IResourceManager::getAnimationGroup(const std::string &animation_id) {
-        if (_animation_groups.find(animation_id) == _animation_groups.end()) {
-            throw std::runtime_error("Unable to find animation group with id \"" + animation_id + "\"");
+    std::shared_ptr<AnimationGroup> IResourceManager::getAnimationGroup(const std::string &animation_group_id) {
+        if (_animation_groups.find(animation_group_id) == _animation_groups.end()) {
+            throw std::runtime_error("Unable to find animation group with id \"" + animation_group_id + "\"");
         }
 
-        return _animation_groups[animation_id];
+        return _animation_groups[animation_group_id];
     }
 
 } // engine
