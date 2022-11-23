@@ -2,9 +2,12 @@
 #define GAME_ENGINE_CAMERA_H
 
 
+#include <tuple>
+
 #include "engine/math/math_utils.h"
 #include "engine/math/Vector2f.h"
 #include "engine/camera/ViewBoundaries.h"
+#include "engine/logging/Logger.h"
 
 namespace engine {
 
@@ -28,9 +31,13 @@ namespace engine {
 
         float getScreenHeight() const;
 
-        float getSubscreenWidth() const;
+        float getSubScreenWidth() const;
 
-        float getSubscreenHeight() const;
+        float getSubScreenHeight() const;
+
+        std::tuple<Vector2f, Vector2f, Vector2f> getSidebarData() const;
+
+        void updateSubScreenResolution();
 
         Vector2f projectCoordWorldToSubScreen(const Vector2f &coord) const;
 
@@ -41,8 +48,13 @@ namespace engine {
 
         ViewBoundaries _boundaries;
         ViewBoundaries _screen_boundaries;
+
         Vector2f _sub_screen_aspect_ratio;
         ViewBoundaries _sub_screen_boundaries;
+
+        Vector2f _sidebar_size;
+        Vector2f _sidebar_1_position;
+        Vector2f _sidebar_2_position;
     };
 
 } // engine
