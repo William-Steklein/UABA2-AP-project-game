@@ -21,6 +21,7 @@ namespace engine {
 
         std::shared_ptr<std::map<unsigned int, float>> shared_channel_volumes = _channel_volumes.lock();
 
+        // check if channel already has a volume, assign one otherwise
         if (shared_channel_volumes->find(_current_channel) == shared_channel_volumes->end()) {
             (*shared_channel_volumes)[_current_channel] = 100;
             return 100;

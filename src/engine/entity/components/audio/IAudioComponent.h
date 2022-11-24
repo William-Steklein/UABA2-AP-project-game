@@ -28,7 +28,7 @@ namespace engine {
 
     protected:
         float _volume;
-        float _current_channel;
+        unsigned int _current_channel;
 
         float getTotalVolume();
 

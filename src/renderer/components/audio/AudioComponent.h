@@ -15,8 +15,8 @@ namespace renderer {
     class AudioComponent : public engine::IAudioComponent {
     public:
         AudioComponent(std::weak_ptr<std::map<unsigned int, float>> channelVolumes,
-                       std::shared_ptr<std::map<std::string, sf::SoundBuffer>> sounds,
-                       std::shared_ptr<std::map<std::string, std::string>> music);
+                       std::shared_ptr<std::map<std::string, sf::SoundBuffer>> sound_buffers,
+                       std::shared_ptr<std::map<std::string, std::string>> music_files);
 
         ~AudioComponent() override = default;
 
@@ -29,11 +29,11 @@ namespace renderer {
         void updateVolume() override;
 
     private:
-        sf::Sound _sound_stream;
-        sf::Music _music_stream;
+        sf::Sound _sound;
+        sf::Music _music;
 
-        std::shared_ptr<std::map<std::string, sf::SoundBuffer>> _sounds;
-        std::shared_ptr<std::map<std::string, std::string>> _music;
+        std::shared_ptr<std::map<std::string, sf::SoundBuffer>> _sound_buffers;
+        std::shared_ptr<std::map<std::string, std::string>> _music_files;
     };
 
 } // renderer
