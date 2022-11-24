@@ -6,6 +6,7 @@
 #include <engine/entity/Entity.h>
 #include <engine/entity/components/animation/AnimationComponent.h>
 
+#include "game/entities/Player.h"
 #include "game/entities/Explosion.h"
 
 namespace game {

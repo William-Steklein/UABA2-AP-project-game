@@ -2,13 +2,17 @@
 #define GAME_ENGINE_IAUDIOCOMPONENT_H
 
 
+#include <map>
+#include <utility>
+#include <stdexcept>
+
 #include "engine/entity/components/IComponent.h"
 
 namespace engine {
 
     class IAudioComponent : public IComponent {
     public:
-        IAudioComponent();
+        IAudioComponent(std::weak_ptr<std::map<unsigned int, float>> channel_volumes);
 
         virtual ~IAudioComponent() = default;
 
@@ -18,8 +22,20 @@ namespace engine {
 
         virtual void playMusic(const std::string &music_id, unsigned int channel, bool loop) = 0;
 
-    private:
+        virtual void setVolume(float volume) = 0;
 
+        virtual void updateVolume() = 0;
+
+    protected:
+        float _volume;
+        float _current_channel;
+
+        float getTotalVolume();
+
+    private:
+        std::weak_ptr<std::map<unsigned int, float>> _channel_volumes;
+
+        float getChannelVolume();
     };
 
 } // engine

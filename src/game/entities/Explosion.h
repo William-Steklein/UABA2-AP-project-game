@@ -12,7 +12,7 @@ namespace game {
                   std::shared_ptr<engine::AnimationComponent> animation = nullptr,
                   std::shared_ptr<engine::IAudioComponent> audio = nullptr);
 
-        ~Explosion();
+        ~Explosion() = default;
 
         void update(double t, float dt) override;
     };

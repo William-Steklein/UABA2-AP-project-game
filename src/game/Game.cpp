@@ -15,12 +15,24 @@ namespace game {
 //                {{0, 0}, {1, 1}, 0},
 //                _entity_view_creator->create("explosion", 0)
 //        ));
+
+        _audio_component_creator->setChannelVolume(1, 25);
+        _audio_component_creator->setChannelVolume(0, 100);
+
         std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
                 {{0, 0}, {1, 1}, 0},
                 _animation_component_creator->create("explosion", 0),
                 _audio_component_creator->create()
         ));
         _physics_entities.insert(new_entity);
+
+        std::shared_ptr<Player> player = std::make_shared<Player>(Player(
+                {{0, 0}, {1, 1}, 0},
+                nullptr,
+                nullptr,
+                _audio_component_creator->create()
+        ));
+        _physics_entities.insert(player);
     }
 
     Game::~Game() = default;

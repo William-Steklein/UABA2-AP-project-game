@@ -9,11 +9,10 @@ namespace game {
         checkComponent(_animation);
         checkComponent(_audio);
         _animation->start("circle_explosion", false, false, false);
-//        _audio->playSound("scream", 0, true);
-        _audio->playMusic("portal_radio", 0, true);
+//        _audio->playSound("footstep", 0, true);
+        _audio->playSound("scream", 1, true);
+//        _audio->playMusic("portal_radio", 0, true);
     }
-
-    Explosion::~Explosion() = default;
 
     void Explosion::update(double t, float dt) {
         if (_animation->isFinished()) {
