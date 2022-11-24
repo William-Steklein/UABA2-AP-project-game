@@ -2,7 +2,7 @@
 #define GAME_ENGINE_IVIEWCOMPONENTCREATOR_H
 
 
-#include "engine/entity/Entity.h"
+#include "engine/entity/components/view/IViewComponent.h"
 
 namespace engine {
 

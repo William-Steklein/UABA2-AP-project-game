@@ -3,6 +3,7 @@
 
 
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Audio.hpp>
 
 #include <engine/resources/IResourceManager.h>
 
@@ -10,21 +11,31 @@ namespace renderer {
 
     class ResourceManager : public engine::IResourceManager {
     public:
+        ResourceManager();
+
+        ~ResourceManager() = default;
+
         void loadTextureResources(const std::vector<engine::TextureResource> &texture_resources) override;
 
         void loadAnimationResourceGroups(
                 const std::vector<engine::AnimationResourceGroup> &animation_resource_groups) override;
 
-        void loadAudioResources(const std::vector<engine::AudioResource> &audio_resources) override;
+        void loadSoundResources(const std::vector<engine::AudioResource> &sound_resources) override;
+
+        void loadMusicResources(const std::vector<engine::AudioResource> &music_resources) override;
 
         std::vector<std::shared_ptr<sf::Texture>> getTextureGroup(const std::string &texture_group_id);
 
+        std::shared_ptr<std::map<std::string, sf::SoundBuffer>> getSounds();
+
+        std::shared_ptr<std::map<std::string, std::string>> getMusic();
+
     private:
         std::map<std::string, std::vector<std::shared_ptr<sf::Texture>>> _texture_groups;
+        std::shared_ptr<std::map<std::string, sf::SoundBuffer>> _sounds;
+        std::shared_ptr<std::map<std::string, std::string>> _music;
 
         bool checkTextureGroupIdLoaded(const std::string &texture_group_id) const;
-
-        void checkTextureGroupIdExists(const std::string &texture_group_id);
     };
 
 } // renderer

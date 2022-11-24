@@ -15,7 +15,9 @@ namespace engine {
         virtual void
         loadAnimationResourceGroups(const std::vector<AnimationResourceGroup> &animation_resource_groups);
 
-        virtual void loadAudioResources(const std::vector<AudioResource> &audio_resources) = 0;
+        virtual void loadSoundResources(const std::vector<AudioResource> &audio_resources) = 0;
+
+        virtual void loadMusicResources(const std::vector<AudioResource> &music_resources) = 0;
 
         // todo: font loading
 

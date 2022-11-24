@@ -1,10 +1,12 @@
 #include "engine/entity/Entity.h"
 
 namespace engine {
-    Entity::Entity(const Transform &transform, std::shared_ptr<IViewComponent> view,
-                   std::shared_ptr<AnimationComponent> animation)
+    Entity::Entity(const Transform &transform,
+                   std::shared_ptr<IViewComponent> view,
+                   std::shared_ptr<AnimationComponent> animation,
+                   std::shared_ptr<IAudioComponent> audio)
             : _transform({{0, 0}, {1, 1}, 0}),
-              _view(std::move(view)), _animation(std::move(animation)) {
+              _view(std::move(view)), _animation(std::move(animation)), _audio(std::move(audio)) {
         // link animation and view
         if (_animation.get()) {
             if (_animation->getView().get()) {
@@ -70,6 +72,14 @@ namespace engine {
             _animation = std::move(component);
         } else {
             throw std::runtime_error("Setting an empty animation component to entity");
+        }
+    }
+
+    void Entity::setAudioComponent(std::shared_ptr<IAudioComponent> component) {
+        if (component.get()) {
+            _audio = std::move(component);
+        } else {
+            throw std::runtime_error("Setting an empty audio component to entity");
         }
     }
 

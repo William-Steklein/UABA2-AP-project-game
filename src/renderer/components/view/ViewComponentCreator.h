@@ -17,7 +17,7 @@ namespace renderer {
     public:
         ViewComponentCreator(std::shared_ptr<ResourceManager> resource_manager);
 
-        ~ViewComponentCreator();
+        ~ViewComponentCreator() = default;
 
         std::shared_ptr<engine::IViewComponent> create(const std::string &texture_id, unsigned int layer) override;
 

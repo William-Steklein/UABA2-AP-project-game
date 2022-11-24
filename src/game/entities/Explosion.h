@@ -9,7 +9,8 @@ namespace game {
     class Explosion : public engine::Entity {
     public:
         Explosion(const engine::Transform &transform,
-                  std::shared_ptr<engine::AnimationComponent> animation = nullptr);
+                  std::shared_ptr<engine::AnimationComponent> animation = nullptr,
+                  std::shared_ptr<engine::IAudioComponent> audio = nullptr);
 
         ~Explosion();
 

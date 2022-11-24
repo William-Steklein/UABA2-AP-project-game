@@ -11,6 +11,12 @@ namespace renderer {
         return texture;
     }
 
+    ResourceManager::ResourceManager()
+            : _sounds(std::make_shared<std::map<std::string, sf::SoundBuffer>>()),
+              _music(std::make_shared<std::map<std::string, std::string>>()) {
+
+    }
+
     void ResourceManager::loadTextureResources(const std::vector<engine::TextureResource> &texture_resources) {
         for (const auto &texture_resource: texture_resources) {
             if (checkTextureGroupIdLoaded(texture_resource.id)) continue;
@@ -42,12 +48,36 @@ namespace renderer {
         engine::IResourceManager::loadAnimationResourceGroups(animation_resource_groups);
     }
 
-    void ResourceManager::loadAudioResources(const std::vector<engine::AudioResource> &audio_resources) {
+    void ResourceManager::loadSoundResources(const std::vector<engine::AudioResource> &sound_resources) {
+        for (const auto &sound_resource: sound_resources) {
+            sf::SoundBuffer sound_buffer;
 
+            if (!sound_buffer.loadFromFile(sound_resource.audio_path)) {
+                throw std::runtime_error("Unable to load sound from file \"" + sound_resource.audio_path + "\"");
+            }
+
+            if (_sounds->find(sound_resource.id) == _sounds->end()) {
+                (*_sounds)[sound_resource.id] = sound_buffer;
+            } else {
+                throw std::runtime_error("Sound with id \"" + sound_resource.id + "\" already exists");
+            }
+        }
+    }
+
+    void ResourceManager::loadMusicResources(const std::vector<engine::AudioResource> &music_resources) {
+        for (const auto &music_resource: music_resources) {
+            if (_music->find(music_resource.id) == _music->end()) {
+                (*_music)[music_resource.id] = music_resource.audio_path;
+            } else {
+                throw std::runtime_error("Music with id \"" + music_resource.id + "\" already exists");
+            }
+        }
     }
 
     std::vector<std::shared_ptr<sf::Texture>> ResourceManager::getTextureGroup(const std::string &texture_group_id) {
-        checkTextureGroupIdExists(texture_group_id);
+        if (_texture_groups.find(texture_group_id) == _texture_groups.end()) {
+            throw std::runtime_error("Unable to get texture group with id \"" + texture_group_id + "\"");
+        }
 
         return _texture_groups.at(texture_group_id);
     }
@@ -62,9 +92,11 @@ namespace renderer {
         return false;
     }
 
-    void ResourceManager::checkTextureGroupIdExists(const std::string &texture_group_id) {
-        if (_texture_groups.find(texture_group_id) == _texture_groups.end()) {
-            throw std::runtime_error("Unable to get texture group with id \"" + texture_group_id + "\"");
-        }
+    std::shared_ptr<std::map<std::string, sf::SoundBuffer>> ResourceManager::getSounds() {
+        return _sounds;
+    }
+
+    std::shared_ptr<std::map<std::string, std::string>> ResourceManager::getMusic() {
+        return _music;
     }
 } // renderer

@@ -2,12 +2,15 @@
 
 namespace game {
     Explosion::Explosion(const engine::Transform &transform,
-                         std::shared_ptr<engine::AnimationComponent> animation)
-            : engine::Entity(transform, nullptr, std::move(animation)) {
+                         std::shared_ptr<engine::AnimationComponent> animation,
+                         std::shared_ptr<engine::IAudioComponent> audio)
+            : engine::Entity(transform, nullptr, std::move(animation), std::move(audio)) {
         checkComponent(_view);
         checkComponent(_animation);
+        checkComponent(_audio);
         _animation->start("circle_explosion", false, false, false);
-//        _audio.play("explosion", false);
+//        _audio->playSound("scream", 0, true);
+        _audio->playMusic("portal_radio", 0, true);
     }
 
     Explosion::~Explosion() = default;
@@ -18,8 +21,8 @@ namespace game {
         }
 
         if (_animation->isLoopFinished()) {
-            _animation->setMirrorV(!_animation->getMirrorV());
-//            setRotation(_rotation + 20);
+//            _animation->setMirrorV(!_animation->getMirrorV());
+            setRotation(_transform.rotation + static_cast<float>(M_PI) / 4);
         }
 
         Entity::update(t, dt);

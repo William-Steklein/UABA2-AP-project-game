@@ -3,9 +3,12 @@
 namespace game {
     Game::Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
                std::shared_ptr<engine::IResourceManager> resource_manager,
-               std::shared_ptr<engine::IViewComponentCreator> view_component_creator)
+               std::shared_ptr<engine::IViewComponentCreator> view_component_creator,
+               std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator)
             : Engine(screen_x_min, screen_x_max, screen_y_min, screen_y_max,
-                     std::move(resource_manager), std::move(view_component_creator)) {
+                     std::move(resource_manager),
+                     std::move(view_component_creator),
+                     std::move(audio_component_creator)) {
         loadResources();
 
 //        std::shared_ptr<engine::Entity> new_entity = std::make_shared<engine::Entity>(engine::Entity(
@@ -14,7 +17,8 @@ namespace game {
 //        ));
         std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
                 {{0, 0}, {1, 1}, 0},
-                _animation_component_creator->create("explosion", 0)
+                _animation_component_creator->create("explosion", 0),
+                _audio_component_creator->create()
         ));
         _physics_entities.insert(new_entity);
     }
@@ -37,6 +41,7 @@ namespace game {
         _resource_manager->loadTextureResources(engine::parseTextureInfo("data/resource-info/textures.json"));
         _resource_manager->loadAnimationResourceGroups(
                 engine::parseAnimationInfo("data/resource-info/animations.json"));
-        _resource_manager->loadAudioResources(engine::parseAudioInfo("data/resource-info/audio.json"));
+        _resource_manager->loadSoundResources(engine::parseAudioInfo("data/resource-info/sounds.json"));
+        _resource_manager->loadMusicResources(engine::parseAudioInfo("data/resource-info/music.json"));
     }
 } // game

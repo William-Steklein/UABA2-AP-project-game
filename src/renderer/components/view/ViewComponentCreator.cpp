@@ -6,8 +6,6 @@ namespace renderer {
 
     }
 
-    ViewComponentCreator::~ViewComponentCreator() = default;
-
     std::shared_ptr<engine::IViewComponent>
     ViewComponentCreator::create(const std::string &texture_id, unsigned int layer) {
         std::shared_ptr<ViewComponent> entity_view = std::make_shared<ViewComponent>(

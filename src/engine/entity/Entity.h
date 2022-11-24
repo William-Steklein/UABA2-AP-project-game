@@ -8,13 +8,16 @@
 #include "engine/entity/components/Transform.h"
 #include "engine/entity/components/view/IViewComponent.h"
 #include "engine/entity/components/animation/AnimationComponent.h"
+#include "engine/entity/components/audio/IAudioComponent.h"
 
 namespace engine {
 
     class Entity {
     public:
         Entity(const Transform &transform,
-               std::shared_ptr<IViewComponent> view = nullptr, std::shared_ptr<AnimationComponent> animation = nullptr);
+               std::shared_ptr<IViewComponent> view = nullptr,
+               std::shared_ptr<AnimationComponent> animation = nullptr,
+               std::shared_ptr<IAudioComponent> audio = nullptr);
 
         ~Entity();
 
@@ -40,7 +43,7 @@ namespace engine {
 
         void setAnimationComponent(std::shared_ptr<AnimationComponent> component);
 
-//        void setAudioComponent(std::shared_ptr<AudioComponent> component);
+        void setAudioComponent(std::shared_ptr<IAudioComponent> component);
 
 //        void setPhysicsComponent(std::shared_ptr<PhysicsComponent> component);
 
@@ -52,7 +55,7 @@ namespace engine {
         // components
         std::shared_ptr<IViewComponent> _view;
         std::shared_ptr<AnimationComponent> _animation;
-        // - audio
+        std::shared_ptr<IAudioComponent> _audio;
         // - physics
     };
 

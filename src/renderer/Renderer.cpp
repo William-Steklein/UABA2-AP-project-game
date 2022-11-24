@@ -7,10 +7,13 @@ namespace renderer {
                                                      constants::window_title);
 
         _resource_manager = std::make_shared<ResourceManager>();
-        _entity_view_creator = std::make_shared<ViewComponentCreator>(_resource_manager);
+        _view_component_creator = std::make_shared<ViewComponentCreator>(_resource_manager);
+        _audio_component_creator = std::make_shared<AudioComponentCreator>(_resource_manager);
 
         _game = std::make_unique<game::Game>(0, _screen_width, _screen_height, 0,
-                                             _resource_manager, _entity_view_creator);
+                                             _resource_manager,
+                                             _view_component_creator,
+                                             _audio_component_creator);
     }
 
     Renderer::~Renderer() = default;
@@ -34,7 +37,7 @@ namespace renderer {
     void Renderer::draw() {
         _window->clear(sf::Color(127, 128, 118));
 
-        for (const auto &entity_view: _entity_view_creator->getEntityViews()) {
+        for (const auto &entity_view: _view_component_creator->getEntityViews()) {
             _window->draw(*entity_view->getSprite());
         }
 

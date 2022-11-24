@@ -14,7 +14,8 @@ namespace game {
     public:
         Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
              std::shared_ptr<engine::IResourceManager> resource_manager,
-             std::shared_ptr<engine::IViewComponentCreator> view_component_creator);
+             std::shared_ptr<engine::IViewComponentCreator> view_component_creator,
+             std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator);
 
         ~Game();
 
