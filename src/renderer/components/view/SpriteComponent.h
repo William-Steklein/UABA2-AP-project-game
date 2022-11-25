@@ -1,5 +1,5 @@
-#ifndef GAME_ENGINE_VIEWCOMPONENT_H
-#define GAME_ENGINE_VIEWCOMPONENT_H
+#ifndef GAME_ENGINE_SPRITECOMPONENT_H
+#define GAME_ENGINE_SPRITECOMPONENT_H
 
 
 #include <utility>
@@ -11,14 +11,14 @@
 
 #include "engine/math/math_utils.h"
 #include "engine/entity/Entity.h"
-#include "engine/entity/components/view/IViewComponent.h"
+#include "engine/entity/components/view/IAnimatedSpriteComponent.h"
 
 namespace renderer {
 
-    class ViewComponent : public engine::IViewComponent {
+    class SpriteComponent : public engine::IAnimatedSpriteComponent {
     public:
-        ViewComponent(std::weak_ptr<engine::Camera> camera,
-                      std::vector<std::shared_ptr<sf::Texture>> texture_group);
+        SpriteComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera,
+                        std::vector<std::shared_ptr<sf::Texture>> texture_group);
 
         void update(double t, float dt, engine::Entity &entity) override;
 
@@ -36,4 +36,4 @@ namespace renderer {
 
 } // renderer
 
-#endif //GAME_ENGINE_VIEWCOMPONENT_H
+#endif //GAME_ENGINE_SPRITECOMPONENT_H

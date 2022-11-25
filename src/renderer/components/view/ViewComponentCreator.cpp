@@ -6,37 +6,50 @@ namespace renderer {
 
     }
 
-    std::shared_ptr<engine::IViewComponent>
-    ViewComponentCreator::create(const std::string &texture_id, unsigned int layer) {
-        std::shared_ptr<ViewComponent> entity_view = std::make_shared<ViewComponent>(
-                _camera, _resource_manager->getTextureGroup(texture_id));
+    std::shared_ptr<engine::ISpriteComponent>
+    ViewComponentCreator::createSprite(const engine::Vector2f &size, const std::string &texture_id,
+                                       unsigned int layer) {
+        std::shared_ptr<SpriteComponent> sprite_component =
+                std::make_shared<SpriteComponent>(size, _camera, _resource_manager->getTextureGroup(texture_id));
 
-        std::weak_ptr<ViewComponent> entity_view_weak = entity_view;
-        if (_view_components.count(layer)) {
-            _view_components.at(layer).push_back(entity_view_weak);
-        } else {
-            _view_components[layer] = {entity_view_weak};
-        }
+        insertDrawable(sprite_component->getSprite(), layer);
 
-        return entity_view;
+        return sprite_component;
     }
 
-    std::vector<std::shared_ptr<ViewComponent>> ViewComponentCreator::getEntityViews() {
-        std::vector<std::shared_ptr<ViewComponent>> render_views;
+    std::shared_ptr<engine::IAnimatedSpriteComponent>
+    ViewComponentCreator::createAnimatedSprite(const engine::Vector2f &size, const std::string &animation_group_id,
+                                               unsigned int layer) {
+        std::shared_ptr<SpriteComponent> animated_sprite_component =
+                std::make_shared<SpriteComponent>(size, _camera, _resource_manager->getTextureGroup(animation_group_id));
+        animated_sprite_component->setAnimationGroup(
+                std::move(_resource_manager->getAnimationGroup(animation_group_id)));
 
-        for (auto &layer: _view_components) {
-            for (auto it = layer.second.begin(); it != layer.second.end();) {
-                // if the entityview got destroyed, remove it from the set
-                if ((*it).expired()) {
-                    it = layer.second.erase(it);
+        insertDrawable(animated_sprite_component->getSprite(), layer);
+
+        return animated_sprite_component;
+    }
+
+    void ViewComponentCreator::draw(const std::shared_ptr<sf::RenderWindow> &window) {
+        for (auto &layer: _drawables) {
+            for (auto view_component_it = layer.second.begin(); view_component_it != layer.second.end();) {
+                // if the view component got destroyed, remove it from the set
+                if ((*view_component_it).expired()) {
+                    view_component_it = layer.second.erase(view_component_it);
                 } else {
-                    render_views.push_back((*it).lock());
+                    window->draw(*(*view_component_it).lock());
 
-                    it++;
+                    view_component_it++;
                 }
             }
         }
+    }
 
-        return render_views;
+    void ViewComponentCreator::insertDrawable(const std::weak_ptr<sf::Drawable> &view_component, unsigned int layer) {
+        if (_drawables.count(layer)) {
+            _drawables.at(layer).push_back(view_component);
+        } else {
+            _drawables[layer] = {view_component};
+        }
     }
 } // renderer

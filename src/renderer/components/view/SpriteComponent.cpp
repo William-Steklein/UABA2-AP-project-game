@@ -1,14 +1,16 @@
-#include "ViewComponent.h"
+#include "SpriteComponent.h"
 
 namespace renderer {
-    ViewComponent::ViewComponent(std::weak_ptr<engine::Camera> camera,
-                                 std::vector<std::shared_ptr<sf::Texture>> texture_group)
-            : engine::IViewComponent(std::move(camera)), _texture_group(std::move(texture_group)),
+    SpriteComponent::SpriteComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera,
+                                     std::vector<std::shared_ptr<sf::Texture>> texture_group)
+            : engine::IAnimatedSpriteComponent(size, std::move(camera)), _texture_group(std::move(texture_group)),
               _sprite(std::make_shared<sf::Sprite>()) {
         updateSpriteTexture();
     }
 
-    void ViewComponent::update(double t, float dt, engine::Entity &entity) {
+    void SpriteComponent::update(double t, float dt, engine::Entity &entity) {
+        engine::IAnimatedSpriteComponent::update(t, dt, entity);
+
         if (_camera.expired()) {
             throw std::runtime_error("A view component has no camera");
         }
@@ -34,17 +36,17 @@ namespace renderer {
         _sprite->setRotation(engine::toDegree(entity.getRotation()));
     }
 
-    void ViewComponent::setTexture(unsigned int texture_index, bool mirror_h, bool mirror_v) {
-        IViewComponent::setTexture(texture_index, mirror_h, mirror_v);
+    void SpriteComponent::setTexture(unsigned int texture_index, bool mirror_h, bool mirror_v) {
+        ISpriteComponent::setTexture(texture_index, mirror_h, mirror_v);
 
         updateSpriteTexture();
     }
 
-    std::shared_ptr<sf::Sprite> ViewComponent::getSprite() {
+    std::shared_ptr<sf::Sprite> SpriteComponent::getSprite() {
         return _sprite;
     }
 
-    void ViewComponent::updateSpriteTexture() {
+    void SpriteComponent::updateSpriteTexture() {
         _sprite->setTexture(*_texture_group.at(_texture_index), true);
         _sprite->setOrigin(static_cast<float>(_sprite->getTextureRect().width) / 2,
                            static_cast<float>(_sprite->getTextureRect().height) / 2);

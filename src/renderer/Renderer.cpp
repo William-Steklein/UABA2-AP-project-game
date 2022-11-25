@@ -3,7 +3,7 @@
 namespace renderer {
     Renderer::Renderer() : _screen_width(constants::screen_width), _screen_height(constants::screen_height),
                            _running(true) {
-        _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(_screen_width, _screen_height),
+        _window = std::make_shared<sf::RenderWindow>(sf::VideoMode(_screen_width, _screen_height),
                                                      constants::window_title);
 
         _resource_manager = std::make_shared<ResourceManager>();
@@ -37,9 +37,10 @@ namespace renderer {
     void Renderer::draw() {
         _window->clear(sf::Color(127, 128, 118));
 
-        for (const auto &entity_view: _view_component_creator->getEntityViews()) {
-            _window->draw(*(static_cast<std::shared_ptr<sf::Drawable>>(entity_view->getSprite())));
-        }
+//        for (const auto &entity_view: _view_component_creator->getEntityViews()) {
+//            _window->draw(*(static_cast<std::shared_ptr<sf::Drawable>>(entity_view->getSprite())));
+//        }
+        _view_component_creator->draw(_window);
 
         _window->display();
     }

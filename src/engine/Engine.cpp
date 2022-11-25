@@ -7,8 +7,6 @@ namespace engine {
                    std::shared_ptr<IAudioComponentCreator> audio_component_creator)
             : _resource_manager(std::move(resource_manager)),
               _view_component_creator(std::move(view_component_creator)),
-              _animation_component_creator(
-                      std::make_shared<AnimationComponentCreator>(_resource_manager, _view_component_creator)),
               _audio_component_creator(std::move(audio_component_creator)),
               _camera(std::make_shared<Camera>(screen_x_min, screen_x_max, screen_y_min, screen_y_max)),
               _physics_delta_time(1.f / 60.f), _physics_time(0.f),

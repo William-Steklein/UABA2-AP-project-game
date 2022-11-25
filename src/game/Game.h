@@ -4,11 +4,9 @@
 
 #include <engine/Engine.h>
 #include <engine/entity/Entity.h>
-#include <engine/entity/components/animation/AnimationComponent.h>
+#include "engine/entity/components/view/IAnimatedSpriteComponent.h"
 
-#include "game/entities/Player.h"
 #include "game/entities/Explosion.h"
-#include "game/entities/UIWidget.h"
 
 namespace game {
 

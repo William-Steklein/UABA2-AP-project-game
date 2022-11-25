@@ -9,12 +9,16 @@ namespace game {
     class Explosion : public engine::Entity {
     public:
         Explosion(const engine::Transform &transform,
-                  std::shared_ptr<engine::AnimationComponent> animation = nullptr,
+                  std::shared_ptr<engine::IAnimatedSpriteComponent> animation = nullptr,
                   std::shared_ptr<engine::IAudioComponent> audio = nullptr);
 
         ~Explosion() = default;
 
         void update(double t, float dt) override;
+
+    private:
+        std::shared_ptr<engine::IAnimatedSpriteComponent> _animation;
+        std::shared_ptr<engine::IAudioComponent> _audio;
     };
 
 } // game

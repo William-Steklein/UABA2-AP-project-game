@@ -6,9 +6,11 @@
 #include <vector>
 #include <map>
 
+#include <SFML/Graphics.hpp>
+
 #include "engine/entity/components/view/IViewComponentCreator.h"
 
-#include "renderer/components/view/ViewComponent.h"
+#include "renderer/components/view/SpriteComponent.h"
 #include "renderer/resources/ResourceManager.h"
 
 namespace renderer {
@@ -19,14 +21,22 @@ namespace renderer {
 
         ~ViewComponentCreator() = default;
 
-        std::shared_ptr<engine::IViewComponent> create(const std::string &texture_id, unsigned int layer) override;
+        std::shared_ptr<engine::ISpriteComponent> createSprite(const engine::Vector2f &size,
+                                                               const std::string &texture_id,
+                                                               unsigned int layer) override;
 
-        std::vector<std::shared_ptr<ViewComponent>> getEntityViews();
+        std::shared_ptr<engine::IAnimatedSpriteComponent> createAnimatedSprite(const engine::Vector2f &size,
+                                                                               const std::string &animation_group_id,
+                                                                               unsigned int layer) override;
+
+        void draw(const std::shared_ptr<sf::RenderWindow> &window);
 
     private:
         std::shared_ptr<ResourceManager> _resource_manager;
 
-        std::map<unsigned int, std::vector<std::weak_ptr<ViewComponent>>> _view_components;
+        std::map<unsigned int, std::vector<std::weak_ptr<sf::Drawable>>> _drawables;
+
+        void insertDrawable(const std::weak_ptr<sf::Drawable> &view_component, unsigned int layer);
     };
 
 } // renderer

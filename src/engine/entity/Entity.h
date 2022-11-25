@@ -6,18 +6,15 @@
 #include <utility>
 
 #include "engine/entity/components/Transform.h"
-#include "engine/entity/components/view/IViewComponent.h"
-#include "engine/entity/components/animation/AnimationComponent.h"
+#include "engine/entity/components/view/ISpriteComponent.h"
+#include "engine/entity/components/view/IAnimatedSpriteComponent.h"
 #include "engine/entity/components/audio/IAudioComponent.h"
 
 namespace engine {
 
     class Entity {
     public:
-        Entity(const Transform &transform,
-               std::shared_ptr<IViewComponent> view = nullptr,
-               std::shared_ptr<AnimationComponent> animation = nullptr,
-               std::shared_ptr<IAudioComponent> audio = nullptr);
+        Entity(const Transform &transform);
 
         ~Entity();
 
@@ -39,23 +36,17 @@ namespace engine {
 
         void setRotation(const float &rotation);
 
-        void setViewComponent(std::shared_ptr<IViewComponent> component);
-
-        void setAnimationComponent(std::shared_ptr<AnimationComponent> component);
-
-        void setAudioComponent(std::shared_ptr<IAudioComponent> component);
-
-//        void setPhysicsComponent(std::shared_ptr<PhysicsComponent> component);
-
-        void checkComponent(const std::shared_ptr<IComponent> &component);
+        static void checkComponent(const std::shared_ptr<IComponent> &component);
 
     protected:
         Transform _transform;
 
+        std::vector<std::shared_ptr<IComponent>> _components;
+
         // components
-        std::shared_ptr<IViewComponent> _view;
-        std::shared_ptr<AnimationComponent> _animation;
-        std::shared_ptr<IAudioComponent> _audio;
+//        std::shared_ptr<IViewComponent> _view;
+//        std::shared_ptr<AnimationComponent> _animation;
+//        std::shared_ptr<IAudioComponent> _audio;
         // - physics
     };
 

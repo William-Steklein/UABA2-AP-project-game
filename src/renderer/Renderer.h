@@ -29,7 +29,7 @@ namespace renderer {
         unsigned int _screen_height;
         bool _running;
 
-        std::unique_ptr<sf::RenderWindow> _window;
+        std::shared_ptr<sf::RenderWindow> _window;
 
         std::shared_ptr<ResourceManager> _resource_manager;
         std::shared_ptr<ViewComponentCreator> _view_component_creator;
