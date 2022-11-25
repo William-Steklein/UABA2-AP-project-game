@@ -12,7 +12,7 @@ namespace game {
         loadResources();
 
         std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
-                {{0, 0}, {1, 1}, 0},
+                {{0, 0}, {1.5f, 1.5f}, 0},
                 _animation_component_creator->create("explosion", 0),
                 _audio_component_creator->create()
         ));
@@ -28,6 +28,13 @@ namespace game {
 
         _audio_component_creator->setChannelVolume(1, 25);
         _audio_component_creator->setChannelVolume(0, 100);
+
+        std::shared_ptr<UIWidget> widget = std::make_shared<UIWidget>(UIWidget(
+                {{-1, 0}, {0.25f, 0.25f}, 0},
+                _view_component_creator->create("hamburger", 1)
+                ));
+
+        _entities.insert(widget);
     }
 
     Game::~Game() = default;

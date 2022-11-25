@@ -38,7 +38,7 @@ namespace renderer {
         _window->clear(sf::Color(127, 128, 118));
 
         for (const auto &entity_view: _view_component_creator->getEntityViews()) {
-            _window->draw(*entity_view->getSprite());
+            _window->draw(*(static_cast<std::shared_ptr<sf::Drawable>>(entity_view->getSprite())));
         }
 
         _window->display();

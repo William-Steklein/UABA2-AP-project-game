@@ -21,12 +21,12 @@ namespace renderer {
 
         auto texture_size = _sprite->getTexture()->getSize();
 
-        engine::Vector2f camera_size = entity.getScale();
-        engine::Vector2f screen_size = camera_shared->projectSizeWorldToSubScreen(entity.getScale());
+        engine::Vector2f camera_scale = entity.getScale();
+        engine::Vector2f screen_size = camera_shared->projectSizeWorldToSubScreen(_size);
 
-        float x_scale_factor = screen_size.x / (camera_size.x * static_cast<float>(texture_size.x));
+        float x_scale_factor = (screen_size.x / static_cast<float>(texture_size.x)) * camera_scale.x;
 
-        float y_scale_factor = screen_size.y / (camera_size.y * static_cast<float>(texture_size.y));
+        float y_scale_factor = (screen_size.y / static_cast<float>(texture_size.y)) * camera_scale.y;
 
         _sprite->setScale(_mirror_h ? -x_scale_factor : x_scale_factor,
                           _mirror_v ? -y_scale_factor : y_scale_factor);

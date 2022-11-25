@@ -5,7 +5,7 @@ namespace engine {
                    std::shared_ptr<IViewComponent> view,
                    std::shared_ptr<AnimationComponent> animation,
                    std::shared_ptr<IAudioComponent> audio)
-            : _transform({{0, 0}, {1, 1}, 0}),
+            : _transform(transform),
               _view(std::move(view)), _animation(std::move(animation)), _audio(std::move(audio)) {
         // link animation and view
         if (_animation.get()) {

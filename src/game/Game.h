@@ -8,6 +8,7 @@
 
 #include "game/entities/Player.h"
 #include "game/entities/Explosion.h"
+#include "game/entities/UIWidget.h"
 
 namespace game {
 
