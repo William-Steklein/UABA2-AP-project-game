@@ -11,5 +11,7 @@ namespace engine {
         _texture_index = texture_index;
         _mirror_h = mirror_h;
         _mirror_v = mirror_v;
+
+        updateSprite();
     }
 } // engine

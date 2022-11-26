@@ -10,8 +10,9 @@
 
 #include "engine/entity/components/view/IViewComponentCreator.h"
 
-#include "renderer/components/view/SpriteComponent.h"
 #include "renderer/resources/ResourceManager.h"
+#include "renderer/components/view/SpriteComponent.h"
+#include "renderer/components/view/TextBoxComponent.h"
 
 namespace renderer {
 
@@ -21,13 +22,15 @@ namespace renderer {
 
         ~ViewComponentCreator() = default;
 
-        std::shared_ptr<engine::ISpriteComponent> createSprite(const engine::Vector2f &size,
-                                                               const std::string &texture_id,
-                                                               unsigned int layer) override;
+        std::shared_ptr<engine::ISpriteComponent> createSprite(
+                const engine::Vector2f &size, unsigned int layer, const std::string &texture_id) override;
 
-        std::shared_ptr<engine::IAnimatedSpriteComponent> createAnimatedSprite(const engine::Vector2f &size,
-                                                                               const std::string &animation_group_id,
-                                                                               unsigned int layer) override;
+        std::shared_ptr<engine::IAnimatedSpriteComponent> createAnimatedSprite(
+                const engine::Vector2f &size, unsigned int layer, const std::string &animation_group_id) override;
+
+        std::shared_ptr<engine::ITextBoxComponent> createTextBox(
+                const engine::Vector2f &size, unsigned int layer, const std::string &font,
+                float font_size, const engine::Color &color, const std::string &text) override;
 
         void draw(const std::shared_ptr<sf::RenderWindow> &window);
 

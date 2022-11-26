@@ -19,7 +19,7 @@ namespace engine {
 
         virtual void loadMusicResources(const std::vector<AudioResource> &music_resources) = 0;
 
-        // todo: font loading
+        virtual void loadFontResources(const std::vector<FontResource> &font_resources) = 0;
 
         std::shared_ptr<AnimationGroup> getAnimationGroup(const std::string &animation_group_id);
 

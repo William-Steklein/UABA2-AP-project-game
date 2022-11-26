@@ -9,9 +9,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "engine/math/math_utils.h"
-#include "engine/entity/Entity.h"
-#include "engine/entity/components/view/IAnimatedSpriteComponent.h"
+#include <engine/math/math_utils.h>
+#include <engine/entity/components/view/IAnimatedSpriteComponent.h>
 
 namespace renderer {
 
@@ -22,8 +21,6 @@ namespace renderer {
 
         void update(double t, float dt, engine::Entity &entity) override;
 
-        void setTexture(unsigned int texture_index, bool mirror_h, bool mirror_v) override;
-
         std::shared_ptr<sf::Sprite> getSprite();
 
     private:
@@ -31,7 +28,7 @@ namespace renderer {
 
         std::vector<std::shared_ptr<sf::Texture>> _texture_group;
 
-        void updateSpriteTexture();
+        void updateSprite() override;
     };
 
 } // renderer

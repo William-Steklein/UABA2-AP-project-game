@@ -6,9 +6,8 @@ namespace renderer {
 
     }
 
-    std::shared_ptr<engine::ISpriteComponent>
-    ViewComponentCreator::createSprite(const engine::Vector2f &size, const std::string &texture_id,
-                                       unsigned int layer) {
+    std::shared_ptr<engine::ISpriteComponent> ViewComponentCreator::createSprite(
+            const engine::Vector2f &size, unsigned int layer, const std::string &texture_id) {
         std::shared_ptr<SpriteComponent> sprite_component =
                 std::make_shared<SpriteComponent>(size, _camera, _resource_manager->getTextureGroup(texture_id));
 
@@ -17,17 +16,29 @@ namespace renderer {
         return sprite_component;
     }
 
-    std::shared_ptr<engine::IAnimatedSpriteComponent>
-    ViewComponentCreator::createAnimatedSprite(const engine::Vector2f &size, const std::string &animation_group_id,
-                                               unsigned int layer) {
+    std::shared_ptr<engine::IAnimatedSpriteComponent> ViewComponentCreator::createAnimatedSprite(
+            const engine::Vector2f &size, unsigned int layer, const std::string &animation_group_id) {
         std::shared_ptr<SpriteComponent> animated_sprite_component =
-                std::make_shared<SpriteComponent>(size, _camera, _resource_manager->getTextureGroup(animation_group_id));
+                std::make_shared<SpriteComponent>(size, _camera,
+                                                  _resource_manager->getTextureGroup(animation_group_id));
         animated_sprite_component->setAnimationGroup(
                 std::move(_resource_manager->getAnimationGroup(animation_group_id)));
 
         insertDrawable(animated_sprite_component->getSprite(), layer);
 
         return animated_sprite_component;
+    }
+
+    std::shared_ptr<engine::ITextBoxComponent> ViewComponentCreator::createTextBox(
+            const engine::Vector2f &size, unsigned int layer, const std::string &font,
+            float font_size, const engine::Color &color, const std::string &text) {
+        std::shared_ptr<TextBoxComponent> text_component =
+                std::make_shared<TextBoxComponent>(size, _camera, _resource_manager->getFont(font), font_size, color,
+                                                   text);
+
+        insertDrawable(text_component->getTextRender(), layer);
+
+        return text_component;
     }
 
     void ViewComponentCreator::draw(const std::shared_ptr<sf::RenderWindow> &window) {

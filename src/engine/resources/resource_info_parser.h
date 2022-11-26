@@ -18,6 +18,8 @@ namespace engine {
 
     std::vector<AudioResource> parseAudioInfo(const std::string &filepath);
 
+    std::vector<FontResource> parseFontInfo(const std::string &filepath);
+
 } // engine
 
 #endif //GAME_ENGINE_RESOURCE_PARSER_H

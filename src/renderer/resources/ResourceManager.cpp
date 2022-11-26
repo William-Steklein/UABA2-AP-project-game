@@ -74,12 +74,44 @@ namespace renderer {
         }
     }
 
+    void ResourceManager::loadFontResources(const std::vector<engine::FontResource> &font_resources) {
+        for (const auto &font_resource: font_resources) {
+            std::shared_ptr<sf::Font> font = std::make_shared<sf::Font>();
+
+            if (!font->loadFromFile(font_resource.font_path)) {
+                throw std::runtime_error("Unable to load font from file \"" + font_resource.font_path + "\"");
+            }
+
+            if (_fonts.find(font_resource.id) == _fonts.end()) {
+                _fonts[font_resource.id] = font;
+            } else {
+                throw std::runtime_error("Font with id \"" + font_resource.id + "\" already exists");
+            }
+        }
+    }
+
     std::vector<std::shared_ptr<sf::Texture>> ResourceManager::getTextureGroup(const std::string &texture_group_id) {
         if (_texture_groups.find(texture_group_id) == _texture_groups.end()) {
             throw std::runtime_error("Unable to get texture group with id \"" + texture_group_id + "\"");
         }
 
         return _texture_groups.at(texture_group_id);
+    }
+
+    std::shared_ptr<std::map<std::string, sf::SoundBuffer>> ResourceManager::getSounds() {
+        return _sounds;
+    }
+
+    std::shared_ptr<std::map<std::string, std::string>> ResourceManager::getMusic() {
+        return _music;
+    }
+
+    std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string &font_id) {
+        if (_fonts.find(font_id) == _fonts.end()) {
+            throw std::runtime_error("Unable to get font with id \"" + font_id + "\"");
+        }
+
+        return _fonts.at(font_id);
     }
 
     /* check if texture id is already loaded */
@@ -90,13 +122,5 @@ namespace renderer {
         }
 
         return false;
-    }
-
-    std::shared_ptr<std::map<std::string, sf::SoundBuffer>> ResourceManager::getSounds() {
-        return _sounds;
-    }
-
-    std::shared_ptr<std::map<std::string, std::string>> ResourceManager::getMusic() {
-        return _music;
     }
 } // renderer

@@ -41,6 +41,10 @@ namespace engine {
 
         Vector2f projectCoordWorldToSubScreen(const Vector2f &coord) const;
 
+        float projectVerticalSizeWorldToSubScreen(float vertical_size) const;
+
+        float projectHorizontalSizeWorldToSubScreen(float horizontal_size) const;
+
         Vector2f projectSizeWorldToSubScreen(const Vector2f &size) const;
 
     private:

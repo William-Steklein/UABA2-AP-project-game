@@ -71,4 +71,18 @@ namespace engine {
 
         return audio_info;
     }
+
+    std::vector<FontResource> parseFontInfo(const std::string &filepath) {
+        nlohmann::json j = loadJsonFromFile(filepath);
+
+        std::vector<FontResource> font_info;
+
+        for (const auto &item: j.items()) {
+            FontResource font_resource;
+
+            font_info.push_back({item.key(), item.value()});
+        }
+
+        return font_info;
+    }
 } // engine

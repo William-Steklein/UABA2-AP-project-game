@@ -28,6 +28,11 @@ namespace engine {
         std::string audio_path;
     };
 
+    struct FontResource {
+        std::string id;
+        std::string font_path;
+    };
+
 } // engine
 
 #endif //GAME_ENGINE_RESOURCES_H

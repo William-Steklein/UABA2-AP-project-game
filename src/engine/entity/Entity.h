@@ -2,21 +2,21 @@
 #define GAME_ENGINE_ENTITY_H
 
 
+#include <vector>
 #include <memory>
 #include <utility>
+#include <algorithm>
 
 #include "engine/entity/components/Transform.h"
-#include "engine/entity/components/view/ISpriteComponent.h"
-#include "engine/entity/components/view/IAnimatedSpriteComponent.h"
-#include "engine/entity/components/audio/IAudioComponent.h"
+#include "engine/entity/components/IComponent.h"
 
 namespace engine {
 
     class Entity {
     public:
-        Entity(const Transform &transform);
+        Entity(Transform transform);
 
-        ~Entity();
+        ~Entity() = default;
 
         virtual void update(double t, float dt);
 
@@ -36,18 +36,16 @@ namespace engine {
 
         void setRotation(const float &rotation);
 
-        static void checkComponent(const std::shared_ptr<IComponent> &component);
+        void addComponent(std::shared_ptr<IComponent> component);
+
+        void removeComponent(const std::shared_ptr<IComponent>& component);
 
     protected:
         Transform _transform;
 
         std::vector<std::shared_ptr<IComponent>> _components;
 
-        // components
-//        std::shared_ptr<IViewComponent> _view;
-//        std::shared_ptr<AnimationComponent> _animation;
-//        std::shared_ptr<IAudioComponent> _audio;
-        // - physics
+        static void checkComponent(const std::shared_ptr<IComponent> &component);
     };
 
 } // engine

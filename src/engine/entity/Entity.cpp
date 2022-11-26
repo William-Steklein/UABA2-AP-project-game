@@ -1,12 +1,10 @@
 #include "engine/entity/Entity.h"
 
 namespace engine {
-    Entity::Entity(const Transform &transform)
-            : _transform(transform) {
+    Entity::Entity(Transform transform)
+            : _transform(std::move(transform)) {
 
     }
-
-    Entity::~Entity() = default;
 
     void Entity::update(double t, float dt) {
         for (const auto &component: _components) {
@@ -46,6 +44,18 @@ namespace engine {
 
     void Entity::setRotation(const float &rotation) {
         _transform.rotation = rotation;
+    }
+
+    void Entity::addComponent(std::shared_ptr<IComponent> component) {
+        checkComponent(component);
+        _components.push_back(std::move(component));
+    }
+
+    void Entity::removeComponent(const std::shared_ptr<IComponent>& component) {
+        auto it = std::find(_components.begin(), _components.end(), component);
+        if (it != _components.end()) {
+            _components.erase(it);
+        }
     }
 
     void Entity::checkComponent(const std::shared_ptr<IComponent> &component) {

@@ -3,6 +3,7 @@
 
 
 #include "engine/entity/components/IComponent.h"
+#include "engine/entity/Entity.h"
 #include "engine/camera/Camera.h"
 
 namespace engine {

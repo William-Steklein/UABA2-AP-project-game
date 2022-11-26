@@ -5,7 +5,7 @@ namespace renderer {
                                      std::vector<std::shared_ptr<sf::Texture>> texture_group)
             : engine::IAnimatedSpriteComponent(size, std::move(camera)), _texture_group(std::move(texture_group)),
               _sprite(std::make_shared<sf::Sprite>()) {
-        updateSpriteTexture();
+        updateSprite();
     }
 
     void SpriteComponent::update(double t, float dt, engine::Entity &entity) {
@@ -36,17 +36,11 @@ namespace renderer {
         _sprite->setRotation(engine::toDegree(entity.getRotation()));
     }
 
-    void SpriteComponent::setTexture(unsigned int texture_index, bool mirror_h, bool mirror_v) {
-        ISpriteComponent::setTexture(texture_index, mirror_h, mirror_v);
-
-        updateSpriteTexture();
-    }
-
     std::shared_ptr<sf::Sprite> SpriteComponent::getSprite() {
         return _sprite;
     }
 
-    void SpriteComponent::updateSpriteTexture() {
+    void SpriteComponent::updateSprite() {
         _sprite->setTexture(*_texture_group.at(_texture_index), true);
         _sprite->setOrigin(static_cast<float>(_sprite->getTextureRect().width) / 2,
                            static_cast<float>(_sprite->getTextureRect().height) / 2);

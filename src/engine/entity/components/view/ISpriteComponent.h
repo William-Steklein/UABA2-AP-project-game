@@ -2,9 +2,6 @@
 #define GAME_ENGINE_ISPRITECOMPONENT_H
 
 
-#include <utility>
-
-#include "engine/math/Vector2f.h"
 #include "engine/entity/components/view/IViewComponent.h"
 
 namespace engine {
@@ -19,6 +16,8 @@ namespace engine {
         unsigned int _texture_index;
         bool _mirror_h;
         bool _mirror_v;
+
+        virtual void updateSprite() = 0;
     };
 
 } // engine

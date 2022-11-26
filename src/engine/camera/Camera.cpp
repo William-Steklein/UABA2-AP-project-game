@@ -100,8 +100,16 @@ namespace engine {
                 lerp(_sub_screen_boundaries.y_min, _sub_screen_boundaries.y_max, alpha_y)};
     }
 
+    float Camera::projectVerticalSizeWorldToSubScreen(float vertical_size) const {
+        return (getSubScreenHeight() / getHeight()) * vertical_size;
+    }
+
+    float Camera::projectHorizontalSizeWorldToSubScreen(float horizontal_size) const {
+        return (getScreenWidth() / getWidth()) * horizontal_size;
+    }
+
     Vector2f Camera::projectSizeWorldToSubScreen(const Vector2f &size) const {
-        return {getSubScreenWidth() / getWidth() * size.x,
-                getSubScreenHeight() / getHeight() * size.y};
+        return {(getSubScreenWidth() / getWidth()) * size.x,
+                (getSubScreenHeight() / getHeight()) * size.y};
     }
 } // engine

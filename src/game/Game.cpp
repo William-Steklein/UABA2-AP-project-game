@@ -1,4 +1,5 @@
 #include "game/Game.h"
+#include "game/entities/UIWidget.h"
 
 namespace game {
     Game::Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
@@ -12,11 +13,19 @@ namespace game {
         loadResources();
 
         std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
-                {{0, 0}, {1.5f, 1.5f}, 0},
-                _view_component_creator->createAnimatedSprite({1, 1}, "explosion", 0),
+                {{0, 0}, {1, 1}, 0},
+                _view_component_creator->createAnimatedSprite({1, 1}, 0, "explosion"),
                 _audio_component_creator->create()
         ));
         _physics_entities.insert(new_entity);
+
+        std::shared_ptr<UIWidget> new_ui_widget = std::make_shared<UIWidget>(UIWidget(
+                {{-0.5f, 0.75f}, {1, 1}, 0},
+                _view_component_creator->createSprite({1.f, 0.5f}, 0, "button"),
+                _view_component_creator->createTextBox({1.f, 0.5f}, 1, "PTSans-regular", 0.2f, {0, 0, 0}, "Banana")
+                ));
+
+        _entities.insert(new_ui_widget);
     }
 
     Game::~Game() = default;
@@ -39,5 +48,6 @@ namespace game {
                 engine::parseAnimationInfo("data/resource-info/animations.json"));
         _resource_manager->loadSoundResources(engine::parseAudioInfo("data/resource-info/sounds.json"));
         _resource_manager->loadMusicResources(engine::parseAudioInfo("data/resource-info/music.json"));
+        _resource_manager->loadFontResources(engine::parseFontInfo("data/resource-info/fonts.json"));
     }
 } // game
