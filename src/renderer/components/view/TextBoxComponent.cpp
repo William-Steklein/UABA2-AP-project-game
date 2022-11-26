@@ -2,9 +2,8 @@
 
 namespace renderer {
     TextBoxComponent::TextBoxComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera,
-                                       std::shared_ptr<sf::Font> font,
-                                       float font_size, const engine::Color &color, const std::string &text)
-            : ITextBoxComponent(size, std::move(camera), font_size, color, text),
+                                       std::shared_ptr<sf::Font> font)
+            : ITextBoxComponent(size, std::move(camera)),
               _font(std::move(font)), _text_render(std::make_shared<sf::Text>()) {
         _text_render->setFont(*_font);
 
@@ -39,7 +38,7 @@ namespace renderer {
     void TextBoxComponent::updateTextRender() {
         _text_render->setCharacterSize(
                 static_cast<unsigned int>(_camera.lock()->projectVerticalSizeWorldToSubScreen(_font_size)));
-        _text_render->setFillColor(sf::Color(_color.r, _color.g, _color.b, _color.a));
+        _text_render->setFillColor(sf::Color(_fillcolor.r, _fillcolor.g, _fillcolor.b, _fillcolor.a));
 
         _text_render->setString(_text);
         sf::FloatRect text_rect = _text_render->getLocalBounds();

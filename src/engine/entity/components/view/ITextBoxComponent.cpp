@@ -1,9 +1,8 @@
 #include "ITextBoxComponent.h"
 
 namespace engine {
-    ITextBoxComponent::ITextBoxComponent(const Vector2f &size, std::weak_ptr<Camera> camera,
-                                         float font_size, const Color &color, const std::string &text)
-            : IViewComponent(size, std::move(camera)), _font_size(font_size), _color(color), _text(text) {
+    ITextBoxComponent::ITextBoxComponent(const Vector2f &size, std::weak_ptr<Camera> camera)
+            : IShapeComponent(size, std::move(camera)), _font_size(0.1f), _text("") {
 
     }
 
@@ -29,12 +28,7 @@ namespace engine {
         updateTextBox();
     }
 
-    const Color &ITextBoxComponent::getColor() const {
-        return _color;
-    }
-
-    void ITextBoxComponent::setColor(const Color &color) {
-        _color = color;
+    void ITextBoxComponent::updateShape() {
         updateTextBox();
     }
 } // engine

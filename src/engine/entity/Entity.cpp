@@ -51,6 +51,13 @@ namespace engine {
         _components.push_back(std::move(component));
     }
 
+    void Entity::addComponents(const std::vector<std::shared_ptr<IComponent>>& components) {
+        for (auto component : components) {
+            checkComponent(component);
+            _components.push_back(std::move(component));
+        }
+    }
+
     void Entity::removeComponent(const std::shared_ptr<IComponent>& component) {
         auto it = std::find(_components.begin(), _components.end(), component);
         if (it != _components.end()) {

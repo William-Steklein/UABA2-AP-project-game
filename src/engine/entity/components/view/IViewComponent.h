@@ -16,7 +16,7 @@ namespace engine {
 
         const Vector2f &getSize() const;
 
-        void setSize(const Vector2f &size);
+        virtual void setSize(const Vector2f &size);
 
         const std::weak_ptr<Camera> &getCamera() const;
 

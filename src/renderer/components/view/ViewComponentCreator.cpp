@@ -6,6 +6,20 @@ namespace renderer {
 
     }
 
+    std::shared_ptr<engine::ILineComponent> ViewComponentCreator::createLine(
+            const engine::Vector2f &size, unsigned int layer) {
+        return std::shared_ptr<engine::ILineComponent>();
+    }
+
+    std::shared_ptr<engine::IShapeComponent> ViewComponentCreator::createRectangle(
+            const engine::Vector2f &size, unsigned int layer) {
+        std::shared_ptr<RectangleComponent> rectangle_component = std::make_shared<RectangleComponent>(size, _camera);
+
+        insertDrawable(rectangle_component->getRectangleRender(), layer);
+
+        return rectangle_component;
+    }
+
     std::shared_ptr<engine::ISpriteComponent> ViewComponentCreator::createSprite(
             const engine::Vector2f &size, unsigned int layer, const std::string &texture_id) {
         std::shared_ptr<SpriteComponent> sprite_component =
@@ -30,11 +44,9 @@ namespace renderer {
     }
 
     std::shared_ptr<engine::ITextBoxComponent> ViewComponentCreator::createTextBox(
-            const engine::Vector2f &size, unsigned int layer, const std::string &font,
-            float font_size, const engine::Color &color, const std::string &text) {
+            const engine::Vector2f &size, unsigned int layer, const std::string &font) {
         std::shared_ptr<TextBoxComponent> text_component =
-                std::make_shared<TextBoxComponent>(size, _camera, _resource_manager->getFont(font), font_size, color,
-                                                   text);
+                std::make_shared<TextBoxComponent>(size, _camera, _resource_manager->getFont(font));
 
         insertDrawable(text_component->getTextRender(), layer);
 

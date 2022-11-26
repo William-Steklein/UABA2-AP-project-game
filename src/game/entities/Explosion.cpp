@@ -18,13 +18,13 @@ namespace game {
     void Explosion::update(double t, float dt) {
         if (_animation->isFinished()) {
             _animation->start("ground_explosion", true, false, false);
-            _audio->playSound("scream", 1, false);
+//            _audio->playSound("scream", 1, false);
         }
 
         if (_animation->isLoopFinished()) {
 //            _animation->setMirrorV(!_animation->getMirrorV());
             setRotation(_transform.rotation + static_cast<float>(M_PI) / 4);
-            _audio->playSound("scream", 1, false);
+//            _audio->playSound("scream", 1, false);
         }
 
         Entity::update(t, dt);

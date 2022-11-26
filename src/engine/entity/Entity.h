@@ -38,6 +38,8 @@ namespace engine {
 
         void addComponent(std::shared_ptr<IComponent> component);
 
+        void addComponents(const std::vector<std::shared_ptr<IComponent>>& components);
+
         void removeComponent(const std::shared_ptr<IComponent>& component);
 
     protected:

@@ -20,9 +20,10 @@ namespace game {
         _physics_entities.insert(new_entity);
 
         std::shared_ptr<UIWidget> new_ui_widget = std::make_shared<UIWidget>(UIWidget(
-                {{-0.5f, 0.75f}, {1, 1}, 0},
+                {{-0.5f, 0.5f}, {1, 1}, 0},
                 _view_component_creator->createSprite({1.f, 0.5f}, 0, "button"),
-                _view_component_creator->createTextBox({1.f, 0.5f}, 1, "PTSans-regular", 0.2f, {0, 0, 0}, "Banana")
+                _view_component_creator->createRectangle({1.f, 0.5f}, 2),
+                _view_component_creator->createTextBox({1.f, 0.5f}, 1, "PTSans-regular")
                 ));
 
         _entities.insert(new_ui_widget);

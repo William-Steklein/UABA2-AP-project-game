@@ -2,15 +2,13 @@
 #define GAME_ENGINE_ITEXTBOXCOMPONENT_H
 
 
-#include "engine/entity/components/view/IViewComponent.h"
-#include "engine/Color.h"
+#include "engine/entity/components/view/IShapeComponent.h"
 
 namespace engine {
 
-    class ITextBoxComponent : public IViewComponent {
+    class ITextBoxComponent : public IShapeComponent {
     public:
-        ITextBoxComponent(const Vector2f &size, std::weak_ptr<Camera> camera,
-                          float font_size, const Color &color, const std::string &text);
+        ITextBoxComponent(const Vector2f &size, std::weak_ptr<Camera> camera);
 
         ~ITextBoxComponent() = default;
 
@@ -24,14 +22,11 @@ namespace engine {
 
         void setFontSize(float font_size);
 
-        const Color &getColor() const;
-
-        void setColor(const Color &color);
-
     protected:
         std::string _text;
         float _font_size;
-        Color _color;
+
+        void updateShape() override;
 
         virtual void updateTextBox() = 0;
     };

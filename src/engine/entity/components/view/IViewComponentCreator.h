@@ -5,11 +5,18 @@
 #include "engine/entity/components/view/ISpriteComponent.h"
 #include "engine/entity/components/view/IAnimatedSpriteComponent.h"
 #include "engine/entity/components/view/ITextBoxComponent.h"
+#include "engine/entity/components/view/ILineComponent.h"
 
 namespace engine {
 
     class IViewComponentCreator {
     public:
+        virtual std::shared_ptr<engine::ILineComponent> createLine(
+                const engine::Vector2f &size, unsigned int layer) = 0;
+
+        virtual std::shared_ptr<engine::IShapeComponent> createRectangle(
+                const engine::Vector2f &size, unsigned int layer) = 0;
+
         virtual std::shared_ptr<ISpriteComponent> createSprite(const engine::Vector2f &size, unsigned int layer,
                                                                const std::string &texture_id) = 0;
 
@@ -17,8 +24,7 @@ namespace engine {
                 const engine::Vector2f &size, unsigned int layer, const std::string &animation_group_id) = 0;
 
         virtual std::shared_ptr<ITextBoxComponent> createTextBox(
-                const engine::Vector2f &size, unsigned int layer, const std::string &font,
-                float font_size, const engine::Color &color, const std::string &text) = 0;
+                const engine::Vector2f &size, unsigned int layer, const std::string &font) = 0;
 
         void setCamera(std::weak_ptr<Camera> camera);
 

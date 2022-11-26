@@ -11,6 +11,7 @@
 #include "engine/entity/components/view/IViewComponentCreator.h"
 
 #include "renderer/resources/ResourceManager.h"
+#include "renderer/components/view/RectangleComponent.h"
 #include "renderer/components/view/SpriteComponent.h"
 #include "renderer/components/view/TextBoxComponent.h"
 
@@ -22,15 +23,20 @@ namespace renderer {
 
         ~ViewComponentCreator() = default;
 
+        std::shared_ptr<engine::ILineComponent> createLine(
+                const engine::Vector2f &size, unsigned int layer) final;
+
+        std::shared_ptr<engine::IShapeComponent> createRectangle(
+                const engine::Vector2f &size, unsigned int layer) final;
+
         std::shared_ptr<engine::ISpriteComponent> createSprite(
-                const engine::Vector2f &size, unsigned int layer, const std::string &texture_id) override;
+                const engine::Vector2f &size, unsigned int layer, const std::string &texture_id) final;
 
         std::shared_ptr<engine::IAnimatedSpriteComponent> createAnimatedSprite(
-                const engine::Vector2f &size, unsigned int layer, const std::string &animation_group_id) override;
+                const engine::Vector2f &size, unsigned int layer, const std::string &animation_group_id) final;
 
         std::shared_ptr<engine::ITextBoxComponent> createTextBox(
-                const engine::Vector2f &size, unsigned int layer, const std::string &font,
-                float font_size, const engine::Color &color, const std::string &text) override;
+                const engine::Vector2f &size, unsigned int layer, const std::string &font) final;
 
         void draw(const std::shared_ptr<sf::RenderWindow> &window);
 

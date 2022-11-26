@@ -12,8 +12,7 @@ namespace renderer {
     class TextBoxComponent : public engine::ITextBoxComponent {
     public:
         TextBoxComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera,
-                         std::shared_ptr<sf::Font> font,
-                         float font_size, const engine::Color &color, const std::string &text);
+                         std::shared_ptr<sf::Font> font);
 
         ~TextBoxComponent() = default;
 

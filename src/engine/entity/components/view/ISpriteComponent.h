@@ -10,6 +10,8 @@ namespace engine {
     public:
         ISpriteComponent(const Vector2f &size, std::weak_ptr<Camera> camera);
 
+        ~ISpriteComponent() = default;
+
         virtual void setTexture(unsigned int texture_index, bool mirror_h, bool mirror_v);
 
     protected:

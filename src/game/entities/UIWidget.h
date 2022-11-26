@@ -4,6 +4,7 @@
 
 #include <engine/entity/Entity.h>
 #include <engine/entity/components/view/ISpriteComponent.h>
+#include <engine/entity/components/view/IShapeComponent.h>
 #include <engine/entity/components/view/ITextBoxComponent.h>
 
 namespace game {
@@ -12,12 +13,14 @@ namespace game {
     public:
         UIWidget(const engine::Transform &transform,
                  std::shared_ptr<engine::ISpriteComponent> sprite,
+                 std::shared_ptr<engine::IShapeComponent> rectangle,
                  std::shared_ptr<engine::ITextBoxComponent> text);
 
         void update(double t, float dt) override;
 
     private:
         std::shared_ptr<engine::ISpriteComponent> _sprite;
+        std::shared_ptr<engine::IShapeComponent> _rectangle;
         std::shared_ptr<engine::ITextBoxComponent> _textbox;
     };
 
