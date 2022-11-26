@@ -11,9 +11,9 @@
 #include "engine/entity/components/view/IViewComponentCreator.h"
 
 #include "renderer/resources/ResourceManager.h"
-#include "renderer/components/view/RectangleComponent.h"
-#include "renderer/components/view/SpriteComponent.h"
-#include "renderer/components/view/TextBoxComponent.h"
+#include "renderer/components/view/shape/RectangleComponent.h"
+#include "renderer/components/view/sprite/SpriteComponent.h"
+#include "renderer/components/view/text/TextBoxComponent.h"
 
 namespace renderer {
 

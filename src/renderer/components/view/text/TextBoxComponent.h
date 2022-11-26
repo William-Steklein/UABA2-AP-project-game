@@ -4,8 +4,8 @@
 
 #include <SFML/Graphics/Text.hpp>
 
-#include <engine/entity/components/view/ITextBoxComponent.h>
-#include <engine/math/math_utils.h>
+#include "engine/entity/components/view/text/ITextBoxComponent.h"
+#include "engine/math/math_utils.h"
 
 namespace renderer {
 

@@ -4,7 +4,7 @@
 
 #include <cmath>
 
-#include "engine/entity/components/view/IShapeComponent.h"
+#include "IShapeComponent.h"
 
 namespace engine {
 

@@ -7,7 +7,7 @@
 #include <utility>
 #include <algorithm>
 
-#include "engine/entity/components/Transform.h"
+#include "Transform.h"
 #include "engine/entity/components/IComponent.h"
 
 namespace engine {

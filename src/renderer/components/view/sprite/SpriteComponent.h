@@ -9,8 +9,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include <engine/math/math_utils.h>
-#include <engine/entity/components/view/IAnimatedSpriteComponent.h>
+#include "engine/math/math_utils.h"
+#include "engine/entity/components/view/sprite/IAnimatedSpriteComponent.h"
 
 namespace renderer {
 

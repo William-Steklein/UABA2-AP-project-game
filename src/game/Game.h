@@ -4,7 +4,7 @@
 
 #include <engine/Engine.h>
 #include <engine/entity/Entity.h>
-#include "engine/entity/components/view/IAnimatedSpriteComponent.h"
+#include "engine/entity/components/view/sprite/IAnimatedSpriteComponent.h"
 
 #include "game/entities/Explosion.h"
 

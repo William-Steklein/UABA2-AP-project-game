@@ -3,9 +3,9 @@
 
 
 #include <engine/entity/Entity.h>
-#include <engine/entity/components/view/ISpriteComponent.h>
-#include <engine/entity/components/view/IShapeComponent.h>
-#include <engine/entity/components/view/ITextBoxComponent.h>
+#include "engine/entity/components/view/sprite/ISpriteComponent.h"
+#include "engine/entity/components/view/shape/IShapeComponent.h"
+#include "engine/entity/components/view/text/ITextBoxComponent.h"
 
 namespace game {
 

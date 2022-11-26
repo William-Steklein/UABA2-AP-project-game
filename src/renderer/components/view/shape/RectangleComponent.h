@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
-#include <engine/entity/components/view/IShapeComponent.h>
+#include "engine/entity/components/view/shape/IShapeComponent.h"
 
 namespace renderer {
 

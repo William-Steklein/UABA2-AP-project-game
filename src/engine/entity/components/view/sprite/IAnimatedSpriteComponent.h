@@ -4,7 +4,7 @@
 
 #include <utility>
 
-#include "engine/entity/components/view/ISpriteComponent.h"
+#include "engine/entity/components/view/sprite/ISpriteComponent.h"
 #include "engine/resources/Animation.h"
 #include "engine/logging/Logger.h"
 

@@ -2,10 +2,10 @@
 #define GAME_ENGINE_IVIEWCOMPONENTCREATOR_H
 
 
-#include "engine/entity/components/view/ISpriteComponent.h"
-#include "engine/entity/components/view/IAnimatedSpriteComponent.h"
-#include "engine/entity/components/view/ITextBoxComponent.h"
-#include "engine/entity/components/view/ILineComponent.h"
+#include "engine/entity/components/view/sprite/ISpriteComponent.h"
+#include "engine/entity/components/view/sprite/IAnimatedSpriteComponent.h"
+#include "engine/entity/components/view/text/ITextBoxComponent.h"
+#include "engine/entity/components/view/shape/ILineComponent.h"
 
 namespace engine {
 

@@ -2,7 +2,7 @@
 #define GAME_ENGINE_ITEXTBOXCOMPONENT_H
 
 
-#include "engine/entity/components/view/IShapeComponent.h"
+#include "engine/entity/components/view/shape/IShapeComponent.h"
 
 namespace engine {
 
