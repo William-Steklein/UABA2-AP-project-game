@@ -10,6 +10,7 @@
 #include <game/Game.h>
 
 #include "renderer/constants/constants.h"
+#include "renderer/utils.h"
 #include "renderer/resources/ResourceManager.h"
 #include "renderer/components/view/ViewComponentCreator.h"
 #include "renderer/components/audio/AudioComponentCreator.h"
@@ -41,6 +42,8 @@ namespace renderer {
         void handleEvents();
 
         void quit();
+
+        void resizeWindow(unsigned int screen_width, unsigned int screen_height);
     };
 
 } // renderer

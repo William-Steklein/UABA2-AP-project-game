@@ -12,6 +12,7 @@ namespace renderer {
 
     void TextBoxComponent::update(double t, float dt, engine::Entity &entity) {
         ITextBoxComponent::update(t, dt, entity);
+        updateTextRender();
 
         if (_camera.expired()) {
             throw std::runtime_error("A view component has no camera");

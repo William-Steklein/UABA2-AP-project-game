@@ -27,5 +27,4 @@ namespace game {
 
 } // game
 
-
 #endif //GAME_ENGINE_EXPLOSION_H

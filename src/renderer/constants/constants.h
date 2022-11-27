@@ -3,6 +3,7 @@
 
 
 #include <string>
+#include <engine/Color.h>
 
 namespace renderer {
 
@@ -11,6 +12,8 @@ namespace renderer {
         extern const unsigned int screen_width;
         extern const unsigned int screen_height;
         extern const std::string window_title;
+
+        extern const engine::Color window_clear_color;
 
     }; // constants
 

@@ -29,6 +29,9 @@ namespace engine {
 
         virtual void update();
 
+        virtual void updateScreenResolution(float screen_x_min, float screen_x_max,
+                                            float screen_y_min, float screen_y_max);
+
     protected:
         std::set<std::shared_ptr<Entity>> _entities;
         std::set<std::shared_ptr<Entity>> _physics_entities;
@@ -38,6 +41,8 @@ namespace engine {
         std::shared_ptr<IAudioComponentCreator> _audio_component_creator;
 
         std::shared_ptr<Camera> _camera;
+        std::shared_ptr<Entity> _sidebar1;
+        std::shared_ptr<Entity> _sidebar2;
 
         virtual void update(double t, float dt);
 

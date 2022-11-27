@@ -35,11 +35,8 @@ namespace renderer {
     }
 
     void Renderer::draw() {
-        _window->clear(sf::Color(127, 128, 118));
+        _window->clear(colorEngineToSFML(constants::window_clear_color));
 
-//        for (const auto &entity_view: _view_component_creator->getEntityViews()) {
-//            _window->draw(*(static_cast<std::shared_ptr<sf::Drawable>>(entity_view->getSprite())));
-//        }
         _view_component_creator->draw(_window);
 
         _window->display();
@@ -53,6 +50,10 @@ namespace renderer {
                     quit();
                     break;
 
+                case sf::Event::Resized:
+                    resizeWindow(_window->getSize().x, _window->getSize().y);
+                    break;
+
                 default:
                     break;
             }
@@ -62,5 +63,16 @@ namespace renderer {
     void Renderer::quit() {
         _window->close();
         _running = false;
+    }
+
+    void Renderer::resizeWindow(unsigned int screen_width, unsigned int screen_height) {
+        _screen_width = screen_width;
+        _screen_height = screen_height;
+
+        // update the view to the new screen_ui_size of the window
+        sf::FloatRect visibleArea(0, 0, static_cast<float>(screen_width), static_cast<float>(screen_height));
+        _window->setView(sf::View(visibleArea));
+
+        _game->updateScreenResolution(0, static_cast<float>(screen_width), static_cast<float>(screen_height), 0);
     }
 } // renderer

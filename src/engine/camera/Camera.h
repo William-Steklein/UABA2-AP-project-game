@@ -23,6 +23,8 @@ namespace engine {
 
         void setPosition(const Vector2f &position);
 
+        void setScreenBoundaries(float left, float right, float bottom, float top);
+
         float getWidth() const;
 
         float getHeight() const;
@@ -46,6 +48,14 @@ namespace engine {
         float projectHorizontalSizeWorldToSubScreen(float horizontal_size) const;
 
         Vector2f projectSizeWorldToSubScreen(const Vector2f &size) const;
+
+        Vector2f projectCoordScreenToWorld(const Vector2f &coord) const;
+
+        Vector2f projectSizeScreenToWorld(const Vector2f &size) const;
+
+        Vector2f projectCoordSubScreenToWorld(const Vector2f &coord) const;
+
+        Vector2f projectSizeSubScreenToWorld(const Vector2f &size) const;
 
     private:
         Vector2f _position;

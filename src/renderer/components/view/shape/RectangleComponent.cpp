@@ -13,6 +13,9 @@ namespace renderer {
         }
         std::shared_ptr<engine::Camera> camera_shared = _camera.lock();
 
+        sf::FloatRect sf_rect = _rectangle_render->getLocalBounds();
+        _rectangle_render->setOrigin(sf_rect.left + sf_rect.width / 2, sf_rect.top + sf_rect.height / 2);
+
         engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(entity.getPosition());
         _rectangle_render->setPosition(screen_position.x, screen_position.y);
 

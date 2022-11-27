@@ -14,7 +14,7 @@ namespace engine {
 
     class Entity {
     public:
-        Entity(Transform transform);
+        Entity(Transform transform, const std::vector<std::shared_ptr<IComponent>>& components = {});
 
         ~Entity() = default;
 

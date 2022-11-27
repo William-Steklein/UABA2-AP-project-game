@@ -7,6 +7,12 @@ namespace engine {
             : _position(0, 0),
               _boundaries({-1.5, 1.5, -1, 1}), _screen_boundaries({left, right, bottom, top}),
               _sub_screen_aspect_ratio({3, 2}), _sub_screen_boundaries({left, right, bottom, top}) {
+        if (getWidth() == 0 || getHeight() == 0) {
+            throw std::runtime_error("Invalid camera boundaries");
+        } else if (getScreenWidth() == 0 || getScreenHeight() == 0) {
+            throw std::runtime_error("Invalid screen boundaries");
+        }
+
         updateSubScreenResolution();
     }
 
@@ -16,6 +22,11 @@ namespace engine {
 
     void Camera::setPosition(const Vector2f &position) {
         _position = position;
+    }
+
+    void Camera::setScreenBoundaries(float left, float right, float bottom, float top) {
+        _screen_boundaries = {left, right, bottom, top};
+        updateSubScreenResolution();
     }
 
     float Camera::getWidth() const {
@@ -90,11 +101,15 @@ namespace engine {
             _sidebar_1_position = {getScreenWidth() / 2, _sidebar_size.y / 2};
             _sidebar_2_position = {getScreenWidth() / 2, getScreenHeight() - _sidebar_size.y / 2};
         }
+
+        _sidebar_size = projectSizeSubScreenToWorld(_sidebar_size);
+        _sidebar_1_position = projectCoordSubScreenToWorld(_sidebar_1_position);
+        _sidebar_2_position = projectCoordSubScreenToWorld(_sidebar_2_position);
     }
 
     Vector2f Camera::projectCoordWorldToSubScreen(const Vector2f &coord) const {
-        float alpha_x = std::abs(coord.x - _boundaries.x_min) / getWidth();
-        float alpha_y = std::abs(coord.y - _boundaries.y_min) / getHeight();
+        float alpha_x = (coord.x - _boundaries.x_min) / getWidth();
+        float alpha_y = (coord.y - _boundaries.y_min) / getHeight();
 
         return {lerp(_sub_screen_boundaries.x_min, _sub_screen_boundaries.x_max, alpha_x),
                 lerp(_sub_screen_boundaries.y_min, _sub_screen_boundaries.y_max, alpha_y)};
@@ -105,11 +120,41 @@ namespace engine {
     }
 
     float Camera::projectHorizontalSizeWorldToSubScreen(float horizontal_size) const {
-        return (getScreenWidth() / getWidth()) * horizontal_size;
+        return (getSubScreenWidth() / getWidth()) * horizontal_size;
     }
 
     Vector2f Camera::projectSizeWorldToSubScreen(const Vector2f &size) const {
         return {(getSubScreenWidth() / getWidth()) * size.x,
                 (getSubScreenHeight() / getHeight()) * size.y};
+    }
+
+    Vector2f Camera::projectCoordScreenToWorld(const Vector2f &coord) const {
+        float alpha_x = (coord.x - _screen_boundaries.x_min) /
+                        (_screen_boundaries.x_max - _screen_boundaries.x_min);
+        float alpha_y = (coord.y - _screen_boundaries.y_min) /
+                        (_screen_boundaries.y_max - _screen_boundaries.y_min);
+
+        return {lerp(_boundaries.x_min, _boundaries.x_max, alpha_x),
+                lerp(_boundaries.y_min, _boundaries.y_max, alpha_y)};
+    }
+
+    Vector2f Camera::projectSizeScreenToWorld(const Vector2f &size) const {
+        return {(getWidth() / getScreenWidth()) * size.x,
+                (getHeight() / getScreenHeight()) * size.y};
+    }
+
+    Vector2f Camera::projectCoordSubScreenToWorld(const Vector2f &coord) const {
+        float alpha_x = (coord.x - _sub_screen_boundaries.x_min) /
+                        (_sub_screen_boundaries.x_max - _sub_screen_boundaries.x_min);
+        float alpha_y = (coord.y - _sub_screen_boundaries.y_min) /
+                        (_sub_screen_boundaries.y_max - _sub_screen_boundaries.y_min);
+
+        return {lerp(_boundaries.x_min, _boundaries.x_max, alpha_x),
+                lerp(_boundaries.y_min, _boundaries.y_max, alpha_y)};
+    }
+
+    Vector2f Camera::projectSizeSubScreenToWorld(const Vector2f &size) const {
+        return {(getWidth() / getSubScreenWidth()) * size.x,
+                (getHeight() / getSubScreenHeight()) * size.y};
     }
 } // engine

@@ -1,9 +1,9 @@
 #include "engine/entity/Entity.h"
 
 namespace engine {
-    Entity::Entity(Transform transform)
+    Entity::Entity(Transform transform, const std::vector<std::shared_ptr<IComponent>>& components)
             : _transform(std::move(transform)) {
-
+        addComponents(components);
     }
 
     void Entity::update(double t, float dt) {

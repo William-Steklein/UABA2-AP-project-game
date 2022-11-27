@@ -33,5 +33,4 @@ namespace engine {
 
 } // engine
 
-
 #endif //GAME_ENGINE_ISHAPECOMPONENT_H
