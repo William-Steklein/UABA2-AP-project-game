@@ -8,6 +8,7 @@
 
 #include "engine/logging/Logger.h"
 #include "engine/Stopwatch.h"
+//#include "engine/State.h"
 #include "engine/resources/IResourceManager.h"
 #include "engine/entity/components/view/IViewComponentCreator.h"
 #include "engine/entity/components/audio/IAudioComponentCreator.h"
@@ -43,6 +44,8 @@ namespace engine {
         std::shared_ptr<Camera> _camera;
         std::shared_ptr<Entity> _sidebar1;
         std::shared_ptr<Entity> _sidebar2;
+
+        void initSidebars();
 
         virtual void update(double t, float dt);
 

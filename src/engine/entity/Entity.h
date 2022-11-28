@@ -16,9 +16,11 @@ namespace engine {
     public:
         Entity(Transform transform, const std::vector<std::shared_ptr<IComponent>>& components = {});
 
-        ~Entity() = default;
+        virtual ~Entity() = default;
 
         virtual void update(double t, float dt);
+
+        virtual void handleInput(const std::string &input);
 
         const Transform &getTransform() const;
 

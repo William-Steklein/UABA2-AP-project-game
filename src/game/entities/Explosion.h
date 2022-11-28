@@ -3,10 +3,8 @@
 
 
 #include <engine/entity/Entity.h>
-#include "engine/entity/components/view/sprite/ISpriteComponent.h"
-#include "engine/entity/components/view/sprite/IAnimatedSpriteComponent.h"
+#include <engine/entity/components/view/sprite/IAnimatedSpriteComponent.h>
 #include <engine/entity/components/audio/IAudioComponent.h>
-#include "engine/entity/components/view/text/ITextBoxComponent.h"
 
 namespace game {
 

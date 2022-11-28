@@ -49,7 +49,7 @@
       ]
     ],
     "idle": [
-      0.10,
+      0.20,
       [
         "data/sprites/adventurer/adventurer-idle-00.png",
         "data/sprites/adventurer/adventurer-idle-01.png",

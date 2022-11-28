@@ -1,5 +1,4 @@
 #include "game/Game.h"
-#include "game/entities/UIWidget.h"
 
 namespace game {
     Game::Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
@@ -12,21 +11,29 @@ namespace game {
                      std::move(audio_component_creator)) {
         loadResources();
 
-        std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
+        std::shared_ptr<Player> player = std::make_shared<Player>(Player(
                 {{0, 0}, {1, 1}, 0},
-                _view_component_creator->createAnimatedSprite({1, 1}, 0, "explosion"),
-                _audio_component_creator->create()
-        ));
-        _physics_entities.insert(new_entity);
-
-        std::shared_ptr<UIWidget> new_ui_widget = std::make_shared<UIWidget>(UIWidget(
-                {{-0.5f, 0.5f}, {1, 1}, 0},
-                _view_component_creator->createSprite({1.f, 0.5f}, 0, "button"),
-                _view_component_creator->createRectangle({1.f, 0.5f}, 2),
-                _view_component_creator->createTextBox({1.f, 0.5f}, 1, "PTSans-regular")
+                std::make_shared<IdleState>(),
+                _view_component_creator->createAnimatedSprite({0.8f, 0.56f}, 0, "adventurer")
                 ));
 
-        _entities.insert(new_ui_widget);
+        _physics_entities.insert(player);
+
+//        std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
+//                {{0, 0}, {1, 1}, 0},
+//                _view_component_creator->createAnimatedSprite({1, 1}, 0, "explosion"),
+//                _audio_component_creator->create()
+//        ));
+//        _physics_entities.insert(new_entity);
+//
+//        std::shared_ptr<UIWidget> new_ui_widget = std::make_shared<UIWidget>(UIWidget(
+//                {{-0.25f, 0.25f}, {1, 1}, 0},
+//                _view_component_creator->createSprite({1.f, 0.5f}, 1, "button"),
+//                _view_component_creator->createRectangle({1.f, 0.5f}, 2),
+//                _view_component_creator->createTextBox({1.f, 0.5f}, 3, "PTSans-regular")
+//                ));
+//
+//        _entities.insert(new_ui_widget);
     }
 
     Game::~Game() = default;

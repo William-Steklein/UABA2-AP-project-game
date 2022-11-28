@@ -12,25 +12,7 @@ namespace engine {
               _physics_delta_time(1.f / 60.f), _physics_time(0.f),
               _accumulator(0.f), _physics_speed(1.f) {
         _view_component_creator->setCamera(_camera);
-
-        std::tuple<Vector2f, Vector2f, Vector2f> sidebar_data = _camera->getSidebarData();
-
-//        LOGDEBUG(std::get<0>(sidebar_data));
-//        LOGDEBUG(std::get<1>(sidebar_data));
-
-        _sidebar1 = std::make_shared<Entity>(Entity(
-                {std::get<1>(sidebar_data), std::get<0>(sidebar_data), 0},
-                {_view_component_creator->createRectangle({1, 1}, 10)}
-                ));
-
-        _entities.insert(_sidebar1);
-
-        _sidebar2 = std::make_shared<Entity>(Entity(
-                {std::get<2>(sidebar_data), std::get<0>(sidebar_data), 0},
-                {_view_component_creator->createRectangle({1, 1}, 10)}
-        ));
-
-        _entities.insert(_sidebar2);
+        initSidebars();
     }
 
     Engine::~Engine() = default;
@@ -73,5 +55,21 @@ namespace engine {
         for (const auto &physics_entity: _physics_entities) {
             physics_entity->update(t, dt);
         }
+    }
+
+    void Engine::initSidebars() {
+        std::tuple<Vector2f, Vector2f, Vector2f> sidebar_data = _camera->getSidebarData();
+
+        _sidebar1 = std::make_shared<Entity>(Entity(
+                {std::get<1>(sidebar_data), std::get<0>(sidebar_data), 0},
+                {_view_component_creator->createRectangle({1, 1}, 10)}
+        ));
+        _sidebar2 = std::make_shared<Entity>(Entity(
+                {std::get<2>(sidebar_data), std::get<0>(sidebar_data), 0},
+                {_view_component_creator->createRectangle({1, 1}, 10)}
+        ));
+
+        _entities.insert(_sidebar1);
+        _entities.insert(_sidebar2);
     }
 } // engine

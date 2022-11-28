@@ -14,6 +14,8 @@ namespace engine {
         }
     }
 
+    void Entity::handleInput(const std::string &input) {}
+
     const Transform &Entity::getTransform() const {
         return _transform;
     }
