@@ -14,6 +14,7 @@
 #include "renderer/resources/ResourceManager.h"
 #include "renderer/components/view/ViewComponentCreator.h"
 #include "renderer/components/audio/AudioComponentCreator.h"
+#include "renderer/input_mapping.h"
 
 namespace renderer {
 

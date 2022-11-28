@@ -42,6 +42,23 @@ namespace game {
         Engine::update();
     }
 
+    void Game::handleInputs(const std::vector<engine::Input> &inputs) {
+        for (const auto &input : inputs) {
+            switch (input.type) {
+                case engine::Input::InputType::KEYPRESSED:
+                    LOGDEBUG("button pressed!");
+                    break;
+
+                case engine::Input::InputType::KEYRELEASED:
+                    LOGDEBUG("button released!");
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
     void Game::update(double t, float dt) {
         Engine::update(t, dt);
     }

@@ -23,6 +23,8 @@ namespace game {
 
         void update() override;
 
+        void handleInputs(const std::vector<engine::Input> &inputs) override;
+
     private:
         void update(double t, float dt) override;
 
@@ -32,6 +34,5 @@ namespace game {
     };
 
 } // game
-
 
 #endif //GAME_ENGINE_GAME_H

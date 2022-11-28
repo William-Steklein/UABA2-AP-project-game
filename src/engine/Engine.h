@@ -8,12 +8,12 @@
 
 #include "engine/logging/Logger.h"
 #include "engine/Stopwatch.h"
-//#include "engine/State.h"
 #include "engine/resources/IResourceManager.h"
 #include "engine/entity/components/view/IViewComponentCreator.h"
 #include "engine/entity/components/audio/IAudioComponentCreator.h"
 #include "engine/entity/Entity.h"
 #include "engine/camera/Camera.h"
+#include "engine/Input.h"
 
 namespace engine {
 
@@ -29,6 +29,8 @@ namespace engine {
         static void sleep();
 
         virtual void update();
+
+        virtual void handleInputs(const std::vector<Input> &inputs) = 0;
 
         virtual void updateScreenResolution(float screen_x_min, float screen_x_max,
                                             float screen_y_min, float screen_y_max);

@@ -43,6 +43,8 @@ namespace renderer {
     }
 
     void Renderer::handleEvents() {
+        std::vector<engine::Input> inputs;
+
         sf::Event event{};
         while (_window->pollEvent(event)) {
             switch (event.type) {
@@ -55,9 +57,18 @@ namespace renderer {
                     break;
 
                 default:
+                    // input mapping
+                    engine::Input input = mapInput(event, _window);
+
+                    if (input.type != engine::Input::InputType::UNDEFINED_TYPE) {
+                        inputs.push_back(input);
+                    }
+
                     break;
             }
         }
+
+        _game->handleInputs(inputs);
     }
 
     void Renderer::quit() {
