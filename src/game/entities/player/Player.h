@@ -20,7 +20,7 @@ namespace game {
 
         void update(double t, float dt) override;
 
-        void handleInput(const std::string &input) override;
+        void handleInput(const InputEvent &input);
 
     private:
         std::shared_ptr<IPlayerState> _state;

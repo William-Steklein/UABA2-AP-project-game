@@ -5,6 +5,8 @@
 #include <memory>
 #include <string>
 
+#include "game/InputEvent.h"
+
 namespace game {
 
     class Player;
@@ -17,7 +19,7 @@ namespace game {
 
         virtual void update(Player &player) = 0;
         
-        virtual std::shared_ptr<IPlayerState> handleInput(Player &player, const std::string &input) = 0;
+        virtual std::shared_ptr<IPlayerState> handleInput(Player &player, const InputEvent &input) = 0;
     };
 
 } // game

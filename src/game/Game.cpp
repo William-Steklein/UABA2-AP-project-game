@@ -11,13 +11,13 @@ namespace game {
                      std::move(audio_component_creator)) {
         loadResources();
 
-        std::shared_ptr<Player> player = std::make_shared<Player>(Player(
+        _player = std::make_shared<Player>(Player(
                 {{0, 0}, {1, 1}, 0},
                 std::make_shared<IdleState>(),
                 _view_component_creator->createAnimatedSprite({0.8f, 0.56f}, 0, "adventurer")
-                ));
+        ));
 
-        _physics_entities.insert(player);
+        _physics_entities.insert(_player);
 
 //        std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
 //                {{0, 0}, {1, 1}, 0},
@@ -43,20 +43,56 @@ namespace game {
     }
 
     void Game::handleInputs(const std::vector<engine::Input> &inputs) {
+        std::map<engine::Input::Button, game::InputEvent::Type> event_map = {
+                {engine::Input::Button::A, game::InputEvent::Type::LEFT},
+                {engine::Input::Button::D, game::InputEvent::Type::RIGHT}
+        };
+
         for (const auto &input : inputs) {
+            game::InputEvent event{};
+
+            if (input.type == engine::Input::InputType::MOUSEMOVED) {
+                continue;
+            }
+
+            if (event_map.find(input.button) == event_map.end()) {
+                continue;
+            }
+
+            event.type = event_map.at(input.button);
+
             switch (input.type) {
                 case engine::Input::InputType::KEYPRESSED:
-                    LOGDEBUG("button pressed!");
+                    event.state_enter = true;
                     break;
 
                 case engine::Input::InputType::KEYRELEASED:
-                    LOGDEBUG("button released!");
+                    event.state_enter = false;
                     break;
 
                 default:
                     break;
             }
+
+            _player->handleInput(event);
         }
+
+//        for (const auto &input : inputs) {
+//            game::InputEvent event{};
+//
+//            switch (input.type) {
+//                case engine::Input::InputType::KEYPRESSED:
+//                    LOGDEBUG("button pressed!");
+//                    break;
+//
+//                case engine::Input::InputType::KEYRELEASED:
+//                    LOGDEBUG("button released!");
+//                    break;
+//
+//                default:
+//                    break;
+//            }
+//        }
     }
 
     void Game::update(double t, float dt) {

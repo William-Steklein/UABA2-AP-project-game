@@ -2,7 +2,7 @@
 
 namespace renderer {
     engine::Input mapInput(const sf::Event &event, const std::shared_ptr<sf::RenderWindow> &window) {
-        engine::Input input{engine::Input::InputType::UNDEFINED_TYPE};
+        engine::Input input{engine::Input::InputType::UNDEFINEDTYPE};
 
         switch (event.type) {
             case sf::Event::KeyPressed:
@@ -34,8 +34,8 @@ namespace renderer {
                 break;
         }
 
-        if (input.button == engine::Input::Button::UNDEFINED_BUTTON) {
-            input.type = engine::Input::InputType::UNDEFINED_TYPE;
+        if (input.button == engine::Input::Button::UNDEFINEDBUTTON) {
+            input.type = engine::Input::InputType::UNDEFINEDTYPE;
         }
 
         return input;
@@ -133,6 +133,17 @@ namespace renderer {
             case sf::Keyboard::Up:
                 return engine::Input::Button::UP;
 
+            case sf::Keyboard::LControl:
+            case sf::Keyboard::RControl:
+                return engine::Input::Button::CONTROL;
+
+            case sf::Keyboard::LShift:
+            case sf::Keyboard::RShift:
+                return engine::Input::Button::SHIFT;
+
+            case sf::Keyboard::Tab:
+                return engine::Input::Button::TAB;
+
             case sf::Keyboard::Escape:
                 return engine::Input::Button::ESCAPE;
 
@@ -140,7 +151,7 @@ namespace renderer {
                 return engine::Input::Button::SPACEBAR;
 
             default:
-                return engine::Input::Button::UNDEFINED_BUTTON;
+                return engine::Input::Button::UNDEFINEDBUTTON;
         }
     }
 
@@ -156,7 +167,7 @@ namespace renderer {
                 return engine::Input::Button::MOUSERIGHT;
 
             default:
-                return engine::Input::Button::UNDEFINED_BUTTON;
+                return engine::Input::Button::UNDEFINEDBUTTON;
         }
     }
 

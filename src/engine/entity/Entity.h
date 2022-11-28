@@ -20,8 +20,6 @@ namespace engine {
 
         virtual void update(double t, float dt);
 
-        virtual void handleInput(const std::string &input);
-
         const Transform &getTransform() const;
 
         void setTransform(const Transform &transform);

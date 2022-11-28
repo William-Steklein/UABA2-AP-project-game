@@ -13,7 +13,21 @@ namespace game {
 
     }
 
-    std::shared_ptr<IPlayerState> IdleState::handleInput(Player &player, const std::string &input) {
+    std::shared_ptr<IPlayerState> IdleState::handleInput(Player &player, const InputEvent &input) {
+        switch (input.type) {
+            case InputEvent::Type::LEFT:
+                player._animated_sprite->start("idle", true, true, false);
+
+                break;
+
+            case InputEvent::Type::RIGHT:
+                player._animated_sprite->start("idle", true, false, false);
+
+                break;
+
+            default:
+                break;
+        }
 
         return nullptr;
     }

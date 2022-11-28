@@ -9,6 +9,7 @@
 #include "game/entities/player/PlayerState.h"
 #include "game/entities/UIWidget.h"
 #include "game/entities/Explosion.h"
+#include "game/InputEvent.h"
 
 namespace game {
 
@@ -31,6 +32,8 @@ namespace game {
         void physicsUpdate(double t, float dt) override;
 
         void loadResources();
+
+        std::shared_ptr<Player> _player;
     };
 
 } // game

@@ -8,7 +8,7 @@ namespace engine {
 
     struct Input {
         enum InputType {
-            UNDEFINED_TYPE,
+            UNDEFINEDTYPE,
             KEYPRESSED,
             KEYRELEASED,
             MOUSEPRESSED,
@@ -17,7 +17,7 @@ namespace engine {
         };
 
         enum Button {
-            UNDEFINED_BUTTON,
+            UNDEFINEDBUTTON,
             A,
             B,
             C,
@@ -50,6 +50,9 @@ namespace engine {
             DOWN,
             UP,
 
+            CONTROL,
+            SHIFT,
+            TAB,
             ESCAPE,
             SPACEBAR,
 

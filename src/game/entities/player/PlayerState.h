@@ -19,7 +19,7 @@ namespace game {
 
         void update(game::Player &player) override;
 
-        std::shared_ptr<IPlayerState> handleInput(game::Player &player, const std::string &input) override;
+        std::shared_ptr<IPlayerState> handleInput(game::Player &player, const InputEvent &input) override;
     };
 
 } // game

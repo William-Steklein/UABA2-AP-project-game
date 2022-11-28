@@ -60,11 +60,9 @@ namespace renderer {
                     // input mapping
                     engine::Input input = mapInput(event, _window);
 
-                    if (input.type != engine::Input::InputType::UNDEFINED_TYPE) {
+                    if (input.type != engine::Input::InputType::UNDEFINEDTYPE) {
                         inputs.push_back(input);
                     }
-
-                    break;
             }
         }
 

@@ -15,14 +15,12 @@ namespace game {
         Entity::update(t, dt);
     }
 
-    void Player::handleInput(const std::string &input) {
+    void Player::handleInput(const InputEvent &input) {
         std::shared_ptr<IPlayerState> state = _state->handleInput(*this, input);
 
         if (state != nullptr) {
             _state = state;
             _state->enter(*this);
         }
-
-        Entity::handleInput(input);
     }
 } // game
