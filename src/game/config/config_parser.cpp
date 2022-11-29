@@ -12,7 +12,9 @@ namespace game {
         config.button_map.keyboard[engine::stringToInputButton(k_map["up"])] = game::InputEvent::Type::UP;
         config.button_map.keyboard[engine::stringToInputButton(k_map["jump"])] = game::InputEvent::Type::JUMP;
         config.button_map.keyboard[engine::stringToInputButton(k_map["special"])] = game::InputEvent::Type::SPECIAL;
+
         config.button_map.keyboard[engine::Input::Button::ENTER] = game::InputEvent::Type::ACCEPT;
+        config.button_map.keyboard[engine::Input::Button::ESCAPE] = game::InputEvent::Type::RETURN;
 
         nlohmann::json c_map = j["button_map"]["controller"];
 

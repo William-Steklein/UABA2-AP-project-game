@@ -15,8 +15,6 @@ namespace engine {
         initSidebars();
     }
 
-    Engine::~Engine() = default;
-
     void Engine::sleep() {
         Stopwatch::getInstance().sleepFrame();
     }

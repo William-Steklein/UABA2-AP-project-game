@@ -41,8 +41,6 @@ namespace game {
 //        _entities.insert(new_ui_widget);
     }
 
-    Game::~Game() = default;
-
     void Game::update() {
         Engine::update();
     }

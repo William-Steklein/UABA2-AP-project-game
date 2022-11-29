@@ -26,15 +26,21 @@ namespace engine {
 
         const Vector2f &getPosition() const;
 
-        void setPosition(const Vector2f &position);
+        virtual void setPosition(const Vector2f &position);
+
+        void move(const Vector2f &vector);
 
         const Vector2f &getScale() const;
 
-        void setScale(const Vector2f &scale);
+        virtual void setScale(const Vector2f &scale);
+
+        void scale(const Vector2f &scale);
 
         const float &getRotation() const;
 
-        void setRotation(const float &rotation);
+        virtual void setRotation(const float &rotation);
+
+        void rotate(float rotation);
 
         void addComponent(std::shared_ptr<IComponent> component);
 

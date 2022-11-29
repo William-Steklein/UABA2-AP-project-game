@@ -24,7 +24,7 @@ namespace engine {
                std::shared_ptr<IViewComponentCreator> view_component_creator,
                std::shared_ptr<IAudioComponentCreator> audio_component_creator);
 
-        ~Engine();
+        virtual ~Engine() = default;
 
         static void sleep();
 

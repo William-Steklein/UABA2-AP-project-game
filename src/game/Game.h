@@ -18,7 +18,7 @@ namespace game {
              std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator,
              std::shared_ptr<IGameState> start_state);
 
-        ~Game();
+        ~Game() override = default;
 
         void update() override;
 

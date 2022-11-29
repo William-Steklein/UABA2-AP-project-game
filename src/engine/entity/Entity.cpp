@@ -19,7 +19,9 @@ namespace engine {
     }
 
     void Entity::setTransform(const Transform &transform) {
-        _transform = transform;
+        setPosition(transform.position);
+        setScale(transform.scale);
+        setRotation(transform.rotation);
     }
 
     const Vector2f &Entity::getPosition() const {
@@ -30,6 +32,10 @@ namespace engine {
         _transform.position = position;
     }
 
+    void Entity::move(const engine::Vector2f &vector) {
+        setPosition(getPosition() + vector);
+    }
+
     const Vector2f &Entity::getScale() const {
         return _transform.scale;
     }
@@ -38,12 +44,20 @@ namespace engine {
         _transform.scale = scale;
     }
 
+    void Entity::scale(const engine::Vector2f &scale) {
+        setScale({getScale().x * scale.x, getScale().y * scale.y});
+    }
+
     const float &Entity::getRotation() const {
         return _transform.rotation;
     }
 
     void Entity::setRotation(const float &rotation) {
         _transform.rotation = rotation;
+    }
+
+    void Entity::rotate(float rotation) {
+        setRotation(getRotation() + rotation);
     }
 
     void Entity::addComponent(std::shared_ptr<IComponent> component) {

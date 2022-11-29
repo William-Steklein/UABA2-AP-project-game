@@ -1,4 +1,5 @@
 #include "MenuState.h"
+#include "game/state/DebugState.h"
 
 namespace game {
     MenuState::MenuState() {
@@ -6,25 +7,32 @@ namespace game {
     }
 
     void MenuState::enter(Game &game) {
-        _player = std::make_shared<Player>(Player(
+        std::shared_ptr<engine::UIEntity> menu_background = std::make_shared<engine::UIEntity>(engine::UIEntity(
                 {{0, 0}, {1, 1}, 0},
-                std::make_shared<IdleState>(),
-                game.getViewComponentCreator()->createAnimatedSprite({0.8f, 0.56f}, 0, "adventurer")
+                {
+                        game.getViewComponentCreator()->createSprite({1.f, 1.5f}, 0, "menu")
+                }
+        ));
+        _entities.insert(menu_background);
+
+        std::shared_ptr<engine::UIEntity> debug_button = std::make_shared<engine::UIEntity>(engine::UIEntity(
+                {{0, 0.5f}, {1, 1}, 0},
+                {
+                        game.getViewComponentCreator()->createSprite({0.5f, 0.25f}, 0, "button")
+                }
         ));
 
-        _physics_entities.insert(_player);
+        menu_background->addChild(debug_button, menu_background);
     }
 
     void MenuState::update(Game &game, double t, float dt) {
         IGameState::update(game, t, dt);
     }
 
-    void MenuState::physicsUpdate(game::Game &game, double t, float dt) {
-        IGameState::physicsUpdate(game, t, dt);
-    }
-
     std::shared_ptr<IGameState> MenuState::handleInput(Game &game, const InputEvent &input) {
-        _player->handleInput(input);
+        if (input.type == InputEvent::Type::ACCEPT) {
+            return std::make_shared<DebugState>();
+        }
 
         return nullptr;
     }

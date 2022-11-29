@@ -13,6 +13,7 @@ namespace game {
             UP,
 
             ACCEPT,
+            RETURN,
 
             JUMP,
             SPECIAL,
