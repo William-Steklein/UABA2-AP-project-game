@@ -1,0 +1,24 @@
+{
+  "button_map": {
+    "keyboard": {
+      "left": "k",
+      "right": "d",
+      "down": "s",
+      "up": "w",
+      "jump": "space",
+      "special": "shift"
+    },
+    "controller": {
+    }
+  },
+  "video": {
+    "width": 1280,
+    "height": 720,
+    "full_screen": false
+  },
+  "audio": {
+    "master": 100,
+    "sfx": 100,
+    "music": 100
+  }
+}

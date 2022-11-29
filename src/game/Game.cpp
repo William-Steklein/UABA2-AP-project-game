@@ -10,6 +10,7 @@ namespace game {
                      std::move(view_component_creator),
                      std::move(audio_component_creator)) {
         loadResources();
+        _config = parseConfig("data/config_default.json");
 
         _player = std::make_shared<Player>(Player(
                 {{0, 0}, {1, 1}, 0},
@@ -43,56 +44,18 @@ namespace game {
     }
 
     void Game::handleInputs(const std::vector<engine::Input> &inputs) {
-        std::map<engine::Input::Button, game::InputEvent::Type> event_map = {
-                {engine::Input::Button::A, game::InputEvent::Type::LEFT},
-                {engine::Input::Button::D, game::InputEvent::Type::RIGHT}
-        };
+        for (const auto &input: inputs) {
+            if (input.type == engine::Input::InputType::MOUSEMOVED ||
+                _config.button_map.keyboard.find(input.button) == _config.button_map.keyboard.end()) {
+                continue;
+            }
 
-        for (const auto &input : inputs) {
             game::InputEvent event{};
-
-            if (input.type == engine::Input::InputType::MOUSEMOVED) {
-                continue;
-            }
-
-            if (event_map.find(input.button) == event_map.end()) {
-                continue;
-            }
-
-            event.type = event_map.at(input.button);
-
-            switch (input.type) {
-                case engine::Input::InputType::KEYPRESSED:
-                    event.state_enter = true;
-                    break;
-
-                case engine::Input::InputType::KEYRELEASED:
-                    event.state_enter = false;
-                    break;
-
-                default:
-                    break;
-            }
+            event.type = _config.button_map.keyboard.at(input.button);
+            event.state_enter = input.type == engine::Input::InputType::KEYPRESSED;
 
             _player->handleInput(event);
         }
-
-//        for (const auto &input : inputs) {
-//            game::InputEvent event{};
-//
-//            switch (input.type) {
-//                case engine::Input::InputType::KEYPRESSED:
-//                    LOGDEBUG("button pressed!");
-//                    break;
-//
-//                case engine::Input::InputType::KEYRELEASED:
-//                    LOGDEBUG("button released!");
-//                    break;
-//
-//                default:
-//                    break;
-//            }
-//        }
     }
 
     void Game::update(double t, float dt) {

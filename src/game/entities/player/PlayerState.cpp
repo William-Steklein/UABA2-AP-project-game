@@ -14,19 +14,21 @@ namespace game {
     }
 
     std::shared_ptr<IPlayerState> IdleState::handleInput(Player &player, const InputEvent &input) {
-        switch (input.type) {
-            case InputEvent::Type::LEFT:
-                player._animated_sprite->start("idle", true, true, false);
+        if (input.state_enter) {
+            switch (input.type) {
+                case InputEvent::Type::LEFT:
+                    player._animated_sprite->setMirrorH(true);
 
-                break;
+                    break;
 
-            case InputEvent::Type::RIGHT:
-                player._animated_sprite->start("idle", true, false, false);
+                case InputEvent::Type::RIGHT:
+                    player._animated_sprite->setMirrorH(false);
 
-                break;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
 
         return nullptr;

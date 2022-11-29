@@ -11,6 +11,9 @@ namespace game {
             RIGHT,
             DOWN,
             UP,
+
+            ACCEPT,
+
             JUMP,
             SPECIAL,
         };

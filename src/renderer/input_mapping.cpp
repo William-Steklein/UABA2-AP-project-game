@@ -150,6 +150,9 @@ namespace renderer {
             case sf::Keyboard::Space:
                 return engine::Input::Button::SPACEBAR;
 
+            case sf::Keyboard::Enter:
+                return engine::Input::Button::ENTER;
+
             default:
                 return engine::Input::Button::UNDEFINEDBUTTON;
         }

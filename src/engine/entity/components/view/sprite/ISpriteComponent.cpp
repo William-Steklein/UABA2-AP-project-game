@@ -7,11 +7,33 @@ namespace engine {
 
     }
 
-    void ISpriteComponent::setTexture(unsigned int texture_index, bool mirror_h, bool mirror_v) {
+    void ISpriteComponent::setTexture(unsigned int texture_index) {
         _texture_index = texture_index;
+        updateSprite();
+    }
+
+    void ISpriteComponent::setTexture(unsigned int texture_index, bool mirror_h, bool mirror_v) {
         _mirror_h = mirror_h;
         _mirror_v = mirror_v;
 
+        setTexture(texture_index);
+    }
+
+    bool ISpriteComponent::isMirrorH() const {
+        return _mirror_h;
+    }
+
+    void ISpriteComponent::setMirrorH(bool mirror_h) {
+        _mirror_h = mirror_h;
+        updateSprite();
+    }
+
+    bool ISpriteComponent::isMirrorV() const {
+        return _mirror_v;
+    }
+
+    void ISpriteComponent::setMirrorV(bool mirror_v) {
+        _mirror_v = mirror_v;
         updateSprite();
     }
 } // engine

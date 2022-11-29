@@ -2,6 +2,9 @@
 #define GAME_ENGINE_INPUT_H
 
 
+#include <string>
+#include <map>
+
 #include "engine/math/Vector2f.h"
 
 namespace engine {
@@ -55,6 +58,7 @@ namespace engine {
             TAB,
             ESCAPE,
             SPACEBAR,
+            ENTER,
 
             MOUSELEFT,
             MOUSERIGHT,
@@ -74,6 +78,10 @@ namespace engine {
             float range;
         };
     };
+
+    engine::Input::Button stringToInputButton(const std::string &button);
+
+    std::string inputButtonToString(const engine::Input::Button &button);
 
 } // engine
 

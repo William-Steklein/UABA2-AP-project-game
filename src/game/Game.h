@@ -10,6 +10,7 @@
 #include "game/entities/UIWidget.h"
 #include "game/entities/Explosion.h"
 #include "game/InputEvent.h"
+#include "game/config_parser.h"
 
 namespace game {
 
@@ -33,6 +34,7 @@ namespace game {
 
         void loadResources();
 
+        Config _config;
         std::shared_ptr<Player> _player;
     };
 

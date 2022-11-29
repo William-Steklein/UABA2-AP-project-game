@@ -1,15 +1,6 @@
 #include "resource_info_parser.h"
 
 namespace engine {
-    inline nlohmann::json loadJsonFromFile(const std::string &filepath) {
-        std::ifstream info_file = read_file(filepath);
-        nlohmann::json j;
-        info_file >> j;
-        info_file.close();
-
-        return j;
-    }
-
     std::vector<TextureResource> parseTextureInfo(const std::string &filepath) {
         nlohmann::json j = loadJsonFromFile(filepath);
 

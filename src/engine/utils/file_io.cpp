@@ -20,4 +20,13 @@ namespace engine {
 
         return f;
     }
+
+    nlohmann::json loadJsonFromFile(const std::string &filepath) {
+        std::ifstream info_file = read_file(filepath);
+        nlohmann::json j;
+        info_file >> j;
+        info_file.close();
+
+        return j;
+    }
 } // engine
