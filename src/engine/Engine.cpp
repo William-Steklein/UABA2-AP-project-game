@@ -45,16 +45,20 @@ namespace engine {
         _sidebar2->setScale(std::get<0>(sidebar_data));
     }
 
-    void Engine::update(double t, float dt) {
-        for (const auto &entity: _entities) {
-            entity->update(t, dt);
-        }
+    const std::shared_ptr<IResourceManager> &Engine::getResourceManager() const {
+        return _resource_manager;
     }
 
-    void Engine::physicsUpdate(double t, float dt) {
-        for (const auto &physics_entity: _physics_entities) {
-            physics_entity->update(t, dt);
-        }
+    const std::shared_ptr<IViewComponentCreator> &Engine::getViewComponentCreator() const {
+        return _view_component_creator;
+    }
+
+    const std::shared_ptr<IAudioComponentCreator> &Engine::getAudioComponentCreator() const {
+        return _audio_component_creator;
+    }
+
+    const std::shared_ptr<Camera> &Engine::getCamera() const {
+        return _camera;
     }
 
     void Engine::initSidebars() {
@@ -68,8 +72,14 @@ namespace engine {
                 {std::get<2>(sidebar_data), std::get<0>(sidebar_data), 0},
                 {_view_component_creator->createRectangle({1, 1}, 10)}
         ));
+    }
 
-        _entities.insert(_sidebar1);
-        _entities.insert(_sidebar2);
+    void Engine::update(double t, float dt) {
+        _sidebar1->update(t, dt);
+        _sidebar2->update(t, dt);
+    }
+
+    void Engine::physicsUpdate(double t, float dt) {
+
     }
 } // engine

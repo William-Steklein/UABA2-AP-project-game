@@ -5,9 +5,9 @@
 #include <string>
 #include <map>
 
-#include <engine/Input.h>
+#include "engine/Input.h"
 
-#include "game/InputEvent.h"
+#include "game/input/InputEvent.h"
 
 namespace game {
 

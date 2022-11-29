@@ -3,14 +3,10 @@
 
 
 #include <engine/Engine.h>
-#include <engine/entity/Entity.h>
 
-#include "game/entities/player/Player.h"
-#include "game/entities/player/PlayerState.h"
-#include "game/entities/UIWidget.h"
-#include "game/entities/Explosion.h"
-#include "game/InputEvent.h"
-#include "game/config_parser.h"
+#include "game/input/InputEvent.h"
+#include "game/config/config_parser.h"
+#include "game/state/IGameState.h"
 
 namespace game {
 
@@ -19,7 +15,8 @@ namespace game {
         Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
              std::shared_ptr<engine::IResourceManager> resource_manager,
              std::shared_ptr<engine::IViewComponentCreator> view_component_creator,
-             std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator);
+             std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator,
+             std::shared_ptr<IGameState> start_state);
 
         ~Game();
 
@@ -35,7 +32,7 @@ namespace game {
         void loadResources();
 
         Config _config;
-        std::shared_ptr<Player> _player;
+        std::shared_ptr<IGameState> _state;
     };
 
 } // game

@@ -3,9 +3,8 @@
 
 
 #include <memory>
-#include <string>
 
-#include "game/InputEvent.h"
+#include "game/input/InputEvent.h"
 
 namespace game {
 

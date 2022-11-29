@@ -2,7 +2,7 @@
 
 namespace engine {
     engine::Input::Button stringToInputButton(const std::string &button) {
-        std::map<std::string, engine::Input::Button> button_map = {
+        static std::map<std::string, engine::Input::Button> button_map = {
                 {"a", engine::Input::A},
                 {"b", engine::Input::B},
                 {"c", engine::Input::C},
@@ -55,7 +55,7 @@ namespace engine {
     }
 
     std::string stringToInputButton(const engine::Input::Button &button) {
-        std::map<engine::Input::Button, std::string> button_map = {
+        static std::map<engine::Input::Button, std::string> button_map = {
                 {engine::Input::A, "a"},
                 {engine::Input::B, "b"},
                 {engine::Input::C, "c"},

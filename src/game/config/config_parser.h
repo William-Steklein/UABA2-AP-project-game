@@ -4,10 +4,10 @@
 
 #include <string>
 
-#include <engine/utils/file_io.h>
-#include <engine/Input.h>
+#include "engine/utils/file_io.h"
+#include "engine/Input.h"
 
-#include "game/Config.h"
+#include "Config.h"
 
 namespace game {
 

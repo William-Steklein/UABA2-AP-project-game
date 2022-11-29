@@ -4,21 +4,25 @@ namespace game {
     Game::Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
                std::shared_ptr<engine::IResourceManager> resource_manager,
                std::shared_ptr<engine::IViewComponentCreator> view_component_creator,
-               std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator)
+               std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator,
+               std::shared_ptr<IGameState> start_state)
             : Engine(screen_x_min, screen_x_max, screen_y_min, screen_y_max,
                      std::move(resource_manager),
                      std::move(view_component_creator),
-                     std::move(audio_component_creator)) {
+                     std::move(audio_component_creator)),
+              _state(std::move(start_state)) {
         loadResources();
         _config = parseConfig("data/config_default.json");
 
-        _player = std::make_shared<Player>(Player(
-                {{0, 0}, {1, 1}, 0},
-                std::make_shared<IdleState>(),
-                _view_component_creator->createAnimatedSprite({0.8f, 0.56f}, 0, "adventurer")
-        ));
+        _state->enter(*this);
 
-        _physics_entities.insert(_player);
+//        _player = std::make_shared<Player>(Player(
+//                {{0, 0}, {1, 1}, 0},
+//                std::make_shared<IdleState>(),
+//                _view_component_creator->createAnimatedSprite({0.8f, 0.56f}, 0, "adventurer")
+//        ));
+//
+//        _physics_entities.insert(_player);
 
 //        std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
 //                {{0, 0}, {1, 1}, 0},
@@ -54,15 +58,24 @@ namespace game {
             event.type = _config.button_map.keyboard.at(input.button);
             event.state_enter = input.type == engine::Input::InputType::KEYPRESSED;
 
-            _player->handleInput(event);
+            std::shared_ptr<IGameState> state = _state->handleInput(*this, event);
+
+            if (state != nullptr) {
+                _state = state;
+                _state->enter(*this);
+            }
         }
     }
 
     void Game::update(double t, float dt) {
+        _state->update(*this, t, dt);
+
         Engine::update(t, dt);
     }
 
     void Game::physicsUpdate(double t, float dt) {
+        _state->physicsUpdate(*this, t, dt);
+
         Engine::physicsUpdate(t, dt);
     }
 
