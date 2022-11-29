@@ -29,6 +29,10 @@ namespace engine {
         updateSubScreenResolution();
     }
 
+    const ViewBoundaries &Camera::getScreenBoundaries() const {
+        return _screen_boundaries;
+    }
+
     float Camera::getWidth() const {
         return std::abs(_boundaries.x_max - _boundaries.x_min);
     }

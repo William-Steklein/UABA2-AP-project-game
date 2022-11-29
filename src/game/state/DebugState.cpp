@@ -17,12 +17,12 @@ namespace game {
         _physics_entities.insert(_player);
     }
 
-    void DebugState::update(Game &game, double t, float dt) {
-        IGameState::update(game, t, dt);
+    std::shared_ptr<IGameState> DebugState::update(Game &game, double t, float dt) {
+        return IGameState::update(game, t, dt);
     }
 
-    void DebugState::physicsUpdate(Game &game, double t, float dt) {
-        IGameState::physicsUpdate(game, t, dt);
+    std::shared_ptr<IGameState> DebugState::physicsUpdate(Game &game, double t, float dt) {
+        return IGameState::physicsUpdate(game, t, dt);
     }
 
     std::shared_ptr<IGameState> DebugState::handleInput(Game &game, const InputEvent &input) {

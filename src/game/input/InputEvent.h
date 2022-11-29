@@ -1,6 +1,9 @@
 #ifndef GAME_ENGINE_INPUTEVENT_H
 #define GAME_ENGINE_INPUTEVENT_H
 
+
+#include <engine/Input.h>
+
 namespace game {
 
     struct InputEvent {
@@ -17,6 +20,9 @@ namespace game {
 
             JUMP,
             SPECIAL,
+
+            MOUSEMOVED,
+            MOUSECLICK,
         };
 
         Type type;

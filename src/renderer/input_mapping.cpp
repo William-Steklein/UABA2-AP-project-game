@@ -175,8 +175,7 @@ namespace renderer {
     }
 
     engine::Input::Range2D _mapMouseMovement(const sf::Event &event, const std::shared_ptr<sf::RenderWindow> &window) {
-        return {static_cast<float>(sf::Mouse::getPosition(*window).x) / static_cast<float>(window->getSize().x),
-                1.f -
-                (static_cast<float>(sf::Mouse::getPosition(*window).y) / static_cast<float>(window->getSize().y))};
+        return {static_cast<float>(sf::Mouse::getPosition(*window).x),
+                static_cast<float>(sf::Mouse::getPosition(*window).y)};
     }
 } // renderer

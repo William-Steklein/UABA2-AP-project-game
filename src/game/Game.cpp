@@ -10,35 +10,12 @@ namespace game {
                      std::move(resource_manager),
                      std::move(view_component_creator),
                      std::move(audio_component_creator)),
-              _state(std::move(start_state)) {
+              _state(std::move(start_state)),
+              _mouse_position(std::make_shared<engine::Vector2f>()) {
         loadResources();
         _config = parseConfig("data/config_default.json");
 
         _state->enter(*this);
-
-//        _player = std::make_shared<Player>(Player(
-//                {{0, 0}, {1, 1}, 0},
-//                std::make_shared<IdleState>(),
-//                _view_component_creator->createAnimatedSprite({0.8f, 0.56f}, 0, "adventurer")
-//        ));
-//
-//        _physics_entities.insert(_player);
-
-//        std::shared_ptr<Explosion> new_entity = std::make_shared<Explosion>(Explosion(
-//                {{0, 0}, {1, 1}, 0},
-//                _view_component_creator->createAnimatedSprite({1, 1}, 0, "explosion"),
-//                _audio_component_creator->create()
-//        ));
-//        _physics_entities.insert(new_entity);
-//
-//        std::shared_ptr<UIWidget> new_ui_widget = std::make_shared<UIWidget>(UIWidget(
-//                {{-0.25f, 0.25f}, {1, 1}, 0},
-//                _view_component_creator->createSprite({1.f, 0.5f}, 1, "button"),
-//                _view_component_creator->createRectangle({1.f, 0.5f}, 2),
-//                _view_component_creator->createTextBox({1.f, 0.5f}, 3, "PTSans-regular")
-//                ));
-//
-//        _entities.insert(new_ui_widget);
     }
 
     void Game::update() {
@@ -47,16 +24,32 @@ namespace game {
 
     void Game::handleInputs(const std::vector<engine::Input> &inputs) {
         for (const auto &input: inputs) {
-            if (input.type == engine::Input::InputType::MOUSEMOVED ||
-                _config.button_map.keyboard.find(input.button) == _config.button_map.keyboard.end()) {
-                continue;
+            game::InputEvent input_event{};
+
+            if (input.type == engine::Input::InputType::MOUSEMOVED) {
+                input_event.type = game::InputEvent::Type::MOUSEMOVED;
+
+                _mouse_position->x = input.range_2d.x;
+                _mouse_position->y = input.range_2d.y;
+                *_mouse_position = _camera->projectCoordSubScreenToWorld(*_mouse_position);
+            } else if (input.button == engine::Input::Button::MOUSELEFT) {
+                // mouse buttonpress
+                input_event.type = game::InputEvent::Type::MOUSECLICK;
+                input_event.state_enter = input.type == engine::Input::InputType::MOUSEPRESSED;
+            } else {
+                // keyboard buttonpress
+
+                // if unable to map to game input event
+                if (_config.button_map.keyboard.find(input.button) == _config.button_map.keyboard.end()) {
+                    continue;
+                }
+
+                input_event.type = _config.button_map.keyboard.at(input.button);
+                input_event.state_enter = input.type == engine::Input::InputType::KEYPRESSED;
             }
+            input_event.range = 0;
 
-            game::InputEvent event{};
-            event.type = _config.button_map.keyboard.at(input.button);
-            event.state_enter = input.type == engine::Input::InputType::KEYPRESSED;
-
-            std::shared_ptr<IGameState> state = _state->handleInput(*this, event);
+            std::shared_ptr<IGameState> state = _state->handleInput(*this, input_event);
 
             if (state != nullptr) {
                 _state = state;
@@ -66,13 +59,23 @@ namespace game {
     }
 
     void Game::update(double t, float dt) {
-        _state->update(*this, t, dt);
+        std::shared_ptr<IGameState> state = _state->update(*this, t, dt);
+
+        if (state != nullptr) {
+            _state = state;
+            _state->enter(*this);
+        }
 
         Engine::update(t, dt);
     }
 
     void Game::physicsUpdate(double t, float dt) {
-        _state->physicsUpdate(*this, t, dt);
+        std::shared_ptr<IGameState> state = _state->physicsUpdate(*this, t, dt);
+
+        if (state != nullptr) {
+            _state = state;
+            _state->enter(*this);
+        }
 
         Engine::physicsUpdate(t, dt);
     }
@@ -84,5 +87,9 @@ namespace game {
         _resource_manager->loadSoundResources(engine::parseAudioInfo("data/resource-info/sounds.json"));
         _resource_manager->loadMusicResources(engine::parseAudioInfo("data/resource-info/music.json"));
         _resource_manager->loadFontResources(engine::parseFontInfo("data/resource-info/fonts.json"));
+    }
+
+    const std::shared_ptr<engine::Vector2f> &Game::getMousePosition() const {
+        return _mouse_position;
     }
 } // game

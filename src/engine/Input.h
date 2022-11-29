@@ -74,8 +74,8 @@ namespace engine {
 
         union {
             Button button;
-            Range2D range_2d;
             float range;
+            Range2D range_2d;
         };
     };
 

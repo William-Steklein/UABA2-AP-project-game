@@ -19,9 +19,9 @@ namespace game {
 
         virtual void enter(Game &game) = 0;
 
-        virtual void update(Game &game, double t, float dt);
+        virtual std::shared_ptr<IGameState> update(Game &game, double t, float dt);
 
-        virtual void physicsUpdate(Game &game, double t, float dt);
+        virtual std::shared_ptr<IGameState> physicsUpdate(Game &game, double t, float dt);
 
         virtual std::shared_ptr<IGameState> handleInput(Game &game, const InputEvent &input) = 0;
 

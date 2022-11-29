@@ -17,9 +17,9 @@ namespace game {
 
         void enter(game::Game &game) override;
 
-        void update(game::Game &game, double t, float dt) override;
+        std::shared_ptr<IGameState> update(game::Game &game, double t, float dt) override;
 
-        void physicsUpdate(game::Game &game, double t, float dt) override;
+        std::shared_ptr<IGameState> physicsUpdate(game::Game &game, double t, float dt) override;
 
         std::shared_ptr<IGameState> handleInput(game::Game &game, const game::InputEvent &input) override;
 

@@ -24,6 +24,8 @@ namespace game {
 
         void handleInputs(const std::vector<engine::Input> &inputs) override;
 
+        const std::shared_ptr<engine::Vector2f> &getMousePosition() const;
+
     private:
         void update(double t, float dt) override;
 
@@ -33,6 +35,7 @@ namespace game {
 
         Config _config;
         std::shared_ptr<IGameState> _state;
+        std::shared_ptr<engine::Vector2f> _mouse_position;
     };
 
 } // game

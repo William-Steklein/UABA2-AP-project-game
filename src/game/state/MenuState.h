@@ -3,6 +3,7 @@
 
 
 #include <engine/entity/ui/UIEntity.h>
+#include "game/entities/widgets/UIButton.h"
 
 #include "game/Game.h"
 #include "game/state/IGameState.h"
@@ -17,11 +18,12 @@ namespace game {
 
         void enter(game::Game &game) override;
 
-        void update(game::Game &game, double t, float dt) override;
+        std::shared_ptr<IGameState> update(game::Game &game, double t, float dt) override;
 
         std::shared_ptr<IGameState> handleInput(game::Game &game, const game::InputEvent &input) override;
 
     private:
+        std::set<std::shared_ptr<UIButton>> _buttons;
 
     };
 
