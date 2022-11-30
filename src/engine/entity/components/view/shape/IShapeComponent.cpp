@@ -1,12 +1,6 @@
 #include "IShapeComponent.h"
 
 namespace engine {
-    IShapeComponent::IShapeComponent(const Vector2f &size, std::weak_ptr<Camera> camera)
-            : IViewComponent(size, std::move(camera)),
-              _fillcolor(0, 0, 0), _outline_color(0, 0, 0), _outline_thickness(0) {
-
-    }
-
     const Color &IShapeComponent::getFillcolor() const {
         return _fillcolor;
     }
@@ -32,5 +26,11 @@ namespace engine {
     void IShapeComponent::setOutlineThickness(float outline_thickness) {
         _outline_thickness = outline_thickness;
         updateShape();
+    }
+
+    IShapeComponent::IShapeComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space)
+            : IViewComponent(size, std::move(camera), project_ui_space),
+              _fillcolor(0, 0, 0), _outline_color(0, 0, 0), _outline_thickness(0) {
+
     }
 } // engine

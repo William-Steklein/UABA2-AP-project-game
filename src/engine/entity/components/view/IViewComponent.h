@@ -10,7 +10,7 @@ namespace engine {
 
     class IViewComponent : public IComponent {
     public:
-        IViewComponent(const Vector2f &size, std::weak_ptr<Camera> camera);
+        IViewComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space);
 
         ~IViewComponent() = default;
 
@@ -25,6 +25,7 @@ namespace engine {
     protected:
         Vector2f _size;
         std::weak_ptr<Camera> _camera;
+        bool _project_ui_space;
     };
 
 } // engine

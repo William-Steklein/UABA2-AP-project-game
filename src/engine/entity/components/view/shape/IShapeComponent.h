@@ -26,7 +26,7 @@ namespace engine {
         Color _outline_color;
         float _outline_thickness;
 
-        IShapeComponent(const Vector2f &size, std::weak_ptr<Camera> camera);
+        IShapeComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space);
 
         virtual void updateShape() = 0;
     };

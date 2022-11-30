@@ -6,13 +6,19 @@
 
 #include "engine/math/math_utils.h"
 #include "engine/math/Vector2f.h"
-#include "engine/camera/ViewBoundaries.h"
 #include "engine/logging/Logger.h"
 
 namespace engine {
 
     class Camera {
     public:
+        struct ViewBoundaries {
+            float x_min;
+            float x_max;
+            float y_min;
+            float y_max;
+        };
+
         Camera();
 
         Camera(float left, float right, float bottom, float top);
@@ -22,6 +28,10 @@ namespace engine {
         const Vector2f &getPosition() const;
 
         void setPosition(const Vector2f &position);
+
+        void move(const Vector2f &vector);
+
+        void reset();
 
         const ViewBoundaries &getScreenBoundaries() const;
 
@@ -43,7 +53,7 @@ namespace engine {
 
         void updateSubScreenResolution();
 
-        Vector2f projectCoordWorldToSubScreen(const Vector2f &coord) const;
+        Vector2f projectCoordWorldToSubScreen(const Vector2f &coord, bool ui_space = false) const;
 
         float projectVerticalSizeWorldToSubScreen(float vertical_size) const;
 

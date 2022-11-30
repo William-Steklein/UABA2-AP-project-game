@@ -23,7 +23,9 @@ namespace game {
         std::shared_ptr<IGameState> handleInput(game::Game &game, const game::InputEvent &input) override;
 
     private:
-        std::set<std::shared_ptr<UIButton>> _buttons;
+        std::shared_ptr<UIButton> _play_button;
+        std::shared_ptr<UIButton> _debug_button;
+        std::shared_ptr<UIButton> _quit_button;
 
     };
 

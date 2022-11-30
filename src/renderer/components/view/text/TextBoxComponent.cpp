@@ -2,8 +2,9 @@
 
 namespace renderer {
     TextBoxComponent::TextBoxComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera,
+                                       bool project_ui_space,
                                        std::shared_ptr<sf::Font> font)
-            : ITextBoxComponent(size, std::move(camera)),
+            : ITextBoxComponent(size, std::move(camera), project_ui_space),
               _font(std::move(font)), _text_render(std::make_shared<sf::Text>()) {
         _text_render->setFont(*_font);
 
@@ -19,7 +20,8 @@ namespace renderer {
         }
         std::shared_ptr<engine::Camera> camera_shared = _camera.lock();
 
-        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(entity.getPosition());
+        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(entity.getPosition(),
+                                                                                       _project_ui_space);
         _text_render->setPosition(screen_position.x, screen_position.y);
 
         _text_render->setScale(entity.getScale().x, entity.getScale().y);

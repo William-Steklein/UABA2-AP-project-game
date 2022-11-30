@@ -1,9 +1,9 @@
 #include "ILineComponent.h"
 
 namespace engine {
-    ILineComponent::ILineComponent(const Vector2f &size, std::weak_ptr<Camera> camera,
+    ILineComponent::ILineComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space,
                                    const Vector2f &origin, const Vector2f &end)
-            : IShapeComponent(size, std::move(camera)),
+            : IShapeComponent(size, std::move(camera), project_ui_space),
             _origin(origin), _end(end), _line_thickness(0.01f),
             _shape_rotation(getShapeRotation()) {
 

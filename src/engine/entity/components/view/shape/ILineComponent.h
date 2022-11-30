@@ -10,7 +10,7 @@ namespace engine {
 
     class ILineComponent : public IShapeComponent {
     public:
-        ILineComponent(const Vector2f &size, std::weak_ptr<Camera> camera,
+        ILineComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space,
                        const Vector2f &origin, const Vector2f &end);
 
         ~ILineComponent() = default;

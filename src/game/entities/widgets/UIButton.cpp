@@ -13,13 +13,7 @@ namespace game {
               _animated_sprite(std::move(animated_sprite)) {
         addComponent(_animated_sprite);
 
-        if (mouseCollides()) {
-            _state = BUTTON_HOVER;
-            _animated_sprite->start("hover");
-//            LOGDEBUG("hover!");
-        } else {
-            _animated_sprite->start("default");
-        }
+        reset();
     }
 
     void UIButton::handleInput(const InputEvent &input) {
@@ -77,5 +71,14 @@ namespace game {
 
     bool UIButton::mouseCollides() const {
         return _hit_box->collides(*_mouse_position);
+    }
+
+    void UIButton::reset() {
+        if (mouseCollides()) {
+            _state = BUTTON_HOVER;
+            _animated_sprite->start("hover");
+        } else {
+            _animated_sprite->start("default");
+        }
     }
 } // game

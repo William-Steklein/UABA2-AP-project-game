@@ -1,8 +1,9 @@
 #include "IAnimatedSpriteComponent.h"
 
 namespace engine {
-    IAnimatedSpriteComponent::IAnimatedSpriteComponent(const Vector2f &size, std::weak_ptr<Camera> camera)
-            : ISpriteComponent(size, std::move(camera)),
+    IAnimatedSpriteComponent::IAnimatedSpriteComponent(const Vector2f &size, std::weak_ptr<Camera> camera,
+                                                       bool project_ui_space)
+            : ISpriteComponent(size, std::move(camera), project_ui_space),
               _current_id(""), _current_frame(0), _current_time(0),
               _loop(false), _finished(true), _loop_finished(false) {
 

@@ -1,8 +1,9 @@
 #include "RectangleComponent.h"
 
 namespace renderer {
-    RectangleComponent::RectangleComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera)
-            : IShapeComponent(size, std::move(camera)),
+    RectangleComponent::RectangleComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera,
+                                           bool project_ui_space)
+            : IShapeComponent(size, std::move(camera), project_ui_space),
               _rectangle_render(std::make_shared<sf::RectangleShape>(sf::Vector2f(0, 0))) {
         updateRectangleRender();
     }
@@ -16,7 +17,8 @@ namespace renderer {
         sf::FloatRect sf_rect = _rectangle_render->getLocalBounds();
         _rectangle_render->setOrigin(sf_rect.left + sf_rect.width / 2, sf_rect.top + sf_rect.height / 2);
 
-        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(entity.getPosition());
+        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(entity.getPosition(),
+                                                                                       _project_ui_space);
         _rectangle_render->setPosition(screen_position.x, screen_position.y);
 
         engine::Vector2f screen_size = camera_shared->projectSizeWorldToSubScreen(_size);

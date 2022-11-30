@@ -1,8 +1,8 @@
 #include "IViewComponent.h"
 
 namespace engine {
-    IViewComponent::IViewComponent(const Vector2f &size, std::weak_ptr<Camera> camera)
-            : _size(size), _camera(std::move(camera)) {
+    IViewComponent::IViewComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space)
+            : _size(size), _camera(std::move(camera)), _project_ui_space(project_ui_space) {
 
     }
 

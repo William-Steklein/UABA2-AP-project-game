@@ -26,6 +26,10 @@ namespace engine {
 
         virtual ~Engine() = default;
 
+        void quit();
+
+        bool isQuit() const;
+
         static void sleep();
 
         virtual void update();
@@ -60,6 +64,8 @@ namespace engine {
         virtual void physicsUpdate(double t, float dt);
 
     private:
+        bool _quit;
+
         float _physics_delta_time;
         double _physics_time;
         float _accumulator;

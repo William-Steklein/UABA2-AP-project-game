@@ -62,13 +62,13 @@ namespace engine {
 
     void Entity::addComponent(std::shared_ptr<IComponent> component) {
         checkComponent(component);
+        component->update(0, 0, *this);
         _components.push_back(std::move(component));
     }
 
     void Entity::addComponents(const std::vector<std::shared_ptr<IComponent>>& components) {
-        for (auto component : components) {
-            checkComponent(component);
-            _components.push_back(std::move(component));
+        for (const auto& component : components) {
+            addComponent(component);
         }
     }
 

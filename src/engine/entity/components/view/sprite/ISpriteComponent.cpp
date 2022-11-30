@@ -1,8 +1,8 @@
 #include "ISpriteComponent.h"
 
 namespace engine {
-    ISpriteComponent::ISpriteComponent(const Vector2f &size, std::weak_ptr<Camera> camera)
-            : IViewComponent(size, std::move(camera)),
+    ISpriteComponent::ISpriteComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space)
+            : IViewComponent(size, std::move(camera), project_ui_space),
               _texture_index(0), _mirror_h(false), _mirror_v(false) {
 
     }

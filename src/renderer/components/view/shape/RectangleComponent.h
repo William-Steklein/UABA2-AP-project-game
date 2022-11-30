@@ -10,7 +10,7 @@ namespace renderer {
 
     class RectangleComponent : public engine::IShapeComponent {
     public:
-        RectangleComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera);
+        RectangleComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera, bool project_ui_space);
 
         ~RectangleComponent() = default;
 

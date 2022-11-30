@@ -8,7 +8,7 @@ namespace engine {
 
     class ISpriteComponent : public IViewComponent {
     public:
-        ISpriteComponent(const Vector2f &size, std::weak_ptr<Camera> camera);
+        ISpriteComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space);
 
         ~ISpriteComponent() = default;
 

@@ -1,8 +1,8 @@
 #include "ITextBoxComponent.h"
 
 namespace engine {
-    ITextBoxComponent::ITextBoxComponent(const Vector2f &size, std::weak_ptr<Camera> camera)
-            : IShapeComponent(size, std::move(camera)), _font_size(0.1f), _text("") {
+    ITextBoxComponent::ITextBoxComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space)
+            : IShapeComponent(size, std::move(camera), project_ui_space), _font_size(0.1f), _text("") {
 
     }
 

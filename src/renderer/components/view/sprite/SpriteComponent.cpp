@@ -2,10 +2,12 @@
 
 namespace renderer {
     SpriteComponent::SpriteComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera,
+                                     bool project_ui_space,
                                      std::vector<std::shared_ptr<sf::Texture>> texture_group)
-            : engine::IAnimatedSpriteComponent(size, std::move(camera)), _texture_group(std::move(texture_group)),
+            : engine::IAnimatedSpriteComponent(size, std::move(camera), project_ui_space),
+            _texture_group(std::move(texture_group)),
               _sprite(std::make_shared<sf::Sprite>()) {
-        updateSprite();
+        updateSpriteRender();
     }
 
     void SpriteComponent::update(double t, float dt, engine::Entity &entity) {
@@ -18,7 +20,8 @@ namespace renderer {
         std::shared_ptr<engine::Camera> camera_shared = _camera.lock();
 
         // update sprite transform
-        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(entity.getPosition());
+        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(entity.getPosition(),
+                                                                                       _project_ui_space);
         _sprite->setPosition(screen_position.x, screen_position.y);
 
         auto texture_size = _sprite->getTexture()->getSize();
@@ -41,6 +44,10 @@ namespace renderer {
     }
 
     void SpriteComponent::updateSprite() {
+        updateSpriteRender();
+    }
+
+    void SpriteComponent::updateSpriteRender() {
         _sprite->setTexture(*_texture_group.at(_texture_index), true);
         _sprite->setOrigin(static_cast<float>(_sprite->getTextureRect().width) / 2,
                            static_cast<float>(_sprite->getTextureRect().height) / 2);

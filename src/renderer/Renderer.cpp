@@ -44,6 +44,8 @@ namespace renderer {
     }
 
     void Renderer::handleEvents() {
+        if (_game->isQuit()) quit();
+
         std::vector<engine::Input> inputs;
 
         sf::Event event{};

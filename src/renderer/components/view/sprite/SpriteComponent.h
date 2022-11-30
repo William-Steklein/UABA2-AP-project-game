@@ -16,7 +16,7 @@ namespace renderer {
 
     class SpriteComponent : public engine::IAnimatedSpriteComponent {
     public:
-        SpriteComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera,
+        SpriteComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera, bool project_ui_space,
                         std::vector<std::shared_ptr<sf::Texture>> texture_group);
 
         void update(double t, float dt, engine::Entity &entity) override;
@@ -29,6 +29,8 @@ namespace renderer {
         std::vector<std::shared_ptr<sf::Texture>> _texture_group;
 
         void updateSprite() override;
+
+        void updateSpriteRender();
     };
 
 } // renderer
