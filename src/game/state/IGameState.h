@@ -17,13 +17,17 @@ namespace game {
     public:
         virtual ~IGameState() = default;
 
-        virtual void enter(Game &game) = 0;
+        virtual void enter(Game &game) {};
 
-        virtual std::shared_ptr<IGameState> update(Game &game, double t, float dt);
+        virtual void exit(Game &game) {};
 
-        virtual std::shared_ptr<IGameState> physicsUpdate(Game &game, double t, float dt);
+        virtual void reset(Game &game);
 
-        virtual std::shared_ptr<IGameState> handleInput(Game &game, const InputEvent &input) = 0;
+        virtual void update(Game &game, double t, float dt);
+
+        virtual void physicsUpdate(Game &game, double t, float dt);
+
+        virtual void handleInput(Game &game, const InputEvent &input) {};
 
     protected:
         std::set<std::shared_ptr<engine::Entity>> _entities;

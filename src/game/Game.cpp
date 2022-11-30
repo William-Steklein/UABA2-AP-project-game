@@ -10,12 +10,12 @@ namespace game {
                      std::move(resource_manager),
                      std::move(view_component_creator),
                      std::move(audio_component_creator)),
-              _state(std::move(start_state)),
               _mouse_position(std::make_shared<engine::Vector2f>()) {
         loadResources();
         _config = parseConfig("data/config_default.json");
 
-        _state->enter(*this);
+        _states.push(std::move(start_state));
+        _states.top()->enter(*this);
     }
 
     void Game::update() {
@@ -49,33 +49,63 @@ namespace game {
             }
             input_event.range = 0;
 
-            std::shared_ptr<IGameState> state = _state->handleInput(*this, input_event);
-
-            if (state != nullptr) {
-                _state = state;
-                _state->enter(*this);
-            }
+            getState()->handleInput(*this, input_event);
         }
     }
 
-    void Game::update(double t, float dt) {
-        std::shared_ptr<IGameState> state = _state->update(*this, t, dt);
+    const std::shared_ptr<engine::Vector2f> &Game::getMousePosition() const {
+        return _mouse_position;
+    }
 
+    void Game::setState(const std::shared_ptr<IGameState> &state) {
         if (state != nullptr) {
-            _state = state;
-            _state->enter(*this);
+            if (_states.empty()) {
+                _states.push(state);
+            } else {
+                _states.pop();
+                _states.push(state);
+            }
+
+            getState()->enter(*this);
         }
+    }
+
+    void Game::pushState(const std::shared_ptr<IGameState> &state) {
+        _states.push(state);
+        _states.top()->enter(*this);
+    }
+
+    void Game::popState() {
+        if (_states.empty()) {
+            throw std::runtime_error("Popping an empty game state stack");
+        } else if (_states.size() == 1) {
+            throw std::runtime_error("Popping last game state from stack");
+        }
+        _states.pop();
+    }
+
+    void Game::popAndSetState(const std::shared_ptr<IGameState> &state) {
+        popState();
+        setState(state);
+    }
+
+    void Game::popAndResetState() {
+        popState();
+        getState()->reset(*this);
+    }
+
+    std::shared_ptr<IGameState> Game::getState() const {
+        return _states.top();
+    }
+
+    void Game::update(double t, float dt) {
+        getState()->update(*this, t, dt);
 
         Engine::update(t, dt);
     }
 
     void Game::physicsUpdate(double t, float dt) {
-        std::shared_ptr<IGameState> state = _state->physicsUpdate(*this, t, dt);
-
-        if (state != nullptr) {
-            _state = state;
-            _state->enter(*this);
-        }
+        getState()->physicsUpdate(*this, t, dt);
 
         Engine::physicsUpdate(t, dt);
     }
@@ -87,9 +117,5 @@ namespace game {
         _resource_manager->loadSoundResources(engine::parseAudioInfo("data/resource-info/sounds.json"));
         _resource_manager->loadMusicResources(engine::parseAudioInfo("data/resource-info/music.json"));
         _resource_manager->loadFontResources(engine::parseFontInfo("data/resource-info/fonts.json"));
-    }
-
-    const std::shared_ptr<engine::Vector2f> &Game::getMousePosition() const {
-        return _mouse_position;
     }
 } // game

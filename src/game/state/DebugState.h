@@ -17,11 +17,13 @@ namespace game {
 
         void enter(game::Game &game) override;
 
-        std::shared_ptr<IGameState> update(game::Game &game, double t, float dt) override;
+        void reset(Game &game) override;
 
-        std::shared_ptr<IGameState> physicsUpdate(game::Game &game, double t, float dt) override;
+        void update(game::Game &game, double t, float dt) override;
 
-        std::shared_ptr<IGameState> handleInput(game::Game &game, const game::InputEvent &input) override;
+        void physicsUpdate(game::Game &game, double t, float dt) override;
+
+        void handleInput(game::Game &game, const game::InputEvent &input) override;
 
     private:
         std::shared_ptr<Player> _player;

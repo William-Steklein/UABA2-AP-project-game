@@ -2,6 +2,8 @@
 #define GAME_ENGINE_GAME_H
 
 
+#include <stack>
+
 #include <engine/Engine.h>
 
 #include "game/input/InputEvent.h"
@@ -26,6 +28,18 @@ namespace game {
 
         const std::shared_ptr<engine::Vector2f> &getMousePosition() const;
 
+        void setState(const std::shared_ptr<IGameState> &state);
+
+        void pushState(const std::shared_ptr<IGameState> &state);
+
+        void popState();
+
+        void popAndSetState(const std::shared_ptr<IGameState> &state);
+
+        void popAndResetState();
+
+        std::shared_ptr<IGameState> getState() const;
+
     private:
         void update(double t, float dt) override;
 
@@ -34,8 +48,9 @@ namespace game {
         void loadResources();
 
         Config _config;
-        std::shared_ptr<IGameState> _state;
         std::shared_ptr<engine::Vector2f> _mouse_position;
+
+        std::stack<std::shared_ptr<IGameState>> _states;
     };
 
 } // game
