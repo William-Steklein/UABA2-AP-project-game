@@ -4,6 +4,7 @@
 
 #include <engine/entity/ui/UIEntity.h>
 #include <engine/physics/HitBox.h>
+#include <engine/entity/components/view/sprite/IAnimatedSpriteComponent.h>
 
 #include "game/input/InputEvent.h"
 
@@ -14,11 +15,14 @@ namespace game {
         enum State {
             BUTTON_INACTIVE,
             BUTTON_HOVER,
+            BUTTON_CLICKING,
             BUTTON_CLICKED,
             BUTTON_ACTIVE
         };
 
-        UIButton(engine::Transform transform, std::shared_ptr<engine::Vector2f> mouse_position,
+        UIButton(engine::Transform transform, const engine::Vector2f &hit_box_size,
+                 std::shared_ptr<engine::Vector2f> mouse_position,
+                 std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite,
                  const std::vector<std::shared_ptr<engine::IComponent>> &components = {});
 
         ~UIButton() override = default;
@@ -36,6 +40,8 @@ namespace game {
         std::shared_ptr<engine::HitBox> _hit_box;
 
         State _state;
+
+        std::shared_ptr<engine::IAnimatedSpriteComponent> _animated_sprite;
     };
 
 } // game

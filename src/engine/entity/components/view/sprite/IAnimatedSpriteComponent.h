@@ -18,7 +18,7 @@ namespace engine {
 
         void update(double t, float dt, Entity &entity) override;
 
-        void start(const std::string &animation_id, bool loop, bool mirror_h, bool mirror_v);
+        void start(const std::string &animation_id, bool loop = false, bool mirror_h = false, bool mirror_v = false);
 
         void setLoop(bool loop);
 

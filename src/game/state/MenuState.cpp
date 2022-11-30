@@ -23,13 +23,13 @@ namespace game {
 
         std::shared_ptr<UIButton> debug_button = std::make_shared<UIButton>(UIButton(
                 {{0, 0.5f}, {1, 1}, 0},
+                button_size,
                 game.getMousePosition(),
+                game.getViewComponentCreator()->createAnimatedSprite(button_size, 0, "button_anim"),
                 {
-                        game.getViewComponentCreator()->createSprite(button_size, 0, "button"),
                         debug_button_text,
                 }
         ));
-        debug_button->getHitBox()->setSize(button_size);
 
         menu_background->addChild(debug_button, menu_background);
         _buttons.insert(debug_button);
