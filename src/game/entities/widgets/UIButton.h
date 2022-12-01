@@ -37,6 +37,10 @@ namespace game {
 
         void reset();
 
+        void setKeyboardActive();
+
+        void setKeyboardInactive();
+
     private:
         std::shared_ptr<engine::Vector2f> _mouse_position;
         std::shared_ptr<engine::HitBox> _hit_box;

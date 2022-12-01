@@ -33,7 +33,8 @@ namespace game {
 //                    LOGDEBUG("NOT hover!");
                 }
 
-                if (input.type == InputEvent::Type::MOUSECLICK && input.state_enter) {
+                if ((input.type == InputEvent::Type::MOUSECLICK || input.type == InputEvent::Type::ACCEPT) &&
+                    input.state_enter) {
                     _state = BUTTON_CLICKING;
                     _animated_sprite->start("clicking");
 //                    LOGDEBUG("clicking!");
@@ -47,7 +48,8 @@ namespace game {
 //                    LOGDEBUG("NOT hover and NOT clicking!");
                 }
 
-                if (input.type == InputEvent::Type::MOUSECLICK && !input.state_enter) {
+                if ((input.type == InputEvent::Type::MOUSECLICK || input.type == InputEvent::Type::ACCEPT) &&
+                    !input.state_enter) {
                     _state = BUTTON_ACTIVE;
 //                    _state = BUTTON_CLICKED;
 //                    LOGDEBUG("active!");
@@ -78,6 +80,20 @@ namespace game {
             _state = BUTTON_HOVER;
             _animated_sprite->start("hover");
         } else {
+            _animated_sprite->start("default");
+        }
+    }
+
+    void UIButton::setKeyboardActive() {
+        if (_state == BUTTON_INACTIVE) {
+            _state = BUTTON_HOVER;
+            _animated_sprite->start("hover");
+        }
+    }
+
+    void UIButton::setKeyboardInactive() {
+        if (_state == BUTTON_HOVER && !mouseCollides()) {
+            _state = BUTTON_INACTIVE;
             _animated_sprite->start("default");
         }
     }

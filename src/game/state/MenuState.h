@@ -12,7 +12,7 @@ namespace game {
 
     class MenuState : public IGameState {
     public:
-        MenuState() = default;
+        MenuState();
 
         ~MenuState() override = default;
 
@@ -22,11 +22,20 @@ namespace game {
 
         void handleInput(game::Game &game, const game::InputEvent &input) override;
 
+        void checkButtons();
+
+        void toggleKeyboardFocus(bool keyboard_focus);
+
+        void selectNextButton(bool up);
+
     private:
+        std::vector<std::shared_ptr<UIButton>> _buttons;
+        bool _keyboard_focus;
+        int _selected_button_index;
+
         std::shared_ptr<UIButton> _play_button;
         std::shared_ptr<UIButton> _debug_button;
         std::shared_ptr<UIButton> _quit_button;
-
     };
 
 } // game
