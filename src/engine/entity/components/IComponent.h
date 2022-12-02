@@ -11,6 +11,8 @@ namespace engine {
 
     class IComponent {
     public:
+        virtual ~IComponent() = default;
+
         virtual void update(double t, float dt, Entity &entity) = 0;
     };
 

@@ -3,8 +3,14 @@
 namespace game {
     Player::Player(engine::Transform transform, std::shared_ptr<IPlayerState> state,
                    std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite)
-            : engine::Entity(std::move(transform)), _state(std::move(state)), _animated_sprite(std::move(animated_sprite)) {
-        addComponents({_animated_sprite});
+            : engine::Entity(std::move(transform)),
+            _state(std::move(state)),
+            _animated_sprite(std::move(animated_sprite)),
+            _physicsComponent(std::make_shared<engine::PhysicsComponent>(false)) {
+        addComponents({_animated_sprite, _physicsComponent});
+
+        _physicsComponent->getHitBox()->setPosition(getPosition());
+        _physicsComponent->getHitBox()->setSize(_animated_sprite->getSize());
 
         _state->enter(*this);
     }

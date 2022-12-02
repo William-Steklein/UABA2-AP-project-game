@@ -29,8 +29,6 @@ namespace game {
     }
 
     void DebugState::physicsUpdate(Game &game, double t, float dt) {
-        _player->move({0.004f, 0});
-
         IGameState::physicsUpdate(game, t, dt);
     }
 
