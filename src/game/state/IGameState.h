@@ -7,12 +7,10 @@
 
 #include <engine/entity/Entity.h>
 
+#include "game/Game.h"
 #include "game/input/InputEvent.h"
 
 namespace game {
-
-    class Game;
-
     class IGameState {
     public:
         virtual ~IGameState() = default;

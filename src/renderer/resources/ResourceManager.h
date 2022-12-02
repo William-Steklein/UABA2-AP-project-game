@@ -18,7 +18,7 @@ namespace renderer {
 
         void loadTextureResources(const std::vector<engine::TextureResource> &texture_resources) override;
 
-        void loadAnimationResourceGroups(
+        void loadAnimationResources(
                 const std::vector<engine::AnimationResourceGroup> &animation_resource_groups) override;
 
         void loadSoundResources(const std::vector<engine::AudioResource> &sound_resources) override;

@@ -27,7 +27,7 @@ namespace renderer {
         }
     }
 
-    void ResourceManager::loadAnimationResourceGroups(
+    void ResourceManager::loadAnimationResources(
             const std::vector<engine::AnimationResourceGroup> &animation_resource_groups) {
         for (const auto &animation_resource_group: animation_resource_groups) {
             if (checkTextureGroupIdLoaded(animation_resource_group.id)) continue;
@@ -45,7 +45,7 @@ namespace renderer {
             }
         }
 
-        engine::IResourceManager::loadAnimationResourceGroups(animation_resource_groups);
+        engine::IResourceManager::loadAnimationResources(animation_resource_groups);
     }
 
     void ResourceManager::loadSoundResources(const std::vector<engine::AudioResource> &sound_resources) {

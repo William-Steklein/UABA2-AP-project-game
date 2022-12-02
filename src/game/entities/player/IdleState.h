@@ -1,11 +1,10 @@
-#ifndef GAME_ENGINE_PLAYERSTATE_H
-#define GAME_ENGINE_PLAYERSTATE_H
+#ifndef GAME_ENGINE_IDLESTATE_H
+#define GAME_ENGINE_IDLESTATE_H
 
 
-#include "engine/logging/Logger.h"
+#include <engine/logging/Logger.h>
 
 #include "game/entities/player/IPlayerState.h"
-#include "game/entities/player/Player.h"
 
 namespace game {
 
@@ -24,4 +23,4 @@ namespace game {
 
 } // game
 
-#endif //GAME_ENGINE_PLAYERSTATE_H
+#endif //GAME_ENGINE_IDLESTATE_H

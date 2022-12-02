@@ -12,7 +12,6 @@ namespace game {
 
         _player = std::make_shared<Player>(Player(
                 {{0, 0}, {1, 1}, 0},
-                std::make_shared<IdleState>(),
                 game.getViewComponentCreator()->createAnimatedSprite({0.8f, 0.56f}, 1, false, "adventurer")
         ));
 

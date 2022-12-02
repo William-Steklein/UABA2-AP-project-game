@@ -1,11 +1,11 @@
 #include "game/Game.h"
+#include "game/state/MenuState.h"
 
 namespace game {
     Game::Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
                std::shared_ptr<engine::IResourceManager> resource_manager,
                std::shared_ptr<engine::IViewComponentCreator> view_component_creator,
-               std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator,
-               std::shared_ptr<IGameState> start_state)
+               std::shared_ptr<engine::IAudioComponentCreator> audio_component_creator)
             : Engine(screen_x_min, screen_x_max, screen_y_min, screen_y_max,
                      std::move(resource_manager),
                      std::move(view_component_creator),
@@ -14,7 +14,7 @@ namespace game {
         loadResources();
         _config = parseConfig("data/config_default.json");
 
-        _states.push(std::move(start_state));
+        _states.push(std::move(std::make_shared<MenuState>()));
         _states.top()->enter(*this);
     }
 
@@ -112,8 +112,7 @@ namespace game {
 
     void Game::loadResources() {
         _resource_manager->loadTextureResources(engine::parseTextureInfo("data/resource-info/textures.json"));
-        _resource_manager->loadAnimationResourceGroups(
-                engine::parseAnimationInfo("data/resource-info/animations.json"));
+        _resource_manager->loadAnimationResources(engine::parseAnimationInfo("data/resource-info/animations.json"));
         _resource_manager->loadSoundResources(engine::parseAudioInfo("data/resource-info/sounds.json"));
         _resource_manager->loadMusicResources(engine::parseAudioInfo("data/resource-info/music.json"));
         _resource_manager->loadFontResources(engine::parseFontInfo("data/resource-info/fonts.json"));

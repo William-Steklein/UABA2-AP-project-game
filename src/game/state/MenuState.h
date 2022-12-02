@@ -5,7 +5,6 @@
 #include <engine/entity/ui/UIEntity.h>
 
 #include "game/entities/widgets/UIButton.h"
-#include "game/Game.h"
 #include "game/state/IGameState.h"
 
 namespace game {

@@ -6,7 +6,6 @@
 
 #include "game/entities/widgets/UIButton.h"
 #include "game/state/IGameState.h"
-#include "game/Game.h"
 
 namespace game {
 

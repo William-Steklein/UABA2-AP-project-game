@@ -4,7 +4,7 @@
 
 #include <memory>
 
-#include "game/input/InputEvent.h"
+#include "game/entities/player/Player.h"
 
 namespace game {
 

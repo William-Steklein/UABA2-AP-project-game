@@ -3,9 +3,7 @@
 
 
 #include "game/state/IGameState.h"
-#include "game/Game.h"
 #include "game/entities/player/Player.h"
-#include "game/entities/player/PlayerState.h"
 
 namespace game {
 

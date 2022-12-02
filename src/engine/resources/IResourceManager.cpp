@@ -1,7 +1,7 @@
 #include "IResourceManager.h"
 
 namespace engine {
-    void IResourceManager::loadAnimationResourceGroups(
+    void IResourceManager::loadAnimationResources(
             const std::vector<AnimationResourceGroup> &animation_resource_groups) {
         for (const auto &animation_resource_group: animation_resource_groups) {
             std::shared_ptr<AnimationGroup> animation_group = std::make_shared<AnimationGroup>();

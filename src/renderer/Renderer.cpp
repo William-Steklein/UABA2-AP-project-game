@@ -13,8 +13,7 @@ namespace renderer {
         _game = std::make_unique<game::Game>(0, _screen_width, _screen_height, 0,
                                              _resource_manager,
                                              _view_component_creator,
-                                             _audio_component_creator,
-                                             std::make_shared<game::MenuState>());
+                                             _audio_component_creator);
     }
 
     Renderer::~Renderer() = default;
