@@ -81,15 +81,15 @@
   "button_anim": {
     "default": [
       0.1,
-      ["data/ui/button.png"]
+      ["data/textures/ui/button.png"]
     ],
     "hover": [
       0.1,
-      ["data/ui/button_hover.png"]
+      ["data/textures/ui/button_hover.png"]
     ],
     "clicking": [
       0.1,
-      ["data/ui/button_clicked.png"]
+      ["data/textures/ui/button_clicked.png"]
     ]
   }
 

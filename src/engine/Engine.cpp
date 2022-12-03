@@ -10,7 +10,7 @@ namespace engine {
               _audio_component_creator(std::move(audio_component_creator)),
               _camera(std::make_shared<Camera>(screen_x_min, screen_x_max, screen_y_min, screen_y_max)),
               _quit(false),
-              _physics_delta_time(1.f / 60.f), _physics_time(0.f),
+              _physics_delta_time(1.f / 120.f), _physics_time(0.f),
               _accumulator(0.f), _physics_speed(1.f) {
         _view_component_creator->setCamera(_camera);
         initSidebars();
@@ -29,9 +29,6 @@ namespace engine {
     }
 
     void Engine::update() {
-        // engine update
-        update(Stopwatch::getInstance().getTime(), Stopwatch::getInstance().getDeltaTime());
-
         // physics update
         _accumulator += Stopwatch::getInstance().getDeltaTime() * _physics_speed;
         while (_accumulator >= _physics_delta_time) {
@@ -40,6 +37,9 @@ namespace engine {
             _accumulator -= _physics_delta_time;
             _physics_time += _physics_delta_time;
         }
+
+        // graphics update
+        graphicsUpdate(Stopwatch::getInstance().getTime(), Stopwatch::getInstance().getDeltaTime());
     }
 
     void Engine::updateScreenResolution(float screen_x_min, float screen_x_max,
@@ -81,9 +81,9 @@ namespace engine {
         ));
     }
 
-    void Engine::update(double t, float dt) {
-        _sidebar1->update(t, dt);
-        _sidebar2->update(t, dt);
+    void Engine::graphicsUpdate(double t, float dt) {
+        _sidebar1->graphicsUpdate(t, dt);
+        _sidebar2->graphicsUpdate(t, dt);
     }
 
     void Engine::physicsUpdate(double t, float dt) {

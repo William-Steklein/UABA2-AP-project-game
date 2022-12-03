@@ -12,7 +12,7 @@ namespace engine {
 
         ~UIEntity() override = default;
 
-        void update(double t, float dt) override;
+        void graphicsUpdate(double t, float dt) override;
 
         void setPosition(const engine::Vector2f &position) override;
 

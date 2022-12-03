@@ -1,4 +1,5 @@
 #include "PhysicsComponent.h"
+#include "engine/logging/Logger.h"
 
 namespace engine {
     PhysicsComponent::PhysicsComponent(bool is_static)

@@ -13,23 +13,26 @@
 namespace game {
     class IGameState {
     public:
+        IGameState(Game &game);
+
         virtual ~IGameState() = default;
 
-        virtual void enter(Game &game) {};
+        virtual void enter() {};
 
-        virtual void exit(Game &game) {};
+        virtual void exit() {};
 
-        virtual void reset(Game &game);
+        virtual void reset();
 
-        virtual void update(Game &game, double t, float dt);
+        virtual void physicsUpdate(double t, float dt);
 
-        virtual void physicsUpdate(Game &game, double t, float dt);
+        virtual void graphicsUpdate(double t, float dt);
 
-        virtual void handleInput(Game &game, const InputEvent &input) {};
+        virtual void handleInput(const InputEvent &input) {};
 
     protected:
+        Game &_game;
+
         std::set<std::shared_ptr<engine::Entity>> _entities;
-        std::set<std::shared_ptr<engine::Entity>> _physics_entities;
     };
 
 } // game

@@ -3,6 +3,7 @@
 
 
 #include <stack>
+#include <iostream>
 
 #include <engine/Engine.h>
 
@@ -41,7 +42,7 @@ namespace game {
         std::shared_ptr<IGameState> getState() const;
 
     private:
-        void update(double t, float dt) override;
+        void graphicsUpdate(double t, float dt) override;
 
         void physicsUpdate(double t, float dt) override;
 

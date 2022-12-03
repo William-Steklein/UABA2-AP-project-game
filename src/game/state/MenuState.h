@@ -11,15 +11,15 @@ namespace game {
 
     class MenuState : public IGameState {
     public:
-        MenuState();
+        MenuState(Game &game);
 
         ~MenuState() override = default;
 
-        void enter(game::Game &game) override;
+        void enter() override;
 
-        void update(game::Game &game, double t, float dt) override;
+        void graphicsUpdate(double t, float dt) override;
 
-        void handleInput(game::Game &game, const game::InputEvent &input) override;
+        void handleInput(const game::InputEvent &input) override;
 
         void checkButtons();
 

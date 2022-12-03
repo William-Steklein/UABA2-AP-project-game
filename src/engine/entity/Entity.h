@@ -18,7 +18,9 @@ namespace engine {
 
         virtual ~Entity() = default;
 
-        virtual void update(double t, float dt);
+        virtual void physicsUpdate(double t, float dt);
+
+        virtual void graphicsUpdate(double t, float dt);
 
         const Transform &getTransform() const;
 
@@ -42,16 +44,15 @@ namespace engine {
 
         void rotate(float rotation);
 
-        void addComponent(std::shared_ptr<IComponent> component);
+        void addComponent(std::shared_ptr<IComponent> component, bool physics = false);
 
-        void addComponents(const std::vector<std::shared_ptr<IComponent>>& components);
-
-        void removeComponent(const std::shared_ptr<IComponent>& component);
+        void addComponents(const std::vector<std::shared_ptr<IComponent>>& components, bool physics = false);
 
     protected:
         Transform _transform;
 
-        std::vector<std::shared_ptr<IComponent>> _components;
+        std::vector<std::shared_ptr<IComponent>> _components_physics;
+        std::vector<std::shared_ptr<IComponent>> _components_graphics;
 
         static void checkComponent(const std::shared_ptr<IComponent> &component);
     };

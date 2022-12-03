@@ -15,7 +15,7 @@ namespace game {
 //        _audio->playMusic("portal_radio", 0, true);
     }
 
-    void Explosion::update(double t, float dt) {
+    void Explosion::graphicsUpdate(double t, float dt) {
         if (_animation->isFinished()) {
             _animation->start("ground_explosion", true, false, false);
 //            _audio->playSound("scream", 1, false);
@@ -27,6 +27,6 @@ namespace game {
 //            _audio->playSound("scream", 1, false);
         }
 
-        Entity::update(t, dt);
+        Entity::graphicsUpdate(t, dt);
     }
 } // game

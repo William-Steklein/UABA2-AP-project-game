@@ -22,7 +22,7 @@ namespace game {
 
         ~Player() override = default;
 
-        void update(double t, float dt) override;
+        void graphicsUpdate(double t, float dt) override;
 
         void handleInput(const InputEvent &input);
 

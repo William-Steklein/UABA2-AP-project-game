@@ -16,7 +16,7 @@ namespace game {
 
         ~Explosion() = default;
 
-        void update(double t, float dt) override;
+        void graphicsUpdate(double t, float dt) override;
 
     private:
         std::shared_ptr<engine::IAnimatedSpriteComponent> _animation;

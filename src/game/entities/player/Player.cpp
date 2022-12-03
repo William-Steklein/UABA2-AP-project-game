@@ -7,7 +7,8 @@ namespace game {
             : engine::Entity(std::move(transform)),
               _animated_sprite(std::move(animated_sprite)),
               _physics_component(std::make_shared<engine::PhysicsComponent>(false)) {
-        addComponents({_animated_sprite, _physics_component});
+        addComponent(_animated_sprite, false);
+        addComponent(_physics_component, true);
 
         _physics_component->getHitBox()->setPosition(getPosition());
         _physics_component->getHitBox()->setSize(_animated_sprite->getSize());
@@ -16,10 +17,10 @@ namespace game {
         _state->enter(*this);
     }
 
-    void Player::update(double t, float dt) {
+    void Player::graphicsUpdate(double t, float dt) {
         _state->update(*this);
 
-        Entity::update(t, dt);
+        Entity::graphicsUpdate(t, dt);
     }
 
     void Player::handleInput(const InputEvent &input) {

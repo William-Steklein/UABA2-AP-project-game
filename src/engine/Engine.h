@@ -59,7 +59,7 @@ namespace engine {
 
         void initSidebars();
 
-        virtual void update(double t, float dt);
+        virtual void graphicsUpdate(double t, float dt);
 
         virtual void physicsUpdate(double t, float dt);
 

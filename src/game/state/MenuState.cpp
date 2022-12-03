@@ -2,18 +2,21 @@
 #include "game/state/DebugState.h"
 
 namespace game {
-    MenuState::MenuState() : _selected_button_index(0), _keyboard_focus(false) {
+    MenuState::MenuState(Game &game)
+            : IGameState(game), _selected_button_index(0), _keyboard_focus(false) {
 
     }
 
-    void MenuState::enter(Game &game) {
+    void MenuState::enter() {
+        _game.getCamera()->reset();
+
         unsigned int background_layer = 0;
         unsigned int button_layer = 1;
         unsigned int text_layer = 2;
 
         std::shared_ptr<engine::UIEntity> menu_background = std::make_shared<engine::UIEntity>(engine::UIEntity(
                 {{0, 0}, {1, 1}, 0},
-                {game.getViewComponentCreator()->createSprite({1.f, 1.5f}, background_layer, true, "menu"),}
+                {_game.getViewComponentCreator()->createSprite({1.f, 1.5f}, background_layer, true, "menu"),}
         ));
         _entities.insert(menu_background);
 
@@ -21,15 +24,15 @@ namespace game {
         float button_font_size = 0.085f;
 
         std::shared_ptr<engine::ITextBoxComponent> play_button_text =
-                game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
+                _game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
         play_button_text->setText("play");
         play_button_text->setFontSize(button_font_size);
 
         _play_button = std::make_shared<UIButton>(UIButton(
                 {{0, 0.51}, {1, 1}, 0},
                 button_size,
-                game.getMousePosition(),
-                game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
+                _game.getMousePosition(),
+                _game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
                 {play_button_text}
         ));
 
@@ -38,15 +41,15 @@ namespace game {
 
 
         std::shared_ptr<engine::ITextBoxComponent> debug_button_text =
-                game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
+                _game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
         debug_button_text->setText("debug mode");
         debug_button_text->setFontSize(button_font_size);
 
         _debug_button = std::make_shared<UIButton>(UIButton(
                 {{0, 0.175}, {1, 1}, 0},
                 button_size,
-                game.getMousePosition(),
-                game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
+                _game.getMousePosition(),
+                _game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
                 {debug_button_text}
         ));
 
@@ -55,15 +58,15 @@ namespace game {
 
 
         std::shared_ptr<engine::ITextBoxComponent> quit_button_text =
-                game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
+                _game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
         quit_button_text->setText("quit");
         quit_button_text->setFontSize(button_font_size);
 
         _quit_button = std::make_shared<UIButton>(UIButton(
                 {{0, -0.175}, {1, 1}, 0},
                 button_size,
-                game.getMousePosition(),
-                game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
+                _game.getMousePosition(),
+                _game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
                 {quit_button_text}
         ));
 
@@ -71,22 +74,22 @@ namespace game {
         _buttons.push_back(_quit_button);
     }
 
-    void MenuState::update(Game &game, double t, float dt) {
+    void MenuState::graphicsUpdate(double t, float dt) {
         if (_play_button->isActive()) {
             _play_button->reset();
             if (_keyboard_focus) {
                 _buttons[_selected_button_index]->setKeyboardActive();
             }
         } else if (_debug_button->isActive()) {
-            game.setState(std::make_shared<DebugState>());
+            _game.setState(std::make_shared<DebugState>(_game));
         } else if (_quit_button->isActive()) {
-            game.quit();
+            _game.quit();
         }
 
-        IGameState::update(game, t, dt);
+        IGameState::graphicsUpdate(t, dt);
     }
 
-    void MenuState::handleInput(Game &game, const InputEvent &input) {
+    void MenuState::handleInput(const InputEvent &input) {
         switch (input.type) {
             case InputEvent::Type::UP:
                 if (!input.state_enter) {

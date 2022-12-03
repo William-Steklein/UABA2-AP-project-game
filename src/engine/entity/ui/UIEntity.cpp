@@ -6,11 +6,11 @@ namespace engine {
 
     }
 
-    void UIEntity::update(double t, float dt) {
-        Entity::update(t, dt);
+    void UIEntity::graphicsUpdate(double t, float dt) {
+        Entity::graphicsUpdate(t, dt);
 
         for (const auto &child: _children) {
-            child->update(t, dt);
+            child->graphicsUpdate(t, dt);
         }
     }
 

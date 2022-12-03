@@ -4,5 +4,6 @@
   "hamburger": "data/textures/ui/hamburger.png",
   "cobble_stone": "data/textures/cobble_stone.png",
   "pr_background": "data/textures/prototype/background_tile.png",
-  "pr_ground": "data/textures/prototype/ground_tile.png"
+  "pr_ground": "data/textures/prototype/ground_tile.png",
+  "pr_ground_2": "data/textures/prototype/ground_tile_2.png"
 }

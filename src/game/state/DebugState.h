@@ -10,22 +10,22 @@ namespace game {
 
     class DebugState : public IGameState {
     public:
-        DebugState();
+        DebugState(Game &game);
 
         ~DebugState() override = default;
 
-        void enter(game::Game &game) override;
+        void enter() override;
 
-        void reset(Game &game) override;
+        void reset() override;
 
-        void update(game::Game &game, double t, float dt) override;
+        void physicsUpdate(double t, float dt) override;
 
-        void physicsUpdate(game::Game &game, double t, float dt) override;
+        void graphicsUpdate(double t, float dt) override;
 
-        void handleInput(game::Game &game, const game::InputEvent &input) override;
+        void handleInput(const game::InputEvent &input) override;
 
-        void generateBackground(game::Game &game, const engine::Vector2f &position,
-                                const engine::Vector2f &size, const engine::Vector2f &entity_size);
+        void generateBackground(const engine::Vector2f &position, const engine::Vector2f &size,
+                                const engine::Vector2f &entity_size);
 
     private:
         std::shared_ptr<Player> _player;

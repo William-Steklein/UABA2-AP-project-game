@@ -14,8 +14,7 @@ namespace game {
         loadResources();
         _config = parseConfig("data/config_default.json");
 
-        _states.push(std::move(std::make_shared<MenuState>()));
-        _states.top()->enter(*this);
+        pushState(std::move(std::make_shared<MenuState>(*this)));
     }
 
     void Game::update() {
@@ -49,7 +48,7 @@ namespace game {
             }
             input_event.range = 0;
 
-            getState()->handleInput(*this, input_event);
+            getState()->handleInput(input_event);
         }
     }
 
@@ -59,20 +58,18 @@ namespace game {
 
     void Game::setState(const std::shared_ptr<IGameState> &state) {
         if (state != nullptr) {
-            if (_states.empty()) {
-                _states.push(state);
-            } else {
+            if (!_states.empty()) {
+                getState()->exit();
                 _states.pop();
-                _states.push(state);
             }
 
-            getState()->enter(*this);
+            pushState(state);
         }
     }
 
     void Game::pushState(const std::shared_ptr<IGameState> &state) {
         _states.push(state);
-        _states.top()->enter(*this);
+        _states.top()->enter();
     }
 
     void Game::popState() {
@@ -81,6 +78,7 @@ namespace game {
         } else if (_states.size() == 1) {
             throw std::runtime_error("Popping last game state from stack");
         }
+        getState()->exit();
         _states.pop();
     }
 
@@ -91,21 +89,21 @@ namespace game {
 
     void Game::popAndResetState() {
         popState();
-        getState()->reset(*this);
+        getState()->reset();
     }
 
     std::shared_ptr<IGameState> Game::getState() const {
         return _states.top();
     }
 
-    void Game::update(double t, float dt) {
-        getState()->update(*this, t, dt);
+    void Game::graphicsUpdate(double t, float dt) {
+        getState()->graphicsUpdate(t, dt);
 
-        Engine::update(t, dt);
+        Engine::graphicsUpdate(t, dt);
     }
 
     void Game::physicsUpdate(double t, float dt) {
-        getState()->physicsUpdate(*this, t, dt);
+        getState()->physicsUpdate(t, dt);
 
         Engine::physicsUpdate(t, dt);
     }

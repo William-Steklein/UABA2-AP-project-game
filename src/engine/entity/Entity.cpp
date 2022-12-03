@@ -6,8 +6,16 @@ namespace engine {
         addComponents(components);
     }
 
-    void Entity::update(double t, float dt) {
-        for (const auto &component: _components) {
+    void Entity::physicsUpdate(double t, float dt) {
+        for (const auto &component: _components_physics) {
+            if (component.get()) {
+                component->update(t, dt, _transform);
+            }
+        }
+    }
+
+    void Entity::graphicsUpdate(double t, float dt) {
+        for (const auto &component: _components_graphics) {
             if (component.get()) {
                 component->update(t, dt, _transform);
             }
@@ -60,22 +68,19 @@ namespace engine {
         setRotation(getRotation() + rotation);
     }
 
-    void Entity::addComponent(std::shared_ptr<IComponent> component) {
+    void Entity::addComponent(std::shared_ptr<IComponent> component, bool physics) {
         checkComponent(component);
         component->update(0, 0, _transform);
-        _components.push_back(std::move(component));
-    }
-
-    void Entity::addComponents(const std::vector<std::shared_ptr<IComponent>>& components) {
-        for (const auto& component : components) {
-            addComponent(component);
+        if (physics) {
+            _components_physics.push_back(std::move(component));
+        } else {
+            _components_graphics.push_back(std::move(component));
         }
     }
 
-    void Entity::removeComponent(const std::shared_ptr<IComponent>& component) {
-        auto it = std::find(_components.begin(), _components.end(), component);
-        if (it != _components.end()) {
-            _components.erase(it);
+    void Entity::addComponents(const std::vector<std::shared_ptr<IComponent>>& components, bool physics) {
+        for (const auto& component : components) {
+            addComponent(component, physics);
         }
     }
 
