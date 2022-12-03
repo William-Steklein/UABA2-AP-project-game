@@ -24,6 +24,9 @@ namespace game {
 
         void handleInput(game::Game &game, const game::InputEvent &input) override;
 
+        void generateBackground(game::Game &game, const engine::Vector2f &position,
+                                const engine::Vector2f &size, const engine::Vector2f &entity_size);
+
     private:
         std::shared_ptr<Player> _player;
         std::vector<std::shared_ptr<Wall>> _walls;
