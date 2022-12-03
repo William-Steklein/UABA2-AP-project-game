@@ -5,6 +5,8 @@
 #include <memory>
 #include <utility>
 
+#include "engine/entity/Transform.h"
+
 namespace engine {
 
     class Entity;
@@ -13,7 +15,7 @@ namespace engine {
     public:
         virtual ~IComponent() = default;
 
-        virtual void update(double t, float dt, Entity &entity) = 0;
+        virtual void update(double t, float dt, Transform &transform) = 0;
     };
 
 } // engine

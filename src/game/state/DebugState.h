@@ -4,6 +4,7 @@
 
 #include "game/state/IGameState.h"
 #include "game/entities/player/Player.h"
+#include "game/entities/Wall.h"
 
 namespace game {
 
@@ -25,6 +26,7 @@ namespace game {
 
     private:
         std::shared_ptr<Player> _player;
+        std::vector<std::shared_ptr<Wall>> _walls;
     };
 
 } // game

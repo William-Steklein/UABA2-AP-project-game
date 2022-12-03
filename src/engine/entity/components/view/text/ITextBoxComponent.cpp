@@ -6,10 +6,6 @@ namespace engine {
 
     }
 
-    void ITextBoxComponent::update(double t, float dt, Entity &entity) {
-
-    }
-
     const std::string &ITextBoxComponent::getText() const {
         return _text;
     }

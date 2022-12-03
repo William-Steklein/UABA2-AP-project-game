@@ -8,14 +8,14 @@ namespace engine {
 
     }
 
-    void PhysicsComponent::update(double t, float dt, Entity &entity) {
+    void PhysicsComponent::update(double t, float dt, Transform &transform) {
         if (_is_static) return;
 
         // force acceleration
         _acceleration += _force / _mass;
 
         // position(t): position + velocity * timestep + (acceleration / 2 * timestep^2)
-        entity.move(_velocity * dt + _acceleration / 2 * dt * dt);
+        transform.move(_velocity * dt + _acceleration / 2 * dt * dt);
         // verlet integration
         _velocity += _acceleration * dt;
 

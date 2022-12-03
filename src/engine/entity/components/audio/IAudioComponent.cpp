@@ -6,7 +6,7 @@ namespace engine {
 
     }
 
-    void IAudioComponent::update(double t, float dt, Entity &entity) {
+    void IAudioComponent::update(double t, float dt, Transform &transform) {
 
     }
 

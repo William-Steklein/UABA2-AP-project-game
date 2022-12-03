@@ -16,7 +16,7 @@ namespace engine {
 
         ~IAnimatedSpriteComponent() = default;
 
-        void update(double t, float dt, Entity &entity) override;
+        void update(double t, float dt, Transform &transform) override;
 
         void start(const std::string &animation_id, bool loop = false, bool mirror_h = false, bool mirror_v = false);
 

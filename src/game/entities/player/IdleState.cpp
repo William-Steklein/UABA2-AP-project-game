@@ -19,23 +19,23 @@ namespace game {
         if (input.state_enter) {
             switch (input.type) {
                 case InputEvent::Type::LEFT:
-                    player._physicsComponent->addVelocity({-movement_force, 0});
+                    player._physics_component->addVelocity({-movement_force, 0});
                     player._animated_sprite->setMirrorH(true);
 
                     break;
 
                 case InputEvent::Type::RIGHT:
-                    player._physicsComponent->addVelocity({movement_force, 0});
+                    player._physics_component->addVelocity({movement_force, 0});
                     player._animated_sprite->setMirrorH(false);
 
                     break;
 
                 case InputEvent::Type::DOWN:
-                    player._physicsComponent->addVelocity({0, -movement_force});
+                    player._physics_component->addVelocity({0, -movement_force});
                     break;
 
                 case InputEvent::Type::UP:
-                    player._physicsComponent->addVelocity({0, movement_force});
+                    player._physics_component->addVelocity({0, movement_force});
                     break;
 
                 default:

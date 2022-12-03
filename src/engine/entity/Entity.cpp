@@ -9,7 +9,7 @@ namespace engine {
     void Entity::update(double t, float dt) {
         for (const auto &component: _components) {
             if (component.get()) {
-                component->update(t, dt, *this);
+                component->update(t, dt, _transform);
             }
         }
     }
@@ -33,7 +33,7 @@ namespace engine {
     }
 
     void Entity::move(const engine::Vector2f &vector) {
-        setPosition(getPosition() + vector);
+        _transform.move(vector);
     }
 
     const Vector2f &Entity::getScale() const {
@@ -62,7 +62,7 @@ namespace engine {
 
     void Entity::addComponent(std::shared_ptr<IComponent> component) {
         checkComponent(component);
-        component->update(0, 0, *this);
+        component->update(0, 0, _transform);
         _components.push_back(std::move(component));
     }
 

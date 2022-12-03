@@ -16,7 +16,7 @@ namespace renderer {
 
         ~TextBoxComponent() = default;
 
-        void update(double t, float dt, engine::Entity &entity) override;
+        void update(double t, float dt, engine::Transform &transform) override;
 
         std::shared_ptr<sf::Text> getTextRender();
 

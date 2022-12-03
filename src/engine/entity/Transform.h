@@ -10,6 +10,10 @@ namespace engine {
         Vector2f position;
         Vector2f scale;
         float rotation;
+
+        void move (const Vector2f &vector) {
+            position += vector;
+        }
     };
 
 } // engine

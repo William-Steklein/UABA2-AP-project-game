@@ -12,8 +12,6 @@ namespace engine {
 
         ~ITextBoxComponent() = default;
 
-        void update(double t, float dt, Entity &entity) override;
-
         const std::string &getText() const;
 
         void setText(const std::string &text);

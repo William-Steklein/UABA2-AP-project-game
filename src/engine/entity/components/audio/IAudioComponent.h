@@ -16,7 +16,7 @@ namespace engine {
 
         virtual ~IAudioComponent() = default;
 
-        void update(double t, float dt, Entity &entity) override;
+        void update(double t, float dt, Transform &transform) override;
 
         virtual void playSound(const std::string &sound_id, unsigned int channel, bool loop) = 0;
 

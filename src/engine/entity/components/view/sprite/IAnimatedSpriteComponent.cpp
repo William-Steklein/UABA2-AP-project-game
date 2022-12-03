@@ -9,7 +9,7 @@ namespace engine {
 
     }
 
-    void IAnimatedSpriteComponent::update(double t, float dt, Entity &entity) {
+    void IAnimatedSpriteComponent::update(double t, float dt, Transform &transform) {
         if (_finished) return;
 
         bool update_view{false};

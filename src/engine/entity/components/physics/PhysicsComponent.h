@@ -14,7 +14,7 @@ namespace engine {
 
         ~PhysicsComponent() override = default;
 
-        void update(double t, float dt, Entity &entity) override;
+        void update(double t, float dt, Transform &transform) override;
 
         float getMass() const;
 

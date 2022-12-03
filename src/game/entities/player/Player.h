@@ -15,7 +15,7 @@ namespace game {
     class Player : public engine::Entity {
     public:
         std::shared_ptr<engine::IAnimatedSpriteComponent> _animated_sprite;
-        std::shared_ptr<engine::PhysicsComponent> _physicsComponent;
+        std::shared_ptr<engine::PhysicsComponent> _physics_component;
 
         Player(engine::Transform transform,
                std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite);
