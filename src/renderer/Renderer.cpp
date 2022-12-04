@@ -6,6 +6,10 @@ namespace renderer {
         _window = std::make_shared<sf::RenderWindow>(sf::VideoMode(_screen_width, _screen_height),
                                                      constants::window_title);
 
+#ifdef WIN32
+        ShowWindow(_window->getSystemHandle(), SW_MAXIMIZE);
+#endif
+
         _input_mapper = std::make_unique<InputMapper>(_window);
 
         _resource_manager = std::make_shared<ResourceManager>();

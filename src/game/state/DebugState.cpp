@@ -14,31 +14,22 @@ namespace game {
 
         _player = std::make_shared<Player>(Player(
                 {{0, 0}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createAnimatedSprite({0.8f, 0.56f}, 1, false, "adventurer")
+                _game.getViewComponentCreator()->createAnimatedSprite({0.50f, 0.37f}, 1, false, "adventurer")
         ));
 
         _entities.insert(_player);
 
-        _walls.push_back(std::make_shared<Wall>(Wall(
-                {{1, 0.5}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "pr_ground")
-        )));
+        createWall({1, 1}, 1);
 
-        _entities.insert(_walls.back());
-
-        _walls.push_back(std::make_shared<Wall>(Wall(
-                {{1, -0.5}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "pr_ground_2")
-        )));
-
-        _entities.insert(_walls.back());
-
-        _walls.push_back(std::make_shared<Wall>(Wall(
-                {{-1, 0.5}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "cobble_stone")
-        )));
-
-        _entities.insert(_walls.back());
+        createWall({-1, -0.5});
+        createWall({-0.75, -0.5});
+        createWall({-0.5, -0.5});
+        createWall({-0.25, -0.5});
+        createWall({0, -0.5});
+        createWall({0.25, -0.5});
+        createWall({0.5, -0.5});
+        createWall({0.75, -0.5});
+        createWall({1, -0.5});
     }
 
     void DebugState::resume() {
@@ -95,5 +86,16 @@ namespace game {
                 _entities.insert(background);
             }
         }
+    }
+
+    void DebugState::createWall(const engine::Vector2f &position, float size) {
+        unsigned int layer = 2;
+
+        _walls.push_back(std::make_shared<Wall>(Wall(
+                {position, {size, size}, 0},
+                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, layer, false, "pr_ground_2")
+        )));
+
+        _entities.insert(_walls.back());
     }
 } // game

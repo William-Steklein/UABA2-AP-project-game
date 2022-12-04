@@ -29,6 +29,8 @@ namespace game {
         void generateBackground(const engine::Vector2f &position, const engine::Vector2f &size,
                                 const engine::Vector2f &entity_size);
 
+        void createWall(const engine::Vector2f &position, float size = 0.5);
+
     private:
         std::shared_ptr<Player> _player;
         std::vector<std::shared_ptr<Wall>> _walls;

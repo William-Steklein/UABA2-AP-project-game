@@ -76,6 +76,13 @@
         "data/sprites/adventurer/adventurer-run-04.png",
         "data/sprites/adventurer/adventurer-run-05.png"
       ]
+    ],
+    "wall_slide": [
+      0.10,
+      [
+        "data/sprites/adventurer/adventurer-wall-slide-00.png",
+        "data/sprites/adventurer/adventurer-wall-slide-01.png"
+      ]
     ]
   },
   "button_anim": {
