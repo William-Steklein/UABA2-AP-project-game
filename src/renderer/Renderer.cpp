@@ -6,6 +6,8 @@ namespace renderer {
         _window = std::make_shared<sf::RenderWindow>(sf::VideoMode(_screen_width, _screen_height),
                                                      constants::window_title);
 
+        _input_mapper = std::make_unique<InputMapper>(_window);
+
         _resource_manager = std::make_shared<ResourceManager>();
         _view_component_creator = std::make_shared<ViewComponentCreator>(_resource_manager);
         _audio_component_creator = std::make_shared<AudioComponentCreator>(_resource_manager);
@@ -59,16 +61,11 @@ namespace renderer {
                     break;
 
                 default:
-                    // input mapping
-                    engine::Input input = mapInput(event, _window);
-
-                    if (input.type != engine::Input::InputType::UNDEFINEDTYPE) {
-                        inputs.push_back(input);
-                    }
+                    break;
             }
         }
 
-        _game->handleInputs(inputs);
+        _game->handleInputs(_input_mapper->getCurrentInput());
     }
 
     void Renderer::quit() {

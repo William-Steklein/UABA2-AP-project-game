@@ -3,7 +3,7 @@
 
 namespace game {
 
-    DebugState::DebugState(Game &game) : IGameState(game) {
+    DebugState::DebugState(Game &game) : IGameState(game), _resumed(false) {
 
     }
 
@@ -19,26 +19,30 @@ namespace game {
 
         _entities.insert(_player);
 
-//        _walls.push_back(std::make_shared<Wall>(Wall(
-//                {{1, 0.5}, {1, 1}, 0},
-//                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "pr_ground")
-//        )));
-//
-//        _entities.insert(_walls.back());
-//
-//        _walls.push_back(std::make_shared<Wall>(Wall(
-//                {{1, -0.5}, {1, 1}, 0},
-//                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "pr_ground_2")
-//        )));
-//
-//        _entities.insert(_walls.back());
-//
-//        _walls.push_back(std::make_shared<Wall>(Wall(
-//                {{-1, 0.5}, {1, 1}, 0},
-//                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "cobble_stone")
-//        )));
-//
-//        _entities.insert(_walls.back());
+        _walls.push_back(std::make_shared<Wall>(Wall(
+                {{1, 0.5}, {1, 1}, 0},
+                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "pr_ground")
+        )));
+
+        _entities.insert(_walls.back());
+
+        _walls.push_back(std::make_shared<Wall>(Wall(
+                {{1, -0.5}, {1, 1}, 0},
+                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "pr_ground_2")
+        )));
+
+        _entities.insert(_walls.back());
+
+        _walls.push_back(std::make_shared<Wall>(Wall(
+                {{-1, 0.5}, {1, 1}, 0},
+                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, 2, false, "cobble_stone")
+        )));
+
+        _entities.insert(_walls.back());
+    }
+
+    void DebugState::resume() {
+        _resumed = true;
     }
 
     void DebugState::reset() {
@@ -57,8 +61,16 @@ namespace game {
     }
 
     void DebugState::handleInput(const InputEvent &input) {
-        if (input.type == InputEvent::Type::RETURN && input.state_enter) {
-            _game.pushState(std::make_shared<OverlayMenuState>(_game));
+        switch (input.type) {
+            case InputEvent::Type::RETURN:
+                if (!input.state_enter && _resumed) _resumed = false;
+
+                if (input.state_enter && !_resumed) {
+                    _game.pushState(std::make_shared<OverlayMenuState>(_game));
+                }
+
+            default:
+                break;
         }
 
         _player->handleInput(input);

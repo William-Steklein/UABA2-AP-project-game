@@ -21,6 +21,10 @@ namespace game {
 
         virtual void exit() {};
 
+        virtual void pause() {};
+
+        virtual void resume() {};
+
         virtual void reset();
 
         virtual void physicsUpdate(double t, float dt);

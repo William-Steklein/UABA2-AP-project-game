@@ -15,7 +15,7 @@
 #include "renderer/resources/ResourceManager.h"
 #include "renderer/components/view/ViewComponentCreator.h"
 #include "renderer/components/audio/AudioComponentCreator.h"
-#include "renderer/input_mapping.h"
+#include "renderer/InputMapper.h"
 
 namespace renderer {
 
@@ -34,9 +34,12 @@ namespace renderer {
 
         std::shared_ptr<sf::RenderWindow> _window;
 
+        std::unique_ptr<InputMapper> _input_mapper;
+
         std::shared_ptr<ResourceManager> _resource_manager;
         std::shared_ptr<ViewComponentCreator> _view_component_creator;
         std::shared_ptr<AudioComponentCreator> _audio_component_creator;
+
         std::unique_ptr<game::Game> _game;
 
         void draw();

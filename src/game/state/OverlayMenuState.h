@@ -25,6 +25,8 @@ namespace game {
         std::shared_ptr<UIButton> _resume_button;
         std::shared_ptr<UIButton> _restart_button;
         std::shared_ptr<UIButton> _main_menu_button;
+
+        bool _entered;
     };
 
 } // game

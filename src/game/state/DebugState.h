@@ -16,6 +16,8 @@ namespace game {
 
         void enter() override;
 
+        virtual void resume();
+
         void reset() override;
 
         void physicsUpdate(double t, float dt) override;
@@ -30,6 +32,8 @@ namespace game {
     private:
         std::shared_ptr<Player> _player;
         std::vector<std::shared_ptr<Wall>> _walls;
+
+        bool _resumed;
     };
 
 } // game

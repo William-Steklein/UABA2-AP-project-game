@@ -34,7 +34,7 @@ namespace game {
             } else if (input.button == engine::Input::Button::MOUSELEFT) {
                 // mouse buttonpress
                 input_event.type = game::InputEvent::Type::MOUSECLICK;
-                input_event.state_enter = input.type == engine::Input::InputType::MOUSEPRESSED;
+                input_event.state_enter = input.type == engine::Input::InputType::BUTTONPRESSED;
             } else {
                 // keyboard buttonpress
 
@@ -44,7 +44,7 @@ namespace game {
                 }
 
                 input_event.type = _config.button_map.keyboard.at(input.button);
-                input_event.state_enter = input.type == engine::Input::InputType::KEYPRESSED;
+                input_event.state_enter = input.type == engine::Input::InputType::BUTTONPRESSED;
             }
             input_event.range = 0;
 
@@ -68,6 +68,9 @@ namespace game {
     }
 
     void Game::pushState(const std::shared_ptr<IGameState> &state) {
+        if (!_states.empty()) {
+            getState()->pause();
+        }
         _states.push(state);
         _states.top()->enter();
     }
@@ -80,6 +83,7 @@ namespace game {
         }
         getState()->exit();
         _states.pop();
+        getState()->resume();
     }
 
     void Game::popAndSetState(const std::shared_ptr<IGameState> &state) {

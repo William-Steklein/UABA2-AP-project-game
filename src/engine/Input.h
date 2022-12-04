@@ -12,10 +12,10 @@ namespace engine {
     struct Input {
         enum InputType {
             UNDEFINEDTYPE,
-            KEYPRESSED,
-            KEYRELEASED,
-            MOUSEPRESSED,
-            MOUSERELEASED,
+
+            BUTTONPRESSED,
+            BUTTONRELEASED,
+
             MOUSEMOVED
         };
 
