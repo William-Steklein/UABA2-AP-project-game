@@ -3,7 +3,7 @@
 
 namespace game {
 
-    DebugState::DebugState(Game &game) : IGameState(game), _resumed(false) {
+    DebugState::DebugState(Game &game) : IGameState(game) {
 
     }
 
@@ -42,11 +42,12 @@ namespace game {
     }
 
     void DebugState::resume() {
-        _resumed = true;
+
     }
 
     void DebugState::reset() {
         _player = nullptr;
+        _walls.clear();
         IGameState::reset();
     }
 
@@ -63,9 +64,7 @@ namespace game {
     void DebugState::handleInput(const InputEvent &input) {
         switch (input.type) {
             case InputEvent::Type::RETURN:
-                if (!input.state_enter && _resumed) _resumed = false;
-
-                if (input.state_enter && !_resumed) {
+                if (!input.state_enter) {
                     _game.pushState(std::make_shared<OverlayMenuState>(_game));
                 }
 

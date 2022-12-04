@@ -2,7 +2,7 @@
 #include "game/state/MenuState.h"
 
 namespace game {
-    OverlayMenuState::OverlayMenuState(Game &game) : IGameState(game), _entered(true) {
+    OverlayMenuState::OverlayMenuState(Game &game) : IGameState(game) {
 
     }
 
@@ -83,9 +83,7 @@ namespace game {
     void OverlayMenuState::handleInput(const InputEvent &input) {
         switch (input.type) {
             case InputEvent::Type::RETURN:
-                if (!input.state_enter && _entered) _entered = false;
-
-                if (input.state_enter && !_entered) {
+                if (!input.state_enter) {
                     _game.popState();
                 }
 
