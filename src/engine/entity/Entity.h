@@ -22,9 +22,7 @@ namespace engine {
 
         virtual void graphicsUpdate(double t, float dt);
 
-        const Transform &getTransform() const;
-
-        void setTransform(const Transform &transform);
+        const std::shared_ptr<Transform> &getTransform() const;
 
         const Vector2f &getPosition() const;
 
@@ -49,7 +47,7 @@ namespace engine {
         void addComponents(const std::vector<std::shared_ptr<IComponent>>& components, bool physics = false);
 
     protected:
-        Transform _transform;
+        std::shared_ptr<Transform> _transform;
 
         std::vector<std::shared_ptr<IComponent>> _components_physics;
         std::vector<std::shared_ptr<IComponent>> _components_graphics;

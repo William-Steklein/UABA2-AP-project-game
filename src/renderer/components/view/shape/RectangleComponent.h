@@ -14,7 +14,7 @@ namespace renderer {
 
         ~RectangleComponent() = default;
 
-        void update(double t, float dt, engine::Transform &transform) override;
+        void update(double t, float dt) override;
 
         const std::shared_ptr<sf::RectangleShape> &getRectangleRender() const;
 

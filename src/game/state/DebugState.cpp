@@ -14,7 +14,8 @@ namespace game {
 
         _player = std::make_shared<Player>(Player(
                 {{0, 0}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createAnimatedSprite({0.50f, 0.37f}, 1, false, "adventurer")
+                _game.getViewComponentCreator()->createAnimatedSprite({0.50f, 0.37f}, 1, false, "adventurer"),
+                _game.getViewComponentCreator()->createRectangle({0.50f, 0.37f}, 2, false)
         ));
 
         _entities.insert(_player);
@@ -44,6 +45,8 @@ namespace game {
 
     void DebugState::physicsUpdate(double t, float dt) {
         IGameState::physicsUpdate(t, dt);
+
+        updateCollisions();
     }
 
     void DebugState::graphicsUpdate(double t, float dt) {
@@ -97,5 +100,11 @@ namespace game {
         )));
 
         _entities.insert(_walls.back());
+    }
+
+    void DebugState::updateCollisions() {
+        for (const auto &wall: _walls) {
+            _player->_physics_component->handleCollision(*wall->getPhysicsComponent());
+        }
     }
 } // game

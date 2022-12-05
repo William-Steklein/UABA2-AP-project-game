@@ -19,7 +19,7 @@ namespace renderer {
         SpriteComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera, bool project_ui_space,
                         std::vector<std::shared_ptr<sf::Texture>> texture_group);
 
-        void update(double t, float dt, engine::Transform &transform) override;
+        void update(double t, float dt) override;
 
         std::shared_ptr<sf::Sprite> getSprite();
 

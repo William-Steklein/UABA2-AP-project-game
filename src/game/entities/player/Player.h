@@ -5,6 +5,7 @@
 #include <engine/entity/Entity.h>
 #include <engine/entity/components/view/sprite/IAnimatedSpriteComponent.h>
 #include <engine/entity/components/physics/PhysicsComponent.h>
+#include <engine/entity/components/view/shape/IShapeComponent.h>
 
 #include "game/input/InputEvent.h"
 
@@ -16,9 +17,11 @@ namespace game {
     public:
         std::shared_ptr<engine::IAnimatedSpriteComponent> _animated_sprite;
         std::shared_ptr<engine::PhysicsComponent> _physics_component;
+        std::shared_ptr<engine::IShapeComponent> _rectangle;
 
         Player(engine::Transform transform,
-               std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite);
+               std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite,
+               std::shared_ptr<engine::IShapeComponent> rectangle);
 
         ~Player() override = default;
 

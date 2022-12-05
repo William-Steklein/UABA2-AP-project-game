@@ -3,18 +3,17 @@
 
 
 #include "engine/entity/components/IComponent.h"
-#include "engine/entity/Entity.h"
 #include "engine/physics/HitBox.h"
 
 namespace engine {
 
     class PhysicsComponent : public IComponent {
     public:
-        PhysicsComponent(bool is_static);
+        PhysicsComponent(bool is_static = true);
 
         ~PhysicsComponent() override = default;
 
-        void update(double t, float dt, Transform &transform) override;
+        void update(double t, float dt) override;
 
         float getMass() const;
 
@@ -47,6 +46,8 @@ namespace engine {
         bool isCollided() const;
 
         void setCollided(bool collided);
+
+        void handleCollision(PhysicsComponent &other);
 
     private:
         float _mass;

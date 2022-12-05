@@ -3,15 +3,25 @@
 
 namespace game {
     Player::Player(engine::Transform transform,
-                   std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite)
+                   std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite,
+                   std::shared_ptr<engine::IShapeComponent> rectangle)
             : engine::Entity(std::move(transform)),
               _animated_sprite(std::move(animated_sprite)),
-              _physics_component(std::make_shared<engine::PhysicsComponent>(false)) {
-        addComponent(_animated_sprite, false);
+              _physics_component(std::make_shared<engine::PhysicsComponent>(false)),
+              _rectangle(std::move(rectangle)) {
+        addComponents({_animated_sprite, _rectangle}, false);
         addComponent(_physics_component, true);
 
-        _physics_component->getHitBox()->setPosition(getPosition());
-        _physics_component->getHitBox()->setSize(_animated_sprite->getSize());
+        engine::Vector2f hit_box_size = _animated_sprite->getSize();
+        hit_box_size.x = hit_box_size.x * 0.5f;
+        hit_box_size.y = hit_box_size.y * 0.8f;
+
+        std::shared_ptr<engine::HitBox> hit_box = std::make_shared<engine::HitBox>(hit_box_size);
+        addComponent(hit_box);
+        _physics_component->setHitBox(hit_box);
+
+        _rectangle->setSize(hit_box_size);
+        _rectangle->setFillcolor({255, 0, 255, 100});
 
         _state = std::make_shared<IdleState>();
         _state->enter(*this);

@@ -23,7 +23,7 @@ namespace game {
 
         if (_animation->isLoopFinished()) {
 //            _animation->setMirrorV(!_animation->getMirrorV());
-            setRotation(_transform.rotation + static_cast<float>(M_PI) / 4);
+            setRotation(_transform->rotation + static_cast<float>(M_PI) / 4);
 //            _audio->playSound("scream", 1, false);
         }
 

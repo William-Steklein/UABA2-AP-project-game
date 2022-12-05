@@ -11,7 +11,9 @@ namespace renderer {
         updateTextRender();
     }
 
-    void TextBoxComponent::update(double t, float dt, engine::Transform &transform) {
+    void TextBoxComponent::update(double t, float dt) {
+        std::shared_ptr<engine::Transform> transform = getTransform();
+        
         updateTextRender();
 
         if (_camera.expired()) {
@@ -19,13 +21,13 @@ namespace renderer {
         }
         std::shared_ptr<engine::Camera> camera_shared = _camera.lock();
 
-        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(transform.position,
+        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(transform->position,
                                                                                        _project_ui_space);
         _text_render->setPosition(screen_position.x, screen_position.y);
 
-        _text_render->setScale(transform.scale.x, transform.scale.y);
+        _text_render->setScale(transform->scale.x, transform->scale.y);
 
-        _text_render->setRotation(engine::toDegree(transform.rotation));
+        _text_render->setRotation(engine::toDegree(transform->rotation));
 
     }
 

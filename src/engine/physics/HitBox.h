@@ -2,34 +2,33 @@
 #define GAME_ENGINE_HITBOX_H
 
 
-#include "engine/math/Vector2f.h"
+#include "engine/entity/components/IComponent.h"
 
 namespace engine {
 
-    class HitBox {
+    class HitBox : public IComponent {
     public:
-        HitBox(const Vector2f &position, const Vector2f &size, const Vector2f &offset = {});
+        HitBox(const Vector2f &size, const Vector2f &offset = {});
 
         ~HitBox() = default;
 
-        const Vector2f &getPosition() const;
-
-        void setPosition(const Vector2f &position);
+        void update(double t, float dt) override;
 
         const Vector2f &getSize() const;
 
         void setSize(const Vector2f &size);
 
+        Vector2f getScaledSize();
+
         const Vector2f &getOffset() const;
 
         void setOffset(const Vector2f &offset);
 
-        bool collides(const Vector2f &point) const;
+        bool collides(const Vector2f &point);
 
-        bool collides(const HitBox &other) const;
+        bool collides(HitBox &other);
 
     private:
-        Vector2f _position;
         Vector2f _size;
         Vector2f _offset;
     };

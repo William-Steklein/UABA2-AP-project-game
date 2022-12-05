@@ -9,18 +9,20 @@ namespace engine {
 
     }
 
-    void PhysicsComponent::update(double t, float dt, Transform &transform) {
+    void PhysicsComponent::update(double t, float dt) {
+        std::shared_ptr<Transform> transform = getTransform();
+
         if (_is_static) return;
 
         // force acceleration
         _acceleration += _force / _mass;
 
         // position(t): position + velocity * timestep + (acceleration / 2 * timestep^2)
-        transform.move(_velocity * dt + _acceleration / 2 * dt * dt);
+        transform->move(_velocity * dt + _acceleration / 2 * dt * dt);
         // verlet integration
         _velocity += _acceleration * dt;
 
-        // clear forces/accelerations
+        // clear force and acceleration
         _force = {0, 0};
         _acceleration = {0, 0};
     }
@@ -87,5 +89,11 @@ namespace engine {
 
     const std::shared_ptr<HitBox> &PhysicsComponent::getHitBox() const {
         return _hit_box;
+    }
+
+    void PhysicsComponent::handleCollision(PhysicsComponent &other) {
+        if (_hit_box->collides(*other.getHitBox())) {
+            LOGDEBUG("collision!");
+        }
     }
 } // enginea

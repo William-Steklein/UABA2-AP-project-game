@@ -31,6 +31,8 @@ namespace game {
 
         void createWall(const engine::Vector2f &position, float size = 0.5);
 
+        void updateCollisions();
+
     private:
         std::shared_ptr<Player> _player;
         std::vector<std::shared_ptr<Wall>> _walls;

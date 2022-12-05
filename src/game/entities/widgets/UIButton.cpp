@@ -8,10 +8,10 @@ namespace game {
                        const std::vector<std::shared_ptr<engine::IComponent>> &components)
             : engine::UIEntity(std::move(transform), components),
               _mouse_position(std::move(mouse_position)),
-              _hit_box(std::make_shared<engine::HitBox>(engine::HitBox(getPosition(), hit_box_size))),
+              _hit_box(std::make_shared<engine::HitBox>(engine::HitBox(hit_box_size))),
               _state(BUTTON_INACTIVE),
               _animated_sprite(std::move(animated_sprite)) {
-        addComponent(_animated_sprite);
+        addComponents({_animated_sprite, _hit_box});
 
         reset();
     }

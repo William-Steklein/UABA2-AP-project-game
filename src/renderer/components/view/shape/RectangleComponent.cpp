@@ -8,7 +8,9 @@ namespace renderer {
         updateRectangleRender();
     }
 
-    void RectangleComponent::update(double t, float dt, engine::Transform &transform) {
+    void RectangleComponent::update(double t, float dt) {
+        std::shared_ptr<engine::Transform> transform = getTransform();
+
         if (_camera.expired()) {
             throw std::runtime_error("A view component has no camera");
         }
@@ -17,17 +19,17 @@ namespace renderer {
         sf::FloatRect sf_rect = _rectangle_render->getLocalBounds();
         _rectangle_render->setOrigin(sf_rect.left + sf_rect.width / 2, sf_rect.top + sf_rect.height / 2);
 
-        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(transform.position,
+        engine::Vector2f screen_position = camera_shared->projectCoordWorldToSubScreen(transform->position,
                                                                                        _project_ui_space);
         _rectangle_render->setPosition(screen_position.x, screen_position.y);
 
         engine::Vector2f screen_size = camera_shared->projectSizeWorldToSubScreen(_size);
         _rectangle_render->setSize({screen_size.x, screen_size.y});
 
-        engine::Vector2f camera_scale = transform.scale;
+        engine::Vector2f camera_scale = transform->scale;
         _rectangle_render->setScale(camera_scale.x, camera_scale.y);
 
-        _rectangle_render->setRotation(engine::toDegree(transform.rotation));
+        _rectangle_render->setRotation(engine::toDegree(transform->rotation));
     }
 
     const std::shared_ptr<sf::RectangleShape> &RectangleComponent::getRectangleRender() const {

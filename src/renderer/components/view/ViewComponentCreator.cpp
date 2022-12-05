@@ -8,7 +8,7 @@ namespace renderer {
 
     std::shared_ptr<engine::ILineComponent> ViewComponentCreator::createLine(
             const engine::Vector2f &size, unsigned int layer, bool project_ui_space) {
-        return std::shared_ptr<engine::ILineComponent>();
+        return {};
     }
 
     std::shared_ptr<engine::IShapeComponent> ViewComponentCreator::createRectangle(
