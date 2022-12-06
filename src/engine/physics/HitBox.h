@@ -28,6 +28,8 @@ namespace engine {
 
         bool collides(HitBox &other);
 
+        Vector2f getDisplacementToCollision(HitBox &other);
+
     private:
         Vector2f _size;
         Vector2f _offset;

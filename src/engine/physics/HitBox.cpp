@@ -49,4 +49,27 @@ namespace engine {
                position.y - size.y / 2 < position_other.y + size_other.y / 2 &&
                position.y + size.y / 2 > position_other.y - size_other.y / 2;
     }
+
+    Vector2f HitBox::getDisplacementToCollision(HitBox &other) {
+        Vector2f displacement;
+
+        Vector2f position = getTransform()->position;
+        Vector2f size = getScaledSize();
+        Vector2f position_other = other.getTransform()->position;
+        Vector2f size_other = other.getScaledSize();
+
+        if (position.x < position_other.x) {
+            displacement.x = position_other.x - (size_other.x / 2) - (position.x + (size.x / 2));
+        } else {
+            displacement.x = position_other.x + (size_other.x / 2) - (position.x - (size.x / 2));
+        }
+
+        if (position.y < position_other.y) {
+            displacement.y = position_other.y - (size_other.y / 2) - (position.y + (size.y / 2));
+        } else {
+            displacement.y = position_other.y + (size_other.y / 2) - (position.y - (size.y / 2));
+        }
+
+        return displacement;
+    }
 } // engine

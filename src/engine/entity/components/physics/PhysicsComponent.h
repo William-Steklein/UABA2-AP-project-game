@@ -47,7 +47,7 @@ namespace engine {
 
         void setCollided(bool collided);
 
-        void handleCollision(PhysicsComponent &other);
+        void handleCollision(PhysicsComponent &other, bool resolve = true, bool set_collided = true);
 
     private:
         float _mass;
@@ -59,6 +59,8 @@ namespace engine {
 
         bool _is_static;
         bool _collided;
+
+        void resolveCollision(PhysicsComponent &other);
     };
 
 } // engine

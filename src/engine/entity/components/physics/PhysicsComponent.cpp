@@ -1,5 +1,6 @@
 #include "PhysicsComponent.h"
 #include "engine/logging/Logger.h"
+#include "engine/math/math_utils.h"
 
 namespace engine {
     PhysicsComponent::PhysicsComponent(bool is_static)
@@ -17,10 +18,9 @@ namespace engine {
         // force acceleration
         _acceleration += _force / _mass;
 
-        // position(t): position + velocity * timestep + (acceleration / 2 * timestep^2)
-        transform->move(_velocity * dt + _acceleration / 2 * dt * dt);
-        // verlet integration
+        // semi-implicit euler
         _velocity += _acceleration * dt;
+        transform->move(_velocity * dt);
 
         // clear force and acceleration
         _force = {0, 0};
@@ -91,9 +91,76 @@ namespace engine {
         return _hit_box;
     }
 
-    void PhysicsComponent::handleCollision(PhysicsComponent &other) {
+    void PhysicsComponent::handleCollision(PhysicsComponent &other, bool resolve, bool set_collided) {
         if (_hit_box->collides(*other.getHitBox())) {
-            LOGDEBUG("collision!");
+            if (set_collided) {
+                setCollided(true);
+                other.setCollided(true);
+            }
+
+            if (resolve) {
+                resolveCollision(other);
+            }
+        }
+    }
+
+    void PhysicsComponent::resolveCollision(PhysicsComponent &other) {
+        Vector2f displacement = _hit_box->getDisplacementToCollision(*other.getHitBox());
+        Vector2f move_vector;
+
+        Vector2f new_velocity_this = _velocity;
+        Vector2f new_velocity_other = other._velocity;
+
+        if (std::abs(displacement.x) == std::abs(displacement.y)) {
+            move_vector = {displacement.x, displacement.y};
+        } else if (std::abs(displacement.x) < std::abs(displacement.y)) {
+            move_vector = {displacement.x, 0};
+
+            new_velocity_this.x = 0;
+            new_velocity_other.x = 0;
+        } else {
+            move_vector = {0, displacement.y};
+
+            new_velocity_this.y = 0;
+            new_velocity_other.y = 0;
+        }
+
+        if (!_is_static && other._is_static) {
+            // this is dynamic
+            getTransform()->move(move_vector);
+            _velocity = new_velocity_this;
+
+        } else if (_is_static && !other._is_static) {
+            // other is dynamic
+            other.getTransform()->move(move_vector * -1);
+            other._velocity = new_velocity_other;
+
+        } else if (!_is_static && !other._is_static) {
+            // TODO: improve this
+            // both are dynamic
+            float alpha;
+
+            if (other._mass < _mass) {
+                alpha = other._mass / _mass;
+            } else {
+                alpha = 1 - (_mass / other._mass);
+            }
+
+            getTransform()->move(lerp({0, 0}, move_vector, alpha));
+            other.getTransform()->move(lerp({0, 0}, move_vector * -1, 1 - alpha));
+
+            Vector2f new_velocity;
+
+            if (_velocity.length() + other._velocity.length() < (_velocity + other._velocity).length()) {
+                new_velocity = _velocity + other._velocity;
+            } else {
+                new_velocity = _velocity.length() > other._velocity.length() ? _velocity : other._velocity;
+            }
+
+            _velocity = new_velocity;
+            other._velocity = new_velocity;
+        } else {
+            throw std::runtime_error("Collisions between two dynamic objects are not supported");
         }
     }
 } // enginea
