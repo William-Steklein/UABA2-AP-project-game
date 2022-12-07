@@ -3,7 +3,7 @@
 
 
 #include <engine/entity/ui/UIEntity.h>
-#include <engine/physics/HitBox.h>
+#include "engine/entity/components/physics/HitBox.h"
 #include <engine/entity/components/view/sprite/IAnimatedSpriteComponent.h>
 
 #include "game/input/InputEvent.h"

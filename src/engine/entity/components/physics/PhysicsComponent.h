@@ -3,7 +3,7 @@
 
 
 #include "engine/entity/components/IComponent.h"
-#include "engine/physics/HitBox.h"
+#include "HitBox.h"
 
 namespace engine {
 

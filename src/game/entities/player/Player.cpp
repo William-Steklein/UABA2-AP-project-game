@@ -20,6 +20,12 @@ namespace game {
         addComponent(hit_box);
         _physics_component->setHitBox(hit_box);
 
+        _standing_ray = std::make_shared<engine::Ray>(engine::Ray(
+                {-hit_box->getSize().x / 2, -hit_box->getSize().y / 2},
+                {hit_box->getSize().x / 2, -hit_box->getSize().y / 2}
+        ));
+        addComponent(_standing_ray, true);
+
         _rectangle->setSize(hit_box_size);
         _rectangle->setFillcolor({255, 0, 255, 100});
 

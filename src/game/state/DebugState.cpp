@@ -104,6 +104,10 @@ namespace game {
 
     void DebugState::updateCollisions() {
         for (const auto &wall: _walls) {
+            if (_player->_standing_ray->collides(*wall->getPhysicsComponent()->getHitBox())) {
+                LOGDEBUG("ray collision!");
+            }
+
             _player->_physics_component->handleCollision(*wall->getPhysicsComponent());
         }
     }
