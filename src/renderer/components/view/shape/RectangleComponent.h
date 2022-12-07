@@ -4,13 +4,13 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
-#include "engine/entity/components/view/shape/IShapeComponent.h"
+#include "engine/entity/components/view/shape/ILineComponent.h"
 
 namespace renderer {
 
-    class RectangleComponent : public engine::IShapeComponent {
+    class RectangleComponent : public engine::ILineComponent {
     public:
-        RectangleComponent(const engine::Vector2f &size, std::weak_ptr<engine::Camera> camera, bool project_ui_space);
+        RectangleComponent(std::weak_ptr<engine::Camera> camera, bool project_ui_space);
 
         ~RectangleComponent() = default;
 

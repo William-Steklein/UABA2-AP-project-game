@@ -28,6 +28,7 @@ namespace game {
 
         _rectangle->setSize(hit_box_size);
         _rectangle->setFillcolor({255, 0, 255, 100});
+//        _rectangle->setRelativeTransform({{0, -0.05}, {1, 1}, 0});
 
         _state = std::make_shared<IdleState>();
         _state->enter(*this);

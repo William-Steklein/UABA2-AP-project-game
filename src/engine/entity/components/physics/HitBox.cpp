@@ -2,8 +2,8 @@
 
 namespace engine {
     HitBox::HitBox(const Vector2f &size, const Vector2f &offset)
-            : _size(size), _offset(offset) {
-
+            : _size(size) {
+        setOffset(offset);
     }
 
     void HitBox::update(double t, float dt) {
@@ -23,11 +23,11 @@ namespace engine {
     }
 
     const Vector2f &HitBox::getOffset() const {
-        return _offset;
+        return _relative_transform.position;
     }
 
     void HitBox::setOffset(const Vector2f &offset) {
-        _offset = offset;
+        _relative_transform.position = offset;
     }
 
     bool HitBox::collides(const Vector2f &point) {

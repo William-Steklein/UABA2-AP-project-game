@@ -7,14 +7,24 @@ namespace renderer {
     }
 
     std::shared_ptr<engine::ILineComponent> ViewComponentCreator::createLine(
-            const engine::Vector2f &size, unsigned int layer, bool project_ui_space) {
-        return {};
+            unsigned int layer, bool project_ui_space, const engine::Vector2f &origin,
+            const engine::Vector2f &end) {
+        std::shared_ptr<RectangleComponent> line_component =
+                std::make_shared<RectangleComponent>(_camera, project_ui_space);
+
+        line_component->setLine(origin, end);
+
+        insertDrawable(line_component->getRectangleRender(), layer);
+
+        return line_component;
     }
 
     std::shared_ptr<engine::IShapeComponent> ViewComponentCreator::createRectangle(
             const engine::Vector2f &size, unsigned int layer, bool project_ui_space) {
         std::shared_ptr<RectangleComponent> rectangle_component =
-                std::make_shared<RectangleComponent>(size, _camera, project_ui_space);
+                std::make_shared<RectangleComponent>(_camera, project_ui_space);
+
+        rectangle_component->setSize(size);
 
         insertDrawable(rectangle_component->getRectangleRender(), layer);
 

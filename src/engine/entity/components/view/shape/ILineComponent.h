@@ -10,10 +10,9 @@ namespace engine {
 
     class ILineComponent : public IShapeComponent {
     public:
-        ILineComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space,
-                       const Vector2f &origin, const Vector2f &end);
+        ILineComponent(std::weak_ptr<Camera> camera, bool project_ui_space);
 
-        ~ILineComponent() = default;
+        ~ILineComponent() override = default;
 
         const Vector2f &getOrigin() const;
 
@@ -23,9 +22,19 @@ namespace engine {
 
         void setEnd(const Vector2f &end);
 
+        void setLine(const Vector2f &origin, const Vector2f &end);
+
         float getLineThickness() const;
 
         void setLineThickness(float line_thickness);
+
+        Vector2f getLineVector() const;
+
+        void updateLineSize();
+
+        Vector2f getPosition() override;
+
+        float getRotation() override;
 
     protected:
         Vector2f _origin;
@@ -34,7 +43,7 @@ namespace engine {
 
         float _shape_rotation;
 
-        float getShapeRotation();
+        void updateShapeRotation();
     };
 
 } // engine

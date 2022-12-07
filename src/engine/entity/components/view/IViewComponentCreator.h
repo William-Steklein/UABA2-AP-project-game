@@ -12,7 +12,7 @@ namespace engine {
     class IViewComponentCreator {
     public:
         virtual std::shared_ptr<engine::ILineComponent> createLine(
-                const engine::Vector2f &size, unsigned int layer, bool project_ui_space) = 0;
+                unsigned int layer, bool project_ui_space, const Vector2f &origin, const Vector2f &end) = 0;
 
         virtual std::shared_ptr<engine::IShapeComponent> createRectangle(
                 const engine::Vector2f &size, unsigned int layer, bool project_ui_space) = 0;

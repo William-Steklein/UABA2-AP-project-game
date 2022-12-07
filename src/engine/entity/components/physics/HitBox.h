@@ -32,7 +32,6 @@ namespace engine {
 
     private:
         Vector2f _size;
-        Vector2f _offset;
     };
 
 } // engine

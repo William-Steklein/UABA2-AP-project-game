@@ -1,11 +1,9 @@
 #include "ILineComponent.h"
 
 namespace engine {
-    ILineComponent::ILineComponent(const Vector2f &size, std::weak_ptr<Camera> camera, bool project_ui_space,
-                                   const Vector2f &origin, const Vector2f &end)
-            : IShapeComponent(size, std::move(camera), project_ui_space),
-            _origin(origin), _end(end), _line_thickness(0.01f),
-            _shape_rotation(getShapeRotation()) {
+    ILineComponent::ILineComponent(std::weak_ptr<Camera> camera, bool project_ui_space)
+            : IShapeComponent({0, 0}, std::move(camera), project_ui_space),
+            _line_thickness(0.01f), _shape_rotation(0) {
 
     }
 
@@ -15,6 +13,8 @@ namespace engine {
 
     void ILineComponent::setOrigin(const Vector2f &origin) {
         _origin = origin;
+        updateLineSize();
+        updateShapeRotation();
     }
 
     const Vector2f &ILineComponent::getEnd() const {
@@ -23,6 +23,15 @@ namespace engine {
 
     void ILineComponent::setEnd(const Vector2f &end) {
         _end = end;
+        updateLineSize();
+        updateShapeRotation();
+    }
+
+    void ILineComponent::setLine(const Vector2f &origin, const Vector2f &end) {
+        _origin = origin;
+        _end = end;
+        updateLineSize();
+        updateShapeRotation();
     }
 
     float ILineComponent::getLineThickness() const {
@@ -31,14 +40,30 @@ namespace engine {
 
     void ILineComponent::setLineThickness(float line_thickness) {
         _line_thickness = line_thickness;
+        _size.y = line_thickness;
     }
 
-    float ILineComponent::getShapeRotation() {
-        // dot product line vector with x-axis elementary vector
-        Vector2f line_vec = _end - _origin;
-        float line_vec_length = line_vec.length();
+    Vector2f ILineComponent::getLineVector() const {
+        return _end - _origin;
+    }
 
-        if (line_vec_length == 0) return 0;
-        return std::acos(line_vec.dotProduct({1, 0}) / line_vec_length);
+    void ILineComponent::updateLineSize() {
+        _size.x = (_end - _origin).length();
+        _size.y = _line_thickness;
+    }
+
+    void ILineComponent::updateShapeRotation() {
+        if (_size.x == 0) return;
+
+        // dot product line vector with x-axis elementary vector
+        _shape_rotation = std::acos(getLineVector().dotProduct({1, 0}) / _size.x);
+    }
+
+    Vector2f ILineComponent::getPosition() {
+        return IComponent::getPosition() + _origin + (getLineVector() / 2);
+    }
+
+    float ILineComponent::getRotation() {
+        return IComponent::getRotation() + _shape_rotation;
     }
 } // engine

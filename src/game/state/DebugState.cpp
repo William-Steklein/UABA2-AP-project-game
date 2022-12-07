@@ -20,6 +20,16 @@ namespace game {
 
         _entities.insert(_player);
 
+        std::shared_ptr<engine::ILineComponent> line_comp =
+                _game.getViewComponentCreator()->createLine(5, false, {0, 0}, {1, 1});
+
+        std::shared_ptr<engine::Entity> line_ent = std::make_shared<engine::Entity>(engine::Entity(
+                {},
+                {line_comp}
+        ));
+
+        _entities.insert(line_ent);
+
         createWall({1, 1}, 1);
 
         createWall({-1, -0.5});
@@ -105,7 +115,7 @@ namespace game {
     void DebugState::updateCollisions() {
         for (const auto &wall: _walls) {
             if (_player->_standing_ray->collides(*wall->getPhysicsComponent()->getHitBox())) {
-                LOGDEBUG("ray collision!");
+//                LOGDEBUG("ray collision!");
             }
 
             _player->_physics_component->handleCollision(*wall->getPhysicsComponent());

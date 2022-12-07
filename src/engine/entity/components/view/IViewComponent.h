@@ -26,6 +26,8 @@ namespace engine {
         Vector2f _size;
         std::weak_ptr<Camera> _camera;
         bool _project_ui_space;
+
+        Vector2f _offset;
     };
 
 } // engine

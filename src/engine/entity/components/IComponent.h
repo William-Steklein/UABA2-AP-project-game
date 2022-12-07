@@ -11,23 +11,29 @@ namespace engine {
 
     class IComponent {
     public:
-        IComponent() {}
+        IComponent() = default;
 
         virtual ~IComponent() = default;
 
-        void setTransform(std::weak_ptr<Transform> transform) {_transform = std::move(transform);}
+        std::shared_ptr<Transform> getTransform();
 
-        std::shared_ptr<Transform> getTransform() {
-            if (_transform.expired()) {
-                throw std::runtime_error("Component has no transform");
-            }
-            return _transform.lock();
-        }
+        void setTransform(std::weak_ptr<Transform> transform);
+
+        const Transform &getRelativeTransform() const;
+
+        void setRelativeTransform(const Transform &relativeTransform);
+
+        virtual Vector2f getPosition();
+
+        virtual Vector2f getScale();
+
+        virtual float getRotation();
 
         virtual void update(double t, float dt) = 0;
 
     protected:
         std::weak_ptr<Transform> _transform;
+        Transform _relative_transform;
     };
 
 } // engine

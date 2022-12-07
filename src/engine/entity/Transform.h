@@ -11,9 +11,11 @@ namespace engine {
         Vector2f scale;
         float rotation;
 
-        void move (const Vector2f &vector) {
-            position += vector;
-        }
+        Transform();
+
+        Transform(const Vector2f &new_position, const Vector2f &new_scale, float new_rotation);
+
+        void move(const Vector2f &vector);
     };
 
 } // engine

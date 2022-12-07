@@ -24,7 +24,8 @@ namespace renderer {
         ~ViewComponentCreator() = default;
 
         std::shared_ptr<engine::ILineComponent> createLine(
-                const engine::Vector2f &size, unsigned int layer, bool project_ui_space) final;
+                unsigned int layer, bool project_ui_space, const engine::Vector2f &origin,
+                const engine::Vector2f &end) final;
 
         std::shared_ptr<engine::IShapeComponent> createRectangle(
                 const engine::Vector2f &size, unsigned int layer, bool project_ui_space) final;
