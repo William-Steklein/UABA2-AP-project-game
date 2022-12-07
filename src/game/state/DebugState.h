@@ -33,9 +33,13 @@ namespace game {
 
         void updateCollisions();
 
+        void createDebugViewComponents();
+
     private:
         std::shared_ptr<Player> _player;
         std::vector<std::shared_ptr<Wall>> _walls;
+
+        std::vector<std::shared_ptr<engine::IViewComponent>> _debug_components;
     };
 
 } // game

@@ -19,7 +19,7 @@ namespace engine {
     }
 
     Vector2f HitBox::getScaledSize() {
-        return {_size.x * getTransform()->scale.x, _size.y * getTransform()->scale.y};
+        return {_size.x * getScale().x, _size.y * getScale().y};
     }
 
     const Vector2f &HitBox::getOffset() const {
@@ -31,7 +31,7 @@ namespace engine {
     }
 
     bool HitBox::collides(const Vector2f &point) {
-        Vector2f position = getTransform()->position;
+        Vector2f position = getPosition();
         Vector2f size = getScaledSize();
         
         return point.x < position.x + size.x / 2 && point.x > position.x - size.x / 2 &&
@@ -39,9 +39,9 @@ namespace engine {
     }
 
     bool HitBox::collides(HitBox &other) {
-        Vector2f position = getTransform()->position;
+        Vector2f position = getPosition();
         Vector2f size = getScaledSize();
-        Vector2f position_other = other.getTransform()->position;
+        Vector2f position_other = other.getPosition();
         Vector2f size_other = other.getScaledSize();
 
         return position.x - size.x / 2 < position_other.x + size_other.x / 2 &&
@@ -53,9 +53,9 @@ namespace engine {
     Vector2f HitBox::getDisplacementToCollision(HitBox &other) {
         Vector2f displacement;
 
-        Vector2f position = getTransform()->position;
+        Vector2f position = getPosition();
         Vector2f size = getScaledSize();
-        Vector2f position_other = other.getTransform()->position;
+        Vector2f position_other = other.getPosition();
         Vector2f size_other = other.getScaledSize();
 
         if (position.x < position_other.x) {

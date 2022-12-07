@@ -21,7 +21,7 @@ namespace engine {
     }
 
     Vector2f Ray::getAbsoluteOrigin() {
-        return getTransform()->position + _origin;
+        return getPosition() + _origin;
     }
 
     void Ray::setOrigin(const Vector2f &origin) {
@@ -33,7 +33,7 @@ namespace engine {
     }
 
     Vector2f Ray::getAbsoluteEnd() {
-        return getTransform()->position + _end;
+        return getPosition() + _end;
     }
 
     void Ray::setEnd(const Vector2f &end) {
@@ -105,6 +105,7 @@ namespace engine {
 
     bool Ray::collides(Ray &other, bool set_collision_point) {
         if (collides(other.getAbsoluteOrigin(), other.getAbsoluteOrigin(), set_collision_point)) {
+            setCollided(true);
             other.setCollided(true);
             return true;
         }
@@ -112,12 +113,23 @@ namespace engine {
     }
 
     bool Ray::collides(HitBox &other, bool set_collision_point) {
-        Vector2f h0 = other.getTransform()->position - other.getSize() / 2;
-        Vector2f h1 = {h0.x + other.getSize().x, h0.y};
-        Vector2f h2 = {h0.x + other.getSize().x, h0.y + other.getSize().y};
-        Vector2f h3 = {h0.x, h0.y + other.getSize().y};
+        if (set_collision_point) {
+            Vector2f h0 = other.getTransform()->position - other.getSize() / 2;
+            Vector2f h1 = {h0.x + other.getSize().x, h0.y};
+            Vector2f h2 = {h0.x + other.getSize().x, h0.y + other.getSize().y};
+            Vector2f h3 = {h0.x, h0.y + other.getSize().y};
 
-        return collides(h0, h1, set_collision_point) || collides(h1, h2, set_collision_point) ||
-               collides(h2, h3, set_collision_point) || collides(h3, h0, set_collision_point);
+            collides(h0, h1, set_collision_point);
+            collides(h1, h2, set_collision_point);
+            collides(h2, h3, set_collision_point);
+            collides(h3, h0, set_collision_point);
+        }
+
+        if (other.collides(getAbsoluteOrigin()) || other.collides(getAbsoluteEnd())) {
+            setCollided(true);
+            return true;
+        }
+
+        return false;
     }
 } // engine

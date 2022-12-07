@@ -14,21 +14,10 @@ namespace game {
 
         _player = std::make_shared<Player>(Player(
                 {{0, 0}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createAnimatedSprite({0.50f, 0.37f}, 1, false, "adventurer"),
-                _game.getViewComponentCreator()->createRectangle({0.50f, 0.37f}, 2, false)
+                _game.getViewComponentCreator()->createAnimatedSprite({0.50f, 0.37f}, 1, false, "adventurer")
         ));
 
         _entities.insert(_player);
-
-        std::shared_ptr<engine::ILineComponent> line_comp =
-                _game.getViewComponentCreator()->createLine(5, false, {0, 0}, {1, 1});
-
-        std::shared_ptr<engine::Entity> line_ent = std::make_shared<engine::Entity>(engine::Entity(
-                {},
-                {line_comp}
-        ));
-
-        _entities.insert(line_ent);
 
         createWall({1, 1}, 1);
 
@@ -41,6 +30,8 @@ namespace game {
         createWall({0.5, -0.5});
         createWall({0.75, -0.5});
         createWall({1, -0.5});
+
+        createDebugViewComponents();
     }
 
     void DebugState::resume() {
@@ -63,6 +54,10 @@ namespace game {
         _game.getCamera()->setPosition(_player->getPosition());
 
         IGameState::graphicsUpdate(t, dt);
+
+        for (const auto &component: _debug_components) {
+            component->update(t, dt);
+        }
     }
 
     void DebugState::handleInput(const InputEvent &input) {
@@ -114,11 +109,38 @@ namespace game {
 
     void DebugState::updateCollisions() {
         for (const auto &wall: _walls) {
-            if (_player->_standing_ray->collides(*wall->getPhysicsComponent()->getHitBox())) {
-//                LOGDEBUG("ray collision!");
-            }
+            _player->_standing_ray->collides(*wall->getPhysicsComponent()->getHitBox());
 
             _player->_physics_component->handleCollision(*wall->getPhysicsComponent());
+        }
+    }
+
+    void DebugState::createDebugViewComponents() {
+        // player
+        std::shared_ptr<engine::IShapeComponent> player_rectangle = _game.getViewComponentCreator()->createRectangle(
+                _player->_physics_component->getHitBox()->getSize(), 2, false);
+        player_rectangle->setFillcolor({255, 0, 255, 100});
+        player_rectangle->setRelativeTransform(_player->_physics_component->getHitBox()->getRelativeTransform());
+        player_rectangle->setTransform(_player->getTransform());
+
+        _debug_components.push_back(player_rectangle);
+
+        std::shared_ptr<engine::ILineComponent> player_line =
+                _game.getViewComponentCreator()->createLine(5, false, _player->_standing_ray->getOrigin(),
+                                                            _player->_standing_ray->getEnd());
+        player_line->setFillcolor({255, 255, 128});
+        player_line->setTransform(_player->getTransform());
+
+        _debug_components.push_back(player_line);
+
+        // walls
+        for (const auto &wall: _walls) {
+            std::shared_ptr<engine::IShapeComponent> wall_rectangle = _game.getViewComponentCreator()->createRectangle(
+                    wall->getPhysicsComponent()->getHitBox()->getSize(), 2, false);
+            wall_rectangle->setFillcolor({0, 255, 255, 200});
+            wall_rectangle->setTransform(wall->getTransform());
+
+            _debug_components.push_back(wall_rectangle);
         }
     }
 } // game
