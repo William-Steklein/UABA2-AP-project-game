@@ -18,7 +18,6 @@ namespace game {
     public:
         std::shared_ptr<engine::IAnimatedSpriteComponent> _animated_sprite;
         std::shared_ptr<engine::PhysicsComponent> _physics_component;
-//        std::shared_ptr<engine::IShapeComponent> _rectangle;
 
         std::shared_ptr<engine::Ray> _standing_ray;
         std::shared_ptr<engine::Ray> _left_wall_slide_ray;
@@ -28,6 +27,8 @@ namespace game {
                std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite);
 
         ~Player() override = default;
+
+        void physicsUpdate(double t, float dt) override;
 
         void graphicsUpdate(double t, float dt) override;
 

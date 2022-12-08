@@ -16,6 +16,8 @@ namespace game {
         config.button_map.keyboard[engine::Input::Button::ENTER] = game::InputEvent::Type::ACCEPT;
         config.button_map.keyboard[engine::Input::Button::ESCAPE] = game::InputEvent::Type::RETURN;
 
+        config.button_map.keyboard[engine::Input::Button::H] = game::InputEvent::Type::DEBUGVIEW;
+
         nlohmann::json c_map = j["button_map"]["controller"];
 
         nlohmann::json video = j["video"];

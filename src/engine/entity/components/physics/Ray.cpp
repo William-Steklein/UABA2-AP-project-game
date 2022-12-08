@@ -3,7 +3,7 @@
 
 namespace engine {
     Ray::Ray(const Vector2f &origin, const Vector2f &end)
-            : _origin(origin), _end(end) {
+            : _origin(origin), _end(end), _collided(false) {
 
     }
 

@@ -3,7 +3,7 @@
 
 namespace game {
 
-    DebugState::DebugState(Game &game) : IGameState(game) {
+    DebugState::DebugState(Game &game) : IGameState(game), _debug_view_visibility(false) {
 
     }
 
@@ -67,6 +67,11 @@ namespace game {
                     _game.pushState(std::make_shared<OverlayMenuState>(_game));
                 }
 
+            case InputEvent::Type::DEBUGVIEW:
+                if (!input.state_enter) {
+                    toggleDebugViewVisibility();
+                }
+
             default:
                 break;
         }
@@ -100,8 +105,8 @@ namespace game {
         unsigned int layer = 2;
 
         _walls.push_back(std::make_shared<Wall>(Wall(
-                {position, {size, size}, 0},
-                _game.getViewComponentCreator()->createSprite({0.5f, 0.5f}, layer, false, "pr_ground_2")
+                {position, {1, 1}, 0},
+                _game.getViewComponentCreator()->createSprite({size, size}, layer, false, "pr_ground_2")
         )));
 
         _entities.insert(_walls.back());
@@ -109,9 +114,11 @@ namespace game {
 
     void DebugState::updateCollisions() {
         for (const auto &wall: _walls) {
-            _player->_standing_ray->collides(*wall->getPhysicsComponent()->getHitBox());
-
             _player->_physics_component->handleCollision(*wall->getPhysicsComponent());
+
+            _player->_standing_ray->collides(*wall->getPhysicsComponent()->getHitBox());
+            _player->_left_wall_slide_ray->collides(*wall->getPhysicsComponent()->getHitBox());
+            _player->_right_wall_slide_ray->collides(*wall->getPhysicsComponent()->getHitBox());
         }
     }
 
@@ -122,16 +129,36 @@ namespace game {
         player_rectangle->setFillcolor({255, 0, 255, 100});
         player_rectangle->setRelativeTransform(_player->_physics_component->getHitBox()->getRelativeTransform());
         player_rectangle->setTransform(_player->getTransform());
+        player_rectangle->setVisible(_debug_view_visibility);
 
         _debug_components.push_back(player_rectangle);
 
-        std::shared_ptr<engine::ILineComponent> player_line =
+        std::shared_ptr<engine::ILineComponent> player_standing_line =
                 _game.getViewComponentCreator()->createLine(5, false, _player->_standing_ray->getOrigin(),
                                                             _player->_standing_ray->getEnd());
-        player_line->setFillcolor({255, 255, 128});
-        player_line->setTransform(_player->getTransform());
+        player_standing_line->setFillcolor({255, 255, 128});
+        player_standing_line->setTransform(_player->getTransform());
+        player_standing_line->setVisible(_debug_view_visibility);
 
-        _debug_components.push_back(player_line);
+        _debug_components.push_back(player_standing_line);
+
+        std::shared_ptr<engine::ILineComponent> player_left_wall_slide_line =
+                _game.getViewComponentCreator()->createLine(5, false, _player->_left_wall_slide_ray->getOrigin(),
+                                                            _player->_left_wall_slide_ray->getEnd());
+        player_left_wall_slide_line->setFillcolor({192, 255, 140});
+        player_left_wall_slide_line->setTransform(_player->getTransform());
+        player_left_wall_slide_line->setVisible(_debug_view_visibility);
+
+        _debug_components.push_back(player_left_wall_slide_line);
+
+        std::shared_ptr<engine::ILineComponent> player_right_wall_slide_line =
+                _game.getViewComponentCreator()->createLine(5, false, _player->_right_wall_slide_ray->getOrigin(),
+                                                            _player->_right_wall_slide_ray->getEnd());
+        player_right_wall_slide_line->setFillcolor({192, 255, 140});
+        player_right_wall_slide_line->setTransform(_player->getTransform());
+        player_right_wall_slide_line->setVisible(_debug_view_visibility);
+
+        _debug_components.push_back(player_right_wall_slide_line);
 
         // walls
         for (const auto &wall: _walls) {
@@ -139,8 +166,17 @@ namespace game {
                     wall->getPhysicsComponent()->getHitBox()->getSize(), 2, false);
             wall_rectangle->setFillcolor({0, 255, 255, 200});
             wall_rectangle->setTransform(wall->getTransform());
+            wall_rectangle->setVisible(_debug_view_visibility);
 
             _debug_components.push_back(wall_rectangle);
+        }
+    }
+
+    void DebugState::toggleDebugViewVisibility() {
+        _debug_view_visibility = !_debug_view_visibility;
+
+        for (auto &component: _debug_components) {
+            component->setVisible(_debug_view_visibility);
         }
     }
 } // game

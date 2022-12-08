@@ -22,10 +22,17 @@ namespace engine {
 
         void setCamera(const std::weak_ptr<Camera> &camera);
 
+        bool isVisible() const;
+
+        void setVisible(bool visible);
+
+        Vector2f getScale() override;
+
     protected:
         Vector2f _size;
         std::weak_ptr<Camera> _camera;
         bool _project_ui_space;
+        bool _visible;
 
         Vector2f _offset;
     };

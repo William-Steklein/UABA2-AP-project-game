@@ -23,6 +23,8 @@ namespace game {
 
             MOUSEMOVED,
             MOUSECLICK,
+
+            DEBUGVIEW,
         };
 
         Type type;
