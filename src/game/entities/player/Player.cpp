@@ -1,15 +1,60 @@
 #include "Player.h"
-#include "game/entities/player/IdleState.h"
+#include "game/entities/player/state/IdleState.h"
 
 namespace game {
     Player::Player(engine::Transform transform,
                    std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite)
             : engine::Entity(std::move(transform)),
               _animated_sprite(std::move(animated_sprite)),
-              _physics_component(std::make_shared<engine::PhysicsComponent>(false)) {
+              _physics_component(std::make_shared<PlayerPhysicsComponent>()) {
         addComponents({_animated_sprite}, false);
         addComponent(_physics_component, true);
 
+        createHitBoxAndRays();
+
+        _state = std::make_shared<IdleState>();
+        _state->enter(*this);
+    }
+
+    void Player::setState(std::shared_ptr<IPlayerState> state) {
+        if (state != nullptr) {
+            _state = std::move(state);
+            _state->enter(*this);
+        }
+    }
+
+    void Player::physicsUpdate(double t, float dt) {
+        _state->physicsUpdate(*this);
+
+        if (_standing_ray->collided()) {
+            _standing_ray->reset();
+//            LOGDEBUG("standing ray collision!");
+        }
+
+        if (_left_wall_slide_ray->collided()) {
+            _left_wall_slide_ray->reset();
+//            LOGDEBUG("left wall slide ray collision!");
+        }
+
+        if (_right_wall_slide_ray->collided()) {
+            _right_wall_slide_ray->reset();
+//            LOGDEBUG("right wall slide ray collision!");
+        }
+
+        engine::Entity::physicsUpdate(t, dt);
+    }
+
+    void Player::graphicsUpdate(double t, float dt) {
+        _state->graphicsUpdate(*this);
+
+        Entity::graphicsUpdate(t, dt);
+    }
+
+    void Player::handleInput(const InputEvent &input) {
+        _state->handleInput(*this, input);
+    }
+
+    void Player::createHitBoxAndRays() {
         engine::Vector2f hit_box_size = _animated_sprite->getSize();
         hit_box_size.x = hit_box_size.x * 0.3f;
         hit_box_size.y = hit_box_size.y * 0.8f;
@@ -44,45 +89,14 @@ namespace game {
                  hit_box->getRelativeTransform().position.y + (hit_box->getSize().y / 2) * 0.99f}
         ));
         addComponent(_right_wall_slide_ray, true);
-
-        _state = std::make_shared<IdleState>();
-        _state->enter(*this);
     }
 
-    void Player::physicsUpdate(double t, float dt) {
-        if (_standing_ray->isCollided()) {
-            _standing_ray->reset();
-
-            LOGDEBUG("standing ray collision!");
-        }
-
-        if (_left_wall_slide_ray->isCollided()) {
-            _left_wall_slide_ray->reset();
-
-            LOGDEBUG("left wall slide ray collision!");
-        }
-
-        if (_right_wall_slide_ray->isCollided()) {
-            _right_wall_slide_ray->reset();
-
-            LOGDEBUG("right wall slide ray collision!");
-        }
-
-        engine::Entity::physicsUpdate(t, dt);
+    void Player::updateDirection(Player::Direction direction) {
+        _direction = direction;
+        _animated_sprite->setMirrorH(_direction == Direction::LEFT);
     }
 
-    void Player::graphicsUpdate(double t, float dt) {
-        _state->update(*this);
-
-        Entity::graphicsUpdate(t, dt);
-    }
-
-    void Player::handleInput(const InputEvent &input) {
-        std::shared_ptr<IPlayerState> state = _state->handleInput(*this, input);
-
-        if (state != nullptr) {
-            _state = state;
-            _state->enter(*this);
-        }
+    bool Player::isFacingLeft() {
+        return _direction == Direction::LEFT;
     }
 } // game

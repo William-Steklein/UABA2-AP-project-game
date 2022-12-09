@@ -28,7 +28,7 @@ namespace engine {
 
         void setEnd(const Vector2f &end);
 
-        bool isCollided() const;
+        bool collided() const;
 
         void setCollided(bool collided);
 

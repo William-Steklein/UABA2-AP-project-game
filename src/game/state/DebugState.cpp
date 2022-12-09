@@ -1,5 +1,6 @@
 #include "DebugState.h"
 #include "game/state/OverlayMenuState.h"
+#include "game/constants/constants.h"
 
 namespace game {
 
@@ -13,14 +14,16 @@ namespace game {
         generateBackground({0, 0}, {5, 5}, {0.5, 0.5});
 
         _player = std::make_shared<Player>(Player(
-                {{0, 0}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createAnimatedSprite({0.50f, 0.37f}, 1, false, "adventurer")
+                {{0, 1}, {1, 1}, 0},
+                _game.getViewComponentCreator()->createAnimatedSprite(constants::player::view_size, 1, false, "adventurer")
         ));
 
         _entities.insert(_player);
 
         createWall({1, 1}, 1);
 
+        createWall({-1.5, -0.5});
+        createWall({-1.25, -0.5});
         createWall({-1, -0.5});
         createWall({-0.75, -0.5});
         createWall({-0.5, -0.5});
@@ -30,6 +33,8 @@ namespace game {
         createWall({0.5, -0.5});
         createWall({0.75, -0.5});
         createWall({1, -0.5});
+        createWall({1.25, -0.5});
+        createWall({1.5, -0.5});
 
         createDebugViewComponents();
     }
@@ -41,6 +46,7 @@ namespace game {
     void DebugState::reset() {
         _player = nullptr;
         _walls.clear();
+        _debug_components.clear();
         IGameState::reset();
     }
 
@@ -67,10 +73,14 @@ namespace game {
                     _game.pushState(std::make_shared<OverlayMenuState>(_game));
                 }
 
+                break;
+
             case InputEvent::Type::DEBUGVIEW:
                 if (!input.state_enter) {
                     toggleDebugViewVisibility();
                 }
+
+                break;
 
             default:
                 break;

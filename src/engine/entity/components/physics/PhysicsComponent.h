@@ -49,7 +49,7 @@ namespace engine {
 
         void handleCollision(PhysicsComponent &other, bool resolve = true, bool set_collided = true);
 
-    private:
+    protected:
         float _mass;
         Vector2f _force;
         Vector2f _velocity;

@@ -1,5 +1,6 @@
 #include "game/Game.h"
 #include "game/state/MenuState.h"
+#include "game/state/DebugState.h"
 
 namespace game {
     Game::Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
@@ -14,7 +15,7 @@ namespace game {
         loadResources();
         _config = parseConfig("data/config_default.json");
 
-        pushState(std::move(std::make_shared<MenuState>(*this)));
+        pushState(std::move(std::make_shared<DebugState>(*this)));
     }
 
     void Game::update() {
@@ -72,7 +73,9 @@ namespace game {
             getState()->pause();
         }
         _states.push(state);
-        _states.top()->enter();
+
+        getState()->enter();
+        graphicsUpdateState();
     }
 
     void Game::popState() {
@@ -93,7 +96,9 @@ namespace game {
 
     void Game::popAndResetState() {
         popState();
+
         getState()->reset();
+        graphicsUpdateState();
     }
 
     std::shared_ptr<IGameState> Game::getState() const {
@@ -104,6 +109,11 @@ namespace game {
         getState()->graphicsUpdate(t, dt);
 
         Engine::graphicsUpdate(t, dt);
+    }
+
+    void Game::graphicsUpdateState() const {
+        getState()->graphicsUpdate(engine::Stopwatch::getInstance().getTime(),
+                                   engine::Stopwatch::getInstance().getDeltaTime());
     }
 
     void Game::physicsUpdate(double t, float dt) {

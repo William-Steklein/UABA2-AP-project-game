@@ -40,7 +40,7 @@ namespace engine {
         _end = end;
     }
 
-    bool Ray::isCollided() const {
+    bool Ray::collided() const {
         return _collided;
     }
 

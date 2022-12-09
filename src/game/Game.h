@@ -44,6 +44,8 @@ namespace game {
     private:
         void graphicsUpdate(double t, float dt) override;
 
+        void graphicsUpdateState() const;
+
         void physicsUpdate(double t, float dt) override;
 
         void loadResources();
