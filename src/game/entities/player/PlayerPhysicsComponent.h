@@ -21,11 +21,12 @@ namespace game {
 
         void applyHorizontalMovementForce(bool left);
 
-        void jump();
+        void jump(bool wall_jump = false, bool left = false);
 
     private:
         engine::Vector2f _gravitational_acceleration;
         float _initial_jump_velocity;
+        float _wall_horizontal_jump_velocity;
         float _horizontal_movement_force;
     };
 

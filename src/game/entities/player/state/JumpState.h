@@ -8,13 +8,16 @@ namespace game {
 
     class JumpState : public InAirState {
     public:
-        JumpState() = default;
+        JumpState(bool wall_jump = false);
 
         ~JumpState() override = default;
 
+        void enter(Player &player) override;
+
         void physicsUpdate(game::Player &player) override;
 
-        void enter(Player &player) override;
+    private:
+        bool _wall_jump;
     };
 
 } // game

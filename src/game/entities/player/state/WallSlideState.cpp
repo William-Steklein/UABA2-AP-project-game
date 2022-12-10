@@ -1,6 +1,7 @@
 #include "WallSlideState.h"
 #include "FallState.h"
 #include "IdleState.h"
+#include "JumpState.h"
 
 namespace game {
     void WallSlideState::enter(Player &player) {
@@ -35,20 +36,8 @@ namespace game {
             player.setState(std::make_shared<FallState>());
         }
 
-
-        if (input.state_enter) {
-            switch (input.type) {
-                case InputEvent::Type::LEFT:
-                    player.updateDirection(Player::Direction::LEFT);
-                    break;
-
-                case InputEvent::Type::RIGHT:
-                    player.updateDirection(Player::Direction::RIGHT);
-                    break;
-
-                default:
-                    break;
-            }
+        if (input.type == InputEvent::Type::JUMP) {
+            player.setState(std::make_shared<JumpState>(true));
         }
 
 //        IPlayerState::handleInput(player, input);
