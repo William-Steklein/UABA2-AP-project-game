@@ -18,8 +18,8 @@ namespace game {
         PhysicsComponent::update(t, dt);
     }
 
-    void PlayerPhysicsComponent::applyGravityForce() {
-        _acceleration += _gravitational_acceleration;
+    void PlayerPhysicsComponent::applyGravityForce(float multiply) {
+        _acceleration += _gravitational_acceleration * multiply;
     }
 
     void PlayerPhysicsComponent::applyHorizontalMovementForce(bool left) {

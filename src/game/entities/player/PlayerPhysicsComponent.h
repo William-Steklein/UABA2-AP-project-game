@@ -17,7 +17,7 @@ namespace game {
 
         void update(double t, float dt) override;
 
-        void applyGravityForce();
+        void applyGravityForce(float multiply = 1.f);
 
         void applyHorizontalMovementForce(bool left);
 

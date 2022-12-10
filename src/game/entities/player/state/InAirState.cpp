@@ -1,16 +1,21 @@
 #include "InAirState.h"
 #include "IdleState.h"
+#include "WallSlideState.h"
 
 namespace game {
     void InAirState::physicsUpdate(Player &player) {
-        // TODO: wall slide stuff
-
         // gravity
         player._physics_component->applyGravityForce();
 
         // air movement
         if (_h_movement) {
             player._physics_component->applyHorizontalMovementForce(player.isFacingLeft());
+        }
+
+        // wall slide
+        if (player.isFacingLeft() && player._left_wall_slide_ray->collided() ||
+            !player.isFacingLeft() && player._right_wall_slide_ray->collided()) {
+            player.setState(std::make_shared<WallSlideState>());
         }
 
         // standing

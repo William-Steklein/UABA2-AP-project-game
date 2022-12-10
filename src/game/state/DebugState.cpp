@@ -20,7 +20,7 @@ namespace game {
 
         _entities.insert(_player);
 
-        createWall({1, 1}, 1);
+        createWall({1, 0.125}, 1);
 
         createWall({-1.5, -0.5});
         createWall({-1.25, -0.5});
