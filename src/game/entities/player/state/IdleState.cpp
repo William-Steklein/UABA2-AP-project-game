@@ -1,14 +1,14 @@
 #include "IdleState.h"
 #include "RunState.h"
-#include "CrouchState.h"
 
 namespace game {
     void IdleState::enter(Player &player) {
         player._animated_sprite->start("idle", true, player.isFacingLeft());
-        player._physics_component->setVelocity({0, 0});
     }
 
     void IdleState::physicsUpdate(game::Player &player) {
+        player._physics_component->applyStoppingFrictionForce();
+
         OnGroundState::physicsUpdate(player);
     }
 
@@ -25,11 +25,6 @@ namespace game {
                 }
 
                 break;
-
-            case InputEvent::Type::DOWN:
-                if (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE) {
-                    player.setState(std::make_shared<CrouchState>());
-                }
 
             default:
                 break;

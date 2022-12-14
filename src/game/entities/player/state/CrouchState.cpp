@@ -4,7 +4,12 @@
 namespace game {
     void CrouchState::enter(Player &player) {
         player._animated_sprite->start("crouch", true, player.isFacingLeft());
-        player._physics_component->setVelocity({0, 0});
+    }
+
+    void CrouchState::physicsUpdate(Player &player) {
+        player._physics_component->applyStoppingFrictionForce();
+
+        OnGroundState::physicsUpdate(player);
     }
 
     void CrouchState::handleInput(Player &player, const InputEvent &input) {

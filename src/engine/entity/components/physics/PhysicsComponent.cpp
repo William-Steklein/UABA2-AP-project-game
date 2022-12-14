@@ -6,7 +6,7 @@ namespace engine {
     PhysicsComponent::PhysicsComponent(bool is_static)
             : _mass(1),
               _hit_box(std::make_shared<HitBox>(HitBox({0, 0}, {0, 0}))),
-              _is_static(is_static), _collided(false) {
+              _is_static(is_static), _collided(false), _horizontal_velocity_cap({0, 0}), _vertical_velocity_cap({0, 0}) {
 
     }
 
@@ -20,7 +20,18 @@ namespace engine {
 
         // semi-implicit euler
         _velocity += _acceleration * dt;
+
+        clampVelocity();
+
         transform->move(_velocity * dt);
+
+        // remove small velocities
+        // todo: make epsilon a constant
+        float epsilon = 1.e-4f;
+        if (_velocity.x < epsilon && _velocity.x > -epsilon)
+            _velocity.x = 0;
+        if (_velocity.y < epsilon && _velocity.y > -epsilon)
+            _velocity.y = 0;
 
         // clear force and acceleration
         _force = {0, 0};
@@ -162,5 +173,10 @@ namespace engine {
         } else {
             throw std::runtime_error("Collisions between two dynamic objects are not supported");
         }
+    }
+
+    void PhysicsComponent::clampVelocity() {
+        _velocity = {engine::clamp(_velocity.x, _horizontal_velocity_cap.x, _horizontal_velocity_cap.y),
+                     engine::clamp(_velocity.y, _vertical_velocity_cap.x, _vertical_velocity_cap.y)};
     }
 } // enginea

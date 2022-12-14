@@ -7,7 +7,14 @@ namespace game {
     }
 
     void RunState::physicsUpdate(Player &player) {
+        // stopping friction when changing direction
+        if (player.isFacingLeft() && player._physics_component->getVelocity().x > 0 ||
+            !player.isFacingLeft() && player._physics_component->getVelocity().x < 0) {
+            player._physics_component->applyStoppingFrictionForce();
+        }
+
         player._physics_component->applyHorizontalMovementForce(player.isFacingLeft());
+
 
         OnGroundState::physicsUpdate(player);
     }

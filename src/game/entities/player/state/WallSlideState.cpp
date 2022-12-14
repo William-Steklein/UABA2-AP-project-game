@@ -10,10 +10,12 @@ namespace game {
 
         player._animated_sprite->start("wall_slide", true, player.isFacingLeft());
 
-//        if (player._physics_component->getVelocity().y > 0) {
-//            player._physics_component->setVelocity({0, 0});
-//        }
         player._physics_component->setVelocity({0, 0});
+        player._physics_component->setWallVelocityClamp(true);
+    }
+
+    void WallSlideState::exit(Player &player) {
+        player._physics_component->setWallVelocityClamp(false);
     }
 
     void WallSlideState::physicsUpdate(game::Player &player) {

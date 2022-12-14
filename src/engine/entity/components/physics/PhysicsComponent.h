@@ -55,12 +55,17 @@ namespace engine {
         Vector2f _velocity;
         Vector2f _acceleration;
 
+        engine::Vector2f _horizontal_velocity_cap;
+        engine::Vector2f _vertical_velocity_cap;
+
         std::shared_ptr<HitBox> _hit_box;
 
         bool _is_static;
         bool _collided;
 
         void resolveCollision(PhysicsComponent &other);
+
+        virtual void clampVelocity();
     };
 
 } // engine

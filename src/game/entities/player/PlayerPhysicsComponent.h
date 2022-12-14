@@ -3,6 +3,7 @@
 
 
 #include <engine/entity/components/physics/PhysicsComponent.h>
+#include <engine/math/math_utils.h>
 
 #include "game/constants/constants.h"
 
@@ -23,11 +24,22 @@ namespace game {
 
         void jump(bool wall_jump = false, bool left = false);
 
+        void applyStoppingFrictionForce();
+
+        void setWallVelocityClamp(bool wall_velocity_clamp);
+
     private:
         engine::Vector2f _gravitational_acceleration;
         float _initial_jump_velocity;
         float _wall_horizontal_jump_velocity;
         float _horizontal_movement_force;
+
+        float _stopping_friction;
+
+        bool _wall_velocity_clamp;
+        engine::Vector2f _wall_vertical_velocity_cap;
+
+        void clampVelocity() override;
     };
 
 } // game

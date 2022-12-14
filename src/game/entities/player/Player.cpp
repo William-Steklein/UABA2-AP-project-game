@@ -18,6 +18,7 @@ namespace game {
 
     void Player::setState(std::shared_ptr<IPlayerState> state) {
         if (state != nullptr) {
+            _state->exit(*this);
             _state = std::move(state);
             _state->enter(*this);
         }

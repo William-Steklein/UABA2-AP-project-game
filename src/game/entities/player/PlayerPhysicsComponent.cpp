@@ -9,10 +9,12 @@ namespace game {
 
         _gravitational_acceleration = {0, -2 * jump_height / (jump_dt * jump_dt)};
 
-//        _min_neg_velocity = {-1.5f, -(_initial_jump_velocity * 1.5f)};
-//        _max_pos_velocity = {1.5f, constants::player::jump_velocity * 5.f};
-//        _drag = {0.15f, 0};
-//        _friction = {5.f, 0};
+        _horizontal_velocity_cap = {-4.f, 4.f};
+        _vertical_velocity_cap = {-_initial_jump_velocity * 1.25f, _initial_jump_velocity * 1.25f};
+
+        _stopping_friction = 250.f;
+
+        _wall_vertical_velocity_cap = {-_initial_jump_velocity * 0.5f, _initial_jump_velocity * 0.5f};
     }
 
     void PlayerPhysicsComponent::update(double t, float dt) {
@@ -41,5 +43,25 @@ namespace game {
         } else {
             addVelocity({0, _initial_jump_velocity});
         }
+    }
+
+    void PlayerPhysicsComponent::applyStoppingFrictionForce() {
+        if (_velocity.x == 0) {
+            return;
+        }
+
+        addForce({_velocity.x * -_stopping_friction, 0});
+    }
+
+    void PlayerPhysicsComponent::clampVelocity() {
+        if (_wall_velocity_clamp) {
+            _velocity.y = engine::clamp(_velocity.y, _wall_vertical_velocity_cap.x, _wall_vertical_velocity_cap.y);
+        } else {
+            PhysicsComponent::clampVelocity();
+        }
+    }
+
+    void PlayerPhysicsComponent::setWallVelocityClamp(bool wall_velocity_clamp) {
+        _wall_velocity_clamp = wall_velocity_clamp;
     }
 } // game

@@ -26,6 +26,8 @@ namespace engine {
 
     float sigmoid(float x, float a, float b);
 
+    float clamp(float value, float min, float max);
+
 } // engine
 
 #endif //GAME_ENGINE_MATH_UTILS_H

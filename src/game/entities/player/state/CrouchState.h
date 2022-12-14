@@ -14,6 +14,8 @@ namespace game {
 
         void enter(game::Player &player) override;
 
+        void physicsUpdate(game::Player &player) override;
+
         void handleInput(Player &player, const InputEvent &input) override;
     };
 
