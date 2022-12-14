@@ -14,6 +14,7 @@ namespace engine {
             UNDEFINEDTYPE,
 
             BUTTONPRESSED,
+            BUTTONPRESSING,
             BUTTONRELEASED,
 
             MOUSEMOVED

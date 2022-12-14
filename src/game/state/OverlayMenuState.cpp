@@ -83,7 +83,7 @@ namespace game {
     void OverlayMenuState::handleInput(const InputEvent &input) {
         switch (input.type) {
             case InputEvent::Type::RETURN:
-                if (!input.state_enter) {
+                if (input.state == InputEvent::State::ENTERED) {
                     _game.popState();
                 }
 

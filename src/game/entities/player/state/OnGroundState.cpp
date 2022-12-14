@@ -12,16 +12,14 @@ namespace game {
     }
 
     void OnGroundState::handleInput(Player &player, const InputEvent &input) {
-        if (input.state_enter) {
-            switch (input.type) {
-                case InputEvent::Type::JUMP:
-                    player.setState(std::make_shared<JumpState>());
+        switch (input.type) {
+            case InputEvent::Type::JUMP:
+                player.setState(std::make_shared<JumpState>());
 
-                    break;
+                break;
 
-                default:
-                    break;
-            }
+            default:
+                break;
         }
 
         IPlayerState::handleInput(player, input);

@@ -92,7 +92,7 @@ namespace game {
     void MenuState::handleInput(const InputEvent &input) {
         switch (input.type) {
             case InputEvent::Type::UP:
-                if (!input.state_enter) {
+                if (input.state == InputEvent::State::EXITED) {
                     if (!_keyboard_focus) {
                         toggleKeyboardFocus(true);
                     } else {
@@ -103,7 +103,7 @@ namespace game {
                 break;
 
             case InputEvent::Type::DOWN:
-                if (!input.state_enter) {
+                if (input.state == InputEvent::State::EXITED) {
                     if (!_keyboard_focus) {
                         toggleKeyboardFocus(true);
                     } else {

@@ -13,7 +13,7 @@ namespace game {
     }
 
     void RunState::handleInput(Player &player, const InputEvent &input) {
-        if (!input.state_enter) {
+        if (input.state == InputEvent::State::EXITED) {
             if ((input.type == InputEvent::Type::LEFT && player.isFacingLeft()) ||
                 (input.type == InputEvent::Type::RIGHT && !player.isFacingLeft())) {
                 player.setState(std::make_shared<IdleState>());

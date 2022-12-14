@@ -27,11 +27,19 @@ namespace game {
             DEBUGVIEW,
         };
 
-        Type type;
+        enum State {
+            ENTERED,
+            ACTIVE,
+            EXITED
+        };
 
-        bool state_enter;
+        Type type;
+        State state;
+
         float range;
     };
+
+    game::InputEvent::State mapEngineToGameInput(engine::Input::InputType input);
 
 } // game
 

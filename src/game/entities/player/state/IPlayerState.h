@@ -23,7 +23,7 @@ namespace game {
         virtual void graphicsUpdate(Player &player) {};
         
         virtual void handleInput(Player &player, const InputEvent &input) {
-            if (input.state_enter) {
+            if (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE) {
                 switch (input.type) {
                 case InputEvent::Type::LEFT:
                     player.updateDirection(Player::Direction::LEFT);

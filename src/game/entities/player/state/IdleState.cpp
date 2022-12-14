@@ -5,6 +5,7 @@
 namespace game {
     void IdleState::enter(Player &player) {
         player._animated_sprite->start("idle", true, player.isFacingLeft());
+        player._physics_component->setVelocity({0, 0});
     }
 
     void IdleState::physicsUpdate(game::Player &player) {
@@ -19,14 +20,14 @@ namespace game {
         switch (input.type) {
             case InputEvent::Type::LEFT:
             case InputEvent::Type::RIGHT:
-                if (input.state_enter) {
+                if (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE) {
                     player.setState(std::make_shared<RunState>());
                 }
 
                 break;
 
             case InputEvent::Type::DOWN:
-                if (input.state_enter) {
+                if (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE) {
                     player.setState(std::make_shared<CrouchState>());
                 }
 

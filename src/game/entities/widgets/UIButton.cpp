@@ -34,7 +34,7 @@ namespace game {
                 }
 
                 if ((input.type == InputEvent::Type::MOUSECLICK || input.type == InputEvent::Type::ACCEPT) &&
-                    input.state_enter) {
+                    input.state == InputEvent::State::ENTERED) {
                     _state = BUTTON_CLICKING;
                     _animated_sprite->start("clicking");
 //                    LOGDEBUG("clicking!");
@@ -45,11 +45,11 @@ namespace game {
                 if (input.type == InputEvent::Type::MOUSEMOVED && !mouseCollides()) {
                     _state = BUTTON_INACTIVE;
                     _animated_sprite->start("default");
-//                    LOGDEBUG("NOT hover and NOT clicking!");
+                    LOGDEBUG("NOT hover and NOT clicking!");
                 }
 
                 if ((input.type == InputEvent::Type::MOUSECLICK || input.type == InputEvent::Type::ACCEPT) &&
-                    !input.state_enter) {
+                    input.state == InputEvent::State::EXITED) {
                     _state = BUTTON_ACTIVE;
 //                    _state = BUTTON_CLICKED;
 //                    LOGDEBUG("active!");

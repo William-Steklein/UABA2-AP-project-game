@@ -16,12 +16,17 @@ namespace renderer {
         for (const auto &key_pair: keyboard_button_map) {
             engine::Input input{};
 
+            auto button_it = _pressed_buttons.find(key_pair.second);
+
             if (sf::Mouse::isButtonPressed(key_pair.first)) {
-                _pressed_buttons.insert(key_pair.second);
-                input.type = engine::Input::InputType::BUTTONPRESSED;
+                if (button_it == _pressed_buttons.end()) {
+                    _pressed_buttons.insert(key_pair.second);
+                    input.type = engine::Input::InputType::BUTTONPRESSED;
+                } else {
+                    input.type = engine::Input::InputType::BUTTONPRESSING;
+                }
 
             } else {
-                auto button_it = _pressed_buttons.find(key_pair.second);
                 if (button_it == _pressed_buttons.end()) {
                     continue;
                 }
@@ -76,12 +81,17 @@ namespace renderer {
         for (const auto &key_pair: keyboard_button_map) {
             engine::Input input{};
 
+            auto button_it = _pressed_buttons.find(key_pair.second);
+
             if (sf::Keyboard::isKeyPressed(key_pair.first)) {
-                _pressed_buttons.insert(key_pair.second);
-                input.type = engine::Input::InputType::BUTTONPRESSED;
+                if (button_it == _pressed_buttons.end()) {
+                    _pressed_buttons.insert(key_pair.second);
+                    input.type = engine::Input::InputType::BUTTONPRESSED;
+                } else {
+                    input.type = engine::Input::InputType::BUTTONPRESSING;
+                }
 
             } else {
-                auto button_it = _pressed_buttons.find(key_pair.second);
                 if (button_it == _pressed_buttons.end()) {
                     continue;
                 }

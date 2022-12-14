@@ -4,7 +4,7 @@ namespace game {
     PlayerPhysicsComponent::PlayerPhysicsComponent(float jump_dt, float jump_height) : engine::PhysicsComponent(false) {
         _mass = constants::player::mass;
         _initial_jump_velocity = 2 * jump_height / jump_dt;
-        _wall_horizontal_jump_velocity = _initial_jump_velocity;
+        _wall_horizontal_jump_velocity = _initial_jump_velocity * 0.75f;
         _horizontal_movement_force = constants::player::horizontal_movement_force;
 
         _gravitational_acceleration = {0, -2 * jump_height / (jump_dt * jump_dt)};

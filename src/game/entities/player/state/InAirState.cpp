@@ -28,7 +28,7 @@ namespace game {
 
     void InAirState::handleInput(Player &player, const InputEvent &input) {
         if (input.type == InputEvent::Type::LEFT || input.type == InputEvent::Type::RIGHT) {
-            _h_movement = input.state_enter;
+            _h_movement = (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE);
         }
 
         IPlayerState::handleInput(player, input);

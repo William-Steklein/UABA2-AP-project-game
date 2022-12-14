@@ -29,7 +29,7 @@ namespace game {
         void generateBackground(const engine::Vector2f &position, const engine::Vector2f &size,
                                 const engine::Vector2f &entity_size);
 
-        void createWall(const engine::Vector2f &position, float size = 0.25);
+        void createWall(const engine::Vector2f &position, const engine::Vector2f& size = {0.25, 0.25});
 
         void updateCollisions();
 

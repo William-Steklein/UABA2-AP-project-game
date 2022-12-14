@@ -27,6 +27,7 @@ namespace game {
             game::InputEvent input_event{};
 
             if (input.type == engine::Input::InputType::MOUSEMOVED) {
+                // mouse move
                 input_event.type = game::InputEvent::Type::MOUSEMOVED;
 
                 _mouse_position->x = input.range_2d.x;
@@ -35,7 +36,7 @@ namespace game {
             } else if (input.button == engine::Input::Button::MOUSELEFT) {
                 // mouse buttonpress
                 input_event.type = game::InputEvent::Type::MOUSECLICK;
-                input_event.state_enter = input.type == engine::Input::InputType::BUTTONPRESSED;
+                input_event.state = mapEngineToGameInput(input.type);
             } else {
                 // keyboard buttonpress
 
@@ -45,7 +46,7 @@ namespace game {
                 }
 
                 input_event.type = _config.button_map.keyboard.at(input.button);
-                input_event.state_enter = input.type == engine::Input::InputType::BUTTONPRESSED;
+                input_event.state = mapEngineToGameInput(input.type);
             }
             input_event.range = 0;
 

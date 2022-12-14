@@ -10,9 +10,10 @@ namespace game {
 
         player._animated_sprite->start("wall_slide", true, player.isFacingLeft());
 
-        if (player._physics_component->getVelocity().y > 0) {
-            player._physics_component->setVelocity({0, 0});
-        }
+//        if (player._physics_component->getVelocity().y > 0) {
+//            player._physics_component->setVelocity({0, 0});
+//        }
+        player._physics_component->setVelocity({0, 0});
     }
 
     void WallSlideState::physicsUpdate(game::Player &player) {
@@ -37,7 +38,10 @@ namespace game {
         }
 
         if (input.type == InputEvent::Type::JUMP) {
-            player.setState(std::make_shared<JumpState>(true));
+            if (input.state == InputEvent::State::ENTERED) {
+                player._physics_component->setVelocity({0, 0});
+                player.setState(std::make_shared<JumpState>(true));
+            }
         }
 
 //        IPlayerState::handleInput(player, input);
