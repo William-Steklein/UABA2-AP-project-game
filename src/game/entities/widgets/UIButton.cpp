@@ -45,7 +45,7 @@ namespace game {
                 if (input.type == InputEvent::Type::MOUSEMOVED && !mouseCollides()) {
                     _state = BUTTON_INACTIVE;
                     _animated_sprite->start("default");
-                    LOGDEBUG("NOT hover and NOT clicking!");
+//                    LOGDEBUG("NOT hover and NOT clicking!");
                 }
 
                 if ((input.type == InputEvent::Type::MOUSECLICK || input.type == InputEvent::Type::ACCEPT) &&
