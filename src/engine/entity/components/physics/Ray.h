@@ -38,7 +38,8 @@ namespace engine {
 
         void reset();
 
-        bool collides(const Vector2f &other_absolute_origin, const Vector2f &other_absolute_end, bool set_collision_point = true);
+        bool collides(const Vector2f &other_absolute_origin, const Vector2f &other_absolute_end,
+                      bool set_collision_point = true);
 
         bool collides(Ray &other, bool set_collision_point = true);
 

@@ -1,7 +1,8 @@
 #include "PlayerPhysicsComponent.h"
 
 namespace game {
-    PlayerPhysicsComponent::PlayerPhysicsComponent(float jump_dt, float jump_height) : engine::PhysicsComponent(false) {
+    PlayerPhysicsComponent::PlayerPhysicsComponent(float jump_dt, float jump_height)
+            : engine::PhysicsComponent(false) {
         _mass = constants::player::mass;
         _initial_jump_velocity = 2 * jump_height / jump_dt;
         _wall_horizontal_jump_velocity = _initial_jump_velocity * 0.75f;
@@ -14,6 +15,7 @@ namespace game {
 
         _stopping_friction = 250.f;
 
+        _wall_velocity_clamp = false;
         _wall_vertical_velocity_cap = {-_initial_jump_velocity * 0.5f, _initial_jump_velocity * 0.5f};
     }
 

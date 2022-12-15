@@ -2,7 +2,7 @@
 
 namespace game {
     Wall::Wall(engine::Transform transform, std::shared_ptr<engine::ISpriteComponent> sprite)
-    : engine::Entity(std::move(transform)), _sprite(std::move(sprite)) {
+            : engine::Entity(std::move(transform)), _sprite(std::move(sprite)) {
         _physics_component = std::make_shared<engine::PhysicsComponent>(true);
         addComponents({_sprite, _physics_component});
 

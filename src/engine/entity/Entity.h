@@ -14,7 +14,7 @@ namespace engine {
 
     class Entity {
     public:
-        Entity(Transform transform, const std::vector<std::shared_ptr<IComponent>>& components = {});
+        Entity(Transform transform, const std::vector<std::shared_ptr<IComponent>> &components = {});
 
         virtual ~Entity() = default;
 
@@ -44,7 +44,7 @@ namespace engine {
 
         void addComponent(std::shared_ptr<IComponent> component, bool physics = false);
 
-        void addComponents(const std::vector<std::shared_ptr<IComponent>>& components, bool physics = false);
+        void addComponents(const std::vector<std::shared_ptr<IComponent>> &components, bool physics = false);
 
     protected:
         std::shared_ptr<Transform> _transform;

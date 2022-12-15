@@ -3,7 +3,7 @@
 namespace engine {
     ILineComponent::ILineComponent(std::weak_ptr<Camera> camera, bool project_ui_space)
             : IShapeComponent({0, 0}, std::move(camera), project_ui_space),
-            _line_thickness(0.01f), _shape_rotation(0) {
+              _line_thickness(0.01f), _shape_rotation(0) {
 
     }
 

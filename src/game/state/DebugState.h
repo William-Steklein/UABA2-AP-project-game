@@ -29,7 +29,7 @@ namespace game {
         void generateBackground(const engine::Vector2f &position, const engine::Vector2f &size,
                                 const engine::Vector2f &entity_size);
 
-        void createWall(const engine::Vector2f &position, const engine::Vector2f& size = {0.25, 0.25});
+        void createWall(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
 
         void updateCollisions();
 
@@ -37,12 +37,17 @@ namespace game {
 
         void toggleDebugViewVisibility();
 
+        void updateFpsCounterText();
+
     private:
         std::shared_ptr<Player> _player;
         std::vector<std::shared_ptr<Wall>> _walls;
 
         std::vector<std::shared_ptr<engine::IViewComponent>> _debug_components;
         bool _debug_view_visibility;
+
+        std::shared_ptr<engine::Entity> _fps_counter;
+        std::shared_ptr<engine::ITextBoxComponent> _fps_counter_text;
     };
 
 } // game

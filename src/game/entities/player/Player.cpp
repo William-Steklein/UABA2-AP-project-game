@@ -29,17 +29,14 @@ namespace game {
 
         if (_standing_ray->collided()) {
             _standing_ray->reset();
-//            LOGDEBUG("standing ray collision!");
         }
 
         if (_left_wall_slide_ray->collided()) {
             _left_wall_slide_ray->reset();
-//            LOGDEBUG("left wall slide ray collision!");
         }
 
         if (_right_wall_slide_ray->collided()) {
             _right_wall_slide_ray->reset();
-//            LOGDEBUG("right wall slide ray collision!");
         }
 
         engine::Entity::physicsUpdate(t, dt);

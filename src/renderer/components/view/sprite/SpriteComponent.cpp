@@ -5,7 +5,7 @@ namespace renderer {
                                      bool project_ui_space,
                                      std::vector<std::shared_ptr<sf::Texture>> texture_group)
             : engine::IAnimatedSpriteComponent(size, std::move(camera), project_ui_space),
-            _texture_group(std::move(texture_group)),
+              _texture_group(std::move(texture_group)),
               _sprite(std::make_shared<sf::Sprite>()) {
         updateSpriteRender();
     }

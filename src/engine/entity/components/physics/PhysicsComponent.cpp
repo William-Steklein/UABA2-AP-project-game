@@ -7,7 +7,8 @@ namespace engine {
     PhysicsComponent::PhysicsComponent(bool is_static)
             : _mass(1),
               _hit_box(std::make_shared<HitBox>(HitBox({0, 0}, {0, 0}))),
-              _is_static(is_static), _collided(false), _horizontal_velocity_cap({0, 0}), _vertical_velocity_cap({0, 0}) {
+              _is_static(is_static), _collided(false), _horizontal_velocity_cap({0, 0}),
+              _vertical_velocity_cap({0, 0}) {
 
     }
 

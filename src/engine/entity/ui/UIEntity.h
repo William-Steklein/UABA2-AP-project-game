@@ -8,7 +8,7 @@ namespace engine {
 
     class UIEntity : public Entity {
     public:
-        UIEntity(Transform transform, const std::vector<std::shared_ptr<IComponent>>& components = {});
+        UIEntity(Transform transform, const std::vector<std::shared_ptr<IComponent>> &components = {});
 
         ~UIEntity() override = default;
 
@@ -32,7 +32,7 @@ namespace engine {
                       bool relative_positioning = true);
 
         void addChildren(const std::vector<std::shared_ptr<UIEntity>> &children, const std::weak_ptr<UIEntity> &parent,
-                      bool relative_positioning = true);
+                         bool relative_positioning = true);
 
         bool hasChildren() const;
 

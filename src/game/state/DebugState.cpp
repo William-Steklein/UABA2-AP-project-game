@@ -2,6 +2,8 @@
 #include "game/state/OverlayMenuState.h"
 #include "game/constants/constants.h"
 
+#include <engine/Stopwatch.h>
+
 namespace game {
 
     DebugState::DebugState(Game &game) : IGameState(game), _debug_view_visibility(false) {
@@ -15,18 +17,35 @@ namespace game {
 
         _player = std::make_shared<Player>(Player(
                 {{0, 1}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createAnimatedSprite(constants::player::view_size, 1, false, "adventurer")
+                _game.getViewComponentCreator()->createAnimatedSprite(constants::player::view_size, 1, false,
+                                                                      "adventurer")
         ));
 
         _entities.insert(_player);
 
-        createWall({-0.5, 0.25}, {0.2, 0.2});
+        createWall({-0.5, 0.25}, {0.25, 0.25});
+        createWall({-1, 0.5}, {0.25, 0.25});
 
-        createWall({2.5, 0.125}, {0.25, 10});
-        createWall({2, 0.125}, {0.25, 10});
-        createWall({0, -0.5}, {5, 0.25});
+        createWall({2, 2}, {0.25, 4});
+        createWall({2.75, 2}, {0.25, 4});
+
+
+        createWall({0, -0.5}, {10, 0.25});
 
         createDebugViewComponents();
+
+
+        _fps_counter_text = _game.getViewComponentCreator()->createTextBox(
+                {0.5f, 0.25f}, 5, true, "PTSans-bold");
+        _fps_counter_text->setFontSize(0.08f);
+
+        _fps_counter = std::make_shared<engine::Entity>(engine::Entity(
+                {{-1.25, 0.9}, {1, 1}, 0},
+                {_fps_counter_text}
+        ));
+        _entities.insert(_fps_counter);
+
+        updateFpsCounterText();
     }
 
     void DebugState::resume() {
@@ -35,8 +54,14 @@ namespace game {
 
     void DebugState::reset() {
         _player = nullptr;
+
         _walls.clear();
+
         _debug_components.clear();
+
+        _fps_counter_text = nullptr;
+        _fps_counter = nullptr;
+
         IGameState::reset();
     }
 
@@ -48,6 +73,8 @@ namespace game {
 
     void DebugState::graphicsUpdate(double t, float dt) {
         _game.getCamera()->setPosition(_player->getPosition());
+
+        updateFpsCounterText();
 
         IGameState::graphicsUpdate(t, dt);
 
@@ -83,9 +110,7 @@ namespace game {
                                         const engine::Vector2f &size, const engine::Vector2f &entity_size) {
         engine::Vector2f total_size = {std::ceil(size.x / entity_size.x) * entity_size.x,
                                        std::ceil(size.y / entity_size.y) * entity_size.y};
-//        engine::Vector2f origin = (position - total_size / 2) - entity_size / 2;
         engine::Vector2f origin = (position - total_size / 2) + entity_size / 2;
-//        engine::Vector2f origin = (position - total_size / 2);
 
         int x_tile_count = std::ceil(size.x / entity_size.x);
         int y_tile_count = std::ceil(size.y / entity_size.y);
@@ -104,7 +129,7 @@ namespace game {
         }
     }
 
-    void DebugState::createWall(const engine::Vector2f &position, const engine::Vector2f& size) {
+    void DebugState::createWall(const engine::Vector2f &position, const engine::Vector2f &size) {
         unsigned int layer = 2;
 
         _walls.push_back(std::make_shared<Wall>(Wall(
@@ -181,5 +206,9 @@ namespace game {
         for (auto &component: _debug_components) {
             component->setVisible(_debug_view_visibility);
         }
+    }
+
+    void DebugState::updateFpsCounterText() {
+        _fps_counter_text->setText(std::to_string(engine::Stopwatch::getInstance().getAverageFps()));
     }
 } // game

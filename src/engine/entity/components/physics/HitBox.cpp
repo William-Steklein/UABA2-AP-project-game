@@ -7,7 +7,7 @@ namespace engine {
     }
 
     void HitBox::update(double t, float dt) {
-        
+
     }
 
     const Vector2f &HitBox::getSize() const {
@@ -33,7 +33,7 @@ namespace engine {
     bool HitBox::collides(const Vector2f &point) {
         Vector2f position = getPosition();
         Vector2f size = getScaledSize();
-        
+
         return point.x < position.x + size.x / 2 && point.x > position.x - size.x / 2 &&
                point.y < position.y + size.y / 2 && point.y > position.y - size.y / 2;
     }

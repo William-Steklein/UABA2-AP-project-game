@@ -25,6 +25,7 @@ namespace game {
 
         void update() override;
 
+        // handles engine input and convert them to game input events
         void handleInputs(const std::vector<engine::Input> &inputs) override;
 
         const std::shared_ptr<engine::Vector2f> &getMousePosition() const;

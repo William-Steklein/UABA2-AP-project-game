@@ -148,10 +148,8 @@ namespace game {
         _keyboard_focus = keyboard_focus;
 
         if (keyboard_focus) {
-//            LOGDEBUG("keyboard focus");
             _buttons[_selected_button_index]->setKeyboardActive();
         } else {
-//            LOGDEBUG("keyboard NOT focus");
             _buttons[_selected_button_index]->setKeyboardInactive();
         }
 
