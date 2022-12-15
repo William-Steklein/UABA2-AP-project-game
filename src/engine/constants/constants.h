@@ -14,6 +14,9 @@ namespace engine {
 
         extern const float animation_frame_time_minimum;
 
+        // velocities under this value are set to zero
+        extern const float velocity_epsilon;
+
     } // constants
 
 } // engine

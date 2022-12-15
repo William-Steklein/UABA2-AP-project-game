@@ -20,10 +20,11 @@ namespace game {
 
         _entities.insert(_player);
 
+        createWall({-0.5, 0.25}, {0.2, 0.2});
+
         createWall({2.5, 0.125}, {0.25, 10});
         createWall({2, 0.125}, {0.25, 10});
         createWall({0, -0.5}, {5, 0.25});
-        createWall({0, 0}, {0.1, 0.1});
 
         createDebugViewComponents();
     }

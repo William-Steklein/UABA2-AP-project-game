@@ -1,6 +1,7 @@
 #include "PhysicsComponent.h"
 #include "engine/logging/Logger.h"
 #include "engine/math/math_utils.h"
+#include "engine/constants/constants.h"
 
 namespace engine {
     PhysicsComponent::PhysicsComponent(bool is_static)
@@ -26,11 +27,9 @@ namespace engine {
         transform->move(_velocity * dt);
 
         // remove small velocities
-        // todo: make epsilon a constant
-        float epsilon = 1.e-4f;
-        if (_velocity.x < epsilon && _velocity.x > -epsilon)
+        if (_velocity.x < constants::velocity_epsilon && _velocity.x > -constants::velocity_epsilon)
             _velocity.x = 0;
-        if (_velocity.y < epsilon && _velocity.y > -epsilon)
+        if (_velocity.y < constants::velocity_epsilon && _velocity.y > -constants::velocity_epsilon)
             _velocity.y = 0;
 
         // clear force and acceleration
@@ -147,7 +146,6 @@ namespace engine {
             other._velocity = new_velocity_other;
 
         } else if (!_is_static && !other._is_static) {
-            // TODO: improve this
             // both are dynamic
             float alpha;
 

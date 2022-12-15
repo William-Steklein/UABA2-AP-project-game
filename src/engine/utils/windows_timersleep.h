@@ -9,8 +9,8 @@
 #include <chrono>
 
 namespace engine {
-
-    // todo: documentation
+    // More accurate sleep function for windows
+    // from "https://blog.bearcats.nl/accurate-sleep-function/"
     void timerSleep(double seconds);
 
 } // engine

@@ -10,5 +10,7 @@ namespace engine {
 
         const float animation_frame_time_minimum = 0.001f;
 
+        const float velocity_epsilon = 1.e-4f;
+
     } // constants
 } // engine

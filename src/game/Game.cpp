@@ -15,7 +15,7 @@ namespace game {
         loadResources();
         _config = parseConfig("data/config_default.json");
 
-        pushState(std::move(std::make_shared<DebugState>(*this)));
+        pushState(std::move(std::make_shared<MenuState>(*this)));
     }
 
     void Game::update() {
