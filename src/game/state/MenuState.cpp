@@ -1,5 +1,6 @@
 #include "MenuState.h"
 #include "game/state/DebugState.h"
+#include "LevelState.h"
 
 namespace game {
     MenuState::MenuState(Game &game)
@@ -76,10 +77,11 @@ namespace game {
 
     void MenuState::graphicsUpdate(double t, float dt) {
         if (_play_button->isActive()) {
-            _play_button->reset();
-            if (_keyboard_focus) {
-                _buttons[_selected_button_index]->setKeyboardActive();
-            }
+//            _play_button->reset();
+//            if (_keyboard_focus) {
+//                _buttons[_selected_button_index]->setKeyboardActive();
+//            }
+            _game.setState(std::make_shared<LevelState>(_game, "data/levels/level1.world"));
         } else if (_debug_button->isActive()) {
             _game.setState(std::make_shared<DebugState>(_game));
         } else if (_quit_button->isActive()) {
