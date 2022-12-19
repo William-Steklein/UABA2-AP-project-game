@@ -8,16 +8,16 @@ namespace game {
 
     class LevelState : public WorldState {
     public:
-        LevelState(Game &game, std::string level_file_path);
+        LevelState(Game &game, std::shared_ptr<LevelData> level_data);
 
         ~LevelState() override = default;
 
         void enter() override;
 
-        void loadLevelFromFile();
+        void loadLevelData();
 
     private:
-        std::string _level_file_path;
+        std::shared_ptr<LevelData> _level_data;
     };
 
 } // game

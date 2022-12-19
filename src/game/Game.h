@@ -9,6 +9,7 @@
 
 #include "game/input/InputEvent.h"
 #include "game/config/config_parser.h"
+#include "game/level/LevelData.h"
 
 namespace game {
 
@@ -42,6 +43,8 @@ namespace game {
 
         std::shared_ptr<IGameState> getState() const;
 
+        const std::vector<std::shared_ptr<LevelData>> &getLevelData() const;
+
     private:
         void graphicsUpdate(double t, float dt) override;
 
@@ -55,6 +58,8 @@ namespace game {
         std::shared_ptr<engine::Vector2f> _mouse_position;
 
         std::stack<std::shared_ptr<IGameState>> _states;
+
+        std::vector<std::shared_ptr<LevelData>> _level_data;
     };
 
 } // game

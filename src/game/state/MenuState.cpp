@@ -81,7 +81,7 @@ namespace game {
 //            if (_keyboard_focus) {
 //                _buttons[_selected_button_index]->setKeyboardActive();
 //            }
-            _game.setState(std::make_shared<LevelState>(_game, "data/levels/level1.world"));
+            _game.setState(std::make_shared<LevelState>(_game, _game.getLevelData()[0]));
         } else if (_debug_button->isActive()) {
             _game.setState(std::make_shared<DebugState>(_game));
         } else if (_quit_button->isActive()) {

@@ -1,6 +1,7 @@
 #include "game/Game.h"
 #include "game/state/MenuState.h"
 #include "game/state/DebugState.h"
+#include "game/level/level_data_parser.h"
 
 namespace game {
     Game::Game(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
@@ -14,6 +15,9 @@ namespace game {
               _mouse_position(std::make_shared<engine::Vector2f>()) {
         loadResources();
         _config = parseConfig("data/config_default.json");
+
+        _level_data = levelsDataParser("data/levels/levels.json");
+
 
         pushState(std::move(std::make_shared<MenuState>(*this)));
     }
@@ -104,6 +108,10 @@ namespace game {
 
     std::shared_ptr<IGameState> Game::getState() const {
         return _states.top();
+    }
+
+    const std::vector<std::shared_ptr<LevelData>> &Game::getLevelData() const {
+        return _level_data;
     }
 
     void Game::graphicsUpdate(double t, float dt) {

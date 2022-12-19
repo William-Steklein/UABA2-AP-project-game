@@ -1,4 +1,5 @@
 #include "config_parser.h"
+#include "engine/utils/file_io.h"
 
 namespace game {
     Config parseConfig(const std::string &filepath) {
