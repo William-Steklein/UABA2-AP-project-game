@@ -4,7 +4,7 @@
 
 #include <engine/entity/ui/UIEntity.h>
 
-#include "game/entities/widgets/UIButton.h"
+#include "game/entities/ui-widgets/button/UIButton.h"
 #include "game/state/IGameState.h"
 
 namespace game {

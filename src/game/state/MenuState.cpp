@@ -4,7 +4,7 @@
 
 namespace game {
     MenuState::MenuState(Game &game)
-            : IGameState(game), _selected_button_index(0), _keyboard_focus(false) {
+            : IGameState(game) {
 
     }
 
@@ -77,10 +77,6 @@ namespace game {
 
     void MenuState::graphicsUpdate(double t, float dt) {
         if (_play_button->isActive()) {
-//            _play_button->reset();
-//            if (_keyboard_focus) {
-//                _buttons[_selected_button_index]->setKeyboardActive();
-//            }
             _game.setState(std::make_shared<LevelState>(_game, _game.getLevelData()[0]));
         } else if (_debug_button->isActive()) {
             _game.setState(std::make_shared<DebugState>(_game));
@@ -93,37 +89,8 @@ namespace game {
 
     void MenuState::handleInput(const InputEvent &input) {
         switch (input.type) {
-            case InputEvent::Type::UP:
-                if (input.state == InputEvent::State::EXITED) {
-                    if (!_keyboard_focus) {
-                        toggleKeyboardFocus(true);
-                    } else {
-                        selectNextButton(true);
-                    }
-                }
-
-                break;
-
-            case InputEvent::Type::DOWN:
-                if (input.state == InputEvent::State::EXITED) {
-                    if (!_keyboard_focus) {
-                        toggleKeyboardFocus(true);
-                    } else {
-                        selectNextButton(false);
-                    }
-                }
-
-                break;
-
-            case InputEvent::Type::ACCEPT:
-                checkButtons();
-                _buttons[_selected_button_index]->handleInput(input);
-                break;
-
             case InputEvent::Type::MOUSEMOVED:
             case InputEvent::Type::MOUSECLICK:
-                toggleKeyboardFocus(false);
-
                 for (const auto &button: {_play_button, _debug_button, _quit_button}) {
                     button->handleInput(input);
                 }
@@ -132,45 +99,5 @@ namespace game {
             default:
                 break;
         }
-    }
-
-    void MenuState::checkButtons() {
-        if (_buttons.empty()) {
-            throw std::runtime_error("Button selection menu has no buttons");
-        }
-    }
-
-    void MenuState::toggleKeyboardFocus(bool keyboard_focus) {
-        checkButtons();
-
-        if (_keyboard_focus == keyboard_focus) {
-            return;
-        }
-
-        _keyboard_focus = keyboard_focus;
-
-        if (keyboard_focus) {
-            _buttons[_selected_button_index]->setKeyboardActive();
-        } else {
-            _buttons[_selected_button_index]->setKeyboardInactive();
-        }
-
-        _selected_button_index = 0;
-    }
-
-    void MenuState::selectNextButton(bool up) {
-        _buttons[_selected_button_index]->setKeyboardInactive();
-        if (up) {
-            _selected_button_index -= 1;
-            if (_selected_button_index < 0) {
-                _selected_button_index = _buttons.size() - 1;
-            }
-        } else {
-            _selected_button_index += 1;
-            if (_selected_button_index >= _buttons.size()) {
-                _selected_button_index = 0;
-            }
-        }
-        _buttons[_selected_button_index]->setKeyboardActive();
     }
 } // game

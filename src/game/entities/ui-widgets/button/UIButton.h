@@ -2,9 +2,9 @@
 #define GAME_ENGINE_UIBUTTON_H
 
 
-#include <engine/entity/ui/UIEntity.h>
+#include "engine/entity/ui/UIEntity.h"
 #include "engine/entity/components/physics/HitBox.h"
-#include <engine/entity/components/view/sprite/IAnimatedSpriteComponent.h>
+#include "engine/entity/components/view/sprite/IAnimatedSpriteComponent.h"
 
 #include "game/input/InputEvent.h"
 
@@ -29,17 +29,11 @@ namespace game {
 
         void handleInput(const InputEvent &input);
 
-        const std::shared_ptr<engine::HitBox> &getHitBox() const;
-
         bool isActive() const;
 
         bool mouseCollides() const;
 
         void reset();
-
-        void setKeyboardActive();
-
-        void setKeyboardInactive();
 
     private:
         std::shared_ptr<engine::Vector2f> _mouse_position;

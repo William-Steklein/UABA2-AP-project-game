@@ -4,7 +4,7 @@
 
 #include <engine/entity/ui/UIEntity.h>
 
-#include "game/entities/widgets/UIButton.h"
+#include "game/entities/ui-widgets/button/UIButton.h"
 #include "game/state/IGameState.h"
 
 namespace game {
@@ -21,16 +21,8 @@ namespace game {
 
         void handleInput(const game::InputEvent &input) override;
 
-        void checkButtons();
-
-        void toggleKeyboardFocus(bool keyboard_focus);
-
-        void selectNextButton(bool up);
-
     private:
         std::vector<std::shared_ptr<UIButton>> _buttons;
-        bool _keyboard_focus;
-        int _selected_button_index;
 
         std::shared_ptr<UIButton> _play_button;
         std::shared_ptr<UIButton> _debug_button;

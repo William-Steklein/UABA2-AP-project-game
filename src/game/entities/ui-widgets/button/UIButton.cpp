@@ -1,5 +1,5 @@
 #include "UIButton.h"
-#include <engine/logging/Logger.h>
+#include "engine/logging/Logger.h"
 
 namespace game {
     UIButton::UIButton(engine::Transform transform, const engine::Vector2f &hit_box_size,
@@ -63,10 +63,6 @@ namespace game {
         }
     }
 
-    const std::shared_ptr<engine::HitBox> &UIButton::getHitBox() const {
-        return _hit_box;
-    }
-
     bool UIButton::isActive() const {
         return _state == State::BUTTON_ACTIVE;
     }
@@ -80,20 +76,6 @@ namespace game {
             _state = BUTTON_HOVER;
             _animated_sprite->start("hover");
         } else {
-            _animated_sprite->start("default");
-        }
-    }
-
-    void UIButton::setKeyboardActive() {
-        if (_state == BUTTON_INACTIVE) {
-            _state = BUTTON_HOVER;
-            _animated_sprite->start("hover");
-        }
-    }
-
-    void UIButton::setKeyboardInactive() {
-        if (_state == BUTTON_HOVER && !mouseCollides()) {
-            _state = BUTTON_INACTIVE;
             _animated_sprite->start("default");
         }
     }
