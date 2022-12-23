@@ -3,27 +3,30 @@
 #include "game/entities/player/state/wall-slide/WallSlideState.h"
 
 namespace game {
-    void InAirState::physicsUpdate() {
+    InAirState::InAirState(Player &state_machine, std::unique_ptr<IPlayerState> &state)
+            : IPlayerState(state_machine, state), _h_movement(false) {}
+
+    void InAirState::physicsUpdate(double t, float dt) {
         // gravity
-        _player._physics_component->applyGravityForce();
+        _state_machine._physics_component->applyGravityForce();
 
         // air movement
         if (_h_movement) {
-            _player._physics_component->applyHorizontalMovementForce(_player.isFacingLeft());
+            _state_machine._physics_component->applyHorizontalMovementForce(_state_machine.isFacingLeft());
         }
 
         // wall slide
-        if (_player.isFacingLeft() && _player._left_wall_slide_ray->collided() ||
-            !_player.isFacingLeft() && _player._right_wall_slide_ray->collided()) {
-            _player.setState(std::make_shared<WallSlideState>(_player));
+        if (_state_machine.isFacingLeft() && _state_machine._left_wall_slide_ray->collided() ||
+            !_state_machine.isFacingLeft() && _state_machine._right_wall_slide_ray->collided()) {
+            set<WallSlideState>();
         }
 
         // standing
-        if (_player._standing_ray->collided()) {
-            _player.setState(std::make_shared<IdleState>(_player));
+        if (_state_machine._standing_ray->collided()) {
+            set<IdleState>();
         }
 
-        IPlayerState::physicsUpdate();
+        IPlayerState::physicsUpdate(0, 0);
     }
 
     void InAirState::handleInput(const InputEvent &input) {
@@ -32,9 +35,5 @@ namespace game {
         }
 
         IPlayerState::handleInput(input);
-    }
-
-    InAirState::InAirState(Player &player) : IPlayerState(player), _h_movement(false) {
-
     }
 } // game

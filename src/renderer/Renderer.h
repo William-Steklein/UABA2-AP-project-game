@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <game/Game.h>
-#include "game/state/menu/MenuState.h"
+#include <game/state/IGameState.h>
 
 #include "renderer/constants/constants.h"
 #include "renderer/utils.h"

@@ -1,6 +1,8 @@
 #include "WorldState.h"
 #include "game/state/menu/OverlayMenuState.h"
 #include "engine/Stopwatch.h"
+#include "game/entities/player/Player.h"
+#include "game/entities/player/state/IPlayerState.h"
 
 namespace game {
 

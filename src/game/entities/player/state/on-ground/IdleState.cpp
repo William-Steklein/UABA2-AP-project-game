@@ -3,16 +3,16 @@
 
 namespace game {
     void IdleState::enter() {
-        _player._animated_sprite->start("idle", true, _player.isFacingLeft());
+        _state_machine._animated_sprite->start("idle", true, _state_machine.isFacingLeft());
     }
 
-    void IdleState::physicsUpdate() {
-        _player._physics_component->applyStoppingFrictionForce();
+    void IdleState::physicsUpdate(double t, float dt) {
+        _state_machine._physics_component->applyStoppingFrictionForce();
 
-        OnGroundState::physicsUpdate();
+        OnGroundState::physicsUpdate(0, 0);
     }
 
-    void IdleState::graphicsUpdate() {
+    void IdleState::graphicsUpdate(double t, float dt) {
 
     }
 
@@ -21,7 +21,7 @@ namespace game {
             case InputEvent::Type::LEFT:
             case InputEvent::Type::RIGHT:
                 if (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE) {
-                    _player.setState(std::make_shared<RunState>(_player));
+                    set<RunState>();
                 }
 
                 break;

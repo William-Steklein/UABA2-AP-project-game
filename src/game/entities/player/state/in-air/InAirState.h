@@ -8,16 +8,16 @@ namespace game {
 
     class InAirState : public IPlayerState {
     public:
+        InAirState(Player &state_machine, std::unique_ptr<IPlayerState> &state);
+
         ~InAirState() override = default;
 
-        void physicsUpdate() override;
+        void physicsUpdate(double t, float dt) override;
 
         void handleInput(const InputEvent &input) override;
 
-//    protected:
+    protected:
         bool _h_movement;
-
-        InAirState(Player &player);
     };
 
 } // game

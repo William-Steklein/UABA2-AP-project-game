@@ -3,27 +3,27 @@
 
 namespace game {
     void RunState::enter() {
-        _player._animated_sprite->start("run", true, _player.isFacingLeft());
+        _state_machine._animated_sprite->start("run", true, _state_machine.isFacingLeft());
     }
 
-    void RunState::physicsUpdate() {
+    void RunState::physicsUpdate(double t, float dt) {
         // stopping friction when changing direction
-        if (_player.isFacingLeft() && _player._physics_component->getVelocity().x > 0 ||
-            !_player.isFacingLeft() && _player._physics_component->getVelocity().x < 0) {
-            _player._physics_component->applyStoppingFrictionForce();
+        if (_state_machine.isFacingLeft() && _state_machine._physics_component->getVelocity().x > 0 ||
+            !_state_machine.isFacingLeft() && _state_machine._physics_component->getVelocity().x < 0) {
+            _state_machine._physics_component->applyStoppingFrictionForce();
         }
 
-        _player._physics_component->applyHorizontalMovementForce(_player.isFacingLeft());
+        _state_machine._physics_component->applyHorizontalMovementForce(_state_machine.isFacingLeft());
 
 
-        OnGroundState::physicsUpdate();
+        OnGroundState::physicsUpdate(0, 0);
     }
 
     void RunState::handleInput(const InputEvent &input) {
         if (input.state == InputEvent::State::EXITED) {
-            if ((input.type == InputEvent::Type::LEFT && _player.isFacingLeft()) ||
-                (input.type == InputEvent::Type::RIGHT && !_player.isFacingLeft())) {
-                _player.setState(std::make_shared<IdleState>(_player));
+            if ((input.type == InputEvent::Type::LEFT && _state_machine.isFacingLeft()) ||
+                (input.type == InputEvent::Type::RIGHT && !_state_machine.isFacingLeft())) {
+                set<IdleState>();
             }
         }
 

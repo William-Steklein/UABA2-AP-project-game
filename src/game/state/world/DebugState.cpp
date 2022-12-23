@@ -1,5 +1,6 @@
 #include "DebugState.h"
 #include "game/constants/constants.h"
+#include "game/entities/player/state/IPlayerState.h"
 
 namespace game {
     void DebugState::enter() {

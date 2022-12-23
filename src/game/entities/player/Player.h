@@ -33,8 +33,6 @@ namespace game {
 
         ~Player() override = default;
 
-        void setState(std::shared_ptr<IPlayerState> state);
-
         void physicsUpdate(double t, float dt) override;
 
         void graphicsUpdate(double t, float dt) override;
@@ -46,7 +44,7 @@ namespace game {
         bool isFacingLeft();
 
     private:
-        std::shared_ptr<IPlayerState> _state;
+        std::unique_ptr<IPlayerState> _state;
         Direction _direction;
 
         void createHitBoxAndRays();

@@ -3,24 +3,24 @@
 
 namespace game {
     void JumpState::enter() {
-        _player._animated_sprite->start("jump", false, _player.isFacingLeft());
+        _state_machine._animated_sprite->start("jump", false, _state_machine.isFacingLeft());
 
-        _player._physics_component->jump(_player.isFacingLeft());
-        _player._standing_ray->reset();
+        _state_machine._physics_component->jump(_state_machine.isFacingLeft());
+        _state_machine._standing_ray->reset();
     }
 
-    void JumpState::physicsUpdate() {
-        if (_player._physics_component->getVelocity().y <= 0) {
-            _player.setState(std::make_shared<FallState>(_player));
+    void JumpState::physicsUpdate(double t, float dt) {
+        if (_state_machine._physics_component->getVelocity().y <= 0) {
+            set<FallState>();
         }
 
-        InAirState::physicsUpdate();
+        InAirState::physicsUpdate(0, 0);
     }
 
     void WallJumpState::enter() {
-        _player._animated_sprite->start("jump", false, _player.isFacingLeft());
+        _state_machine._animated_sprite->start("jump", false, _state_machine.isFacingLeft());
 
-        _player._physics_component->walljump(_player.isFacingLeft());
-        _player._standing_ray->reset();
+        _state_machine._physics_component->walljump(_state_machine.isFacingLeft());
+        _state_machine._standing_ray->reset();
     }
 } // game

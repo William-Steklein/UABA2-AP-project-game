@@ -13,7 +13,9 @@ namespace engine {
 
         template<class ConcreteState>
         static void init(FiniteStateMachine &state_machine, std::unique_ptr<BaseState> &state) {
-            state->exit();
+            if (state) {
+                state->exit();
+            }
             state = std::unique_ptr<BaseState>(new ConcreteState(state_machine, state));
             state->enter();
         }

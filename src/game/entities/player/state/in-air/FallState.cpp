@@ -3,6 +3,6 @@
 
 namespace game {
     void FallState::enter() {
-        _player._animated_sprite->start("fall", true, _player.isFacingLeft());
+        _state_machine._animated_sprite->start("fall", true, _state_machine.isFacingLeft());
     }
 } // game

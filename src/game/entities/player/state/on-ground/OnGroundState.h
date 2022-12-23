@@ -8,14 +8,13 @@ namespace game {
 
     class OnGroundState : public IPlayerState {
     public:
+        using IPlayerState::IPlayerState;
+
         ~OnGroundState() override = default;
 
-        void physicsUpdate() override;
+        void physicsUpdate(double t, float dt) override;
 
         void handleInput(const InputEvent &input) override;
-
-//    protected:
-        OnGroundState(Player &player);
     };
 
 } // game

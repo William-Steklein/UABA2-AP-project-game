@@ -4,24 +4,24 @@
 #include "CrouchState.h"
 
 namespace game {
-    void OnGroundState::physicsUpdate() {
-        if (!_player._standing_ray->collided()) {
-            _player.setState(std::make_shared<FallState>(_player));
+    void OnGroundState::physicsUpdate(double t, float dt) {
+        if (!_state_machine._standing_ray->collided()) {
+            set<FallState>();
         }
 
-        IPlayerState::physicsUpdate();
+        IPlayerState::physicsUpdate(0, 0);
     }
 
     void OnGroundState::handleInput(const InputEvent &input) {
         switch (input.type) {
             case InputEvent::Type::JUMP:
-                _player.setState(std::make_shared<JumpState>(_player));
+                set<JumpState>();
 
                 break;
 
             case InputEvent::Type::DOWN:
                 if (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE) {
-                    _player.setState(std::make_shared<CrouchState>(_player));
+                    set<CrouchState>();
                 }
 
             default:
@@ -30,6 +30,4 @@ namespace game {
 
         IPlayerState::handleInput(input);
     }
-
-    OnGroundState::OnGroundState(Player &player) : IPlayerState(player) {}
 } // game

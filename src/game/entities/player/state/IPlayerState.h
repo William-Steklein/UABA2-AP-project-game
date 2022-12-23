@@ -3,42 +3,16 @@
 
 #include <memory>
 
+#include <engine/state-machine/FiniteState.h>
+
 #include "game/entities/player/Player.h"
 
 namespace game {
-    class IPlayerState {
+    class IPlayerState : public engine::FiniteState<Player, IPlayerState, InputEvent> {
     public:
-        virtual ~IPlayerState() = default;
+        IPlayerState(Player &state_machine, std::unique_ptr<IPlayerState> &state);
 
-        virtual void enter() {};
-
-        virtual void exit() {};
-
-        virtual void physicsUpdate() {};
-
-        virtual void graphicsUpdate() {};
-
-        virtual void handleInput(const InputEvent &input) {
-            if (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE) {
-                switch (input.type) {
-                    case InputEvent::Type::LEFT:
-                        _player.updateDirection(Player::Direction::LEFT);
-                        break;
-
-                    case InputEvent::Type::RIGHT:
-                        _player.updateDirection(Player::Direction::RIGHT);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        };
-
-//    protected:
-        IPlayerState(Player &player) : _player(player) {};
-
-        Player &_player;
+        void handleInput(const InputEvent &input) override;
     };
 
 } // game

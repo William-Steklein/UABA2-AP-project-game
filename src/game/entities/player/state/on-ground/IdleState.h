@@ -16,9 +16,9 @@ namespace game {
 
         void enter() override;
 
-        void physicsUpdate() override;
+        void physicsUpdate(double t, float dt) override;
 
-        void graphicsUpdate() override;
+        void graphicsUpdate(double t, float dt) override;
 
         void handleInput(const InputEvent &input) override;
     };
