@@ -1,11 +1,11 @@
-#include "UIButton.h"
+#include "Button.h"
 #include "engine/logging/Logger.h"
 
 namespace game {
-    UIButton::UIButton(engine::Transform transform, const engine::Vector2f &hit_box_size,
-                       std::shared_ptr<engine::Vector2f> mouse_position,
-                       std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite,
-                       const std::vector<std::shared_ptr<engine::IComponent>> &components)
+    Button::Button(engine::Transform transform, const engine::Vector2f &hit_box_size,
+                   std::shared_ptr<engine::Vector2f> mouse_position,
+                   std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite,
+                   const std::vector<std::shared_ptr<engine::IComponent>> &components)
             : engine::UIEntity(std::move(transform), components),
               _mouse_position(std::move(mouse_position)),
               _hit_box(std::make_shared<engine::HitBox>(engine::HitBox(hit_box_size))),
@@ -16,7 +16,7 @@ namespace game {
         reset();
     }
 
-    void UIButton::handleInput(const InputEvent &input) {
+    void Button::handleInput(const InputEvent &input) {
         switch (_state) {
             case BUTTON_INACTIVE:
                 if (input.type == InputEvent::Type::MOUSEMOVED && mouseCollides()) {
@@ -63,15 +63,15 @@ namespace game {
         }
     }
 
-    bool UIButton::isActive() const {
+    bool Button::isActive() const {
         return _state == State::BUTTON_ACTIVE;
     }
 
-    bool UIButton::mouseCollides() const {
+    bool Button::mouseCollides() const {
         return _hit_box->collides(*_mouse_position);
     }
 
-    void UIButton::reset() {
+    void Button::reset() {
         if (mouseCollides()) {
             _state = BUTTON_HOVER;
             _animated_sprite->start("hover");

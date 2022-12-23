@@ -25,7 +25,7 @@ namespace game {
         play_button_text->setText("resume");
         play_button_text->setFontSize(button_font_size);
 
-        _resume_button = std::make_shared<UIButton>(UIButton(
+        _resume_button = std::make_shared<Button>(Button(
                 {{0, 0.51}, {1, 1}, 0},
                 button_size,
                 _game.getMousePosition(),
@@ -41,7 +41,7 @@ namespace game {
         debug_button_text->setText("restart");
         debug_button_text->setFontSize(button_font_size);
 
-        _restart_button = std::make_shared<UIButton>(UIButton(
+        _restart_button = std::make_shared<Button>(Button(
                 {{0, 0.175}, {1, 1}, 0},
                 button_size,
                 _game.getMousePosition(),
@@ -57,7 +57,7 @@ namespace game {
         quit_button_text->setText("main menu");
         quit_button_text->setFontSize(button_font_size);
 
-        _main_menu_button = std::make_shared<UIButton>(UIButton(
+        _main_menu_button = std::make_shared<Button>(Button(
                 {{0, -0.175}, {1, 1}, 0},
                 button_size,
                 _game.getMousePosition(),

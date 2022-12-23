@@ -1,5 +1,5 @@
-#ifndef GAME_ENGINE_UIBUTTON_H
-#define GAME_ENGINE_UIBUTTON_H
+#ifndef GAME_ENGINE_BUTTON_H
+#define GAME_ENGINE_BUTTON_H
 
 
 #include "engine/entity/ui/UIEntity.h"
@@ -10,7 +10,7 @@
 
 namespace game {
 
-    class UIButton : public engine::UIEntity {
+    class Button : public engine::UIEntity {
     public:
         enum State {
             BUTTON_INACTIVE,
@@ -20,12 +20,12 @@ namespace game {
             BUTTON_ACTIVE
         };
 
-        UIButton(engine::Transform transform, const engine::Vector2f &hit_box_size,
-                 std::shared_ptr<engine::Vector2f> mouse_position,
-                 std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite,
-                 const std::vector<std::shared_ptr<engine::IComponent>> &components = {});
+        Button(engine::Transform transform, const engine::Vector2f &hit_box_size,
+               std::shared_ptr<engine::Vector2f> mouse_position,
+               std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite,
+               const std::vector<std::shared_ptr<engine::IComponent>> &components = {});
 
-        ~UIButton() override = default;
+        ~Button() override = default;
 
         void handleInput(const InputEvent &input);
 
@@ -46,4 +46,4 @@ namespace game {
 
 } // game
 
-#endif //GAME_ENGINE_UIBUTTON_H
+#endif //GAME_ENGINE_BUTTON_H

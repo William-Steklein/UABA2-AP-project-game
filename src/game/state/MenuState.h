@@ -4,7 +4,7 @@
 
 #include <engine/entity/ui/UIEntity.h>
 
-#include "game/entities/ui-widgets/button/UIButton.h"
+#include "game/entities/ui-widgets/button/Button.h"
 #include "game/state/IGameState.h"
 
 namespace game {
@@ -22,11 +22,11 @@ namespace game {
         void handleInput(const game::InputEvent &input) override;
 
     private:
-        std::vector<std::shared_ptr<UIButton>> _buttons;
+        std::vector<std::shared_ptr<Button>> _buttons;
 
-        std::shared_ptr<UIButton> _play_button;
-        std::shared_ptr<UIButton> _debug_button;
-        std::shared_ptr<UIButton> _quit_button;
+        std::shared_ptr<Button> _play_button;
+        std::shared_ptr<Button> _debug_button;
+        std::shared_ptr<Button> _quit_button;
     };
 
 } // game

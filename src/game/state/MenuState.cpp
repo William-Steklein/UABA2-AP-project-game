@@ -29,7 +29,7 @@ namespace game {
         play_button_text->setText("play");
         play_button_text->setFontSize(button_font_size);
 
-        _play_button = std::make_shared<UIButton>(UIButton(
+        _play_button = std::make_shared<Button>(Button(
                 {{0, 0.51}, {1, 1}, 0},
                 button_size,
                 _game.getMousePosition(),
@@ -46,7 +46,7 @@ namespace game {
         debug_button_text->setText("debug mode");
         debug_button_text->setFontSize(button_font_size);
 
-        _debug_button = std::make_shared<UIButton>(UIButton(
+        _debug_button = std::make_shared<Button>(Button(
                 {{0, 0.175}, {1, 1}, 0},
                 button_size,
                 _game.getMousePosition(),
@@ -63,7 +63,7 @@ namespace game {
         quit_button_text->setText("quit");
         quit_button_text->setFontSize(button_font_size);
 
-        _quit_button = std::make_shared<UIButton>(UIButton(
+        _quit_button = std::make_shared<Button>(Button(
                 {{0, -0.175}, {1, 1}, 0},
                 button_size,
                 _game.getMousePosition(),
