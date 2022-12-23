@@ -8,7 +8,7 @@ namespace game {
 
     class LevelState : public WorldState {
     public:
-        LevelState(Game &game, std::shared_ptr<LevelData> level_data);
+        LevelState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states);
 
         ~LevelState() override = default;
 

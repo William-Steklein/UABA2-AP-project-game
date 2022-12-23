@@ -8,7 +8,7 @@ namespace game {
 
     class DebugState : public WorldState {
     public:
-        DebugState(Game &game);
+        using WorldState::WorldState;
 
         ~DebugState() override = default;
 

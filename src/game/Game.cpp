@@ -18,8 +18,7 @@ namespace game {
 
         _level_data = levelsDataParser("data/levels/levels.json");
 
-
-        pushState(std::move(std::make_shared<MenuState>(*this)));
+        IGameState::init<MenuState>(*this, _states);
     }
 
     void Game::update() {
@@ -54,7 +53,7 @@ namespace game {
             }
             input_event.range = 0;
 
-            getState()->handleInput(input_event);
+            _states.top()->handleInput(input_event);
         }
     }
 
@@ -62,71 +61,27 @@ namespace game {
         return _mouse_position;
     }
 
-    void Game::setState(const std::shared_ptr<IGameState> &state) {
-        if (state != nullptr) {
-            if (!_states.empty()) {
-                getState()->exit();
-                _states.pop();
-            }
-
-            pushState(state);
-        }
-    }
-
-    void Game::pushState(const std::shared_ptr<IGameState> &state) {
-        if (!_states.empty()) {
-            getState()->pause();
-        }
-        _states.push(state);
-
-        getState()->enter();
-        graphicsUpdateState();
-    }
-
-    void Game::popState() {
-        if (_states.empty()) {
-            throw std::runtime_error("Popping an empty game state stack");
-        } else if (_states.size() == 1) {
-            throw std::runtime_error("Popping last game state from stack");
-        }
-        getState()->exit();
-        _states.pop();
-        getState()->resume();
-    }
-
-    void Game::popAndSetState(const std::shared_ptr<IGameState> &state) {
-        popState();
-        setState(state);
-    }
-
-    void Game::popAndResetState() {
-        popState();
-
-        getState()->reset();
-        graphicsUpdateState();
-    }
-
-    std::shared_ptr<IGameState> Game::getState() const {
-        return _states.top();
-    }
-
     const std::vector<std::shared_ptr<LevelData>> &Game::getLevelData() const {
         return _level_data;
     }
 
+    const std::shared_ptr<LevelData> &Game::getLevelDataPoint(unsigned int level_id) const {
+        return _level_data[level_id];
+    }
+
+    const std::shared_ptr<LevelData> &Game::getCurrentLevelDataPoint() const {
+        // todo: level selection
+        return _level_data[0];
+    }
+
     void Game::graphicsUpdate(double t, float dt) {
-        getState()->graphicsUpdate(t, dt);
+        _states.top()->graphicsUpdate(t, dt);
 
         Engine::graphicsUpdate(t, dt);
     }
 
-    void Game::graphicsUpdateState() const {
-        getState()->graphicsUpdate(engine::Stopwatch::getInstance().getTime(),
-                                   engine::Stopwatch::getInstance().getDeltaTime());
-    }
-
     void Game::physicsUpdate(double t, float dt) {
-        getState()->physicsUpdate(t, dt);
+        _states.top()->physicsUpdate(t, dt);
 
         Engine::physicsUpdate(t, dt);
     }

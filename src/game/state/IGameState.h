@@ -1,41 +1,28 @@
 #ifndef GAME_ENGINE_IGAMESTATE_H
 #define GAME_ENGINE_IGAMESTATE_H
 
-
-#include <memory>
 #include <set>
 
+#include <engine/state-machine/PushdownState.h>
 #include <engine/entity/Entity.h>
 
 #include "game/Game.h"
 #include "game/input/InputEvent.h"
 
 namespace game {
-    class IGameState {
+    class IGameState : public engine::PushdownState<Game, IGameState, InputEvent> {
     public:
-        IGameState(Game &game);
+        IGameState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states);
 
-        virtual ~IGameState() = default;
+        void enter() override;
 
-        virtual void enter() {};
+        void reset() override;
 
-        virtual void exit() {};
+        void graphicsUpdate(double t, float dt) override;
 
-        virtual void pause() {};
-
-        virtual void resume() {};
-
-        virtual void reset();
-
-        virtual void physicsUpdate(double t, float dt);
-
-        virtual void graphicsUpdate(double t, float dt);
-
-        virtual void handleInput(const InputEvent &input) {};
+        void physicsUpdate(double t, float dt) override;
 
     protected:
-        Game &_game;
-
         std::set<std::shared_ptr<engine::Entity>> _entities;
     };
 

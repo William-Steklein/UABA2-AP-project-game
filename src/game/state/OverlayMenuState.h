@@ -11,7 +11,7 @@ namespace game {
 
     class OverlayMenuState : public IGameState {
     public:
-        OverlayMenuState(Game &game);
+        using IGameState::IGameState;
 
         ~OverlayMenuState() override = default;
 

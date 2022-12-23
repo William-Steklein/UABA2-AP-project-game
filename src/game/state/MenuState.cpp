@@ -3,13 +3,8 @@
 #include "LevelState.h"
 
 namespace game {
-    MenuState::MenuState(Game &game)
-            : IGameState(game) {
-
-    }
-
     void MenuState::enter() {
-        _game.getCamera()->reset();
+        _state_machine.getCamera()->reset();
 
         unsigned int background_layer = 0;
         unsigned int button_layer = 1;
@@ -17,7 +12,7 @@ namespace game {
 
         std::shared_ptr<engine::UIEntity> menu_background = std::make_shared<engine::UIEntity>(engine::UIEntity(
                 {{0, 0}, {1, 1}, 0},
-                {_game.getViewComponentCreator()->createSprite({1.f, 1.5f}, background_layer, true, "menu"),}
+                {_state_machine.getViewComponentCreator()->createSprite({1.f, 1.5f}, background_layer, true, "menu"),}
         ));
         _entities.insert(menu_background);
 
@@ -25,15 +20,16 @@ namespace game {
         float button_font_size = 0.085f;
 
         std::shared_ptr<engine::ITextBoxComponent> play_button_text =
-                _game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
+                _state_machine.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
         play_button_text->setText("play");
         play_button_text->setFontSize(button_font_size);
 
         _play_button = std::make_shared<Button>(Button(
                 {{0, 0.51}, {1, 1}, 0},
                 button_size,
-                _game.getMousePosition(),
-                _game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
+                _state_machine.getMousePosition(),
+                _state_machine.getViewComponentCreator()->createAnimatedSprite(
+                        button_size, button_layer, true, "button_anim"),
                 {play_button_text}
         ));
 
@@ -42,15 +38,16 @@ namespace game {
 
 
         std::shared_ptr<engine::ITextBoxComponent> debug_button_text =
-                _game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
+                _state_machine.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
         debug_button_text->setText("debug mode");
         debug_button_text->setFontSize(button_font_size);
 
         _debug_button = std::make_shared<Button>(Button(
                 {{0, 0.175}, {1, 1}, 0},
                 button_size,
-                _game.getMousePosition(),
-                _game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
+                _state_machine.getMousePosition(),
+                _state_machine.getViewComponentCreator()->createAnimatedSprite(
+                        button_size, button_layer, true, "button_anim"),
                 {debug_button_text}
         ));
 
@@ -59,15 +56,16 @@ namespace game {
 
 
         std::shared_ptr<engine::ITextBoxComponent> quit_button_text =
-                _game.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
+                _state_machine.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
         quit_button_text->setText("quit");
         quit_button_text->setFontSize(button_font_size);
 
         _quit_button = std::make_shared<Button>(Button(
                 {{0, -0.175}, {1, 1}, 0},
                 button_size,
-                _game.getMousePosition(),
-                _game.getViewComponentCreator()->createAnimatedSprite(button_size, button_layer, true, "button_anim"),
+                _state_machine.getMousePosition(),
+                _state_machine.getViewComponentCreator()->createAnimatedSprite(
+                        button_size, button_layer, true, "button_anim"),
                 {quit_button_text}
         ));
 
@@ -77,14 +75,14 @@ namespace game {
 
     void MenuState::graphicsUpdate(double t, float dt) {
         if (_play_button->isActive()) {
-            _game.setState(std::make_shared<LevelState>(_game, _game.getLevelData()[0]));
+            set<LevelState>();
         } else if (_debug_button->isActive()) {
-            _game.setState(std::make_shared<DebugState>(_game));
+            set<DebugState>();
         } else if (_quit_button->isActive()) {
-            _game.quit();
+            _state_machine.quit();
+        } else {
+            IGameState::graphicsUpdate(t, dt);
         }
-
-        IGameState::graphicsUpdate(t, dt);
     }
 
     void MenuState::handleInput(const InputEvent &input) {

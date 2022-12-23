@@ -1,13 +1,10 @@
 #include "LevelState.h"
 #include <engine/utils/file_io.h>
 
-#include <utility>
-#include <algorithm>
-
 namespace game {
-    LevelState::LevelState(Game &game, std::shared_ptr<LevelData> level_data)
-            : WorldState(game), _level_data(std::move(level_data)) {
-
+    LevelState::LevelState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states)
+            : WorldState(state_machine, states) {
+        _level_data = state_machine.getCurrentLevelDataPoint();
     }
 
     void LevelState::enter() {

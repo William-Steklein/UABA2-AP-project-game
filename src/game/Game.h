@@ -31,24 +31,14 @@ namespace game {
 
         const std::shared_ptr<engine::Vector2f> &getMousePosition() const;
 
-        void setState(const std::shared_ptr<IGameState> &state);
-
-        void pushState(const std::shared_ptr<IGameState> &state);
-
-        void popState();
-
-        void popAndSetState(const std::shared_ptr<IGameState> &state);
-
-        void popAndResetState();
-
-        std::shared_ptr<IGameState> getState() const;
-
         const std::vector<std::shared_ptr<LevelData>> &getLevelData() const;
+
+        const std::shared_ptr<LevelData> &getLevelDataPoint(unsigned int level_id) const;
+
+        const std::shared_ptr<LevelData> &getCurrentLevelDataPoint() const;
 
     private:
         void graphicsUpdate(double t, float dt) override;
-
-        void graphicsUpdateState() const;
 
         void physicsUpdate(double t, float dt) override;
 
@@ -57,7 +47,7 @@ namespace game {
         Config _config;
         std::shared_ptr<engine::Vector2f> _mouse_position;
 
-        std::stack<std::shared_ptr<IGameState>> _states;
+        std::stack<std::unique_ptr<IGameState>> _states;
 
         std::vector<std::shared_ptr<LevelData>> _level_data;
     };

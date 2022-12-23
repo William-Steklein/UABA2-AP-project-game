@@ -1,9 +1,14 @@
 #include "IGameState.h"
 
 namespace game {
-    IGameState::IGameState(Game &game)
-            : _game(game) {
+    IGameState::IGameState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states)
+            : engine::PushdownState<Game, IGameState, InputEvent>(state_machine, states) {
 
+    }
+
+    void IGameState::enter() {
+        graphicsUpdate(engine::Stopwatch::getInstance().getTime(),
+                       engine::Stopwatch::getInstance().getDeltaTime());
     }
 
     void IGameState::reset() {

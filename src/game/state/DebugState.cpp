@@ -2,18 +2,13 @@
 #include "game/constants/constants.h"
 
 namespace game {
-
-    DebugState::DebugState(Game &game) : WorldState(game) {
-
-    }
-
     void DebugState::enter() {
         generateBackground({0, 0}, {20, 20}, {0.5, 0.5});
 
         _player = std::make_shared<Player>(Player(
                 {{0, 1}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createAnimatedSprite(constants::player::view_size, 1, false,
-                                                                      "adventurer")
+                _state_machine.getViewComponentCreator()->createAnimatedSprite(
+                        constants::player::view_size, 1, false, "adventurer")
         ));
 
         _entities.insert(_player);
@@ -45,7 +40,8 @@ namespace game {
 
                 std::shared_ptr<engine::Entity> background = std::make_shared<engine::Entity>(engine::Entity(
                         {entity_position, {1, 1}, 0},
-                        {_game.getViewComponentCreator()->createSprite(entity_size, 0, false, "pr_background"),}
+                        {_state_machine.getViewComponentCreator()->createSprite(
+                                entity_size, 0, false, "pr_background"),}
                 ));
 
                 _entities.insert(background);

@@ -10,7 +10,7 @@ namespace game {
 
     class WorldState : public IGameState {
     public:
-        WorldState(Game &game);
+        WorldState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states);
 
         ~WorldState() override = default;
 

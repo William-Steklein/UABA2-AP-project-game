@@ -4,18 +4,22 @@
 
 namespace game {
 
-    WorldState::WorldState(Game &game) : IGameState(game), _debug_view_visibility(false) {
+    WorldState::WorldState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states)
+            : IGameState(state_machine, states),
+              _debug_view_visibility(false) {
 
     }
 
     void WorldState::enter() {
+        _debug_view_visibility = false;
+
         if (_player == nullptr) {
             throw std::runtime_error("Loaded world has no player");
         }
 
-        _game.getCamera()->reset();
+        _state_machine.getCamera()->reset();
 
-        _fps_counter_text = _game.getViewComponentCreator()->createTextBox(
+        _fps_counter_text = _state_machine.getViewComponentCreator()->createTextBox(
                 {0.5f, 0.25f}, 5, true, "PTSans-bold");
         _fps_counter_text->setFontSize(0.08f);
 
@@ -56,7 +60,7 @@ namespace game {
     }
 
     void WorldState::graphicsUpdate(double t, float dt) {
-        _game.getCamera()->setPosition(_player->getPosition());
+        _state_machine.getCamera()->setPosition(_player->getPosition());
 
         updateFpsCounterText();
 
@@ -71,7 +75,7 @@ namespace game {
         switch (input.type) {
             case InputEvent::Type::RETURN:
                 if (input.state == InputEvent::State::ENTERED) {
-                    _game.pushState(std::make_shared<OverlayMenuState>(_game));
+                    push<OverlayMenuState>();
                 }
 
                 break;
@@ -84,17 +88,17 @@ namespace game {
                 break;
 
             default:
+                _player->handleInput(input);
+
                 break;
         }
-
-        _player->handleInput(input);
     }
 
     void WorldState::createPlayer(const engine::Vector2f &position) {
         _player = std::make_shared<Player>(Player(
-                {{0, 1}, {1, 1}, 0},
-                _game.getViewComponentCreator()->createAnimatedSprite(constants::player::view_size, 1, false,
-                                                                      "adventurer")
+                {position, {1, 1}, 0},
+                _state_machine.getViewComponentCreator()->createAnimatedSprite(
+                        constants::player::view_size, 1, false, "adventurer")
         ));
 
         _entities.insert(_player);
@@ -105,7 +109,7 @@ namespace game {
 
         _walls.push_back(std::make_shared<Wall>(Wall(
                 {position, {1, 1}, 0},
-                _game.getViewComponentCreator()->createSprite(size, layer, false, "pr_ground_2")
+                _state_machine.getViewComponentCreator()->createSprite(size, layer, false, "pr_ground_2")
         )));
 
         _entities.insert(_walls.back());
@@ -123,8 +127,9 @@ namespace game {
 
     void WorldState::createDebugViewComponents() {
         // player
-        std::shared_ptr<engine::IShapeComponent> player_rectangle = _game.getViewComponentCreator()->createRectangle(
-                _player->_physics_component->getHitBox()->getSize(), 2, false);
+        std::shared_ptr<engine::IShapeComponent> player_rectangle =
+                _state_machine.getViewComponentCreator()->createRectangle(
+                        _player->_physics_component->getHitBox()->getSize(), 2, false);
         player_rectangle->setFillcolor({255, 0, 255, 100});
         player_rectangle->setRelativeTransform(_player->_physics_component->getHitBox()->getRelativeTransform());
         player_rectangle->setTransform(_player->getTransform());
@@ -133,8 +138,8 @@ namespace game {
         _debug_components.push_back(player_rectangle);
 
         std::shared_ptr<engine::ILineComponent> player_standing_line =
-                _game.getViewComponentCreator()->createLine(5, false, _player->_standing_ray->getOrigin(),
-                                                            _player->_standing_ray->getEnd());
+                _state_machine.getViewComponentCreator()->createLine(5, false, _player->_standing_ray->getOrigin(),
+                                                                     _player->_standing_ray->getEnd());
         player_standing_line->setFillcolor({255, 255, 128});
         player_standing_line->setTransform(_player->getTransform());
         player_standing_line->setVisible(_debug_view_visibility);
@@ -142,8 +147,9 @@ namespace game {
         _debug_components.push_back(player_standing_line);
 
         std::shared_ptr<engine::ILineComponent> player_left_wall_slide_line =
-                _game.getViewComponentCreator()->createLine(5, false, _player->_left_wall_slide_ray->getOrigin(),
-                                                            _player->_left_wall_slide_ray->getEnd());
+                _state_machine.getViewComponentCreator()->createLine(5, false,
+                                                                     _player->_left_wall_slide_ray->getOrigin(),
+                                                                     _player->_left_wall_slide_ray->getEnd());
         player_left_wall_slide_line->setFillcolor({192, 255, 140});
         player_left_wall_slide_line->setTransform(_player->getTransform());
         player_left_wall_slide_line->setVisible(_debug_view_visibility);
@@ -151,8 +157,9 @@ namespace game {
         _debug_components.push_back(player_left_wall_slide_line);
 
         std::shared_ptr<engine::ILineComponent> player_right_wall_slide_line =
-                _game.getViewComponentCreator()->createLine(5, false, _player->_right_wall_slide_ray->getOrigin(),
-                                                            _player->_right_wall_slide_ray->getEnd());
+                _state_machine.getViewComponentCreator()->createLine(5, false,
+                                                                     _player->_right_wall_slide_ray->getOrigin(),
+                                                                     _player->_right_wall_slide_ray->getEnd());
         player_right_wall_slide_line->setFillcolor({192, 255, 140});
         player_right_wall_slide_line->setTransform(_player->getTransform());
         player_right_wall_slide_line->setVisible(_debug_view_visibility);
@@ -161,8 +168,9 @@ namespace game {
 
         // walls
         for (const auto &wall: _walls) {
-            std::shared_ptr<engine::IShapeComponent> wall_rectangle = _game.getViewComponentCreator()->createRectangle(
-                    wall->getPhysicsComponent()->getHitBox()->getSize(), 2, false);
+            std::shared_ptr<engine::IShapeComponent> wall_rectangle =
+                    _state_machine.getViewComponentCreator()->createRectangle(
+                            wall->getPhysicsComponent()->getHitBox()->getSize(), 2, false);
             wall_rectangle->setFillcolor({0, 255, 255, 200});
             wall_rectangle->setTransform(wall->getTransform());
             wall_rectangle->setVisible(_debug_view_visibility);
