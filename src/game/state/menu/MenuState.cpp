@@ -10,7 +10,7 @@ namespace game {
         unsigned int button_layer = 1;
         unsigned int text_layer = 2;
 
-        std::shared_ptr<engine::UIEntity> menu_background = std::make_shared<engine::UIEntity>(engine::UIEntity(
+        std::shared_ptr<engine::UIEntity> menu_background = std::unique_ptr<engine::UIEntity>(new engine::UIEntity(
                 {{0, 0}, {1, 1}, 0},
                 {_state_machine.getViewComponentCreator()->createSprite({1.f, 1.5f}, background_layer, true, "menu"),}
         ));
@@ -24,7 +24,7 @@ namespace game {
         play_button_text->setText("play");
         play_button_text->setFontSize(button_font_size);
 
-        _play_button = std::make_shared<Button>(Button(
+        _play_button = std::unique_ptr<Button>(new Button(
                 {{0, 0.51}, {1, 1}, 0},
                 button_size,
                 _state_machine.getMousePosition(),
@@ -42,7 +42,7 @@ namespace game {
         debug_button_text->setText("debug mode");
         debug_button_text->setFontSize(button_font_size);
 
-        _debug_button = std::make_shared<Button>(Button(
+        _debug_button = std::unique_ptr<Button>(new Button(
                 {{0, 0.175}, {1, 1}, 0},
                 button_size,
                 _state_machine.getMousePosition(),
@@ -60,7 +60,7 @@ namespace game {
         quit_button_text->setText("quit");
         quit_button_text->setFontSize(button_font_size);
 
-        _quit_button = std::make_shared<Button>(Button(
+        _quit_button = std::unique_ptr<Button>(new Button(
                 {{0, -0.175}, {1, 1}, 0},
                 button_size,
                 _state_machine.getMousePosition(),

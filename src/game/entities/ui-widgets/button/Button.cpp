@@ -1,5 +1,6 @@
 #include "Button.h"
 #include "engine/logging/Logger.h"
+#include "ButtonState.h"
 
 namespace game {
     Button::Button(engine::Transform transform, const engine::Vector2f &hit_box_size,
@@ -9,62 +10,18 @@ namespace game {
             : engine::UIEntity(std::move(transform), components),
               _mouse_position(std::move(mouse_position)),
               _hit_box(std::make_shared<engine::HitBox>(engine::HitBox(hit_box_size))),
-              _state(BUTTON_INACTIVE),
-              _animated_sprite(std::move(animated_sprite)) {
+              _animated_sprite(std::move(animated_sprite)), _state(nullptr) {
         addComponents({_animated_sprite, _hit_box});
 
-        reset();
+        ButtonState::init<Inactive>(*this, _state);
     }
 
     void Button::handleInput(const InputEvent &input) {
-        switch (_state) {
-            case BUTTON_INACTIVE:
-                if (input.type == InputEvent::Type::MOUSEMOVED && mouseCollides()) {
-                    _state = BUTTON_HOVER;
-                    _animated_sprite->start("hover");
-//                    LOGDEBUG("hover!");
-                }
-                break;
-
-            case BUTTON_HOVER:
-                if (input.type == InputEvent::Type::MOUSEMOVED && !mouseCollides()) {
-                    _state = BUTTON_INACTIVE;
-                    _animated_sprite->start("default");
-//                    LOGDEBUG("NOT hover!");
-                }
-
-                if ((input.type == InputEvent::Type::MOUSECLICK || input.type == InputEvent::Type::ACCEPT) &&
-                    input.state == InputEvent::State::ENTERED) {
-                    _state = BUTTON_CLICKING;
-                    _animated_sprite->start("clicking");
-//                    LOGDEBUG("clicking!");
-                }
-                break;
-
-            case BUTTON_CLICKING:
-                if (input.type == InputEvent::Type::MOUSEMOVED && !mouseCollides()) {
-                    _state = BUTTON_INACTIVE;
-                    _animated_sprite->start("default");
-//                    LOGDEBUG("NOT hover and NOT clicking!");
-                }
-
-                if ((input.type == InputEvent::Type::MOUSECLICK || input.type == InputEvent::Type::ACCEPT) &&
-                    input.state == InputEvent::State::EXITED) {
-                    _state = BUTTON_ACTIVE;
-//                    _state = BUTTON_CLICKED;
-//                    LOGDEBUG("active!");
-                }
-
-//            case BUTTON_CLICKED:
-//                break;
-
-            default:
-                break;
-        }
+        _state->handleInput(input);
     }
 
     bool Button::isActive() const {
-        return _state == State::BUTTON_ACTIVE;
+        return _state->isActive();
     }
 
     bool Button::mouseCollides() const {
@@ -72,11 +29,6 @@ namespace game {
     }
 
     void Button::reset() {
-        if (mouseCollides()) {
-            _state = BUTTON_HOVER;
-            _animated_sprite->start("hover");
-        } else {
-            _animated_sprite->start("default");
-        }
+        ButtonState::init<Inactive>(*this, _state);
     }
 } // game
