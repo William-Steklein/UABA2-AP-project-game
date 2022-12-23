@@ -35,15 +35,15 @@ namespace game {
         }
     }
 
-    void PlayerPhysicsComponent::jump(bool wall_jump, bool left) {
-        if (wall_jump) {
-            if (left) {
-                addVelocity({-_wall_horizontal_jump_velocity, _initial_jump_velocity});
-            } else {
-                addVelocity({_wall_horizontal_jump_velocity, _initial_jump_velocity});
-            }
+    void PlayerPhysicsComponent::jump(bool left) {
+        addVelocity({0, _initial_jump_velocity});
+    }
+
+    void PlayerPhysicsComponent::walljump(bool left) {
+        if (left) {
+            addVelocity({-_wall_horizontal_jump_velocity, _initial_jump_velocity});
         } else {
-            addVelocity({0, _initial_jump_velocity});
+            addVelocity({_wall_horizontal_jump_velocity, _initial_jump_velocity});
         }
     }
 

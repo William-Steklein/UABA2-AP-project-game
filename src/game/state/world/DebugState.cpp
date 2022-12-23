@@ -5,7 +5,7 @@ namespace game {
     void DebugState::enter() {
         generateBackground({0, 0}, {20, 20}, {0.5, 0.5});
 
-        _player = std::make_shared<Player>(Player(
+        _player = std::shared_ptr<Player>(new Player(
                 {{0, 1}, {1, 1}, 0},
                 _state_machine.getViewComponentCreator()->createAnimatedSprite(
                         constants::player::view_size, 1, false, "adventurer")

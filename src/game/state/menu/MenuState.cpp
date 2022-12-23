@@ -1,11 +1,14 @@
-#include "OverlayMenuState.h"
-#include "game/state/MenuState.h"
+#include "MenuState.h"
+#include "game/state/world/DebugState.h"
+#include "game/state/world/LevelState.h"
 
 namespace game {
-    void OverlayMenuState::enter() {
-        unsigned int background_layer = 8;
-        unsigned int button_layer = 9;
-        unsigned int text_layer = 10;
+    void MenuState::enter() {
+        _state_machine.getCamera()->reset();
+
+        unsigned int background_layer = 0;
+        unsigned int button_layer = 1;
+        unsigned int text_layer = 2;
 
         std::shared_ptr<engine::UIEntity> menu_background = std::make_shared<engine::UIEntity>(engine::UIEntity(
                 {{0, 0}, {1, 1}, 0},
@@ -18,10 +21,10 @@ namespace game {
 
         std::shared_ptr<engine::ITextBoxComponent> play_button_text =
                 _state_machine.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
-        play_button_text->setText("resume");
+        play_button_text->setText("play");
         play_button_text->setFontSize(button_font_size);
 
-        _resume_button = std::make_shared<Button>(Button(
+        _play_button = std::make_shared<Button>(Button(
                 {{0, 0.51}, {1, 1}, 0},
                 button_size,
                 _state_machine.getMousePosition(),
@@ -30,15 +33,16 @@ namespace game {
                 {play_button_text}
         ));
 
-        menu_background->addChild(_resume_button, menu_background);
+        menu_background->addChild(_play_button, menu_background);
+        _buttons.push_back(_play_button);
 
 
         std::shared_ptr<engine::ITextBoxComponent> debug_button_text =
                 _state_machine.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
-        debug_button_text->setText("restart");
+        debug_button_text->setText("debug mode");
         debug_button_text->setFontSize(button_font_size);
 
-        _restart_button = std::make_shared<Button>(Button(
+        _debug_button = std::make_shared<Button>(Button(
                 {{0, 0.175}, {1, 1}, 0},
                 button_size,
                 _state_machine.getMousePosition(),
@@ -47,15 +51,16 @@ namespace game {
                 {debug_button_text}
         ));
 
-        menu_background->addChild(_restart_button, menu_background);
+        menu_background->addChild(_debug_button, menu_background);
+        _buttons.push_back(_debug_button);
 
 
         std::shared_ptr<engine::ITextBoxComponent> quit_button_text =
                 _state_machine.getViewComponentCreator()->createTextBox(button_size, text_layer, true, "PTSans-bold");
-        quit_button_text->setText("main menu");
+        quit_button_text->setText("quit");
         quit_button_text->setFontSize(button_font_size);
 
-        _main_menu_button = std::make_shared<Button>(Button(
+        _quit_button = std::make_shared<Button>(Button(
                 {{0, -0.175}, {1, 1}, 0},
                 button_size,
                 _state_machine.getMousePosition(),
@@ -64,31 +69,27 @@ namespace game {
                 {quit_button_text}
         ));
 
-        menu_background->addChild(_main_menu_button, menu_background);
+        menu_background->addChild(_quit_button, menu_background);
+        _buttons.push_back(_quit_button);
     }
 
-    void OverlayMenuState::graphicsUpdate(double t, float dt) {
-        if (_resume_button->isActive()) {
-            pop();
-        } else if (_restart_button->isActive()) {
-            popAndReset();
-        } else if (_main_menu_button->isActive()) {
-            popAndSet<MenuState>();
+    void MenuState::graphicsUpdate(double t, float dt) {
+        if (_play_button->isActive()) {
+            set<LevelState>();
+        } else if (_debug_button->isActive()) {
+            set<DebugState>();
+        } else if (_quit_button->isActive()) {
+            _state_machine.quit();
         } else {
             IGameState::graphicsUpdate(t, dt);
         }
     }
 
-    void OverlayMenuState::handleInput(const InputEvent &input) {
+    void MenuState::handleInput(const InputEvent &input) {
         switch (input.type) {
-            case InputEvent::Type::RETURN:
-                if (input.state == InputEvent::State::ENTERED) {
-                    pop();
-                }
-
             case InputEvent::Type::MOUSEMOVED:
             case InputEvent::Type::MOUSECLICK:
-                for (const auto &button: {_resume_button, _restart_button, _main_menu_button}) {
+                for (const auto &button: {_play_button, _debug_button, _quit_button}) {
                     button->handleInput(input);
                 }
                 break;

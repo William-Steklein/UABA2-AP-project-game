@@ -8,11 +8,11 @@ namespace game {
 
     class FallState : public InAirState {
     public:
-        FallState() = default;
+        using InAirState::InAirState;
 
         ~FallState() override = default;
 
-        void enter(Player &player) override;
+        void enter() override;
     };
 
 } // game

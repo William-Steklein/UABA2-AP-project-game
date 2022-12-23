@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "game/entities/player/state/IdleState.h"
+#include "game/entities/player/state/on-ground/IdleState.h"
 
 namespace game {
     Player::Player(engine::Transform transform,
@@ -12,20 +12,20 @@ namespace game {
 
         createHitBoxAndRays();
 
-        _state = std::make_shared<IdleState>();
-        _state->enter(*this);
+        _state = std::make_shared<IdleState>(*this);
+        _state->enter();
     }
 
     void Player::setState(std::shared_ptr<IPlayerState> state) {
         if (state != nullptr) {
-            _state->exit(*this);
+            _state->exit();
             _state = std::move(state);
-            _state->enter(*this);
+            _state->enter();
         }
     }
 
     void Player::physicsUpdate(double t, float dt) {
-        _state->physicsUpdate(*this);
+        _state->physicsUpdate();
 
         if (_standing_ray->collided()) {
             _standing_ray->reset();
@@ -43,13 +43,13 @@ namespace game {
     }
 
     void Player::graphicsUpdate(double t, float dt) {
-        _state->graphicsUpdate(*this);
+        _state->graphicsUpdate();
 
         Entity::graphicsUpdate(t, dt);
     }
 
     void Player::handleInput(const InputEvent &input) {
-        _state->handleInput(*this, input);
+        _state->handleInput(input);
     }
 
     void Player::createHitBoxAndRays() {

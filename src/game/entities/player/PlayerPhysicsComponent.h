@@ -22,7 +22,9 @@ namespace game {
 
         void applyHorizontalMovementForce(bool left);
 
-        void jump(bool wall_jump = false, bool left = false);
+        void jump(bool left = false);
+
+        void walljump(bool left = false);
 
         void applyStoppingFrictionForce();
 

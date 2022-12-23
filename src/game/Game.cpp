@@ -1,6 +1,6 @@
 #include "game/Game.h"
-#include "game/state/MenuState.h"
-#include "game/state/DebugState.h"
+#include "game/state/menu/MenuState.h"
+#include "game/state/world/DebugState.h"
 #include "game/level/level_data_parser.h"
 
 namespace game {

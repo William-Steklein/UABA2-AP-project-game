@@ -2,7 +2,7 @@
 #define GAME_ENGINE_ONGROUNDSTATE_H
 
 
-#include "IPlayerState.h"
+#include "game/entities/player/state/IPlayerState.h"
 
 namespace game {
 
@@ -10,12 +10,12 @@ namespace game {
     public:
         ~OnGroundState() override = default;
 
-        void physicsUpdate(game::Player &player) override;
+        void physicsUpdate() override;
 
-        void handleInput(Player &player, const InputEvent &input) override;
+        void handleInput(const InputEvent &input) override;
 
-    protected:
-        OnGroundState() = default;
+//    protected:
+        OnGroundState(Player &player);
     };
 
 } // game

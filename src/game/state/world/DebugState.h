@@ -2,7 +2,7 @@
 #define GAME_ENGINE_DEBUGSTATE_H
 
 
-#include "game/state/WorldState.h"
+#include "WorldState.h"
 
 namespace game {
 

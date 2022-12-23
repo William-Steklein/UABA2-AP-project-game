@@ -1,6 +1,6 @@
 #include "WorldState.h"
-#include "game/state/OverlayMenuState.h"
-#include <engine/Stopwatch.h>
+#include "game/state/menu/OverlayMenuState.h"
+#include "engine/Stopwatch.h"
 
 namespace game {
 
@@ -95,7 +95,7 @@ namespace game {
     }
 
     void WorldState::createPlayer(const engine::Vector2f &position) {
-        _player = std::make_shared<Player>(Player(
+        _player = std::shared_ptr<Player>(new Player(
                 {position, {1, 1}, 0},
                 _state_machine.getViewComponentCreator()->createAnimatedSprite(
                         constants::player::view_size, 1, false, "adventurer")
