@@ -3,4 +3,3 @@ add_library(game_lib STATIC ${game_lib_sources})
 target_include_directories(game_lib PUBLIC "${PROJECT_SOURCE_DIR}/src")
 
 target_link_libraries(game_lib PUBLIC engine_lib)
-#target_link_libraries(game_lib PUBLIC engine_lib nlohmann_json::nlohmann_json)
