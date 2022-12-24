@@ -1,5 +1,5 @@
 #include "game/Game.h"
-#include "game/state/menu/MenuState.h"
+#include "game/state/menu/MainMenuState.h"
 #include "game/state/world/DebugState.h"
 #include "game/level/level_data_parser.h"
 
@@ -18,7 +18,7 @@ namespace game {
 
         _level_data = levelsDataParser("data/levels/levels.json");
 
-        IGameState::init<MenuState>(*this, _states);
+        IGameState::init<MainMenuState>(*this, _states);
     }
 
     void Game::update() {

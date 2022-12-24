@@ -24,6 +24,10 @@ namespace game {
 
         void enter() override {
             _state_machine._animated_sprite->start("default");
+
+            if (_state_machine.mouseCollides()) {
+                set<Hover>();
+            }
         }
 
         void handleInput(const InputEvent &input) override {

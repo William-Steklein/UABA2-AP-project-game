@@ -2,19 +2,13 @@
 #define GAME_ENGINE_OVERLAYMENUSTATE_H
 
 
-#include "engine/entity/ui/UIEntity.h"
-
-#include "game/entities/ui-widgets/button/Button.h"
-#include "game/entities/ui-widgets/button/ButtonState.h"
-#include "game/state/IGameState.h"
+#include "game/state/menu/MenuState.h"
 
 namespace game {
 
-    class OverlayMenuState : public IGameState {
+    class OverlayMenuState : public MenuState {
     public:
-        using IGameState::IGameState;
-
-        ~OverlayMenuState() override = default;
+        using MenuState::MenuState;
 
         void enter() override;
 
