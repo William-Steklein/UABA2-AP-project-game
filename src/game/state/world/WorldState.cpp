@@ -19,8 +19,6 @@ namespace game {
             throw std::runtime_error("Loaded world has no player");
         }
 
-        _state_machine.getCamera()->reset();
-
         _fps_counter_text = _state_machine.getViewComponentCreator()->createTextBox(
                 {0.5f, 0.25f}, 5, true, "PTSans-bold");
         _fps_counter_text->setFontSize(0.08f);
@@ -34,6 +32,11 @@ namespace game {
         createDebugViewComponents();
 
         updateFpsCounterText();
+
+        cameraFollowPlayer();
+        // graphics update after changing camera position
+        graphicsUpdate(engine::Stopwatch::getInstance().getTime(),
+                       engine::Stopwatch::getInstance().getDeltaTime());
 
         IGameState::enter();
     }
@@ -62,15 +65,12 @@ namespace game {
     }
 
     void WorldState::graphicsUpdate(double t, float dt) {
-        _state_machine.getCamera()->setPosition(_player->getPosition());
+        cameraFollowPlayer();
 
         updateFpsCounterText();
 
         IGameState::graphicsUpdate(t, dt);
-
-        for (const auto &component: _debug_components) {
-            component->update(t, dt);
-        }
+        updateDebugViewComponents(t, dt);
     }
 
     void WorldState::handleInput(const InputEvent &input) {
@@ -104,6 +104,10 @@ namespace game {
         ));
 
         _entities.insert(_player);
+    }
+
+    void WorldState::cameraFollowPlayer() {
+        _state_machine.getCamera()->setPosition(_player->getPosition());
     }
 
     void WorldState::createWall(const engine::Vector2f &position, const engine::Vector2f &size) {
@@ -178,6 +182,14 @@ namespace game {
             wall_rectangle->setVisible(_debug_view_visibility);
 
             _debug_components.push_back(wall_rectangle);
+        }
+
+        updateDebugViewComponents(0, 0);
+    }
+
+    void WorldState::updateDebugViewComponents(double t, float dt) {
+        for (const auto &component: _debug_components) {
+            component->update(t, dt);
         }
     }
 

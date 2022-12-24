@@ -38,11 +38,15 @@ namespace game {
 
         void createPlayer(const engine::Vector2f &position);
 
+        void cameraFollowPlayer();
+
         void createWall(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
 
         void updateCollisions();
 
         void createDebugViewComponents();
+
+        void updateDebugViewComponents(double t, float dt);
 
         void toggleDebugViewVisibility();
 

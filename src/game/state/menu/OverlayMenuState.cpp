@@ -9,6 +9,8 @@ namespace game {
         _resume_button = createMenuButton("resume", {0, 0.51}, menu_background);
         _restart_button = createMenuButton("restart", {0, 0.175}, menu_background);
         _main_menu_button = createMenuButton("main menu", {0, -0.175}, menu_background);
+
+        MenuState::enter();
     }
 
     void OverlayMenuState::graphicsUpdate(double t, float dt) {

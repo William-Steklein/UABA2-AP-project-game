@@ -14,8 +14,6 @@ namespace game {
     public:
         IGameState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states);
 
-        void enter() override;
-
         void reset() override;
 
         void graphicsUpdate(double t, float dt) override;

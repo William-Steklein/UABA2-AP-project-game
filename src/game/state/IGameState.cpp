@@ -6,11 +6,6 @@ namespace game {
 
     }
 
-    void IGameState::enter() {
-        graphicsUpdate(engine::Stopwatch::getInstance().getTime(),
-                       engine::Stopwatch::getInstance().getDeltaTime());
-    }
-
     void IGameState::reset() {
         _entities.clear();
 
