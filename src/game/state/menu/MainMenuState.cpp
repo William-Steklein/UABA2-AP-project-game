@@ -7,7 +7,7 @@ namespace game {
         _state_machine.getCamera()->reset();
 
         std::shared_ptr<engine::UIEntity> menu_background = createMenuBackground({0, 0});
-        _entities.insert(menu_background);
+        _entities.push_back(menu_background);
 
         _play_button = createMenuButton("play", {0, 0.51}, menu_background);
         _debug_button = createMenuButton("debug mode", {0, 0.175}, menu_background);

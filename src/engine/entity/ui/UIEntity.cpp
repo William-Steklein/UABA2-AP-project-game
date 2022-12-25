@@ -12,12 +12,32 @@ namespace engine {
         for (const auto &child: _children) {
             child->graphicsUpdate(t, dt);
         }
+
+        for (auto child_it = _weak_children.begin(); child_it != _weak_children.end();) {
+            if ((*child_it).expired()) {
+                child_it = _weak_children.erase(child_it);
+            } else {
+                child_it->lock()->graphicsUpdate(t, dt);
+
+                child_it++;
+            }
+        }
     }
 
     void UIEntity::setPosition(const engine::Vector2f &position) {
         for (const auto &child: _children) {
             if (child->_relative_positioning) {
                 child->move(position - getPosition());
+            }
+        }
+
+        for (auto child_it = _weak_children.begin(); child_it != _weak_children.end();) {
+            if ((*child_it).expired()) {
+                child_it = _weak_children.erase(child_it);
+            } else {
+                child_it->lock()->move(position - getPosition());
+
+                child_it++;
             }
         }
 
@@ -43,33 +63,37 @@ namespace engine {
         return !_parent.expired();
     }
 
-    const std::vector<std::shared_ptr<UIEntity>> &UIEntity::getChildren() const {
-        return _children;
-    }
+    std::vector<std::shared_ptr<UIEntity>> UIEntity::getChildren() {
+        std::vector<std::shared_ptr<UIEntity>> children = _children;
 
-    void UIEntity::setChildren(const std::vector<std::shared_ptr<UIEntity>> &children) {
-        _children = children;
+        for (auto child_it = _weak_children.begin(); child_it != _weak_children.end();) {
+            if ((*child_it).expired()) {
+                child_it = _weak_children.erase(child_it);
+            } else {
+                children.push_back(child_it->lock());
+
+                child_it++;
+            }
+        }
+
+        return children;
     }
 
     void UIEntity::addChild(const std::shared_ptr<UIEntity> &child, const std::weak_ptr<UIEntity> &parent,
                             bool relative_positioning) {
-        child->_parent = parent;
-        child->_relative_positioning = relative_positioning;
-        if (relative_positioning) {
-            child->setRelativePosition(child->getPosition());
-        }
+        _linkChild(child, parent, relative_positioning);
         _children.push_back(child);
     }
 
-    void UIEntity::addChildren(const std::vector<std::shared_ptr<UIEntity>> &children,
-                               const std::weak_ptr<UIEntity> &parent, bool relative_positioning) {
-        for (const auto &child: children) {
-            addChild(child, parent, relative_positioning);
-        }
+    void UIEntity::addWeakChild(const std::weak_ptr<UIEntity> &child, const std::weak_ptr<UIEntity> &parent,
+                                bool relative_positioning) {
+        if (child.expired()) return;
+        _linkChild(child.lock(), parent, relative_positioning);
+        _weak_children.push_back(child);
     }
 
-    bool UIEntity::hasChildren() const {
-        return !_children.empty();
+    bool UIEntity::hasChildren() {
+        return !getChildren().empty();
     }
 
     bool UIEntity::isRelativePositioning() const {
@@ -78,5 +102,15 @@ namespace engine {
 
     void UIEntity::setRelativePositioning(bool relativePositioning) {
         _relative_positioning = relativePositioning;
+    }
+
+    void UIEntity::_linkChild(const std::shared_ptr<UIEntity> &child, const std::weak_ptr<UIEntity> &parent,
+                              bool relative_positioning) {
+        child->_parent = parent;
+        child->_relative_positioning = relative_positioning;
+        if (relative_positioning) {
+            child->setRelativePosition(child->getPosition());
+        }
+        child->graphicsUpdate(0,0);
     }
 } // engine

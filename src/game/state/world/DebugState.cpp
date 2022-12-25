@@ -12,7 +12,7 @@ namespace game {
                         constants::player::view_size, 1, false, "adventurer")
         ));
 
-        _entities.insert(_player);
+        _entities.push_back(_player);
 
         createWall({-0.5, 0.25}, {0.25, 0.25});
         createWall({-1, 0.5}, {0.25, 0.25});
@@ -45,7 +45,7 @@ namespace game {
                                 entity_size, 0, false, "pr_background"),}
                 ));
 
-                _entities.insert(background);
+                _entities.push_back(background);
             }
         }
     }

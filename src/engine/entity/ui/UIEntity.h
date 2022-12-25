@@ -24,17 +24,15 @@ namespace engine {
 
         bool hasParent() const;
 
-        const std::vector<std::shared_ptr<UIEntity>> &getChildren() const;
-
-        void setChildren(const std::vector<std::shared_ptr<UIEntity>> &children);
+        std::vector<std::shared_ptr<UIEntity>> getChildren();
 
         void addChild(const std::shared_ptr<UIEntity> &child, const std::weak_ptr<UIEntity> &parent,
                       bool relative_positioning = true);
 
-        void addChildren(const std::vector<std::shared_ptr<UIEntity>> &children, const std::weak_ptr<UIEntity> &parent,
-                         bool relative_positioning = true);
+        void addWeakChild(const std::weak_ptr<UIEntity> &child, const std::weak_ptr<UIEntity> &parent,
+                          bool relative_positioning = true);
 
-        bool hasChildren() const;
+        bool hasChildren();
 
         bool isRelativePositioning() const;
 
@@ -43,8 +41,12 @@ namespace engine {
     private:
         std::weak_ptr<UIEntity> _parent;
         std::vector<std::shared_ptr<UIEntity>> _children;
+        std::vector<std::weak_ptr<UIEntity>> _weak_children;
 
         bool _relative_positioning;
+
+        static inline void _linkChild(const std::shared_ptr<UIEntity> &child, const std::weak_ptr<UIEntity> &parent,
+                                      bool relative_positioning = true);
     };
 
 } // engine

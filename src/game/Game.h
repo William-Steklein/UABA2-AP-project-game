@@ -31,6 +31,8 @@ namespace game {
 
         const std::shared_ptr<engine::Vector2f> &getMousePosition() const;
 
+        void setCurrentLevelId(unsigned int level_id);
+
         const std::vector<std::shared_ptr<LevelData>> &getLevelData() const;
 
         const std::shared_ptr<LevelData> &getLevelDataPoint(unsigned int level_id) const;
@@ -50,6 +52,7 @@ namespace game {
         std::stack<std::unique_ptr<IGameState>> _states;
 
         std::vector<std::shared_ptr<LevelData>> _level_data;
+        unsigned int _current_level_id;
     };
 
 } // game

@@ -6,7 +6,8 @@ namespace game {
                    std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite)
             : engine::Entity(std::move(transform)),
               _animated_sprite(std::move(animated_sprite)),
-              _physics_component(std::make_shared<PlayerPhysicsComponent>()) {
+              _physics_component(std::make_shared<PlayerPhysicsComponent>()),
+              _direction(Direction::RIGHT) {
         addComponents({_animated_sprite}, false);
         addComponent(_physics_component, true);
 

@@ -21,7 +21,8 @@ namespace game {
         void physicsUpdate(double t, float dt) override;
 
     protected:
-        std::set<std::shared_ptr<engine::Entity>> _entities;
+        std::vector<std::shared_ptr<engine::Entity>> _entities;
+        std::vector<std::weak_ptr<engine::Entity>> _weak_entities;
     };
 
 } // game

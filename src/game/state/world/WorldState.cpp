@@ -27,7 +27,7 @@ namespace game {
                 {{-1.25, 0.9}, {1, 1}, 0},
                 {_fps_counter_text}
         ));
-        _entities.insert(_fps_counter);
+        _entities.push_back(_fps_counter);
 
         createDebugViewComponents();
 
@@ -103,7 +103,7 @@ namespace game {
                         constants::player::view_size, 1, false, "adventurer")
         ));
 
-        _entities.insert(_player);
+        _entities.push_back(_player);
     }
 
     void WorldState::cameraFollowPlayer() {
@@ -118,7 +118,7 @@ namespace game {
                 _state_machine.getViewComponentCreator()->createSprite(size, layer, false, "pr_ground_2")
         )));
 
-        _entities.insert(_walls.back());
+        _entities.push_back(_walls.back());
     }
 
     void WorldState::updateCollisions() {

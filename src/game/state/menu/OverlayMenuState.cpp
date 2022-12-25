@@ -4,7 +4,7 @@
 namespace game {
     void OverlayMenuState::enter() {
         std::shared_ptr<engine::UIEntity> menu_background = createMenuBackground({0, 0});
-        _entities.insert(menu_background);
+        _entities.push_back(menu_background);
 
         _resume_button = createMenuButton("resume", {0, 0.51}, menu_background);
         _restart_button = createMenuButton("restart", {0, 0.175}, menu_background);

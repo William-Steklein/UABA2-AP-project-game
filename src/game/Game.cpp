@@ -12,7 +12,8 @@ namespace game {
                      std::move(resource_manager),
                      std::move(view_component_creator),
                      std::move(audio_component_creator)),
-              _mouse_position(std::make_shared<engine::Vector2f>()) {
+              _mouse_position(std::make_shared<engine::Vector2f>()),
+              _current_level_id(0) {
         loadResources();
         _config = parseConfig("data/config_default.json");
 
@@ -61,6 +62,14 @@ namespace game {
         return _mouse_position;
     }
 
+    void Game::setCurrentLevelId(unsigned int level_id) {
+        if (level_id >= _level_data.size()) {
+            throw std::runtime_error("No level with id \"" + std::to_string(level_id) + "\"");
+        }
+
+        _current_level_id = level_id;
+    }
+
     const std::vector<std::shared_ptr<LevelData>> &Game::getLevelData() const {
         return _level_data;
     }
@@ -71,7 +80,7 @@ namespace game {
 
     const std::shared_ptr<LevelData> &Game::getCurrentLevelDataPoint() const {
         // todo: level selection
-        return _level_data[0];
+        return _level_data[_current_level_id];
     }
 
     void Game::graphicsUpdate(double t, float dt) {

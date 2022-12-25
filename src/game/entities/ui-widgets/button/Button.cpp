@@ -16,6 +16,18 @@ namespace game {
         ButtonState::init<Inactive>(*this, _state);
     }
 
+    void Button::setPosition(const engine::Vector2f &position) {
+        engine::UIEntity::setPosition(position);
+
+        _resendMouseMovedInput();
+    }
+
+    void Button::setScale(const engine::Vector2f &scale) {
+        engine::UIEntity::setScale(scale);
+
+        _resendMouseMovedInput();
+    }
+
     void Button::handleInput(const InputEvent &input) {
         _state->handleInput(input);
     }
@@ -30,5 +42,14 @@ namespace game {
 
     void Button::reset() {
         ButtonState::init<Inactive>(*this, _state);
+    }
+
+    void Button::_resendMouseMovedInput() {
+        game::InputEvent input{};
+
+        input.type = game::InputEvent::Type::MOUSEMOVED;
+        input.state = game::InputEvent::State::ACTIVE;
+
+        _state->handleInput(input);
     }
 } // game

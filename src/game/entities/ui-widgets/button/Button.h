@@ -21,6 +21,10 @@ namespace game {
                std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite,
                const std::vector<std::shared_ptr<engine::IComponent>> &components = {});
 
+        void setPosition(const engine::Vector2f &position) override;
+
+        void setScale(const engine::Vector2f &scale) override;
+
         void handleInput(const InputEvent &input);
 
         bool isActive() const;
@@ -34,6 +38,8 @@ namespace game {
 
         std::shared_ptr<engine::Vector2f> _mouse_position;
         std::shared_ptr<engine::HitBox> _hit_box;
+
+        void _resendMouseMovedInput();
     };
 
 } // game

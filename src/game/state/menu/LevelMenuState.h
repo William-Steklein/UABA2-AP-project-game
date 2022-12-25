@@ -17,19 +17,20 @@ namespace game {
 
     private:
         std::shared_ptr<engine::UIEntity> _menu_background;
+        std::shared_ptr<engine::UIEntity> _panel;
 
         std::shared_ptr<Button> _return_button;
         std::shared_ptr<Button> _left_arrow_button;
         std::shared_ptr<Button> _right_arrow_button;
 
-        std::vector<std::shared_ptr<Button>> _level_buttons;
+        std::vector<std::pair<std::shared_ptr<Button>, unsigned int>> _level_buttons;
 
         unsigned int _current_panel;
         unsigned int _level_amount;
         unsigned int _panel_amount;
         unsigned int _remainder;
 
-        void createPanel(unsigned int panel_nr);
+        void createPanel();
     };
 
 } // game

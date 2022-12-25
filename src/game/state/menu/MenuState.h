@@ -36,7 +36,7 @@ namespace game {
                                                   const engine::Vector2f &size = {0.3f, 0.3f});
 
     protected:
-        std::vector<std::shared_ptr<Button>> _buttons;
+        std::vector<std::weak_ptr<Button>> _buttons;
     };
 
 } // game

@@ -5,8 +5,14 @@ namespace game {
         switch (input.type) {
             case InputEvent::Type::MOUSEMOVED:
             case InputEvent::Type::MOUSECLICK:
-                for (const auto &button: _buttons) {
-                    button->handleInput(input);
+                for (auto button_it = _buttons.begin(); button_it != _buttons.end();) {
+                    if ((*button_it).expired()) {
+                        button_it = _buttons.erase(button_it);
+                    } else {
+                        button_it->lock()->handleInput(input);
+
+                        button_it++;
+                    }
                 }
                 break;
 
@@ -21,7 +27,7 @@ namespace game {
                                     const engine::Vector2f &size) {
         unsigned int background_layer = 8;
 
-        std::shared_ptr<engine::UIEntity> menu_background = std::unique_ptr<engine::UIEntity>(new engine::UIEntity(
+        std::shared_ptr<engine::UIEntity> menu_background = std::shared_ptr<engine::UIEntity>(new engine::UIEntity(
                 {position, {1, 1}, 0},
                 {_state_machine.getViewComponentCreator()->createSprite(size, background_layer, true, "menu"),}
         ));
@@ -46,7 +52,7 @@ namespace game {
         button_text->setText(text);
         button_text->setFontSize(font_size);
 
-        std::shared_ptr<Button> button = std::unique_ptr<Button>(new Button(
+        std::shared_ptr<Button> button = std::shared_ptr<Button>(new Button(
                 {position, {1, 1}, 0},
                 size,
                 _state_machine.getMousePosition(),
@@ -77,7 +83,7 @@ namespace game {
         button_text->setText(text);
         button_text->setFontSize(font_size);
 
-        std::shared_ptr<Button> button = std::unique_ptr<Button>(new Button(
+        std::shared_ptr<Button> button = std::shared_ptr<Button>(new Button(
                 {position, {1, 1}, 0},
                 size,
                 _state_machine.getMousePosition(),
@@ -100,7 +106,7 @@ namespace game {
                                                          const engine::Vector2f &size) {
         unsigned int button_layer = 9;
 
-        std::shared_ptr<Button> button = std::unique_ptr<Button>(new Button(
+        std::shared_ptr<Button> button = std::shared_ptr<Button>(new Button(
                 {position, {1, 1}, 0},
                 size,
                 _state_machine.getMousePosition(),
