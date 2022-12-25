@@ -1,6 +1,5 @@
 {
   "menu": "data/textures/ui/menu.png",
-  "button": "data/textures/ui/button.png",
   "hamburger": "data/textures/ui/hamburger.png",
   "cobble_stone": "data/textures/cobble_stone.png",
   "pr_background": "data/textures/prototype/background_tile.png",
