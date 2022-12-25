@@ -3,7 +3,7 @@
 
 namespace game {
     void CrouchState::enter() {
-        _state_machine._animated_sprite->start("crouch", true, _state_machine.isFacingLeft());
+        _state_machine._animated_sprite->start("crouch", true, _state_machine.isFacingLeft(), false);
     }
 
     void CrouchState::physicsUpdate(double t, float dt) {

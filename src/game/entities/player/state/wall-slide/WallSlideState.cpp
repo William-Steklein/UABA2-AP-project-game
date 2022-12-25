@@ -8,7 +8,7 @@ namespace game {
         // reverse direction
         _state_machine.updateDirection(_state_machine.isFacingLeft() ? Player::Direction::RIGHT : Player::Direction::LEFT);
 
-        _state_machine._animated_sprite->start("wall_slide", true, _state_machine.isFacingLeft());
+        _state_machine._animated_sprite->start("wall_slide", true, _state_machine.isFacingLeft(), false);
 
         _state_machine._physics_component->setVelocity({0, 0});
         _state_machine._physics_component->setWallVelocityClamp(true);

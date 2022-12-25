@@ -25,7 +25,15 @@ namespace game {
                                                  const engine::Vector2f &size = {0.5f, 0.25f},
                                                  float font_size = 0.085f);
 
-        void createLevelSelectButton();
+        std::shared_ptr<Button> createLevelSelectButton(const std::string &text, const engine::Vector2f &position,
+                                     const std::shared_ptr<engine::UIEntity> &parent = nullptr,
+                                     const engine::Vector2f &size = {0.3f, 0.3f},
+                                     float font_size = 0.085f);
+
+        std::shared_ptr<Button> createArrowButton(const engine::Vector2f &position,
+                                                  bool left = false,
+                                                  const std::shared_ptr<engine::UIEntity> &parent = nullptr,
+                                                  const engine::Vector2f &size = {0.3f, 0.3f});
 
     protected:
         std::vector<std::shared_ptr<Button>> _buttons;

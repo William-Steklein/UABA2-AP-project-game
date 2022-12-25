@@ -3,7 +3,7 @@
 
 namespace game {
     void IdleState::enter() {
-        _state_machine._animated_sprite->start("idle", true, _state_machine.isFacingLeft());
+        _state_machine._animated_sprite->start("idle", true, _state_machine.isFacingLeft(), false);
     }
 
     void IdleState::physicsUpdate(double t, float dt) {

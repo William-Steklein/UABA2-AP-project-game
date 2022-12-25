@@ -85,19 +85,58 @@
       ]
     ]
   },
-  "button_anim": {
+  "menu_button": {
     "default": [
       0.1,
-      ["data/textures/ui/button.png"]
+      ["data/textures/ui/menu-button/button.png"]
     ],
     "hover": [
       0.1,
-      ["data/textures/ui/button_hover.png"]
+      ["data/textures/ui/menu-button/button_hover.png"]
     ],
     "clicking": [
       0.1,
-      ["data/textures/ui/button_clicked.png"]
+      ["data/textures/ui/menu-button/button_clicking.png"]
+    ],
+    "clicked": [
+      0.1,
+      ["data/textures/ui/menu-button/button_clicking.png"]
+    ]
+  },
+  "level_menu_button": {
+    "default": [
+      0.1,
+      ["data/textures/ui/level-menu-button/level_button.png"]
+    ],
+    "hover": [
+      0.1,
+      ["data/textures/ui/level-menu-button/level_button_hover.png"]
+    ],
+    "clicking": [
+      0.1,
+      ["data/textures/ui/level-menu-button/level_button_clicking.png"]
+    ],
+    "clicked": [
+      0.1,
+      ["data/textures/ui/level-menu-button/level_button_clicking.png"]
+    ]
+  },
+  "arrow_button": {
+    "default": [
+      0.1,
+      ["data/textures/ui/arrow-button/arrow_button.png"]
+    ],
+    "hover": [
+      0.1,
+      ["data/textures/ui/arrow-button/arrow_button_hover.png"]
+    ],
+    "clicking": [
+      0.1,
+      ["data/textures/ui/arrow-button/arrow_button_clicking.png"]
+    ],
+    "clicked": [
+      0.1,
+      ["data/textures/ui/arrow-button/arrow_button_clicking.png"]
     ]
   }
-
 }

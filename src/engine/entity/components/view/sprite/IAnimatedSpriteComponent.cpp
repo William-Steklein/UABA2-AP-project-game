@@ -36,15 +36,12 @@ namespace engine {
         if (update_view) setTexture(_current_frame, _mirror_h, _mirror_v);
     }
 
-    void IAnimatedSpriteComponent::start(const std::string &animation_id, bool loop, bool mirror_h, bool mirror_v) {
+    void IAnimatedSpriteComponent::start(const std::string &animation_id, bool loop) {
         if (!_animation_group.get()) {
             throw std::runtime_error("An animation component has no animation data");
         } else if (_animation_group->animations.find(animation_id) == _animation_group->animations.end()) {
             throw std::runtime_error("An animation component has no animation \"" + animation_id + "\"");
         }
-
-        _mirror_h = mirror_h;
-        _mirror_v = mirror_v;
 
         _current_id = animation_id;
         _current_time = 0;
@@ -55,6 +52,13 @@ namespace engine {
         _loop_finished = false;
 
         setTexture(_current_frame, _mirror_h, _mirror_v);
+    }
+
+    void IAnimatedSpriteComponent::start(const std::string &animation_id, bool loop, bool mirror_h, bool mirror_v) {
+        setMirrorH(mirror_h);
+        setMirrorV(mirror_v);
+
+        start(animation_id, loop);
     }
 
     void IAnimatedSpriteComponent::setLoop(bool loop) {

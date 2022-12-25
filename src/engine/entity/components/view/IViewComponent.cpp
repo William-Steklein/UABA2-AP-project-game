@@ -28,6 +28,7 @@ namespace engine {
 
     void IViewComponent::setVisible(bool visible) {
         _visible = visible;
+        update(0, 0);
     }
 
     Vector2f IViewComponent::getScale() {

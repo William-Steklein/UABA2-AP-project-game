@@ -23,7 +23,7 @@ namespace game {
         using ButtonState::ButtonState;
 
         void enter() override {
-            _state_machine._animated_sprite->start("default");
+            _state_machine._animated_sprite->start("default", false);
 
             if (_state_machine.mouseCollides()) {
                 set<Hover>();
@@ -48,7 +48,7 @@ namespace game {
         using ButtonState::ButtonState;
 
         void enter() override {
-            _state_machine._animated_sprite->start("hover");
+            _state_machine._animated_sprite->start("hover", false);
         }
 
         void handleInput(const InputEvent &input) override {
@@ -76,7 +76,7 @@ namespace game {
         using ButtonState::ButtonState;
 
         void enter() override {
-            _state_machine._animated_sprite->start("clicking");
+            _state_machine._animated_sprite->start("clicking", false);
         }
 
         void handleInput(const InputEvent &input) override {
@@ -104,7 +104,7 @@ namespace game {
         using ButtonState::ButtonState;
 
         void enter() override {
-            _state_machine._animated_sprite->start("default");
+            _state_machine._animated_sprite->start("default", false);
         }
 
         void handleInput(const InputEvent &input) override {

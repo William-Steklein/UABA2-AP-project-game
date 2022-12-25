@@ -3,7 +3,7 @@
 
 namespace game {
     void JumpState::enter() {
-        _state_machine._animated_sprite->start("jump", false, _state_machine.isFacingLeft());
+        _state_machine._animated_sprite->start("jump", false, _state_machine.isFacingLeft(), false);
 
         _state_machine._physics_component->jump(_state_machine.isFacingLeft());
         _state_machine._standing_ray->reset();
@@ -18,7 +18,7 @@ namespace game {
     }
 
     void WallJumpState::enter() {
-        _state_machine._animated_sprite->start("jump", false, _state_machine.isFacingLeft());
+        _state_machine._animated_sprite->start("jump", false, _state_machine.isFacingLeft(), false);
 
         _state_machine._physics_component->walljump(_state_machine.isFacingLeft());
         _state_machine._standing_ray->reset();

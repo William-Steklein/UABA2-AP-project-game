@@ -25,7 +25,7 @@ namespace engine {
 
     void ISpriteComponent::setMirrorH(bool mirror_h) {
         _mirror_h = mirror_h;
-        updateSprite();
+        update(0, 0);
     }
 
     bool ISpriteComponent::isMirrorV() const {
@@ -34,6 +34,6 @@ namespace engine {
 
     void ISpriteComponent::setMirrorV(bool mirror_v) {
         _mirror_v = mirror_v;
-        updateSprite();
+        update(0, 0);
     }
 } // engine

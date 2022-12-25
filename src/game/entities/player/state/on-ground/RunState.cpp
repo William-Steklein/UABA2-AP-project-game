@@ -3,7 +3,7 @@
 
 namespace game {
     void RunState::enter() {
-        _state_machine._animated_sprite->start("run", true, _state_machine.isFacingLeft());
+        _state_machine._animated_sprite->start("run", true, _state_machine.isFacingLeft(), false);
     }
 
     void RunState::physicsUpdate(double t, float dt) {
