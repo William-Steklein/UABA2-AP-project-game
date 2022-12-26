@@ -1,5 +1,5 @@
 #include "FallState.h"
-#include "game/entities/player/state/on-ground/IdleState.h"
+#include "game/entities/world/player/state/on-ground/IdleState.h"
 
 namespace game {
     void FallState::enter() {

@@ -1,7 +1,7 @@
 #include "WallSlideState.h"
-#include "game/entities/player/state/in-air/FallState.h"
-#include "game/entities/player/state/on-ground/IdleState.h"
-#include "game/entities/player/state/in-air/JumpState.h"
+#include "game/entities/world/player/state/in-air/FallState.h"
+#include "game/entities/world/player/state/on-ground/IdleState.h"
+#include "game/entities/world/player/state/in-air/JumpState.h"
 
 namespace game {
     void WallSlideState::enter() {

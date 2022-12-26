@@ -21,10 +21,9 @@ namespace game {
         _return_button = createMenuButton("return", {0, -0.75}, _menu_background);
 
         if (_panel_amount == 0) {
-            unsigned int text_layer = 10;
-
             std::shared_ptr<engine::ITextBoxComponent> text =
-                    _state_machine.getViewComponentCreator()->createTextBox({1, 1}, text_layer, true, "PTSans-bold");
+                    _state_machine.getViewComponentCreator()->createTextBox({1, 1}, constants::layer::ui_text, true,
+                                                                            "PTSans-bold");
             text->setText("No levels!");
             text->setFontSize(0.25);
 

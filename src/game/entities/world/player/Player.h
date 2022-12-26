@@ -2,13 +2,13 @@
 #define GAME_ENGINE_PLAYER_H
 
 
-#include <engine/entity/Entity.h>
-#include <engine/entity/components/view/sprite/IAnimatedSpriteComponent.h>
-#include <engine/entity/components/view/shape/IShapeComponent.h>
-#include <engine/entity/components/physics/Ray.h>
+#include "engine/entity/Entity.h"
+#include "engine/entity/components/view/sprite/IAnimatedSpriteComponent.h"
+#include "engine/entity/components/view/shape/IShapeComponent.h"
+#include "engine/entity/components/physics/Ray.h"
 
 #include "game/input/InputEvent.h"
-#include "game/entities/player/PlayerPhysicsComponent.h"
+#include "PlayerPhysicsComponent.h"
 
 namespace game {
 

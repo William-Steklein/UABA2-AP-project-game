@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "game/entities/player/state/on-ground/IdleState.h"
+#include "game/entities/world/player/state/on-ground/IdleState.h"
 
 namespace game {
     Player::Player(engine::Transform transform,

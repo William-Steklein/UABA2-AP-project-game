@@ -1,6 +1,6 @@
 #include "DebugState.h"
 #include "game/constants/constants.h"
-#include "game/entities/player/state/IPlayerState.h"
+#include "game/entities/world/player/state/IPlayerState.h"
 
 namespace game {
     void DebugState::enter() {
@@ -9,7 +9,7 @@ namespace game {
         _player = std::shared_ptr<Player>(new Player(
                 {{0, 1}, {1, 1}, 0},
                 _state_machine.getViewComponentCreator()->createAnimatedSprite(
-                        constants::player::view_size, 1, false, "adventurer")
+                        constants::player::view_size, constants::layer::player, false, "adventurer")
         ));
 
         _entities.push_back(_player);
@@ -42,7 +42,7 @@ namespace game {
                 std::shared_ptr<engine::Entity> background = std::make_shared<engine::Entity>(engine::Entity(
                         {entity_position, {1, 1}, 0},
                         {_state_machine.getViewComponentCreator()->createSprite(
-                                entity_size, 0, false, "pr_background"),}
+                                entity_size, constants::layer::tile_bg, false, "pr_background"),}
                 ));
 
                 _entities.push_back(background);

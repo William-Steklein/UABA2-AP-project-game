@@ -2,7 +2,7 @@
 #define GAME_ENGINE_ONGROUNDSTATE_H
 
 
-#include "game/entities/player/state/IPlayerState.h"
+#include "game/entities/world/player/state/IPlayerState.h"
 
 namespace game {
 

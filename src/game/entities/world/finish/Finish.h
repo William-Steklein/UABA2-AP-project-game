@@ -1,9 +1,9 @@
 #ifndef GAME_ENGINE_FINISH_H
 #define GAME_ENGINE_FINISH_H
 
-#include <engine/entity/Entity.h>
-#include <engine/entity/components/view/sprite/IAnimatedSpriteComponent.h>
-#include <engine/entity/components/physics/PhysicsComponent.h>
+#include "engine/entity/Entity.h"
+#include "engine/entity/components/view/sprite/IAnimatedSpriteComponent.h"
+#include "engine/entity/components/physics/PhysicsComponent.h"
 
 namespace game {
 

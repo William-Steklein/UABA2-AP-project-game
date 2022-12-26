@@ -1,6 +1,6 @@
 #include "InAirState.h"
-#include "game/entities/player/state/on-ground/IdleState.h"
-#include "game/entities/player/state/wall-slide/WallSlideState.h"
+#include "game/entities/world/player/state/on-ground/IdleState.h"
+#include "game/entities/world/player/state/wall-slide/WallSlideState.h"
 
 namespace game {
     InAirState::InAirState(Player &state_machine, std::unique_ptr<IPlayerState> &state)

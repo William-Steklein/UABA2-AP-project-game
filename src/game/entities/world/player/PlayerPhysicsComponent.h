@@ -2,8 +2,8 @@
 #define GAME_ENGINE_PLAYERPHYSICSCOMPONENT_H
 
 
-#include <engine/entity/components/physics/PhysicsComponent.h>
-#include <engine/math/math_utils.h>
+#include "engine/entity/components/physics/PhysicsComponent.h"
+#include "engine/math/math_utils.h"
 
 #include "game/constants/constants.h"
 

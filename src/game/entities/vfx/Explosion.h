@@ -2,9 +2,9 @@
 #define GAME_ENGINE_EXPLOSION_H
 
 
-#include <engine/entity/Entity.h>
-#include <engine/entity/components/view/sprite/IAnimatedSpriteComponent.h>
-#include <engine/entity/components/audio/IAudioComponent.h>
+#include "engine/entity/Entity.h"
+#include "engine/entity/components/view/sprite/IAnimatedSpriteComponent.h"
+#include "engine/entity/components/audio/IAudioComponent.h"
 
 namespace game {
 

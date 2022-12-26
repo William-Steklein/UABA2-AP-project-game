@@ -1,6 +1,6 @@
 #include "OnGroundState.h"
-#include "game/entities/player/state/in-air/FallState.h"
-#include "game/entities/player/state/in-air/JumpState.h"
+#include "game/entities/world/player/state/in-air/FallState.h"
+#include "game/entities/world/player/state/in-air/JumpState.h"
 #include "CrouchState.h"
 
 namespace game {

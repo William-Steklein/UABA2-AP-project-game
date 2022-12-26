@@ -2,9 +2,9 @@
 #define GAME_ENGINE_WALL_H
 
 
-#include <engine/entity/Entity.h>
-#include <engine/entity/components/view/sprite/ISpriteComponent.h>
-#include <engine/entity/components/physics/PhysicsComponent.h>
+#include "engine/entity/Entity.h"
+#include "engine/entity/components/view/sprite/ISpriteComponent.h"
+#include "engine/entity/components/physics/PhysicsComponent.h"
 
 namespace game {
 

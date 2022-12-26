@@ -1,4 +1,5 @@
 #include "MenuState.h"
+#include "game/constants/constants.h"
 
 namespace game {
     void MenuState::handleInput(const InputEvent &input) {
@@ -25,11 +26,9 @@ namespace game {
     MenuState::createMenuBackground(const engine::Vector2f &position,
                                     const std::shared_ptr<engine::UIEntity> &parent,
                                     const engine::Vector2f &size) {
-        unsigned int background_layer = 8;
-
         std::shared_ptr<engine::UIEntity> menu_background = std::shared_ptr<engine::UIEntity>(new engine::UIEntity(
                 {position, {1, 1}, 0},
-                {_state_machine.getViewComponentCreator()->createSprite(size, background_layer, true, "menu"),}
+                {_state_machine.getViewComponentCreator()->createSprite(size, constants::layer::ui_menu, true, "menu"),}
         ));
 
         if (parent != nullptr) {
@@ -44,11 +43,9 @@ namespace game {
                                 const std::shared_ptr<engine::UIEntity> &parent,
                                 const engine::Vector2f &size,
                                 float font_size) {
-        unsigned int button_layer = 9;
-        unsigned int text_layer = 10;
-
         std::shared_ptr<engine::ITextBoxComponent> button_text =
-                _state_machine.getViewComponentCreator()->createTextBox(size, text_layer, true, "PTSans-bold");
+                _state_machine.getViewComponentCreator()->createTextBox(size, constants::layer::ui_text, true,
+                                                                        "PTSans-bold");
         button_text->setText(text);
         button_text->setFontSize(font_size);
 
@@ -57,7 +54,7 @@ namespace game {
                 size,
                 _state_machine.getMousePosition(),
                 _state_machine.getViewComponentCreator()->createAnimatedSprite(
-                        size, button_layer, true, "menu_button"),
+                        size, constants::layer::ui_button, true, "menu_button"),
                 {button_text}
         ));
 
@@ -75,11 +72,9 @@ namespace game {
                                        const std::shared_ptr<engine::UIEntity> &parent,
                                        const engine::Vector2f &size,
                                        float font_size) {
-        unsigned int button_layer = 9;
-        unsigned int text_layer = 10;
-
         std::shared_ptr<engine::ITextBoxComponent> button_text =
-                _state_machine.getViewComponentCreator()->createTextBox(size, text_layer, true, "PTSans-bold");
+                _state_machine.getViewComponentCreator()->createTextBox(size, constants::layer::ui_text, true,
+                                                                        "PTSans-bold");
         button_text->setText(text);
         button_text->setFontSize(font_size);
 
@@ -88,7 +83,7 @@ namespace game {
                 size,
                 _state_machine.getMousePosition(),
                 _state_machine.getViewComponentCreator()->createAnimatedSprite(
-                        size, button_layer, true, "level_menu_button"),
+                        size, constants::layer::ui_button, true, "level_menu_button"),
                 {button_text}
         ));
 
@@ -104,14 +99,12 @@ namespace game {
     std::shared_ptr<Button> MenuState::createArrowButton(const engine::Vector2f &position, bool left,
                                                          const std::shared_ptr<engine::UIEntity> &parent,
                                                          const engine::Vector2f &size) {
-        unsigned int button_layer = 9;
-
         std::shared_ptr<Button> button = std::shared_ptr<Button>(new Button(
                 {position, {1, 1}, 0},
                 size,
                 _state_machine.getMousePosition(),
                 _state_machine.getViewComponentCreator()->createAnimatedSprite(
-                        size, button_layer, true, "arrow_button")
+                        size, constants::layer::ui_button, true, "arrow_button")
         ));
 
         // set direction

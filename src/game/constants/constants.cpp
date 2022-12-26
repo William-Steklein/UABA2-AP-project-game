@@ -2,6 +2,38 @@
 
 namespace game {
     namespace constants {
+
+        namespace layer {
+
+            const unsigned int bg_1 = 0;
+            const unsigned int bg_2 = 1;
+            const unsigned int bg_3 = 2;
+            const unsigned int bg_4 = 3;
+            const unsigned int bg_5 = 4;
+
+            const unsigned int tile_bg = 5;
+            const unsigned int player = 6;
+            const unsigned int tile = 7;
+            const unsigned int finish = 8;
+            const unsigned int tile_prop = 9;
+            const unsigned int vfx = 10;
+
+            const unsigned int debug_wall_hit_box = 20;
+            const unsigned int debug_finish_hit_box = 21;
+
+            const unsigned int debug_player_hit_box = 22;
+            const unsigned int debug_player_wall_slide_ray = 23;
+            const unsigned int debug_player_standing_ray = 24;
+
+            const unsigned int ui_bg = 31;
+            const unsigned int ui_menu = 32;
+            const unsigned int ui_button = 33;
+            const unsigned int ui_text = 34;
+
+            const unsigned int side_bar = 40;
+
+        }
+
         namespace player {
             const engine::Vector2f view_size = {0.50f, 0.37f};
 

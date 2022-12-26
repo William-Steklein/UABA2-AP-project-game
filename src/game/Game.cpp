@@ -1,6 +1,6 @@
 #include "game/Game.h"
+#include "game/constants/constants.h"
 #include "game/state/menu/MainMenuState.h"
-#include "game/state/world/DebugState.h"
 #include "game/level/level_data_parser.h"
 
 namespace game {
@@ -14,6 +14,7 @@ namespace game {
                      std::move(audio_component_creator)),
               _mouse_position(std::make_shared<engine::Vector2f>()),
               _current_level_id(0) {
+        initSidebars(constants::layer::side_bar);
         loadResources();
         _config = parseConfig("data/config_default.json");
 

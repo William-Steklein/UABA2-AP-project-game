@@ -3,9 +3,9 @@
 
 
 #include "game/state/IGameState.h"
-#include "game/entities/player/Player.h"
-#include "game/entities/Wall.h"
-#include "game/entities/Finish.h"
+#include "game/entities/world/player/Player.h"
+#include "game/entities/world/terrain/Wall.h"
+#include "game/entities/world/finish/Finish.h"
 
 namespace game {
 

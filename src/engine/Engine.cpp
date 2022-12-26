@@ -13,7 +13,7 @@ namespace engine {
               _physics_delta_time(1.f / 120.f), _physics_time(0.f),
               _accumulator(0.f), _physics_speed(1.f) {
         _view_component_creator->setCamera(_camera);
-        initSidebars();
+
     }
 
     void Engine::quit() {
@@ -68,16 +68,16 @@ namespace engine {
         return _camera;
     }
 
-    void Engine::initSidebars() {
+    void Engine::initSidebars(unsigned int layer) {
         std::tuple<Vector2f, Vector2f, Vector2f> sidebar_data = _camera->getSidebarData();
 
         _sidebar1 = std::make_shared<Entity>(Entity(
                 {std::get<1>(sidebar_data), std::get<0>(sidebar_data), 0},
-                {_view_component_creator->createRectangle({1, 1}, 10, true)}
+                {_view_component_creator->createRectangle({1, 1}, layer, true)}
         ));
         _sidebar2 = std::make_shared<Entity>(Entity(
                 {std::get<2>(sidebar_data), std::get<0>(sidebar_data), 0},
-                {_view_component_creator->createRectangle({1, 1}, 10, true)}
+                {_view_component_creator->createRectangle({1, 1}, layer, true)}
         ));
     }
 

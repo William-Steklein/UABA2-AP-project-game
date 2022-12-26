@@ -64,23 +64,20 @@ namespace game {
     }
 
     void LevelState::createFinish(const engine::Vector2f &position, const engine::Vector2f &size) {
-        unsigned int layer = 1;
-
         _finish = std::make_shared<Finish>(Finish(
                 {position, {1, 1}, 0},
-                _state_machine.getViewComponentCreator()->createAnimatedSprite(size, layer, false, "blue_cube")
+                _state_machine.getViewComponentCreator()->createAnimatedSprite(size, constants::layer::finish, false,
+                                                                               "blue_cube")
         ));
 
         _entities.push_back(_finish);
     }
 
     void LevelState::createDebugViewComponents() {
-        unsigned int rectangle_layer = 4;
-
         // finish
         std::shared_ptr<engine::IShapeComponent> finish_rectangle =
                 _state_machine.getViewComponentCreator()->createRectangle(
-                        _finish->getHitBox()->getSize(), rectangle_layer, false);
+                        _finish->getHitBox()->getSize(), constants::layer::debug_finish_hit_box, false);
         finish_rectangle->setFillcolor({255, 153, 204, 200});
         finish_rectangle->setTransform(_finish->getTransform());
         finish_rectangle->setVisible(_debug_view_visibility);

@@ -57,7 +57,7 @@ namespace engine {
         std::shared_ptr<Entity> _sidebar1;
         std::shared_ptr<Entity> _sidebar2;
 
-        void initSidebars();
+        void initSidebars(unsigned int layer);
 
         virtual void graphicsUpdate(double t, float dt);
 

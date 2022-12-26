@@ -2,7 +2,7 @@
 #define GAME_ENGINE_BUTTONSTATE_H
 
 #include <engine/state-machine/FiniteState.h>
-#include "game/entities/ui-widgets/button/Button.h"
+#include "game/entities/ui/button/Button.h"
 
 namespace game {
 

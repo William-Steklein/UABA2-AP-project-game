@@ -4,8 +4,8 @@
 #include <engine/entity/ui/UIEntity.h>
 
 #include "game/state/IGameState.h"
-#include "game/entities/ui-widgets/button/Button.h"
-#include "game/entities/ui-widgets/button/ButtonState.h"
+#include "game/entities/ui/button/Button.h"
+#include "game/entities/ui/button/ButtonState.h"
 
 namespace game {
 
