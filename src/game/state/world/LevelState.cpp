@@ -24,25 +24,37 @@ namespace game {
     }
 
     void LevelState::loadLevelData() {
-        for (const auto &entity_data: _level_data->entity_data) {
-            switch (entity_data.id) {
+        createPlayer(_level_data->player.position, _level_data->player.size);
+
+        createFinish(_level_data->finish.position, _level_data->finish.size);
+
+        for (const auto& wall_data : _level_data->walls) {
+            createWall(wall_data.position, wall_data.size);
+        }
+
+        for (const auto& tile_data : _level_data->tiles) {
+            unsigned int layer{0};
+            switch (tile_data.type) {
                 case 0:
-                    createPlayer(entity_data.position);
+                    layer = constants::layer::tile_bg;
                     break;
 
                 case 1:
-                    createWall(entity_data.position, entity_data.size);
-
+                    layer = constants::layer::tile_fg;
                     break;
 
                 case 2:
-                    createFinish(entity_data.position, entity_data.size);
-
+                    layer = constants::layer::tile_prop;
                     break;
 
                 default:
-
                     break;
+            }
+
+            if (tile_data.animated) {
+                createAnimatedTile(tile_data.position, tile_data.size, layer, tile_data.sprite_id);
+            } else {
+                createTile(tile_data.position, tile_data.size, layer, tile_data.sprite_id);
             }
         }
 

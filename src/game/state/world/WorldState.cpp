@@ -3,7 +3,6 @@
 #include "engine/Stopwatch.h"
 #include "game/entities/world/player/Player.h"
 #include "game/entities/world/player/state/IPlayerState.h"
-#include "game/state/menu/LevelMenuState.h"
 
 namespace game {
 
@@ -46,6 +45,8 @@ namespace game {
         _player = nullptr;
 
         _walls.clear();
+        _tiles.clear();
+        _animated_tiles.clear();
 
         _debug_components.clear();
 
@@ -93,11 +94,11 @@ namespace game {
         }
     }
 
-    void WorldState::createPlayer(const engine::Vector2f &position) {
+    void WorldState::createPlayer(const engine::Vector2f &position, const engine::Vector2f &size) {
         _player = std::shared_ptr<Player>(new Player(
                 {position, {1, 1}, 0},
                 _state_machine.getViewComponentCreator()->createAnimatedSprite(
-                        constants::player::view_size, constants::layer::player, false, "adventurer")
+                        size, constants::layer::player, false, "adventurer")
         ));
 
         _entities.push_back(_player);
@@ -110,11 +111,30 @@ namespace game {
     void WorldState::createWall(const engine::Vector2f &position, const engine::Vector2f &size) {
         _walls.push_back(std::make_shared<Wall>(Wall(
                 {position, {1, 1}, 0},
-                _state_machine.getViewComponentCreator()->createSprite(size, constants::layer::tile, false,
-                                                                       "pr_ground_2")
+                size
         )));
 
         _entities.push_back(_walls.back());
+    }
+
+    void WorldState::createTile(const engine::Vector2f &position, const engine::Vector2f &size,
+                                unsigned int layer, const std::string &sprite_id) {
+        _tiles.push_back(std::make_shared<Tile>(Tile(
+                {position, {1, 1}, 0},
+                _state_machine.getViewComponentCreator()->createSprite(size, layer, false, sprite_id)
+        )));
+
+        _entities.push_back(_tiles.back());
+    }
+
+    void WorldState::createAnimatedTile(const engine::Vector2f &position, const engine::Vector2f &size,
+                                        unsigned int layer, const std::string &sprite_id) {
+        _animated_tiles.push_back(std::make_shared<AnimatedTile>(AnimatedTile(
+                {position, {1, 1}, 0},
+                _state_machine.getViewComponentCreator()->createAnimatedSprite(size, layer, false, sprite_id)
+        )));
+
+        _entities.push_back(_animated_tiles.back());
     }
 
     void WorldState::updateCollisions() {

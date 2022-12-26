@@ -13,7 +13,7 @@ namespace game {
 
             const unsigned int tile_bg = 5;
             const unsigned int player = 6;
-            const unsigned int tile = 7;
+            const unsigned int tile_fg = 7;
             const unsigned int finish = 8;
             const unsigned int tile_prop = 9;
             const unsigned int vfx = 10;
@@ -34,9 +34,16 @@ namespace game {
 
         }
 
-        namespace player {
-            const engine::Vector2f view_size = {0.50f, 0.37f};
+        namespace size {
 
+            const engine::Vector2f player = {0.50f, 0.37f};
+            const engine::Vector2f finish = {0.25,0.25};
+            const engine::Vector2f wall = {0.25,0.25};
+            const engine::Vector2f tile = {0.25,0.25};
+
+        }
+
+        namespace player {
             const float jump_dt = 0.5;
             const float jump_height = 1;
 

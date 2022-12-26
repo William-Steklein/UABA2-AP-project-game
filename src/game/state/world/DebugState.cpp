@@ -9,7 +9,7 @@ namespace game {
         _player = std::shared_ptr<Player>(new Player(
                 {{0, 1}, {1, 1}, 0},
                 _state_machine.getViewComponentCreator()->createAnimatedSprite(
-                        constants::player::view_size, constants::layer::player, false, "adventurer")
+                        constants::size::player, constants::layer::player, false, "adventurer")
         ));
 
         _entities.push_back(_player);

@@ -7,12 +7,57 @@ namespace game {
         str.erase(end_pos, str.end());
     }
 
-    engine::Vector2f parseVector2f(const std::string &str) {
+    inline bool parseBoolString(const std::string &str) {
+        try {
+            return static_cast<bool>(std::stoi(str));
+        } catch (...) {
+            throw std::runtime_error("Unable to parse bool string \"" + str + "\"");
+        }
+    }
+
+    inline float parseFloatString(const std::string &str) {
+        try {
+            return std::stof(str);
+        } catch (...) {
+            throw std::runtime_error("Unable to parse float string \"" + str + "\"");
+        }
+    }
+
+    inline unsigned int parseUnsignedIntString(const std::string &str) {
+        try {
+            return std::stol(str);
+        } catch (...) {
+            throw std::runtime_error("Unable to parse unsigned int string \"" + str + "\"");
+        }
+    }
+
+    inline engine::Vector2f parseVector2fString(const std::string &str) {
         size_t pos = str.find(',');
         if (pos > str.length()) {
-            throw std::runtime_error("Unable to parse string to vector2f");
+            throw std::runtime_error("Unable to parse vector2f string \"" + str + "\"");
         }
         return {std::stof(str.substr(0, pos)), std::stof(str.substr(pos + 1))};
+    }
+
+    std::vector<std::string> segmentEntityLine(const std::string &line) {
+        if (std::count(line.begin(), line.end(), ';') == 0) {
+            throw std::runtime_error("Line \"" + line + " \" does not contain ';'");
+        }
+
+        std::vector<std::string> segments;
+
+        std::string current_line = line;
+        size_t pos{0};
+
+        while (!current_line.empty()) {
+            pos = current_line.find(';');
+
+            segments.push_back(current_line.substr(0, pos));
+
+            current_line = current_line.substr(pos + 1);
+        }
+
+        return segments;
     }
 
     std::shared_ptr<LevelData> levelDataParser(const std::string &filepath) {
@@ -57,44 +102,84 @@ namespace game {
                     break;
 
                 case ENTITIES:
-                    if (std::count(line.begin(), line.end(), ';') != 3) {
+                    if (std::count(line.begin(), line.end(), ';') < 2) {
                         throw std::runtime_error("Unable to parse entity on line " + std::to_string(line_count));
                     }
 
-                    LevelData::EntityData entity_data{};
+                    removeWhiteSpace(line);
 
-                    std::string current_line = line;
-                    removeWhiteSpace(current_line);
-                    std::string sub_line;
-                    size_t pos{0};
+                    std::vector<std::string> line_segments = segmentEntityLine(line);
 
-                    // entity id
-                    pos = current_line.find(';');
+                    unsigned int entity_id = parseUnsignedIntString(line_segments[0]);
+                    if (entity_id == 3) {
+                        LevelData::TileData entity_data{};
 
-                    sub_line = current_line.substr(0, pos);
-                    entity_data.id = std::stoul(sub_line);
+                        if (line_segments.size() != 5 || line_segments.size() != 6) {
+                            throw std::runtime_error("Unable to parse entity line");
+                        }
 
-                    current_line = current_line.substr(pos + 1);
+                        entity_data.position = parseVector2fString(line_segments[4]);
 
-                    // position
-                    pos = current_line.find(';');
+                        if (line_segments.size() == 6) {
+                            entity_data.size = parseVector2fString(line_segments[5]);
+                        } else {
+                            entity_data.size = constants::size::tile;
+                        }
 
-                    sub_line = current_line.substr(0, pos);
-                    entity_data.position = parseVector2f(sub_line);
+                        entity_data.type = parseUnsignedIntString(line_segments[1]);
 
-                    current_line = current_line.substr(pos + 1);
+                        entity_data.animated = parseBoolString(line_segments[2]);
 
-                    // size
-                    pos = current_line.find(';');
-                    sub_line = current_line.substr(0, pos);
-                    engine::Vector2f size;
-                    if (sub_line.length() != 0) {
-                        entity_data.size = parseVector2f(sub_line);
+                        entity_data.sprite_id = line_segments[3];
+
+                        level_data->tiles.push_back(entity_data);
+
                     } else {
-                        // todo: get default size
-                    }
+                        LevelData::EntityData entity_data{};
 
-                    level_data->entity_data.push_back(entity_data);
+                        if (line_segments.size() != 2 || line_segments.size() != 3) {
+                            throw std::runtime_error("Unable to parse entity line");
+                        }
+
+                        entity_data.position = parseVector2fString(line_segments[1]);
+
+                        bool default_size{false};
+
+                        if (line_segments.size() == 3) {
+                            entity_data.size = parseVector2fString(line_segments[2]);
+                        } else {
+                            default_size = true;
+                        }
+
+                        switch (entity_id) {
+                            case 0:
+                                if (default_size) {
+                                    entity_data.size = constants::size::player;
+                                }
+
+                                level_data->player = entity_data;
+                                break;
+
+                            case 1:
+                                if (default_size) {
+                                    entity_data.size = constants::size::finish;
+                                }
+
+                                level_data->finish = entity_data;
+                                break;
+
+                            case 2:
+                                if (default_size) {
+                                    entity_data.size = constants::size::wall;
+                                }
+
+                                level_data->walls.push_back(entity_data);
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
 
                     break;
             }

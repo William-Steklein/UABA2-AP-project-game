@@ -6,6 +6,7 @@
 #include "game/entities/world/player/Player.h"
 #include "game/entities/world/terrain/Wall.h"
 #include "game/entities/world/finish/Finish.h"
+#include "game/entities/world/terrain/Tile.h"
 
 namespace game {
 
@@ -28,6 +29,8 @@ namespace game {
     protected:
         std::shared_ptr<Player> _player;
         std::vector<std::shared_ptr<Wall>> _walls;
+        std::vector<std::shared_ptr<Tile>> _tiles;
+        std::vector<std::shared_ptr<AnimatedTile>> _animated_tiles;
 
         std::vector<std::shared_ptr<engine::IViewComponent>> _debug_components;
         bool _debug_view_visibility;
@@ -35,11 +38,17 @@ namespace game {
         std::shared_ptr<engine::Entity> _fps_counter;
         std::shared_ptr<engine::ITextBoxComponent> _fps_counter_text;
 
-        void createPlayer(const engine::Vector2f &position);
+        void createPlayer(const engine::Vector2f &position, const engine::Vector2f &size);
 
         void cameraFollowPlayer();
 
-        void createWall(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
+        void createWall(const engine::Vector2f &position, const engine::Vector2f &size);
+
+        void createTile(const engine::Vector2f &position, const engine::Vector2f &size,
+                        unsigned int layer, const std::string &sprite_id);
+
+        void createAnimatedTile(const engine::Vector2f &position, const engine::Vector2f &size,
+                                unsigned int layer, const std::string &sprite_id);
 
         virtual void updateCollisions();
 

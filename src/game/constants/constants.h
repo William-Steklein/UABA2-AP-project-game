@@ -18,7 +18,7 @@ namespace game {
 
             extern const unsigned int tile_bg;
             extern const unsigned int player;
-            extern const unsigned int tile;
+            extern const unsigned int tile_fg;
             extern const unsigned int finish;
             extern const unsigned int tile_prop;
             extern const unsigned int vfx;
@@ -39,9 +39,16 @@ namespace game {
 
         }
 
-        namespace player {
+        namespace size {
 
-            extern const engine::Vector2f view_size;
+            extern const engine::Vector2f player;
+            extern const engine::Vector2f finish;
+            extern const engine::Vector2f wall;
+            extern const engine::Vector2f tile;
+
+        }
+
+        namespace player {
 
             extern const float jump_dt;
             extern const float jump_height;
