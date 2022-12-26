@@ -25,10 +25,19 @@ namespace game {
 
                     break;
 
+                case 2:
+                    createFinish(entity_data.position, entity_data.size);
+
+                    break;
+
                 default:
 
                     break;
             }
+        }
+
+        if (_finish == nullptr) {
+            throw std::runtime_error("Loaded world has no finish");
         }
     }
 } // game

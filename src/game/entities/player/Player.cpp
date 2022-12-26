@@ -53,7 +53,7 @@ namespace game {
 
         std::shared_ptr<engine::HitBox> hit_box = std::make_shared<engine::HitBox>(hit_box_size);
         hit_box->setRelativeTransform({{0, hit_box_y_offset}, {1, 1}, 0});
-        addComponent(hit_box);
+        addComponent(hit_box, true);
         _physics_component->setHitBox(hit_box);
 
         _standing_ray = std::make_shared<engine::Ray>(engine::Ray(

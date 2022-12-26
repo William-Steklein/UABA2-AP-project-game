@@ -5,6 +5,7 @@
 #include "game/state/IGameState.h"
 #include "game/entities/player/Player.h"
 #include "game/entities/Wall.h"
+#include "game/entities/Finish.h"
 
 namespace game {
 
@@ -28,6 +29,7 @@ namespace game {
 
     protected:
         std::shared_ptr<Player> _player;
+        std::shared_ptr<Finish> _finish;
         std::vector<std::shared_ptr<Wall>> _walls;
 
         std::vector<std::shared_ptr<engine::IViewComponent>> _debug_components;
@@ -41,6 +43,8 @@ namespace game {
         void cameraFollowPlayer();
 
         void createWall(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
+
+        void createFinish(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
 
         void updateCollisions();
 
