@@ -24,15 +24,9 @@ namespace game {
             if ((input.type == InputEvent::Type::LEFT && _state_machine.isFacingLeft()) ||
                 (input.type == InputEvent::Type::RIGHT && !_state_machine.isFacingLeft())) {
                 set<IdleState>();
+                return;
             }
         }
-
-        switch (input.type) {
-
-            default:
-                break;
-        }
-
 
         OnGroundState::handleInput(input);
     }

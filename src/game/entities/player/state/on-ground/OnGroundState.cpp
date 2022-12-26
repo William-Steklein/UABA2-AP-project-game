@@ -24,10 +24,10 @@ namespace game {
                     set<CrouchState>();
                 }
 
-            default:
                 break;
-        }
 
-        IPlayerState::handleInput(input);
+            default:
+                IPlayerState::handleInput(input);
+        }
     }
 } // game

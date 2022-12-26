@@ -17,8 +17,6 @@ namespace game {
 
         void enter() override;
 
-        void resume() override;
-
         void reset() override;
 
         void physicsUpdate(double t, float dt) override;
@@ -29,7 +27,6 @@ namespace game {
 
     protected:
         std::shared_ptr<Player> _player;
-        std::shared_ptr<Finish> _finish;
         std::vector<std::shared_ptr<Wall>> _walls;
 
         std::vector<std::shared_ptr<engine::IViewComponent>> _debug_components;
@@ -44,13 +41,11 @@ namespace game {
 
         void createWall(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
 
-        void createFinish(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
+        virtual void updateCollisions();
 
-        void updateCollisions();
+        virtual void createDebugViewComponents();
 
-        void createDebugViewComponents();
-
-        void updateDebugViewComponents(double t, float dt);
+        virtual void updateDebugViewComponents(double t, float dt);
 
         void toggleDebugViewVisibility();
 

@@ -14,10 +14,20 @@ namespace game {
 
         void enter() override;
 
+        void reset() override;
+
         void loadLevelData();
+
+        void updateCollisions() override;
 
     private:
         std::shared_ptr<LevelData> _level_data;
+
+        std::shared_ptr<Finish> _finish;
+
+        void createFinish(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
+
+        void createDebugViewComponents() override;
     };
 
 } // game

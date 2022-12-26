@@ -1,5 +1,5 @@
 #include "WorldState.h"
-#include "game/state/menu/OverlayMenuState.h"
+#include "game/state/menu/PauzeOverlayState.h"
 #include "engine/Stopwatch.h"
 #include "game/entities/player/Player.h"
 #include "game/entities/player/state/IPlayerState.h"
@@ -42,10 +42,6 @@ namespace game {
         IGameState::enter();
     }
 
-    void WorldState::resume() {
-        IGameState::resume();
-    }
-
     void WorldState::reset() {
         _player = nullptr;
 
@@ -78,7 +74,7 @@ namespace game {
         switch (input.type) {
             case InputEvent::Type::RETURN:
                 if (input.state == InputEvent::State::ENTERED) {
-                    push<OverlayMenuState>();
+                    push<PauzeOverlayState>();
                 }
 
                 break;
@@ -122,17 +118,6 @@ namespace game {
         _entities.push_back(_walls.back());
     }
 
-    void WorldState::createFinish(const engine::Vector2f &position, const engine::Vector2f &size) {
-        unsigned int layer = 1;
-
-        _finish = std::make_shared<Finish>(Finish(
-                {position, {1, 1}, 0},
-                _state_machine.getViewComponentCreator()->createAnimatedSprite(size, layer, false, "blue_cube")
-                ));
-
-        _entities.push_back(_finish);
-    }
-
     void WorldState::updateCollisions() {
         for (const auto &wall: _walls) {
             _player->_physics_component->handleCollision(*wall->getPhysicsComponent());
@@ -140,12 +125,6 @@ namespace game {
             _player->_standing_ray->collides(*wall->getPhysicsComponent()->getHitBox());
             _player->_left_wall_slide_ray->collides(*wall->getPhysicsComponent()->getHitBox());
             _player->_right_wall_slide_ray->collides(*wall->getPhysicsComponent()->getHitBox());
-        }
-
-        // finish
-        if (_player->_physics_component->getHitBox()->collides(*_finish->getHitBox())) {
-            set<LevelMenuState>();
-            return;
         }
     }
 
@@ -203,18 +182,6 @@ namespace game {
             wall_rectangle->setVisible(_debug_view_visibility);
 
             _debug_components.push_back(wall_rectangle);
-        }
-
-        // finish
-        if (_finish != nullptr) {
-            std::shared_ptr<engine::IShapeComponent> finish_rectangle =
-                    _state_machine.getViewComponentCreator()->createRectangle(
-                            _finish->getHitBox()->getSize(), rectangle_layer, false);
-            finish_rectangle->setFillcolor({255, 153, 204, 200});
-            finish_rectangle->setTransform(_finish->getTransform());
-            finish_rectangle->setVisible(_debug_view_visibility);
-
-            _debug_components.push_back(finish_rectangle);
         }
 
         updateDebugViewComponents(0, 0);

@@ -15,6 +15,7 @@ namespace game {
     void CrouchState::handleInput(const InputEvent &input) {
         if (input.state == InputEvent::State::EXITED && input.type == InputEvent::Type::DOWN) {
             set<IdleState>();
+            return;
         }
 
         OnGroundState::handleInput(input);

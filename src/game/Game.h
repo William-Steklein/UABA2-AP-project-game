@@ -39,6 +39,10 @@ namespace game {
 
         const std::shared_ptr<LevelData> &getCurrentLevelDataPoint() const;
 
+        bool isLastLevel() const;
+
+        void advanceCurrentLevel();
+
     private:
         void graphicsUpdate(double t, float dt) override;
 

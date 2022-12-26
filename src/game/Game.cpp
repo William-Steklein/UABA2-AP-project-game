@@ -79,8 +79,19 @@ namespace game {
     }
 
     const std::shared_ptr<LevelData> &Game::getCurrentLevelDataPoint() const {
-        // todo: level selection
         return _level_data[_current_level_id];
+    }
+
+    bool Game::isLastLevel() const {
+        return _current_level_id == _level_data.size() - 1;
+    }
+
+    void Game::advanceCurrentLevel() {
+        if (isLastLevel()) {
+            _current_level_id = 0;
+        } else {
+            _current_level_id++;
+        }
     }
 
     void Game::graphicsUpdate(double t, float dt) {

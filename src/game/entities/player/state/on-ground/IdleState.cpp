@@ -27,9 +27,7 @@ namespace game {
                 break;
 
             default:
-                break;
+                game::OnGroundState::handleInput(input);
         }
-
-        game::OnGroundState::handleInput(input);
     }
 } // game
