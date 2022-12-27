@@ -109,6 +109,7 @@ namespace game {
 
     void Game::loadResources() {
         _resource_manager->loadTextureResources(engine::parseTextureInfo("data/resource-info/textures.json"));
+        _resource_manager->loadTextureResources(engine::parseTextureInfo("data/resource-info/tile_textures.json"));
         _resource_manager->loadAnimationResources(engine::parseAnimationInfo("data/resource-info/animations.json"));
         _resource_manager->loadSoundResources(engine::parseAudioInfo("data/resource-info/sounds.json"));
         _resource_manager->loadMusicResources(engine::parseAudioInfo("data/resource-info/music.json"));

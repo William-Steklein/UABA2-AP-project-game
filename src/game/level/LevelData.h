@@ -22,15 +22,14 @@ namespace game {
         };
 
         struct TileData : public EntityData {
-            TileData() : EntityData(), type(0), animated(false) {}
+            TileData() : EntityData(), type(0) {}
 
             TileData(const engine::Vector2f &position_, const engine::Vector2f &size_,
                      unsigned int type_, bool animated_, std::string sprite_id_)
-                    : EntityData(position_, size_), type(type_), animated(animated_),
+                    : EntityData(position_, size_), type(type_),
                       sprite_id(std::move(sprite_id_)) {}
 
             unsigned int type;
-            bool animated;
             std::string sprite_id;
         };
 

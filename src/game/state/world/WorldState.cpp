@@ -20,7 +20,7 @@ namespace game {
         }
 
         _fps_counter_text = _state_machine.getViewComponentCreator()->createTextBox(
-                {0.5f, 0.25f}, 5, true, "PTSans-bold");
+                {0.5f, 0.25f}, constants::layer::ui_text, true, "PTSans-bold");
         _fps_counter_text->setFontSize(0.08f);
 
         _fps_counter = std::make_shared<engine::Entity>(engine::Entity(
@@ -46,7 +46,6 @@ namespace game {
 
         _walls.clear();
         _tiles.clear();
-        _animated_tiles.clear();
 
         _debug_components.clear();
 
@@ -125,16 +124,6 @@ namespace game {
         )));
 
         _entities.push_back(_tiles.back());
-    }
-
-    void WorldState::createAnimatedTile(const engine::Vector2f &position, const engine::Vector2f &size,
-                                        unsigned int layer, const std::string &sprite_id) {
-        _animated_tiles.push_back(std::make_shared<AnimatedTile>(AnimatedTile(
-                {position, {1, 1}, 0},
-                _state_machine.getViewComponentCreator()->createAnimatedSprite(size, layer, false, sprite_id)
-        )));
-
-        _entities.push_back(_animated_tiles.back());
     }
 
     void WorldState::updateCollisions() {

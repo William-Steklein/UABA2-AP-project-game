@@ -51,11 +51,7 @@ namespace game {
                     break;
             }
 
-            if (tile_data.animated) {
-                createAnimatedTile(tile_data.position, tile_data.size, layer, tile_data.sprite_id);
-            } else {
-                createTile(tile_data.position, tile_data.size, layer, tile_data.sprite_id);
-            }
+            createTile(tile_data.position, tile_data.size, layer, tile_data.sprite_id);
         }
 
         if (_finish == nullptr) {

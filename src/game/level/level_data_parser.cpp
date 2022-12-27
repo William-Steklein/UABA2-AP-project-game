@@ -114,30 +114,28 @@ namespace game {
                     if (entity_id == 3) {
                         LevelData::TileData entity_data{};
 
-                        if (line_segments.size() != 5 || line_segments.size() != 6) {
+                        if (line_segments.size() != 4 && line_segments.size() != 5) {
                             throw std::runtime_error("Unable to parse entity line");
                         }
 
-                        entity_data.position = parseVector2fString(line_segments[4]);
+                        entity_data.position = parseVector2fString(line_segments[3]);
 
                         if (line_segments.size() == 6) {
-                            entity_data.size = parseVector2fString(line_segments[5]);
+                            entity_data.size = parseVector2fString(line_segments[4]);
                         } else {
                             entity_data.size = constants::size::tile;
                         }
 
                         entity_data.type = parseUnsignedIntString(line_segments[1]);
 
-                        entity_data.animated = parseBoolString(line_segments[2]);
-
-                        entity_data.sprite_id = line_segments[3];
+                        entity_data.sprite_id = line_segments[2];
 
                         level_data->tiles.push_back(entity_data);
 
                     } else {
                         LevelData::EntityData entity_data{};
 
-                        if (line_segments.size() != 2 || line_segments.size() != 3) {
+                        if (line_segments.size() != 2 && line_segments.size() != 3) {
                             throw std::runtime_error("Unable to parse entity line");
                         }
 

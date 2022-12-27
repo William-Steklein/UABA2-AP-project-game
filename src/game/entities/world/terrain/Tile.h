@@ -12,11 +12,6 @@ namespace game {
         Tile(engine::Transform transform, const std::shared_ptr<engine::ISpriteComponent>& sprite);
     };
 
-    class AnimatedTile : public engine::Entity {
-    public:
-        AnimatedTile(engine::Transform transform, const std::shared_ptr<engine::IAnimatedSpriteComponent>& sprite);
-    };
-
 } // game
 
 

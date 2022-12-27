@@ -1,0 +1,28 @@
+-meta
+
+-entities
+
+# player
+# format:
+# 0; position; size (optional);
+
+0; 0, 1;
+
+# finish
+# format:
+# 1; position; size (optional);
+
+1; 1, -0.25;
+
+# wall
+# format:
+# 2; position; size (optional);
+2; 0, -0.5; 1, 0.25;
+
+# tile
+# format:
+# 3; type (0: background, 1: foreground, 2: prop); texture/animation id; position; size (optional);
+3; 1; pr_ground_2; 0.375, -0.5;
+3; 1; pr_ground_2; 0.125, -0.5;
+3; 1; pr_ground_2; -0.125, -0.5;
+3; 1; pr_ground_2; -0.375, -0.5;
