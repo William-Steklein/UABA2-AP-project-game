@@ -23,11 +23,11 @@ namespace game {
 
         if ((!_state_machine.isFacingLeft() && !_state_machine._left_wall_slide_ray->collided()) ||
             (_state_machine.isFacingLeft() && !_state_machine._right_wall_slide_ray->collided())) {
-            set<FallState>();
+            return set<FallState>();
         }
 
         if (_state_machine._standing_ray->collided()) {
-            set<IdleState>();
+            return set<IdleState>();
         }
 
         IPlayerState::physicsUpdate(0, 0);
@@ -36,13 +36,13 @@ namespace game {
     void WallSlideState::handleInput(const InputEvent &input) {
         if ((input.type == InputEvent::Type::LEFT && _state_machine.isFacingLeft()) ||
             (input.type == InputEvent::Type::RIGHT && !_state_machine.isFacingLeft())) {
-            set<FallState>();
+            return set<FallState>();
         }
 
         if (input.type == InputEvent::Type::JUMP) {
             if (input.state == InputEvent::State::ENTERED) {
                 _state_machine._physics_component->setVelocity({0, 0});
-                set<WallJumpState>();
+                return set<WallJumpState>();
             }
         }
 

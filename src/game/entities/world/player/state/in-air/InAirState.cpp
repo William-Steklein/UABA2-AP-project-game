@@ -19,11 +19,13 @@ namespace game {
         if (_state_machine.isFacingLeft() && _state_machine._left_wall_slide_ray->collided() ||
             !_state_machine.isFacingLeft() && _state_machine._right_wall_slide_ray->collided()) {
             set<WallSlideState>();
+            return;
         }
 
         // standing
         if (_state_machine._standing_ray->collided()) {
             set<IdleState>();
+            return;
         }
 
         IPlayerState::physicsUpdate(0, 0);
