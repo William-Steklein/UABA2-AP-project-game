@@ -12,6 +12,8 @@ namespace game {
     void JumpState::physicsUpdate(double t, float dt) {
         if (_state_machine._physics_component->getVelocity().y <= 0) {
             set<FallState>();
+
+            return;
         }
 
         InAirState::physicsUpdate(0, 0);
