@@ -29,6 +29,7 @@ namespace game {
     protected:
         std::shared_ptr<Player> _player;
         std::vector<std::shared_ptr<Wall>> _walls;
+        std::vector<std::shared_ptr<Wall>> _slide_walls;
         std::vector<std::shared_ptr<Tile>> _tiles;
 
         std::vector<std::shared_ptr<engine::IViewComponent>> _debug_components;
@@ -41,7 +42,7 @@ namespace game {
 
         void cameraFollowPlayer();
 
-        void createWall(const engine::Vector2f &position, const engine::Vector2f &size);
+        void createWall(const engine::Vector2f &position, const engine::Vector2f &size, bool slide = false);
 
         void createTile(const engine::Vector2f &position, const engine::Vector2f &size,
                         unsigned int layer, const std::string &sprite_id);

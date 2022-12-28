@@ -21,11 +21,20 @@ namespace game {
             engine::Vector2f size;
         };
 
+        struct WallData : public EntityData {
+            WallData() : EntityData(), sliding(false) {}
+
+            WallData(const engine::Vector2f &position_, const engine::Vector2f &size_, bool sliding_)
+                    : EntityData(position_, size_), sliding(sliding_) {};
+
+            bool sliding;
+        };
+
         struct TileData : public EntityData {
             TileData() : EntityData(), type(0) {}
 
             TileData(const engine::Vector2f &position_, const engine::Vector2f &size_,
-                     unsigned int type_, bool animated_, std::string sprite_id_)
+                     unsigned int type_, std::string sprite_id_)
                     : EntityData(position_, size_), type(type_),
                       sprite_id(std::move(sprite_id_)) {}
 
@@ -39,7 +48,7 @@ namespace game {
 
         EntityData player;
         EntityData finish;
-        std::vector<EntityData> walls;
+        std::vector<WallData> walls;
         std::vector<TileData> tiles;
 //        std::vector<EntityData> backgrounds;
     };

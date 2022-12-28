@@ -13,9 +13,9 @@ namespace game {
 
             const unsigned int tile_bg = 5;
             const unsigned int player = 6;
-            const unsigned int tile_fg = 7;
-            const unsigned int finish = 8;
-            const unsigned int tile_prop = 9;
+            const unsigned int finish = 7;
+            const unsigned int tile_prop = 8;
+            const unsigned int tile_fg = 9;
             const unsigned int vfx = 10;
 
             const unsigned int debug_wall_hit_box = 20;

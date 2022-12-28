@@ -111,67 +111,29 @@ namespace game {
                     std::vector<std::string> line_segments = segmentEntityLine(line);
 
                     unsigned int entity_id = parseUnsignedIntString(line_segments[0]);
-                    if (entity_id == 3) {
-                        LevelData::TileData entity_data{};
 
-                        if (line_segments.size() != 4 && line_segments.size() != 5) {
-                            throw std::runtime_error("Unable to parse entity line");
-                        }
+                    engine::Vector2f position = parseVector2fString(line_segments[1]);
 
-                        entity_data.position = parseVector2fString(line_segments[3]);
-
-                        if (line_segments.size() == 6) {
-                            entity_data.size = parseVector2fString(line_segments[4]);
-                        } else {
-                            entity_data.size = constants::size::tile;
-                        }
-
-                        entity_data.type = parseUnsignedIntString(line_segments[1]);
-
-                        entity_data.sprite_id = line_segments[2];
-
-                        level_data->tiles.push_back(entity_data);
-
+                    bool default_size{false};
+                    engine::Vector2f size;
+                    if (!line_segments[2].empty()) {
+                        size = parseVector2fString(line_segments[2]);
                     } else {
-                        LevelData::EntityData entity_data{};
-
-                        if (line_segments.size() != 2 && line_segments.size() != 3) {
-                            throw std::runtime_error("Unable to parse entity line");
-                        }
-
-                        entity_data.position = parseVector2fString(line_segments[1]);
-
-                        bool default_size{false};
-
-                        if (line_segments.size() == 3) {
-                            entity_data.size = parseVector2fString(line_segments[2]);
-                        } else {
-                            default_size = true;
-                        }
-
                         switch (entity_id) {
                             case 0:
-                                if (default_size) {
-                                    entity_data.size = constants::size::player;
-                                }
-
-                                level_data->player = entity_data;
+                                size = constants::size::player;
                                 break;
 
                             case 1:
-                                if (default_size) {
-                                    entity_data.size = constants::size::finish;
-                                }
-
-                                level_data->finish = entity_data;
+                                size = constants::size::finish;
                                 break;
 
                             case 2:
-                                if (default_size) {
-                                    entity_data.size = constants::size::wall;
-                                }
+                                size = constants::size::wall;
+                                break;
 
-                                level_data->walls.push_back(entity_data);
+                            case 3:
+                                size = constants::size::tile;
                                 break;
 
                             default:
@@ -179,7 +141,34 @@ namespace game {
                         }
                     }
 
-                    break;
+                    switch (entity_id) {
+                        case 2:
+                            // wall
+                            level_data->walls.emplace_back(position,
+                                                           size,
+                                                           parseBoolString(line_segments[3]));
+                            break;
+
+                        case 3:
+                            // tile
+                            level_data->tiles.emplace_back(position,
+                                                           size,
+                                                           parseUnsignedIntString(line_segments[3]),
+                                                           line_segments[4]);
+                            break;
+
+                        case 0:
+                            // player
+                            level_data->player = LevelData::EntityData(position, size);
+                            break;
+
+                        case 1:
+                            level_data->finish = LevelData::EntityData(position, size);
+                            break;
+
+                        default:
+                            break;
+                    }
             }
         }
 

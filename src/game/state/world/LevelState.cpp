@@ -29,7 +29,7 @@ namespace game {
         createFinish(_level_data->finish.position, _level_data->finish.size);
 
         for (const auto& wall_data : _level_data->walls) {
-            createWall(wall_data.position, wall_data.size);
+            createWall(wall_data.position, wall_data.size, wall_data.sliding);
         }
 
         for (const auto& tile_data : _level_data->tiles) {

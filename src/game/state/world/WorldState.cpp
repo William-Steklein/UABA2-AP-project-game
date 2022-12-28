@@ -107,12 +107,15 @@ namespace game {
         _state_machine.getCamera()->setPosition(_player->getPosition());
     }
 
-    void WorldState::createWall(const engine::Vector2f &position, const engine::Vector2f &size) {
+    void WorldState::createWall(const engine::Vector2f &position, const engine::Vector2f &size, bool slide) {
         _walls.push_back(std::make_shared<Wall>(Wall(
                 {position, {1, 1}, 0},
                 size
         )));
 
+        if (slide) {
+            _slide_walls.push_back(_walls.back());
+        }
         _entities.push_back(_walls.back());
     }
 
@@ -131,8 +134,11 @@ namespace game {
             _player->_physics_component->handleCollision(*wall->getPhysicsComponent());
 
             _player->_standing_ray->collides(*wall->getPhysicsComponent()->getHitBox());
-            _player->_left_wall_slide_ray->collides(*wall->getPhysicsComponent()->getHitBox());
-            _player->_right_wall_slide_ray->collides(*wall->getPhysicsComponent()->getHitBox());
+        }
+
+        for (const auto &slide_wall: _slide_walls) {
+            _player->_left_wall_slide_ray->collides(*slide_wall->getPhysicsComponent()->getHitBox());
+            _player->_right_wall_slide_ray->collides(*slide_wall->getPhysicsComponent()->getHitBox());
         }
     }
 
