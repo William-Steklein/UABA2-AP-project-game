@@ -17,9 +17,9 @@ namespace game {
             extern const unsigned int bg_5;
 
             extern const unsigned int tile_bg;
+            extern const unsigned int tile_prop;
             extern const unsigned int player;
             extern const unsigned int finish;
-            extern const unsigned int tile_prop;
             extern const unsigned int tile_fg;
             extern const unsigned int vfx;
 

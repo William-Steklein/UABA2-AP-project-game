@@ -102,7 +102,7 @@ namespace game {
                     break;
 
                 case ENTITIES:
-                    if (std::count(line.begin(), line.end(), ';') < 2) {
+                    if (std::count(line.begin(), line.end(), ';') < 3) {
                         throw std::runtime_error("Unable to parse entity on line " + std::to_string(line_count));
                     }
 

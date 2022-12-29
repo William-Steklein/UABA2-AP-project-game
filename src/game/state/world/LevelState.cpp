@@ -40,11 +40,11 @@ namespace game {
                     break;
 
                 case 1:
-                    layer = constants::layer::tile_fg;
+                    layer = constants::layer::tile_prop;
                     break;
 
                 case 2:
-                    layer = constants::layer::tile_prop;
+                    layer = constants::layer::tile_fg;
                     break;
 
                 default:
