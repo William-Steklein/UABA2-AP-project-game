@@ -1,4 +1,6 @@
 -meta
+origin = 6.25, 6.25
+limit = 10, 10
 
 -entities
 

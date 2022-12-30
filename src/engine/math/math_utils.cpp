@@ -119,4 +119,8 @@ namespace engine {
         }
         return value;
     }
+
+    Vector2f clamp(const Vector2f &value, const Vector2f &min, const Vector2f &max) {
+        return {clamp(value.x, min.x, max.x), clamp(value.y, min.y, max.y)};
+    }
 } // engine

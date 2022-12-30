@@ -45,6 +45,8 @@ namespace game {
         LevelData() = default;
 
         std::string name;
+        engine::Vector2f origin;
+        engine::Vector2f limit;
 
         EntityData player;
         EntityData finish;

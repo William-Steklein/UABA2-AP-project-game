@@ -41,7 +41,7 @@ namespace game {
 
     std::vector<std::string> segmentEntityLine(const std::string &line) {
         if (std::count(line.begin(), line.end(), ';') == 0) {
-            throw std::runtime_error("Line \"" + line + " \" does not contain ';'");
+            throw std::runtime_error("Entity line \"" + line + " \" does not contain ';'");
         }
 
         std::vector<std::string> segments;
@@ -58,6 +58,16 @@ namespace game {
         }
 
         return segments;
+    }
+
+    std::pair<std::string, std::string> parseMetaLine(const std::string &line) {
+        if (std::count(line.begin(), line.end(), '=') == 0) {
+            throw std::runtime_error("Meta line \"" + line + " \" does not contain '='");
+        }
+
+        size_t pos = line.find('=');
+
+        return {line.substr(0, pos), line.substr(pos + 1)};
     }
 
     std::shared_ptr<LevelData> levelDataParser(const std::string &filepath) {
@@ -93,11 +103,23 @@ namespace game {
                 continue;
             }
 
+            removeWhiteSpace(line);
+
             switch (header) {
                 case UNDEFINED:
                     throw std::runtime_error("No header defined while parsing \"" + filepath + "\"");
 
                 case META:
+                    {
+                        std::pair<std::string, std::string> meta_pair = parseMetaLine(line);
+
+                        if (meta_pair.first == "origin") {
+                            level_data->origin = parseVector2fString(meta_pair.second);
+                        } else if (meta_pair.first == "limit") {
+                            // todo remove magic number camera size
+                            level_data->limit = parseVector2fString(meta_pair.second) - engine::Vector2f(5, 3);
+                        }
+                    }
 
                     break;
 
@@ -105,8 +127,6 @@ namespace game {
                     if (std::count(line.begin(), line.end(), ';') < 3) {
                         throw std::runtime_error("Unable to parse entity on line " + std::to_string(line_count));
                     }
-
-                    removeWhiteSpace(line);
 
                     std::vector<std::string> line_segments = segmentEntityLine(line);
 

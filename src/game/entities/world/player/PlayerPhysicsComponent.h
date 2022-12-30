@@ -28,6 +28,8 @@ namespace game {
 
         void applyStoppingFrictionForce();
 
+        void applyWallSlidingFrictionForce();
+
         void setWallVelocityClamp(bool wall_velocity_clamp);
 
     private:
@@ -37,6 +39,7 @@ namespace game {
         float _horizontal_movement_force;
 
         float _stopping_friction;
+        float _sliding_friction;
 
         bool _wall_velocity_clamp;
         engine::Vector2f _wall_vertical_velocity_cap;

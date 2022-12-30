@@ -5,8 +5,8 @@ namespace engine {
 
     Camera::Camera(float left, float right, float bottom, float top)
             : _position(0, 0),
-              _boundaries({-1.5, 1.5, -1, 1}), _screen_boundaries({left, right, bottom, top}),
-              _sub_screen_aspect_ratio({3, 2}), _sub_screen_boundaries({left, right, bottom, top}) {
+              _boundaries({-2.5, 2.5, -1.5, 1.5}), _screen_boundaries({left, right, bottom, top}),
+              _sub_screen_aspect_ratio({5, 3}), _sub_screen_boundaries({left, right, bottom, top}) {
         if (getWidth() == 0 || getHeight() == 0) {
             throw std::runtime_error("Invalid camera boundaries");
         } else if (getScreenWidth() == 0 || getScreenHeight() == 0) {

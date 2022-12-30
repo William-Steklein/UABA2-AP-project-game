@@ -36,7 +36,7 @@ namespace game {
 
         namespace size {
 
-            const engine::Vector2f player = {0.50f, 0.37f};
+            const engine::Vector2f player = {0.60f, 0.444f};
             const engine::Vector2f finish = {0.25,0.25};
             const engine::Vector2f wall = {0.25,0.25};
             const engine::Vector2f tile = {0.25,0.25};

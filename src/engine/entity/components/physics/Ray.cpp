@@ -8,7 +8,7 @@ namespace engine {
     }
 
     Ray::Ray(const Vector2f &origin, const Vector2f &direction, float length)
-            : _origin(origin), _end(origin + (direction * length)) {
+            : _origin(origin), _end(origin + (direction * length)), _collided(false) {
 
     }
 

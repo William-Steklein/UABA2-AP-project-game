@@ -24,15 +24,23 @@ namespace game {
     }
 
     void LevelState::loadLevelData() {
+        if (!_level_data->limit.empty()) {
+            _camera_limit = true;
+            _camera_min_limit = {_level_data->origin.x - _level_data->limit.x / 2,
+                                 _level_data->origin.y - _level_data->limit.y / 2};
+            _camera_max_limit = {_level_data->origin.x + _level_data->limit.x / 2,
+                                 _level_data->origin.y + _level_data->limit.y / 2};
+        }
+
         createPlayer(_level_data->player.position, _level_data->player.size);
 
         createFinish(_level_data->finish.position, _level_data->finish.size);
 
-        for (const auto& wall_data : _level_data->walls) {
+        for (const auto &wall_data: _level_data->walls) {
             createWall(wall_data.position, wall_data.size, wall_data.sliding);
         }
 
-        for (const auto& tile_data : _level_data->tiles) {
+        for (const auto &tile_data: _level_data->tiles) {
             unsigned int layer{0};
             switch (tile_data.type) {
                 case 0:

@@ -1,5 +1,6 @@
 {
   "levels": [
+    "data/levels/level_1.world",
     "data/levels/test.world",
     "data/levels/test2.world"
   ]

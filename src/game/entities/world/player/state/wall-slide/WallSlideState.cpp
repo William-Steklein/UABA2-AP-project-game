@@ -10,7 +10,7 @@ namespace game {
 
         _state_machine._animated_sprite->start("wall_slide", true, _state_machine.isFacingLeft(), false);
 
-        _state_machine._physics_component->setVelocity({0, 0});
+//        _state_machine._physics_component->setVelocity({0, 0});
         _state_machine._physics_component->setWallVelocityClamp(true);
     }
 
@@ -20,6 +20,8 @@ namespace game {
 
     void WallSlideState::physicsUpdate(double t, float dt) {
         _state_machine._physics_component->applyGravityForce(0.25f);
+
+        _state_machine._physics_component->applyWallSlidingFrictionForce();
 
         if ((!_state_machine.isFacingLeft() && !_state_machine._left_wall_slide_ray->collided()) ||
             (_state_machine.isFacingLeft() && !_state_machine._right_wall_slide_ray->collided())) {

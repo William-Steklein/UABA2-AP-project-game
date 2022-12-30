@@ -32,6 +32,10 @@ namespace game {
         std::vector<std::shared_ptr<Wall>> _slide_walls;
         std::vector<std::shared_ptr<Tile>> _tiles;
 
+        bool _camera_limit;
+        engine::Vector2f _camera_min_limit;
+        engine::Vector2f _camera_max_limit;
+
         std::vector<std::shared_ptr<engine::IViewComponent>> _debug_components;
         bool _debug_view_visibility;
 

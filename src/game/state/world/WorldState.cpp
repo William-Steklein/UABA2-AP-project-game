@@ -7,7 +7,7 @@
 namespace game {
 
     WorldState::WorldState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states)
-            : IGameState(state_machine, states),
+            : IGameState(state_machine, states), _camera_limit(false),
               _debug_view_visibility(false) {
 
     }
@@ -104,7 +104,12 @@ namespace game {
     }
 
     void WorldState::cameraFollowPlayer() {
-        _state_machine.getCamera()->setPosition(_player->getPosition());
+        _state_machine.getCamera()->setPosition({6.25, _player->getPosition().y});
+
+        if (_camera_limit) {
+            _state_machine.getCamera()->setPosition(
+                    engine::clamp(_player->getPosition(), _camera_min_limit, _camera_max_limit));
+        }
     }
 
     void WorldState::createWall(const engine::Vector2f &position, const engine::Vector2f &size, bool slide) {

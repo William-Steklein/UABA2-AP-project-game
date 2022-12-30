@@ -14,6 +14,7 @@ namespace game {
         _vertical_velocity_cap = {-_initial_jump_velocity * 1.25f, _initial_jump_velocity * 1.25f};
 
         _stopping_friction = 250.f;
+        _sliding_friction = 50.f;
 
         _wall_velocity_clamp = false;
         _wall_vertical_velocity_cap = {-_initial_jump_velocity * 0.5f, _initial_jump_velocity * 0.5f};
@@ -53,6 +54,14 @@ namespace game {
         }
 
         addForce({_velocity.x * -_stopping_friction, 0});
+    }
+
+    void PlayerPhysicsComponent::applyWallSlidingFrictionForce() {
+        if (_velocity.y <= 0) {
+            return;
+        }
+
+        addForce({0, _velocity.y * -_sliding_friction});
     }
 
     void PlayerPhysicsComponent::clampVelocity() {

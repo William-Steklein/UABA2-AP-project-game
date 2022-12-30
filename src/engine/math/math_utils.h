@@ -28,6 +28,8 @@ namespace engine {
 
     float clamp(float value, float min, float max);
 
+    Vector2f clamp(const Vector2f &value, const Vector2f &min, const Vector2f &max);
+
 } // engine
 
 #endif //GAME_ENGINE_MATH_UTILS_H
