@@ -52,6 +52,8 @@ namespace game {
         _fps_counter_text = nullptr;
         _fps_counter = nullptr;
 
+        _camera_limit = false;
+
         IGameState::reset();
     }
 
@@ -104,11 +106,11 @@ namespace game {
     }
 
     void WorldState::cameraFollowPlayer() {
-        _state_machine.getCamera()->setPosition({6.25, _player->getPosition().y});
-
         if (_camera_limit) {
             _state_machine.getCamera()->setPosition(
                     engine::clamp(_player->getPosition(), _camera_min_limit, _camera_max_limit));
+        } else {
+            _state_machine.getCamera()->setPosition(_player->getPosition());
         }
     }
 

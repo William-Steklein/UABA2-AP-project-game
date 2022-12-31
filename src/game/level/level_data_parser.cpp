@@ -116,8 +116,7 @@ namespace game {
                         if (meta_pair.first == "origin") {
                             level_data->origin = parseVector2fString(meta_pair.second);
                         } else if (meta_pair.first == "limit") {
-                            // todo remove magic number camera size
-                            level_data->limit = parseVector2fString(meta_pair.second) - engine::Vector2f(5, 3);
+                            level_data->limit = parseVector2fString(meta_pair.second);
                         }
                     }
 

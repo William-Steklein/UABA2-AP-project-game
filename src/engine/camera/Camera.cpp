@@ -32,13 +32,17 @@ namespace engine {
         _position = {0, 0};
     }
 
-    void Camera::setScreenBoundaries(float left, float right, float bottom, float top) {
-        _screen_boundaries = {left, right, bottom, top};
-        updateSubScreenResolution();
+    const Camera::ViewBoundaries &Camera::getBoundaries() const {
+        return _boundaries;
     }
 
     const Camera::ViewBoundaries &Camera::getScreenBoundaries() const {
         return _screen_boundaries;
+    }
+
+    void Camera::setScreenBoundaries(float left, float right, float bottom, float top) {
+        _screen_boundaries = {left, right, bottom, top};
+        updateSubScreenResolution();
     }
 
     float Camera::getWidth() const {

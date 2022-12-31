@@ -33,6 +33,8 @@ namespace engine {
 
         void reset();
 
+        const ViewBoundaries &getBoundaries() const;
+
         const ViewBoundaries &getScreenBoundaries() const;
 
         void setScreenBoundaries(float left, float right, float bottom, float top);

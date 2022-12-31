@@ -23,12 +23,33 @@ namespace game {
         WorldState::reset();
     }
 
+    void LevelState::physicsUpdate(double t, float dt) {
+        WorldState::physicsUpdate(t, dt);
+
+        if (!_level_data->limit.empty()) {
+            if (_player->getPosition().x < _level_min_limit.x || _player->getPosition().x > _level_max_limit.x ||
+                    _player->getPosition().y < _level_min_limit.y || _player->getPosition().y > _level_max_limit.y) {
+                return reset();
+            }
+        }
+    }
+
     void LevelState::loadLevelData() {
         if (!_level_data->limit.empty()) {
             _camera_limit = true;
-            _camera_min_limit = {_level_data->origin.x - _level_data->limit.x / 2,
+
+            engine::Vector2f camera_limit = _level_data->limit -
+                                            engine::Vector2f(_state_machine.getCamera()->getWidth(),
+                                                             _state_machine.getCamera()->getHeight());
+
+            _camera_min_limit = {_level_data->origin.x - camera_limit.x / 2,
+                                 _level_data->origin.y - camera_limit.y / 2};
+            _camera_max_limit = {_level_data->origin.x + camera_limit.x / 2,
+                                 _level_data->origin.y + camera_limit.y / 2};
+
+            _level_min_limit = {_level_data->origin.x - _level_data->limit.x / 2,
                                  _level_data->origin.y - _level_data->limit.y / 2};
-            _camera_max_limit = {_level_data->origin.x + _level_data->limit.x / 2,
+            _level_max_limit = {_level_data->origin.x + _level_data->limit.x / 2,
                                  _level_data->origin.y + _level_data->limit.y / 2};
         }
 
