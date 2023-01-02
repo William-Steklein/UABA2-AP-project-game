@@ -5,6 +5,12 @@ namespace game {
     void removeWhiteSpace(std::string &str) {
         std::string::iterator end_pos = std::remove(str.begin(), str.end(), ' ');
         str.erase(end_pos, str.end());
+
+        end_pos = std::remove(str.begin(), str.end(), '\n');
+        str.erase(end_pos, str.end());
+
+        end_pos = std::remove(str.begin(), str.end(), '\r');
+        str.erase(end_pos, str.end());
     }
 
     inline bool parseBoolString(const std::string &str) {
@@ -85,8 +91,13 @@ namespace game {
 
         std::string line;
         unsigned int line_count{0};
+//        while (std::getline(level_file, line)) {
+//            LOGDEBUG(line);
+//        }
+
         while (std::getline(level_file, line)) {
             line_count++;
+            removeWhiteSpace(line);
 
             if (line.empty() || line[0] == '#') {
                 continue;
@@ -102,8 +113,6 @@ namespace game {
 
                 continue;
             }
-
-            removeWhiteSpace(line);
 
             switch (header) {
                 case UNDEFINED:

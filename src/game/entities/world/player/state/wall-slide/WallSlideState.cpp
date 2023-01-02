@@ -42,10 +42,12 @@ namespace game {
         }
 
         if (input.type == InputEvent::Type::JUMP) {
-            if (input.state == InputEvent::State::ENTERED) {
-                _state_machine._physics_component->setVelocity({0, 0});
-                return set<WallJumpState>();
-            }
+            _state_machine._physics_component->setVelocity({0, 0});
+            return set<WallJumpState>();
+//            if (input.state == InputEvent::State::ENTERED) {
+//                _state_machine._physics_component->setVelocity({0, 0});
+//                return set<WallJumpState>();
+//            }
         }
 
 //        IPlayerState::handleInput(player, input);
