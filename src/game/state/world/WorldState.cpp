@@ -24,7 +24,7 @@ namespace game {
         _fps_counter_text->setFontSize(0.08f);
 
         _fps_counter = std::make_shared<engine::Entity>(engine::Entity(
-                {{-1.25, 0.9}, {1, 1}, 0},
+                {{-1.25 * (5.f / 3.f), 0.9 * (3.f / 2.f)}, {1, 1}, 0},
                 {_fps_counter_text}
         ));
         _entities.push_back(_fps_counter);
@@ -33,7 +33,9 @@ namespace game {
 
         updateFpsCounterText();
 
-        cameraFollowPlayer();
+        if (!_camera_move_vector.empty()) {
+            controlCamera();
+        }
         // graphics update after changing camera position
         graphicsUpdate(engine::Stopwatch::getInstance().getTime(),
                        engine::Stopwatch::getInstance().getDeltaTime());
@@ -64,7 +66,7 @@ namespace game {
     }
 
     void WorldState::graphicsUpdate(double t, float dt) {
-        cameraFollowPlayer();
+        controlCamera();
 
         updateFpsCounterText();
 
@@ -105,12 +107,17 @@ namespace game {
         _entities.push_back(_player);
     }
 
-    void WorldState::cameraFollowPlayer() {
-        if (_camera_limit) {
-            _state_machine.getCamera()->setPosition(
-                    engine::clamp(_player->getPosition(), _camera_min_limit, _camera_max_limit));
+    void WorldState::controlCamera() {
+        std::shared_ptr<engine::Camera> camera = _state_machine.getCamera();
+
+        if (!_camera_move_vector.empty()) {
+            camera->move(_camera_move_vector);
         } else {
-            _state_machine.getCamera()->setPosition(_player->getPosition());
+            camera->setPosition(_player->getPosition());
+        }
+
+        if (_camera_limit) {
+            camera->setPosition(engine::clamp(camera->getPosition(), _camera_min_limit, _camera_max_limit));
         }
     }
 

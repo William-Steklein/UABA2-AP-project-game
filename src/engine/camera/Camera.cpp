@@ -182,4 +182,9 @@ namespace engine {
         return {(getWidth() / getSubScreenWidth()) * size.x,
                 (getHeight() / getSubScreenHeight()) * size.y};
     }
+
+    bool Camera::isInView(const Vector2f &point) const {
+        return !(point.x < _boundaries.x_min + _position.x || point.x > _boundaries.x_max+ _position.x ||
+               point.y < _boundaries.y_min + _position.y || point.y > _boundaries.y_max + _position.y);
+    }
 } // engine

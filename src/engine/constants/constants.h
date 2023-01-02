@@ -12,6 +12,8 @@ namespace engine {
         // average framerate counter
         extern const float sample_duration;
 
+        extern const float physics_delta_time;
+
         extern const float animation_frame_time_minimum;
 
         // velocities under this value are set to zero

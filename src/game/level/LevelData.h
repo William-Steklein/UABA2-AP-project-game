@@ -48,6 +48,10 @@ namespace game {
         engine::Vector2f origin;
         engine::Vector2f limit;
 
+        engine::Vector2f camera_start;
+        engine::Vector2f camera_end;
+        float camera_move_time = 0;
+
         EntityData player;
         EntityData finish;
         std::vector<WallData> walls;

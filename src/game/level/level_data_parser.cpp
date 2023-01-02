@@ -117,6 +117,12 @@ namespace game {
                             level_data->origin = parseVector2fString(meta_pair.second);
                         } else if (meta_pair.first == "limit") {
                             level_data->limit = parseVector2fString(meta_pair.second);
+                        } else if (meta_pair.first == "camera_move_time") {
+                            level_data->camera_move_time = parseFloatString(meta_pair.second);
+                        } else if (meta_pair.first == "camera_start") {
+                            level_data->camera_start = parseVector2fString(meta_pair.second);
+                        } else if (meta_pair.first == "camera_end") {
+                            level_data->camera_end = parseVector2fString(meta_pair.second);
                         }
                     }
 

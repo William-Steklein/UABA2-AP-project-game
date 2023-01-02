@@ -16,6 +16,8 @@ namespace game {
 
         void reset() override;
 
+        void graphicsUpdate(double t, float dt) override;
+
         void physicsUpdate(double t, float dt) override;
 
         void loadLevelData();
@@ -29,6 +31,7 @@ namespace game {
         engine::Vector2f _level_max_limit;
 
         std::shared_ptr<Finish> _finish;
+        bool _finished;
 
         void createFinish(const engine::Vector2f &position, const engine::Vector2f &size = {0.25, 0.25});
 

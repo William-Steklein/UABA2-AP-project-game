@@ -71,6 +71,8 @@ namespace engine {
 
         Vector2f projectSizeSubScreenToWorld(const Vector2f &size) const;
 
+        bool isInView(const Vector2f &point) const;
+
     private:
         Vector2f _position;
 

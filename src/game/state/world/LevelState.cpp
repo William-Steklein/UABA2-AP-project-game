@@ -5,7 +5,7 @@
 
 namespace game {
     LevelState::LevelState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states)
-            : WorldState(state_machine, states) {
+            : WorldState(state_machine, states), _finished(false) {
 
     }
 
@@ -18,23 +18,31 @@ namespace game {
 
     void LevelState::reset() {
         _finish = nullptr;
+        _finished = false;
         _level_data = nullptr;
 
         WorldState::reset();
     }
 
+    void LevelState::graphicsUpdate(double t, float dt) {
+        WorldState::graphicsUpdate(t, dt);
+
+        if (_finished) {
+            push<LevelFinishOverlayState>();
+            return;
+        }
+    }
+
     void LevelState::physicsUpdate(double t, float dt) {
         WorldState::physicsUpdate(t, dt);
 
-        if (!_level_data->limit.empty()) {
-            if (_player->getPosition().x < _level_min_limit.x || _player->getPosition().x > _level_max_limit.x ||
-                    _player->getPosition().y < _level_min_limit.y || _player->getPosition().y > _level_max_limit.y) {
-                return reset();
-            }
+        if (!_state_machine.getCamera()->isInView(_player->getPosition())) {
+            return reset();
         }
     }
 
     void LevelState::loadLevelData() {
+        // camera limit
         if (!_level_data->limit.empty()) {
             _camera_limit = true;
 
@@ -51,6 +59,17 @@ namespace game {
                                  _level_data->origin.y - _level_data->limit.y / 2};
             _level_max_limit = {_level_data->origin.x + _level_data->limit.x / 2,
                                  _level_data->origin.y + _level_data->limit.y / 2};
+        }
+
+        // camera move
+        if (_level_data->camera_move_time != 0) {
+            _camera_start = _level_data->camera_start;
+
+            float move_amount = _level_data->camera_move_time / engine::constants::physics_delta_time;
+
+            _camera_move_vector = (_level_data->camera_end - _level_data->camera_start) / move_amount;
+
+            _state_machine.getCamera()->setPosition(_camera_start);
         }
 
         createPlayer(_level_data->player.position, _level_data->player.size);
@@ -92,8 +111,7 @@ namespace game {
         // finish
         if (_finish != nullptr) {
             if (_player->_physics_component->getHitBox()->collides(*_finish->getHitBox())) {
-                push<LevelFinishOverlayState>();
-                return;
+                _finished = true;
             }
         }
 

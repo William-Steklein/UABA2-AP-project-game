@@ -36,6 +36,9 @@ namespace game {
         engine::Vector2f _camera_min_limit;
         engine::Vector2f _camera_max_limit;
 
+        engine::Vector2f _camera_start;
+        engine::Vector2f _camera_move_vector;
+
         std::vector<std::shared_ptr<engine::IViewComponent>> _debug_components;
         bool _debug_view_visibility;
 
@@ -44,7 +47,7 @@ namespace game {
 
         void createPlayer(const engine::Vector2f &position, const engine::Vector2f &size);
 
-        void cameraFollowPlayer();
+        void controlCamera();
 
         void createWall(const engine::Vector2f &position, const engine::Vector2f &size, bool slide = false);
 
