@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="1">
  <properties>
+  <property name="camera_end" value="0,0"/>
   <property name="camera_move_time" type="float" value="0"/>
+  <property name="camera_start" value="0,0"/>
+  <property name="finish_pos" value="0,0"/>
+  <property name="player_pos" value="0,0"/>
  </properties>
  <layer id="1" name="tile_bg" width="50" height="50">
   <data encoding="csv">
@@ -168,8 +172,4 @@
  </layer>
  <objectgroup id="5" name="wall"/>
  <objectgroup id="6" name="slide_wall"/>
- <objectgroup id="7" name="player"/>
- <objectgroup id="8" name="finish"/>
- <objectgroup id="9" name="camera_start"/>
- <objectgroup id="10" name="camare_end"/>
 </map>

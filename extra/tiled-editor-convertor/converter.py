@@ -3,15 +3,15 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
-def getFilenameFromPath(filepath: str):
+def get_filename_from_path(filepath: str):
     return os.path.basename(filepath)
 
 
-def getFilenameFromPathWithoutExtension(filepath: str):
-    return getFilenameFromPath(filepath).split('.')[0]
+def get_filename_from_path_without_extension(filepath: str):
+    return get_filename_from_path(filepath).split('.')[0]
 
 
-def convertPixelToWorldUnit(number):
+def convert_pixel_to_world_unit(number):
     return number * (0.25 / 16)
 
 
@@ -24,14 +24,14 @@ class Tileset:
 
         for child in root:
             if child.tag == "tile":
-                self._addChild(child.attrib["id"], child[0])
+                self.__add_child(child.attrib["id"], child[0])
 
-    def _addChild(self, tile_id: str, tile_element):
-        self.tiles[int(tile_id)] = WorldTileSrite(convertPixelToWorldUnit(int(tile_element.attrib["width"])),
-                                                  convertPixelToWorldUnit(int(tile_element.attrib["height"])),
-                                                  getFilenameFromPathWithoutExtension(tile_element.attrib["source"]))
+    def __add_child(self, tile_id: str, tile_element):
+        self.tiles[int(tile_id)] = WorldTileSrite(convert_pixel_to_world_unit(int(tile_element.attrib["width"])),
+                                                  convert_pixel_to_world_unit(int(tile_element.attrib["height"])),
+                                                  get_filename_from_path_without_extension(tile_element.attrib["source"]))
 
-    def getTile(self, tile_id: int):
+    def get_tile(self, tile_id: int):
         return self.tiles[tile_id]
 
 
@@ -45,17 +45,17 @@ class WorldWallEntity:
 
         self.sliding = sliding
 
-    def getPositionString(self):
+    def get_position_string(self):
         return f"{self.xpos}, {self.ypos}"
 
-    def getSizeString(self):
+    def get_size_string(self):
         if self.width != 0.25 or self.height != 0.25:
             return f"{self.width}, {self.height}"
         else:
             return ""
 
     def __str__(self):
-        return f"2; {self.getPositionString()}; {self.getSizeString()}; {int(self.sliding)};"
+        return f"2; {self.get_position_string()}; {self.get_size_string()}; {int(self.sliding)};"
 
 
 class WorldTileSrite:
@@ -73,17 +73,17 @@ class WorldTileEntity:
         self.tile = tile
         self.tile_type = tile_type
 
-    def getPositionString(self):
+    def get_position_string(self):
         return f"{self.xpos}, {self.ypos}"
 
-    def getSizeString(self):
+    def get_size_string(self):
         if self.tile.width != 0.25 or self.tile.height != 0.25:
             return f"{self.tile.width}, {self.tile.height}"
         else:
             return ""
 
     def __str__(self):
-        return f"3; {self.getPositionString()}; {self.getSizeString()}; {self.tile_type}; {self.tile.filename};"
+        return f"3; {self.get_position_string()}; {self.get_size_string()}; {self.tile_type}; {self.tile.filename};"
 
 
 class WorldMap:
@@ -111,7 +111,7 @@ class WorldMap:
         self.camera_end_xpos = 0
         self.camera_end_ypos = 0
 
-        self.name = getFilenameFromPathWithoutExtension(tile_map_filename)
+        self.name = get_filename_from_path_without_extension(tile_map_filename)
 
         tree = ET.parse(tile_map_filename)
         root = tree.getroot()
@@ -134,35 +134,35 @@ class WorldMap:
 
             if child.tag == "properties":
                 # print(child[0].tag, child[0].attrib)
-                self.__loadProperties(child)
+                self.__load_properties(child)
 
             elif child.tag == "objectgroup":
                 if child.attrib["name"] == "wall":
-                    self._loadWallLayer(child, False)
+                    self.__load_wall_layer(child, False)
                 elif child.attrib["name"] == "slide_wall":
-                    self._loadWallLayer(child, True)
+                    self.__load_wall_layer(child, True)
                 elif child.attrib["name"] == "player":
-                    self._loadPlayerPosition(child)
+                    self.__load_player_position(child)
                 elif child.attrib["name"] == "finish":
-                    self._loadFinishPosition(child)
+                    self.__load_finish_position(child)
                 elif child.attrib["name"] == "camera_start":
-                    self._loadCameraStart(child)
+                    self.__load_camera_start(child)
                 elif child.attrib["name"] == "camera_end":
-                    self._loadCameraEnd(child)
+                    self.__load_camera_end(child)
                 elif child.attrib["name"] == "tile_bg":
-                    self._loadTileObjectLayer(child, 0)
+                    self.__load_tile_object_layer(child, 0)
                 elif child.attrib["name"] == "tile_prop":
-                    self._loadTileObjectLayer(child, 1)
+                    self.__load_tile_object_layer(child, 1)
                 elif child.attrib["name"] == "tile_fg":
-                    self._loadTileObjectLayer(child, 2)
+                    self.__load_tile_object_layer(child, 2)
 
             elif child.tag == "layer":
                 if child.attrib["name"] == "tile_bg":
-                    self._loadTileLayer(child, 0)
+                    self.__load_tile_layer(child, 0)
                 elif child.attrib["name"] == "tile_prop":
-                    self._loadTileLayer(child, 1)
+                    self.__load_tile_layer(child, 1)
                 elif child.attrib["name"] == "tile_fg":
-                    self._loadTileLayer(child, 2)
+                    self.__load_tile_layer(child, 2)
 
     def __str__(self):
         total = ""
@@ -179,12 +179,12 @@ class WorldMap:
 
         return total
 
-    def __loadProperties(self, properties_element):
+    def __load_properties(self, properties_element):
         for property_element in properties_element:
             if property_element.attrib["name"] == "camera_move_time":
                 self.camera_move_time = float(property_element.attrib["value"])
 
-    def _getTile(self, tile_id: int):
+    def __get_tile(self, tile_id: int):
         current_tileset_id = next(iter(self.tileset_id_offsets))
         for tileset_id in self.tileset_id_offsets:
             if tile_id < self.tileset_id_offsets[tileset_id]:
@@ -193,9 +193,9 @@ class WorldMap:
 
         offset = self.tileset_id_offsets[current_tileset_id]
 
-        return self.tilesets[current_tileset_id].getTile(tile_id - offset)
+        return self.tilesets[current_tileset_id].get_tile(tile_id - offset)
 
-    def _loadTileLayer(self, layer_element, tile_type: int = 0):
+    def __load_tile_layer(self, layer_element, tile_type: int = 0):
         layer_width_tile = int(layer_element.attrib["width"])
         layer_height_tile = int(layer_element.attrib["height"])
 
@@ -214,11 +214,11 @@ class WorldMap:
                 elif tile_type == 2:
                     tile_list = self.tiles_fg
 
-                tile_sprite = self._getTile(int(tile_id))
+                tile_sprite = self.__get_tile(int(tile_id))
 
                 tile_list.append(
-                    WorldTileEntity(convertPixelToWorldUnit(x_tile_pos * self.tile_width_pixel) + tile_sprite.width / 2,
-                                    convertPixelToWorldUnit(
+                    WorldTileEntity(convert_pixel_to_world_unit(x_tile_pos * self.tile_width_pixel) + tile_sprite.width / 2,
+                                    convert_pixel_to_world_unit(
                                         y_tile_pos * self.tile_height_pixel) + tile_sprite.height / 2,
                                     tile_sprite, tile_type))
 
@@ -227,7 +227,7 @@ class WorldMap:
                 x_tile_pos = 0
                 y_tile_pos -= 1
 
-    def _loadWallLayer(self, layer_element, sliding: bool):
+    def __load_wall_layer(self, layer_element, sliding: bool):
         for child in layer_element:
             wall_list = []
 
@@ -236,11 +236,11 @@ class WorldMap:
             else:
                 wall_list = self.walls
 
-            wall_width = convertPixelToWorldUnit(int(child.attrib["width"]))
-            wall_height = convertPixelToWorldUnit(int(child.attrib["height"]))
+            wall_width = convert_pixel_to_world_unit(int(child.attrib["width"]))
+            wall_height = convert_pixel_to_world_unit(int(child.attrib["height"]))
 
-            wall_xpos = convertPixelToWorldUnit(int(child.attrib["x"]) + (int(child.attrib["width"]) / 2))
-            wall_ypos = convertPixelToWorldUnit(
+            wall_xpos = convert_pixel_to_world_unit(int(child.attrib["x"]) + (int(child.attrib["width"]) / 2))
+            wall_ypos = convert_pixel_to_world_unit(
                 -(int(child.attrib["y"]) + (int(child.attrib["height"]) / 2) - self.height_pixel))
 
             wall_list.append(WorldWallEntity(wall_xpos,
@@ -249,46 +249,46 @@ class WorldMap:
                                              wall_height,
                                              sliding))
 
-    def _convertPosition(self, xpos_pixel, ypos_pixel, width_world=0.25, height_world=0.25):
-        return [convertPixelToWorldUnit(xpos_pixel) + (width_world / 2),
-                convertPixelToWorldUnit(-(ypos_pixel - self.height_pixel)) + (height_world / 2)]
+    def __convert_position(self, xpos_pixel, ypos_pixel, width_world=0.25, height_world=0.25):
+        return [convert_pixel_to_world_unit(xpos_pixel) + (width_world / 2),
+                convert_pixel_to_world_unit(-(ypos_pixel - self.height_pixel)) + (height_world / 2)]
 
-    def _loadPlayerPosition(self, layer_element):
-        position = self._convertPosition(int(layer_element[0].attrib["x"]), int(layer_element[0].attrib["y"]))
+    def __load_player_position(self, layer_element):
+        position = self.__convert_position(int(layer_element[0].attrib["x"]), int(layer_element[0].attrib["y"]))
 
         self.player_xpos = position[0]
         self.player_ypos = position[1]
 
-    def _loadFinishPosition(self, layer_element):
-        position = self._convertPosition(int(layer_element[0].attrib["x"]), int(layer_element[0].attrib["y"]))
+    def __load_finish_position(self, layer_element):
+        position = self.__convert_position(int(layer_element[0].attrib["x"]), int(layer_element[0].attrib["y"]))
 
         self.finish_xpos = position[0]
         self.finish_ypos = position[1]
 
-    def _loadCameraStart(self, layer_element):
+    def __load_camera_start(self, layer_element):
         if not layer_element:
             return
 
-        position = self._convertPosition(int(layer_element[0].attrib["x"]), int(layer_element[0].attrib["y"]))
+        position = self.__convert_position(int(layer_element[0].attrib["x"]), int(layer_element[0].attrib["y"]))
 
         self.camera_start_xpos = position[0]
         self.camera_start_ypos = position[1]
 
-    def _loadCameraEnd(self, layer_element):
+    def __load_camera_end(self, layer_element):
         if not layer_element:
             return
 
-        position = self._convertPosition(int(layer_element[0].attrib["x"]), int(layer_element[0].attrib["y"]))
+        position = self.__convert_position(int(layer_element[0].attrib["x"]), int(layer_element[0].attrib["y"]))
 
         self.camera_end_xpos = position[0]
         self.camera_end_ypos = position[1]
 
-    def _loadTileObjectLayer(self, layer_element, tile_type: int):
+    def __load_tile_object_layer(self, layer_element, tile_type: int):
         for tile_object in layer_element:
-            tile_sprite = self._getTile(int(tile_object.attrib["gid"]))
+            tile_sprite = self.__get_tile(int(tile_object.attrib["gid"]))
 
-            position = self._convertPosition(int(tile_object.attrib["x"]), int(tile_object.attrib["y"]),
-                                             tile_sprite.width, tile_sprite.height)
+            position = self.__convert_position(int(tile_object.attrib["x"]), int(tile_object.attrib["y"]),
+                                               tile_sprite.width, tile_sprite.height)
 
             tile_list = []
 
@@ -302,11 +302,11 @@ class WorldMap:
             tile_list.append(
                 WorldTileEntity(position[0], position[1], tile_sprite, tile_type))
 
-    def getCenterWorld(self):
-        return f"{convertPixelToWorldUnit(self.width_pixel / 2)}, {convertPixelToWorldUnit(self.height_pixel / 2)}"
+    def get_center_world(self):
+        return f"{convert_pixel_to_world_unit(self.width_pixel / 2)}, {convert_pixel_to_world_unit(self.height_pixel / 2)}"
 
-    def getLimitWorld(self):
-        return f"{convertPixelToWorldUnit(self.width_pixel)}, {convertPixelToWorldUnit(self.height_pixel)}"
+    def get_limit_world(self):
+        return f"{convert_pixel_to_world_unit(self.width_pixel)}, {convert_pixel_to_world_unit(self.height_pixel)}"
 
 
 class Converter:
@@ -314,25 +314,25 @@ class Converter:
         self.tilesets = {}  # tileset_filename: TileSet
         self.world_maps = []
 
-        self._loadTilesets(tileset_directory)
-        self._loadMaps(map_directory)
+        self.__load_tilesets(tileset_directory)
+        self.__load_maps(map_directory)
 
-    def _loadTilesets(self, directory: str):
+    def __load_tilesets(self, directory: str):
         for filepath in Path(directory).glob("*.tsx"):
-            self.tilesets[getFilenameFromPath(str(filepath))] = Tileset(str(filepath))
+            self.tilesets[get_filename_from_path(str(filepath))] = Tileset(str(filepath))
 
-    def _loadMaps(self, directory: str):
+    def __load_maps(self, directory: str):
         for filepath in Path(directory).glob("*.tmx"):
             self.world_maps.append(WorldMap(str(filepath), self.tilesets))
 
-    def createWorldFiles(self):
+    def create_world_files(self):
         for world_map in self.world_maps:
             Path("./output").mkdir(parents=True, exist_ok=True)
             f = open(f"./output/{world_map.name}.world", "w")
 
             f.write("-meta\n")
-            f.write(f"origin= {world_map.getCenterWorld()}\n")
-            f.write(f"limit= {world_map.getLimitWorld()}\n")
+            f.write(f"origin= {world_map.get_center_world()}\n")
+            f.write(f"limit= {world_map.get_limit_world()}\n")
 
             f.write("\n")
 
@@ -348,11 +348,11 @@ class Converter:
 
         return ""
 
-    def createResourceFile(self, tile_set_filename: str, new_path: str):
+    def create_resource_file(self, tile_set_filename: str, new_path: str):
         return ""
 
 
 if __name__ == "__main__":
     convertor = Converter("./input/tileset/", "./input/map/")
 
-    convertor.createWorldFiles()
+    convertor.create_world_files()
