@@ -4,5 +4,9 @@
   "cobble_stone": "data/textures/cobble_stone.png",
   "pr_background": "data/textures/prototype/background_tile.png",
   "pr_ground": "data/textures/prototype/ground_tile.png",
-  "pr_ground_2": "data/textures/prototype/ground_tile_2.png"
+  "pr_ground_2": "data/textures/prototype/ground_tile_2.png",
+  "bg-mountains": "data/textures/background/BG-mountains.png",
+  "bg-ruins": "data/textures/background/BG-ruins.png",
+  "bg-sky": "data/textures/background/BG-sky.png",
+  "bg-sun": "data/textures/background/BG-sun.png"
 }
