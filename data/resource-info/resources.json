@@ -1,0 +1,7 @@
+{
+  "texture": ["data/resource-info/textures.json", "data/resource-info/tile_textures.json"],
+  "animation": ["data/resource-info/animations.json"],
+  "font": ["data/resource-info/fonts.json"],
+  "sounds": ["data/resource-info/sounds.json"],
+  "music": ["data/resource-info/music.json"]
+}

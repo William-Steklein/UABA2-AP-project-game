@@ -10,6 +10,8 @@ namespace engine {
 
     class IResourceManager {
     public:
+        void loadResources(const std::string &resources_config_path);
+
         virtual void loadTextureResources(const std::vector<TextureResource> &texture_resources) = 0;
 
         virtual void

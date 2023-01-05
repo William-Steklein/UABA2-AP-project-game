@@ -48,8 +48,6 @@ namespace game {
 
         void physicsUpdate(double t, float dt) override;
 
-        void loadResources();
-
         Config _config;
         std::shared_ptr<engine::Vector2f> _mouse_position;
 

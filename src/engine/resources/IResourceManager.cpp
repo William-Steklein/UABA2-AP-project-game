@@ -1,6 +1,35 @@
 #include "IResourceManager.h"
+#include "engine/utils/file_io.h"
 
 namespace engine {
+    void IResourceManager::loadResources(const std::string &resources_config_path) {
+        nlohmann::json j = loadJsonFromFile(resources_config_path);
+
+        for (const auto &resource_type: j.items()) {
+            if (resource_type.key() == "texture") {
+                for (const auto &resource_info_file: resource_type.value()) {
+                    loadTextureResources(engine::parseTextureInfo(resource_info_file));
+                }
+            } else if (resource_type.key() == "animation") {
+                for (const auto &resource_info_file: resource_type.value()) {
+                    loadAnimationResources(engine::parseAnimationInfo(resource_info_file));
+                }
+            } else if (resource_type.key() == "font") {
+                for (const auto &resource_info_file: resource_type.value()) {
+                    loadFontResources(engine::parseFontInfo(resource_info_file));
+                }
+            } else if (resource_type.key() == "sounds") {
+                for (const auto &resource_info_file: resource_type.value()) {
+                    loadSoundResources(engine::parseAudioInfo(resource_info_file));
+                }
+            } else if (resource_type.key() == "music") {
+                for (const auto &resource_info_file: resource_type.value()) {
+                    loadMusicResources(engine::parseAudioInfo(resource_info_file));
+                }
+            }
+        }
+    }
+
     void IResourceManager::loadAnimationResources(
             const std::vector<AnimationResourceGroup> &animation_resource_groups) {
         for (const auto &animation_resource_group: animation_resource_groups) {

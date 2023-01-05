@@ -1,124 +1,92 @@
 {
-  "explosion": {
-    "circle_explosion": [
-      0.10,
-      [
-        "data/sprites/circle-explosion/Circle_explosion1.png",
-        "data/sprites/circle-explosion/Circle_explosion2.png",
-        "data/sprites/circle-explosion/Circle_explosion3.png",
-        "data/sprites/circle-explosion/Circle_explosion4.png",
-        "data/sprites/circle-explosion/Circle_explosion5.png",
-        "data/sprites/circle-explosion/Circle_explosion6.png",
-        "data/sprites/circle-explosion/Circle_explosion7.png",
-        "data/sprites/circle-explosion/Circle_explosion8.png",
-        "data/sprites/circle-explosion/Circle_explosion9.png",
-        "data/sprites/circle-explosion/Circle_explosion10.png"
-      ]
-    ],
-    "ground_explosion": [
-      0.10,
-      [
-        "data/sprites/ground-explosion/Explosion1.png",
-        "data/sprites/ground-explosion/Explosion2.png",
-        "data/sprites/ground-explosion/Explosion3.png",
-        "data/sprites/ground-explosion/Explosion4.png",
-        "data/sprites/ground-explosion/Explosion5.png",
-        "data/sprites/ground-explosion/Explosion6.png",
-        "data/sprites/ground-explosion/Explosion7.png",
-        "data/sprites/ground-explosion/Explosion8.png",
-        "data/sprites/ground-explosion/Explosion9.png",
-        "data/sprites/ground-explosion/Explosion10.png"
-      ]
-    ]
-  },
   "adventurer": {
     "crouch": [
       0.10,
       [
-        "data/sprites/adventurer/adventurer-crouch-00.png",
-        "data/sprites/adventurer/adventurer-crouch-01.png",
-        "data/sprites/adventurer/adventurer-crouch-02.png",
-        "data/sprites/adventurer/adventurer-crouch-03.png"
+        "data/textures/adventurer/adventurer-crouch-00.png",
+        "data/textures/adventurer/adventurer-crouch-01.png",
+        "data/textures/adventurer/adventurer-crouch-02.png",
+        "data/textures/adventurer/adventurer-crouch-03.png"
       ]
     ],
     "fall": [
       0.10,
       [
-        "data/sprites/adventurer/adventurer-fall-00.png",
-        "data/sprites/adventurer/adventurer-fall-01.png"
+        "data/textures/adventurer/adventurer-fall-00.png",
+        "data/textures/adventurer/adventurer-fall-01.png"
       ]
     ],
     "idle": [
       0.20,
       [
-        "data/sprites/adventurer/adventurer-idle-00.png",
-        "data/sprites/adventurer/adventurer-idle-01.png",
-        "data/sprites/adventurer/adventurer-idle-02.png",
-        "data/sprites/adventurer/adventurer-idle-03.png"
+        "data/textures/adventurer/adventurer-idle-00.png",
+        "data/textures/adventurer/adventurer-idle-01.png",
+        "data/textures/adventurer/adventurer-idle-02.png",
+        "data/textures/adventurer/adventurer-idle-03.png"
       ]
     ],
     "jump": [
       0.10,
       [
-        "data/sprites/adventurer/adventurer-jump-00.png",
-        "data/sprites/adventurer/adventurer-jump-01.png",
-        "data/sprites/adventurer/adventurer-jump-02.png",
-        "data/sprites/adventurer/adventurer-jump-03.png"
+        "data/textures/adventurer/adventurer-jump-00.png",
+        "data/textures/adventurer/adventurer-jump-01.png",
+        "data/textures/adventurer/adventurer-jump-02.png",
+        "data/textures/adventurer/adventurer-jump-03.png"
       ]
     ],
     "run": [
       0.10,
       [
-        "data/sprites/adventurer/adventurer-run-00.png",
-        "data/sprites/adventurer/adventurer-run-01.png",
-        "data/sprites/adventurer/adventurer-run-02.png",
-        "data/sprites/adventurer/adventurer-run-03.png",
-        "data/sprites/adventurer/adventurer-run-04.png",
-        "data/sprites/adventurer/adventurer-run-05.png"
+        "data/textures/adventurer/adventurer-run-00.png",
+        "data/textures/adventurer/adventurer-run-01.png",
+        "data/textures/adventurer/adventurer-run-02.png",
+        "data/textures/adventurer/adventurer-run-03.png",
+        "data/textures/adventurer/adventurer-run-04.png",
+        "data/textures/adventurer/adventurer-run-05.png"
       ]
     ],
     "wall_slide": [
       0.10,
       [
-        "data/sprites/adventurer/adventurer-wall-slide-00.png",
-        "data/sprites/adventurer/adventurer-wall-slide-01.png"
+        "data/textures/adventurer/adventurer-wall-slide-00.png",
+        "data/textures/adventurer/adventurer-wall-slide-01.png"
       ]
     ]
   },
   "menu_button": {
     "default": [
       0.1,
-      ["data/textures/ui/menu-button/button.png"]
+      ["data/textures/ui/button/button.png"]
     ],
     "hover": [
       0.1,
-      ["data/textures/ui/menu-button/button_hover.png"]
+      ["data/textures/ui/button/button_hover.png"]
     ],
     "clicking": [
       0.1,
-      ["data/textures/ui/menu-button/button_clicking.png"]
+      ["data/textures/ui/button/button_clicking.png"]
     ],
     "clicked": [
       0.1,
-      ["data/textures/ui/menu-button/button_clicking.png"]
+      ["data/textures/ui/button/button_clicking.png"]
     ]
   },
   "level_menu_button": {
     "default": [
       0.1,
-      ["data/textures/ui/level-menu-button/level_button.png"]
+      ["data/textures/ui/level-button/level_button.png"]
     ],
     "hover": [
       0.1,
-      ["data/textures/ui/level-menu-button/level_button_hover.png"]
+      ["data/textures/ui/level-button/level_button_hover.png"]
     ],
     "clicking": [
       0.1,
-      ["data/textures/ui/level-menu-button/level_button_clicking.png"]
+      ["data/textures/ui/level-button/level_button_clicking.png"]
     ],
     "clicked": [
       0.1,
-      ["data/textures/ui/level-menu-button/level_button_clicking.png"]
+      ["data/textures/ui/level-button/level_button_clicking.png"]
     ]
   },
   "arrow_button": {
@@ -143,66 +111,66 @@
     "default": [
       0.075,
       [
-        "data/sprites/blue-cube/0000.png",
-        "data/sprites/blue-cube/0001.png",
-        "data/sprites/blue-cube/0002.png",
-        "data/sprites/blue-cube/0003.png",
-        "data/sprites/blue-cube/0004.png",
-        "data/sprites/blue-cube/0005.png",
-        "data/sprites/blue-cube/0006.png",
-        "data/sprites/blue-cube/0007.png",
-        "data/sprites/blue-cube/0008.png",
-        "data/sprites/blue-cube/0009.png",
-        "data/sprites/blue-cube/0010.png",
-        "data/sprites/blue-cube/0011.png",
-        "data/sprites/blue-cube/0012.png",
-        "data/sprites/blue-cube/0013.png",
-        "data/sprites/blue-cube/0014.png",
-        "data/sprites/blue-cube/0015.png",
-        "data/sprites/blue-cube/0016.png",
-        "data/sprites/blue-cube/0017.png",
-        "data/sprites/blue-cube/0018.png",
-        "data/sprites/blue-cube/0019.png",
-        "data/sprites/blue-cube/0020.png",
-        "data/sprites/blue-cube/0021.png",
-        "data/sprites/blue-cube/0022.png",
-        "data/sprites/blue-cube/0023.png",
-        "data/sprites/blue-cube/0024.png",
-        "data/sprites/blue-cube/0025.png",
-        "data/sprites/blue-cube/0026.png",
-        "data/sprites/blue-cube/0027.png",
-        "data/sprites/blue-cube/0028.png",
-        "data/sprites/blue-cube/0029.png",
-        "data/sprites/blue-cube/0030.png",
-        "data/sprites/blue-cube/0031.png",
-        "data/sprites/blue-cube/0032.png",
-        "data/sprites/blue-cube/0033.png",
-        "data/sprites/blue-cube/0034.png",
-        "data/sprites/blue-cube/0035.png",
-        "data/sprites/blue-cube/0036.png",
-        "data/sprites/blue-cube/0037.png",
-        "data/sprites/blue-cube/0038.png",
-        "data/sprites/blue-cube/0039.png",
-        "data/sprites/blue-cube/0040.png",
-        "data/sprites/blue-cube/0041.png",
-        "data/sprites/blue-cube/0042.png",
-        "data/sprites/blue-cube/0043.png",
-        "data/sprites/blue-cube/0044.png",
-        "data/sprites/blue-cube/0045.png",
-        "data/sprites/blue-cube/0046.png",
-        "data/sprites/blue-cube/0047.png",
-        "data/sprites/blue-cube/0048.png",
-        "data/sprites/blue-cube/0049.png",
-        "data/sprites/blue-cube/0050.png",
-        "data/sprites/blue-cube/0051.png",
-        "data/sprites/blue-cube/0052.png",
-        "data/sprites/blue-cube/0053.png",
-        "data/sprites/blue-cube/0054.png",
-        "data/sprites/blue-cube/0055.png",
-        "data/sprites/blue-cube/0056.png",
-        "data/sprites/blue-cube/0057.png",
-        "data/sprites/blue-cube/0058.png",
-        "data/sprites/blue-cube/0059.png"
+        "data/textures/blue-cube/0000.png",
+        "data/textures/blue-cube/0001.png",
+        "data/textures/blue-cube/0002.png",
+        "data/textures/blue-cube/0003.png",
+        "data/textures/blue-cube/0004.png",
+        "data/textures/blue-cube/0005.png",
+        "data/textures/blue-cube/0006.png",
+        "data/textures/blue-cube/0007.png",
+        "data/textures/blue-cube/0008.png",
+        "data/textures/blue-cube/0009.png",
+        "data/textures/blue-cube/0010.png",
+        "data/textures/blue-cube/0011.png",
+        "data/textures/blue-cube/0012.png",
+        "data/textures/blue-cube/0013.png",
+        "data/textures/blue-cube/0014.png",
+        "data/textures/blue-cube/0015.png",
+        "data/textures/blue-cube/0016.png",
+        "data/textures/blue-cube/0017.png",
+        "data/textures/blue-cube/0018.png",
+        "data/textures/blue-cube/0019.png",
+        "data/textures/blue-cube/0020.png",
+        "data/textures/blue-cube/0021.png",
+        "data/textures/blue-cube/0022.png",
+        "data/textures/blue-cube/0023.png",
+        "data/textures/blue-cube/0024.png",
+        "data/textures/blue-cube/0025.png",
+        "data/textures/blue-cube/0026.png",
+        "data/textures/blue-cube/0027.png",
+        "data/textures/blue-cube/0028.png",
+        "data/textures/blue-cube/0029.png",
+        "data/textures/blue-cube/0030.png",
+        "data/textures/blue-cube/0031.png",
+        "data/textures/blue-cube/0032.png",
+        "data/textures/blue-cube/0033.png",
+        "data/textures/blue-cube/0034.png",
+        "data/textures/blue-cube/0035.png",
+        "data/textures/blue-cube/0036.png",
+        "data/textures/blue-cube/0037.png",
+        "data/textures/blue-cube/0038.png",
+        "data/textures/blue-cube/0039.png",
+        "data/textures/blue-cube/0040.png",
+        "data/textures/blue-cube/0041.png",
+        "data/textures/blue-cube/0042.png",
+        "data/textures/blue-cube/0043.png",
+        "data/textures/blue-cube/0044.png",
+        "data/textures/blue-cube/0045.png",
+        "data/textures/blue-cube/0046.png",
+        "data/textures/blue-cube/0047.png",
+        "data/textures/blue-cube/0048.png",
+        "data/textures/blue-cube/0049.png",
+        "data/textures/blue-cube/0050.png",
+        "data/textures/blue-cube/0051.png",
+        "data/textures/blue-cube/0052.png",
+        "data/textures/blue-cube/0053.png",
+        "data/textures/blue-cube/0054.png",
+        "data/textures/blue-cube/0055.png",
+        "data/textures/blue-cube/0056.png",
+        "data/textures/blue-cube/0057.png",
+        "data/textures/blue-cube/0058.png",
+        "data/textures/blue-cube/0059.png"
       ]
     ]
   }

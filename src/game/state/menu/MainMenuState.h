@@ -15,7 +15,6 @@ namespace game {
 
     private:
         std::shared_ptr<Button> _play_button;
-        std::shared_ptr<Button> _debug_button;
         std::shared_ptr<Button> _quit_button;
     };
 

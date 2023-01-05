@@ -15,9 +15,9 @@ namespace game {
               _mouse_position(std::make_shared<engine::Vector2f>()),
               _current_level_id(0) {
         initSidebars(constants::layer::side_bar);
-        loadResources();
-        _config = parseConfig("data/config_default.json");
 
+        // load data
+        _config = parseConfig("data/config_default.json");
         _level_data = levelsDataParser("data/levels/levels.json");
 
         IGameState::init<MainMenuState>(*this, _states);
@@ -105,14 +105,5 @@ namespace game {
         _states.top()->physicsUpdate(t, dt);
 
         Engine::physicsUpdate(t, dt);
-    }
-
-    void Game::loadResources() {
-        _resource_manager->loadTextureResources(engine::parseTextureInfo("data/resource-info/textures.json"));
-        _resource_manager->loadTextureResources(engine::parseTextureInfo("data/resource-info/tile_textures.json"));
-        _resource_manager->loadAnimationResources(engine::parseAnimationInfo("data/resource-info/animations.json"));
-        _resource_manager->loadSoundResources(engine::parseAudioInfo("data/resource-info/sounds.json"));
-        _resource_manager->loadMusicResources(engine::parseAudioInfo("data/resource-info/music.json"));
-        _resource_manager->loadFontResources(engine::parseFontInfo("data/resource-info/fonts.json"));
     }
 } // game
