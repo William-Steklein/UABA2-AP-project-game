@@ -1,2 +1,4 @@
-extra/output/
-extra/levels/
+extra/tiled-editor-convertor/output/
+extra/tiled-editor-convertor/game-engine-tiled-editor-project/levels/
+**.idea/
+**cmake-build-debug/
