@@ -56,6 +56,18 @@
                 "y": 400.26818638954074
             }
         },
+        "levels/level1.tmx": {
+            "expandedObjectLayers": [
+                4,
+                5
+            ],
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 379,
+                "y": 688
+            }
+        },
         "map_1.tmx": {
             "expandedObjectLayers": [
                 2
@@ -68,11 +80,11 @@
             }
         },
         "map_template.tmx": {
-            "scale": 0.75,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 361.33333333333337,
-                "y": 459.9999999999999
+                "x": 440,
+                "y": 552
             }
         },
         "props.tsx": {
@@ -157,6 +169,7 @@
     "project": "game_engine.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "levels/level1.tmx",
         "map_template.tmx",
         "terrain.tsx",
         "props.tsx",
@@ -167,8 +180,7 @@
         "background.tsx",
         "test2.tmx",
         "level_3.tmx",
-        "start_end.tsx",
-        "blocks.tsx"
+        "start_end.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

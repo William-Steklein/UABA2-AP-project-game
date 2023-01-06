@@ -1,5 +1,5 @@
 {
-  "texture": ["data/resource-info/textures.json", "data/resource-info/tile_textures.json"],
+  "texture": ["data/resource-info/textures.json", "data/resource-info/tile_terrain_textures.json", "data/resource-info/tile_prop_textures.json"],
   "animation": ["data/resource-info/animations.json"],
   "font": ["data/resource-info/fonts.json"],
   "sounds": ["data/resource-info/sounds.json"],
