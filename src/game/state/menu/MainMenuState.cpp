@@ -3,13 +3,15 @@
 
 namespace game {
     void MainMenuState::enter() {
+        createBackground();
+
         _state_machine.getCamera()->reset();
 
         std::shared_ptr<engine::UIEntity> menu_background = createMenuBackground({0, 0});
         _entities.push_back(menu_background);
 
-        _play_button = createMenuButton("play", {0, 0.51}, menu_background);
-        _quit_button = createMenuButton("quit", {0, 0.175}, menu_background);
+        _play_button = createMenuButton("play", constants::ui::menu::button_position_1, menu_background);
+        _quit_button = createMenuButton("quit", constants::ui::menu::button_position_2, menu_background);
 
         MenuState::enter();
     }

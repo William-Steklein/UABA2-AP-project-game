@@ -58,6 +58,35 @@ namespace game {
 
         } // player
 
+        namespace ui {
+
+            extern const float scale_factor;
+
+            namespace menu {
+
+                extern const engine::Vector2f position;
+                extern const engine::Vector2f size;
+
+                extern const engine::Vector2f button_position_1;
+                extern const engine::Vector2f button_position_2;
+                extern const engine::Vector2f button_position_3;
+                extern const engine::Vector2f button_position_4;
+
+                extern const engine::Vector2f button_size;
+                extern const float font_size;
+
+            }
+
+            namespace level_menu {
+
+                extern const engine::Vector2f level_select_button_size;
+                extern const engine::Vector2f arrow_button_size;
+                extern const engine::Vector2f return_button_position;
+
+            }
+
+        }
+
     } // constants
 
 } // game

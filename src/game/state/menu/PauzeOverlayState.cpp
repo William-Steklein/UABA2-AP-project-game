@@ -6,9 +6,9 @@ namespace game {
         std::shared_ptr<engine::UIEntity> menu_background = createMenuBackground({0, 0});
         _entities.push_back(menu_background);
 
-        _resume_button = createMenuButton("resume", {0, 0.51}, menu_background);
-        _restart_button = createMenuButton("restart", {0, 0.175}, menu_background);
-        _main_menu_button = createMenuButton("main menu", {0, -0.175}, menu_background);
+        _resume_button = createMenuButton("resume", constants::ui::menu::button_position_1, menu_background);
+        _restart_button = createMenuButton("restart", constants::ui::menu::button_position_2, menu_background);
+        _main_menu_button = createMenuButton("main menu", constants::ui::menu::button_position_3, menu_background);
 
         MenuState::enter();
     }

@@ -44,11 +44,42 @@ namespace game {
         }
 
         namespace player {
+
             const float jump_dt = 0.5;
             const float jump_height = 1;
 
             const float mass = 20;
             const float horizontal_movement_force = 200;
+
         } // player
+
+        namespace ui {
+
+                const float scale_factor = 1.55f;
+
+            namespace menu {
+
+                const engine::Vector2f position = {0, 0};
+                const engine::Vector2f size = engine::Vector2f(1, 1.5) * scale_factor;
+
+                const engine::Vector2f button_position_1 = engine::Vector2f(0, 0.51) * scale_factor;
+                const engine::Vector2f button_position_2 = engine::Vector2f(0, 0.175) * scale_factor;
+                const engine::Vector2f button_position_3 = engine::Vector2f(0, -0.175) * scale_factor;
+                const engine::Vector2f button_position_4 = engine::Vector2f(0, -0.51) * scale_factor;
+
+                const engine::Vector2f button_size = engine::Vector2f(0.5, 0.25) * scale_factor;
+                extern const float font_size = 0.085f * scale_factor;
+            }
+
+            namespace level_menu {
+
+                const engine::Vector2f level_select_button_size = engine::Vector2f(0.3, 0.3) * scale_factor;
+                const engine::Vector2f arrow_button_size = engine::Vector2f(0.3, 0.3) * scale_factor;
+
+                const engine::Vector2f return_button_position = engine::Vector2f(0, -0.75) * scale_factor;
+
+            }
+
+        }
     } // constants
 } // game

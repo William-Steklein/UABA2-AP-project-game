@@ -21,13 +21,15 @@ namespace game {
 
         _fps_counter_text = _state_machine.getViewComponentCreator()->createTextBox(
                 {0.5f, 0.25f}, constants::layer::ui_text, true, "PTSans-bold");
-        _fps_counter_text->setFontSize(0.08f);
+        _fps_counter_text->setFontSize(0.08f * constants::ui::scale_factor);
 
         _fps_counter = std::make_shared<engine::Entity>(engine::Entity(
-                {{-1.25 * (5.f / 3.f), 0.9 * (3.f / 2.f)}, {1, 1}, 0},
+                {engine::Vector2f(-1.25, 0.9) * constants::ui::scale_factor, {1, 1}, 0},
                 {_fps_counter_text}
         ));
         _entities.push_back(_fps_counter);
+
+        createBackgroundBackground();
 
         createDebugViewComponents();
 
@@ -233,6 +235,38 @@ namespace game {
 
     void WorldState::updateFpsCounterText() {
         _fps_counter_text->setText(std::to_string(engine::Stopwatch::getInstance().getAverageFps()));
+    }
+
+    void WorldState::createBackgroundBackground() {
+        _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
+                {{-1.25, 0.25}, {1, 1}, 0},
+                {_state_machine.getViewComponentCreator()->createSprite({2.5, 2.5}, constants::layer::bg_1, true,
+                                                                        "bg-sky")}
+        )));
+
+        _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
+                {{1.25, 0.25}, {1, 1}, 0},
+                {_state_machine.getViewComponentCreator()->createSprite({2.5, 2.5}, constants::layer::bg_1, true,
+                                                                        "bg-sky")}
+        )));
+
+        _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
+                {{0, 0}, {1, 1}, 0},
+                {_state_machine.getViewComponentCreator()->createSprite({6, 6}, constants::layer::bg_2, true,
+                                                                        "bg-mountains")}
+        )));
+
+        _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
+                {{0, 0.25}, {1, 1}, 0},
+                {_state_machine.getViewComponentCreator()->createSprite({6, 6}, constants::layer::bg_3, true,
+                                                                        "bg-ruins")}
+        )));
+
+        _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
+                {{2, 1.1}, {1, 1}, 0},
+                {_state_machine.getViewComponentCreator()->createSprite({0.4, 0.4}, constants::layer::bg_4, true,
+                                                                        "bg-sun")}
+        )));
     }
 
 } // game

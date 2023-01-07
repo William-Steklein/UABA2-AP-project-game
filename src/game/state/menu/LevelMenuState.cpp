@@ -13,12 +13,14 @@ namespace game {
     }
 
     void LevelMenuState::enter() {
+        createBackground();
+
         _menu_background = std::shared_ptr<engine::UIEntity>(new engine::UIEntity(
                 {{0, 0}, {1, 1}, 0}
         ));
         _entities.push_back(_menu_background);
 
-        _return_button = createMenuButton("return", {0, -0.75}, _menu_background);
+        _return_button = createMenuButton("return", constants::ui::level_menu::return_button_position, _menu_background);
 
         if (_panel_amount == 0) {
             std::shared_ptr<engine::ITextBoxComponent> text =
@@ -105,7 +107,7 @@ namespace game {
             panel_level_amount = _remainder;
         }
 
-        float distance = 0.5f;
+        float distance = 0.5f * constants::ui::scale_factor;
         engine::Vector2f button_start_position{-distance,
                                                distance};
 

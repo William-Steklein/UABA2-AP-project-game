@@ -63,6 +63,8 @@ namespace game {
         void toggleDebugViewVisibility();
 
         void updateFpsCounterText();
+
+        void createBackgroundBackground();
     };
 
 }

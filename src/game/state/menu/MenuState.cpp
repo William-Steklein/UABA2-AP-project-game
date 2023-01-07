@@ -118,4 +118,24 @@ namespace game {
 
         return button;
     }
+
+    void MenuState::createBackground() {
+        _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
+                {{-1.5, 0}, {1, 1}, 0},
+                {_state_machine.getViewComponentCreator()->createSprite({3, 3}, constants::layer::bg_1, true,
+                                                                        "bg-sky")}
+        )));
+
+        _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
+                {{1.5, 0}, {1, 1}, 0},
+                {_state_machine.getViewComponentCreator()->createSprite({3, 3}, constants::layer::bg_1, true,
+                                                                        "bg-sky")}
+        )));
+
+        _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
+                {{2, 1.1}, {1, 1}, 0},
+                {_state_machine.getViewComponentCreator()->createSprite({0.4, 0.4}, constants::layer::bg_4, true,
+                                                                        "bg-sun")}
+        )));
+    }
 } // game

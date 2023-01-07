@@ -3,9 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level_1.tmx",
+    "activeFile": "levels/level1.tmx",
     "expandedProjectPaths": [
-        "."
+        ".",
+        "levels"
     ],
     "fileStates": {
         "background.tsx": {
@@ -61,11 +62,11 @@
                 4,
                 5
             ],
-            "scale": 3,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 379,
-                "y": 688
+                "x": 281.99999999999994,
+                "y": 580.6666666666667
             }
         },
         "map_1.tmx": {
@@ -163,16 +164,16 @@
     "map.width": 50,
     "openFiles": [
         "map_template.tmx",
-        "level_2.tmx",
-        "level_1.tmx"
+        "props.tsx",
+        "levels/level1.tmx"
     ],
     "project": "game_engine.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "levels/level1.tmx",
         "map_template.tmx",
-        "terrain.tsx",
         "props.tsx",
+        "levels/level1.tmx",
+        "terrain.tsx",
         "level_2.tmx",
         "level_1.tmx",
         "test.tmx",
