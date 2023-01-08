@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "props.tsx",
+    "activeFile": "levels/level_1.tmx",
     "expandedProjectPaths": [
         ".",
         "levels"
@@ -71,38 +71,38 @@
         },
         "levels/level_1.tmx": {
             "expandedObjectLayers": [
-                11,
-                4,
                 5,
-                6
+                4,
+                6,
+                11
             ],
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 255.33333333333331,
-                "y": 174.66666666666666
+                "x": 238.66666666666666,
+                "y": 145.33333333333331
             }
         },
         "levels/level_2.tmx": {
             "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 159.66666666666666,
-                "y": 76.99999999999997
+                "x": 160,
+                "y": 119.83333333333334
             }
         },
         "levels/level_3.tmx": {
             "expandedObjectLayers": [
-                12,
-                6,
+                5,
                 4,
-                5
+                6,
+                12
             ],
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 184.5,
-                "y": 319
+                "x": 160,
+                "y": 319.75
             }
         },
         "levels/level_4.tmx": {
@@ -112,16 +112,16 @@
             "scale": 1.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 63.333333333333314,
-                "y": 4.666666666666686
+                "x": 160,
+                "y": 120.33333333333331
             }
         },
         "levels/level_5.tmx": {
             "scale": 0.75,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 255.9999999999999,
-                "y": 379.9999999999999
+                "x": 160,
+                "y": 399.33333333333337
             }
         },
         "levels/map_template.tmx": {
@@ -161,7 +161,7 @@
         },
         "props.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
+            "scaleInDock": 3,
             "scaleInEditor": 8
         },
         "start_end.tsx": {
@@ -235,19 +235,24 @@
     "map.width": 50,
     "openFiles": [
         "map_template.tmx",
-        "props.tsx"
+        "props.tsx",
+        "levels/level_5.tmx",
+        "levels/level_4.tmx",
+        "levels/level_3.tmx",
+        "levels/level_2.tmx",
+        "levels/level_1.tmx"
     ],
     "project": "game_engine.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "levels/level_5.tmx",
         "map_template.tmx",
         "props.tsx",
-        "levels/map_template.tmx",
+        "levels/level_5.tmx",
+        "levels/level_4.tmx",
         "levels/level_3.tmx",
         "levels/level_2.tmx",
-        "levels/level_4.tmx",
         "levels/level_1.tmx",
+        "levels/map_template.tmx",
         "terrain.tsx",
         "levels/test.tmx",
         "levels/level1.tmx",

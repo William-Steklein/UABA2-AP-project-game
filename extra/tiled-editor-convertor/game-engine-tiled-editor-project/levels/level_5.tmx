@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="20" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="96">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="20" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="98">
  <properties>
   <property name="camera_end" value="152,0"/>
   <property name="camera_move_time" type="float" value="15"/>
@@ -137,11 +137,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-53,53,53,54,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+61,53,53,54,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 56,56,56,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 56,56,56,72,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 65,59,59,60,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -218,5 +218,6 @@
   <object id="50" x="161" y="192" width="15" height="144"/>
   <object id="51" x="224" y="192" width="15" height="96"/>
   <object id="52" x="48" y="128" width="15" height="48"/>
+  <object id="97" x="0" y="64" width="15" height="80"/>
  </objectgroup>
 </map>
