@@ -91,9 +91,6 @@ namespace game {
 
         std::string line;
         unsigned int line_count{0};
-//        while (std::getline(level_file, line)) {
-//            LOGDEBUG(line);
-//        }
 
         while (std::getline(level_file, line)) {
             line_count++;
@@ -132,6 +129,8 @@ namespace game {
                             level_data->camera_start = parseVector2fString(meta_pair.second);
                         } else if (meta_pair.first == "camera_end") {
                             level_data->camera_end = parseVector2fString(meta_pair.second);
+                        } else if (meta_pair.first == "camera_pos_y_lock") {
+                            level_data->camera_pos_y_lock = parseBoolString(meta_pair.second);
                         }
                     }
 

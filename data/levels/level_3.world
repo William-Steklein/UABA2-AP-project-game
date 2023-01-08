@@ -5,6 +5,7 @@ limit= 5.0, 10.25
 camera_move_time= 0.0
 camera_start= 0.125, 10.125
 camera_end= 0.125, 10.125
+camera_pos_y_lock= 1
 
 -entities
 0; 0.625, 0.625; ;

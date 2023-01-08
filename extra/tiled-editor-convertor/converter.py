@@ -107,6 +107,7 @@ class WorldMap:
         self.camera_start_position: Vector2 = Vector2(0, 0)
         self.camera_end_position: Vector2 = Vector2(0, 0)
         self.camera_move_time: float = 0
+        self.camera_pos_y_lock: bool = False
 
         self.name = get_filename_from_path_without_extension(tile_map_filename)
 
@@ -187,6 +188,8 @@ class WorldMap:
             elif property_name == "camera_end":
                 self.camera_end_position = self.__convert_vector2_position_pixel_to_world_unit(
                     parse_Vector2_from_string(property_value), Vector2(0.25, 0.25), True)
+            elif property_name == "camera_pos_y_lock":
+                self.camera_pos_y_lock = property_value == "true"
 
     def __convert_vector2_position_pixel_to_world_unit(self, position_pixel: Vector2,
                                                        entity_world_size: Vector2 = Vector2(0.25, 0.25),
@@ -317,6 +320,7 @@ class Converter:
             f.write(f"camera_move_time= {world_map.camera_move_time}\n")
             f.write(f"camera_start= {world_map.camera_start_position}\n")
             f.write(f"camera_end= {world_map.camera_end_position}\n")
+            f.write(f"camera_pos_y_lock= {int(world_map.camera_pos_y_lock)}\n")
 
             f.write("\n")
 

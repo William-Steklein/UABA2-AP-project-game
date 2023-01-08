@@ -71,10 +71,10 @@
         },
         "levels/level_1.tmx": {
             "expandedObjectLayers": [
+                6,
                 5,
                 4,
-                11,
-                6
+                11
             ],
             "scale": 2,
             "selectedLayer": 2,
@@ -93,8 +93,8 @@
         },
         "levels/level_3.tmx": {
             "expandedObjectLayers": [
-                5,
-                6
+                6,
+                5
             ],
             "scale": 1.5,
             "selectedLayer": 6,
@@ -137,7 +137,7 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 439,
+                "x": 438,
                 "y": 552
             }
         },
@@ -225,7 +225,7 @@
         "levels/level_4.tmx"
     ],
     "project": "game_engine.tiled-project",
-    "property.type": "string",
+    "property.type": "bool",
     "recentFiles": [
         "map_template.tmx",
         "props.tsx",

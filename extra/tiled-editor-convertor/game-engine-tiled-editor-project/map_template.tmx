@@ -3,6 +3,7 @@
  <properties>
   <property name="camera_end" value="0,0"/>
   <property name="camera_move_time" type="float" value="0"/>
+  <property name="camera_pos_y_lock" type="bool" value="false"/>
   <property name="camera_start" value="0,0"/>
   <property name="finish_pos" value="0,0"/>
   <property name="player_pos" value="0,0"/>

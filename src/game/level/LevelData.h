@@ -51,12 +51,12 @@ namespace game {
         engine::Vector2f camera_start;
         engine::Vector2f camera_end;
         float camera_move_time = 0;
+        bool camera_pos_y_lock = false;
 
         EntityData player;
         EntityData finish;
         std::vector<WallData> walls;
         std::vector<TileData> tiles;
-//        std::vector<EntityData> backgrounds;
     };
 
 } // game

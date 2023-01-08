@@ -7,7 +7,7 @@
 namespace game {
 
     WorldState::WorldState(Game &state_machine, std::stack<std::unique_ptr<IGameState>> &states)
-            : IGameState(state_machine, states), _camera_limit(false),
+            : IGameState(state_machine, states), _camera_limit(false), _camera_pos_y_lock(false),
               _debug_view_visibility(false) {
 
     }
@@ -36,8 +36,11 @@ namespace game {
         updateFpsCounterText();
 
         if (!_camera_move_vector.empty()) {
-            controlCamera();
+            _state_machine.getCamera()->setPosition(_camera_start);
+        } else {
+            _state_machine.getCamera()->setPosition(_player->getPosition());
         }
+
         // graphics update after changing camera position
         graphicsUpdate(engine::Stopwatch::getInstance().getTime(),
                        engine::Stopwatch::getInstance().getDeltaTime());
@@ -58,6 +61,7 @@ namespace game {
         _fps_counter = nullptr;
 
         _camera_limit = false;
+        _camera_pos_y_lock = false;
 
         IGameState::reset();
     }
@@ -116,7 +120,14 @@ namespace game {
         if (!_camera_move_vector.empty()) {
             camera->move(_camera_move_vector);
         } else {
-            camera->setPosition(_player->getPosition());
+
+            engine::Vector2f move_vector = _player->getPosition() - camera->getPosition();
+
+            if (_camera_pos_y_lock && move_vector.y < 0) {
+                move_vector.y = 0;
+            }
+
+            camera->move(move_vector);
         }
 
         if (_camera_limit) {

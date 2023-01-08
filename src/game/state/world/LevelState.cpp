@@ -68,9 +68,9 @@ namespace game {
             float move_amount = _level_data->camera_move_time / engine::constants::physics_delta_time;
 
             _camera_move_vector = (_level_data->camera_end - _level_data->camera_start) / move_amount;
-
-            _state_machine.getCamera()->setPosition(_camera_start);
         }
+
+        _camera_pos_y_lock = _level_data->camera_pos_y_lock;
 
         createPlayer(_level_data->player.position, _level_data->player.size);
 
