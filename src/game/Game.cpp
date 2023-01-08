@@ -17,10 +17,25 @@ namespace game {
         initSidebars(constants::layer::side_bar);
 
         // load data
-        _config = parseConfig("data/config_default.json");
-        _level_data = levelsDataParser("data/levels/levels.json");
+        try {
+            _config = parseConfig("data/config_default.json");
+        } catch (const std::runtime_error &e) {
+            LOGERROR("Unable to load config data");
 
-        IGameState::init<MainMenuState>(*this, _states);
+            quit();
+        }
+
+        try {
+            _level_data = levelsDataParser("data/levels/levels.json");
+        } catch (const std::runtime_error &e) {
+            LOGERROR("Unable to load level data");
+
+            quit();
+        }
+
+        if (!isQuit()) {
+            IGameState::init<MainMenuState>(*this, _states);
+        }
     }
 
     void Game::update() {

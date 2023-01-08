@@ -3,10 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "levels/level_1.tmx",
+    "activeFile": "levels/level_5.tmx",
     "expandedProjectPaths": [
-        ".",
-        "levels"
+        "levels",
+        "."
     ],
     "fileStates": {
         "background.tsx": {
@@ -117,11 +117,11 @@
             }
         },
         "levels/level_5.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 6,
+            "scale": 1,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 160,
-                "y": 399.33333333333337
+                "x": 223,
+                "y": 357
             }
         },
         "levels/map_template.tmx": {
@@ -247,11 +247,11 @@
     "recentFiles": [
         "map_template.tmx",
         "props.tsx",
-        "levels/level_5.tmx",
-        "levels/level_4.tmx",
-        "levels/level_3.tmx",
-        "levels/level_2.tmx",
         "levels/level_1.tmx",
+        "levels/level_2.tmx",
+        "levels/level_3.tmx",
+        "levels/level_4.tmx",
+        "levels/level_5.tmx",
         "levels/map_template.tmx",
         "terrain.tsx",
         "levels/test.tmx",

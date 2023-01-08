@@ -13,7 +13,14 @@ namespace engine {
               _physics_delta_time(constants::physics_delta_time), _physics_time(0.f),
               _accumulator(0.f), _physics_speed(1.f) {
         _view_component_creator->setCamera(_camera);
-        _resource_manager->loadResources("data/resource-info/resources.json");
+
+        try {
+            _resource_manager->loadResources("data/resource-info/resources.json");
+        } catch (const std::runtime_error &e) {
+            LOGERROR("Unable to load resource data");
+
+            quit();
+        }
     }
 
     void Engine::quit() {
