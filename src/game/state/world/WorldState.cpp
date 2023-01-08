@@ -49,6 +49,7 @@ namespace game {
         _player = nullptr;
 
         _walls.clear();
+        _slide_walls.clear();
         _tiles.clear();
 
         _debug_components.clear();
