@@ -91,12 +91,12 @@ namespace game {
         _weak_entities.push_back(_panel);
 
         if (_current_panel != 0) {
-            _left_arrow_button = createArrowButton({-1, 0}, true, _panel);
+            _left_arrow_button = createArrowButton(engine::Vector2f(-1, 0) * constants::ui::scale_factor, true, _panel);
             _weak_entities.push_back(_left_arrow_button);
         }
 
         if (_current_panel != _panel_amount - 1) {
-            _right_arrow_button = createArrowButton({1, 0}, false, _panel);
+            _right_arrow_button = createArrowButton(engine::Vector2f(1, 0) * constants::ui::scale_factor, false, _panel);
             _weak_entities.push_back(_right_arrow_button);
         }
 

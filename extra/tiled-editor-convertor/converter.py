@@ -229,15 +229,6 @@ class WorldMap:
 
                 tile_sprite = self.__get_tile(int(tile_id))
 
-                # tile_list.append(
-                #     WorldTileEntity(
-                #         convert_pixel_to_world_unit(x_tile_pos * self.tile_width_pixel) + tile_sprite.width / 2,
-                #         convert_pixel_to_world_unit(
-                #             y_tile_pos * self.tile_height_pixel) + tile_sprite.height / 2,
-                #         tile_sprite, tile_type))
-
-                # test = x_tile_pos * self.tile_width_pixel + (tile_sprite.size.x / 2)
-
                 position = convert_vector2_pixel_to_world_unit(
                     x_tile_pos * self.tile_width_pixel,
                     y_tile_pos * self.tile_height_pixel
