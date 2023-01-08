@@ -61,6 +61,8 @@ namespace game {
         _fps_counter = nullptr;
 
         _camera_limit = false;
+        _camera_start.clear();
+        _camera_move_vector.clear();
         _camera_pos_y_lock = false;
 
         IGameState::reset();
@@ -120,7 +122,6 @@ namespace game {
         if (!_camera_move_vector.empty()) {
             camera->move(_camera_move_vector);
         } else {
-
             engine::Vector2f move_vector = _player->getPosition() - camera->getPosition();
 
             if (_camera_pos_y_lock && move_vector.y < 0) {
