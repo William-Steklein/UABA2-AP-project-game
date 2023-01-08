@@ -19,6 +19,7 @@ namespace game {
     private:
         std::shared_ptr<Button> _resume_button;
         std::shared_ptr<Button> _restart_button;
+        std::shared_ptr<Button> _level_menu_button;
         std::shared_ptr<Button> _main_menu_button;
     };
 

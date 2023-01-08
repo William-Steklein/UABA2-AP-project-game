@@ -13,13 +13,6 @@ namespace game {
         _level_data = _state_machine.getCurrentLevelDataPoint();
         loadLevelData();
 
-//        std::shared_ptr<engine::Entity> background = std::make_shared<Tile>(Tile(
-//                {_level_data->origin, {1, 1}, 0},
-//                _state_machine.getViewComponentCreator()->createSprite({5, 5}, constants::layer::bg_1, true, "bg-sky")
-//        ));
-//
-//        _entities.push_back(background);
-
         WorldState::enter();
     }
 
