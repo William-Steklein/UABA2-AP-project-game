@@ -8,6 +8,9 @@
 
 namespace engine {
 
+    /**
+     * Interface class that manages the loading of the game resources / assets and stores them.
+     */
     class IResourceManager {
     public:
         void loadResources(const std::string &resources_config_path);

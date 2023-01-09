@@ -12,6 +12,9 @@
 
 namespace engine {
 
+    /**
+     * Singleton class that is used to manage the framerate of the game.
+     */
     class Stopwatch {
     public:
         Stopwatch(const Stopwatch &) = delete;
@@ -20,6 +23,9 @@ namespace engine {
 
         static Stopwatch &getInstance();
 
+        /**
+         * Sleeps for the rest of the frame until the specified frame_duration_limit
+         */
         void sleepFrame();
 
         float getDeltaTime() const;

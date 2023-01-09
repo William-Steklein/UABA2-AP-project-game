@@ -1,29 +1,6 @@
 #include "engine/Engine.h"
 
 namespace engine {
-    Engine::Engine(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
-                   std::shared_ptr<IResourceManager> resource_manager,
-                   std::shared_ptr<IViewComponentCreator> view_component_creator,
-                   std::shared_ptr<IAudioComponentCreator> audio_component_creator)
-            : _resource_manager(std::move(resource_manager)),
-              _view_component_creator(std::move(view_component_creator)),
-              _audio_component_creator(std::move(audio_component_creator)),
-              _camera(std::make_shared<Camera>(screen_x_min, screen_x_max, screen_y_min, screen_y_max)),
-              _quit(false),
-              _physics_delta_time(1.f / constants::physics_framerate_limit), _physics_time(0.f),
-              _accumulator(0.f), _physics_speed(1.f) {
-        _view_component_creator->setCamera(_camera);
-
-        try {
-            _resource_manager->loadResources("data/resource-info/resources.json");
-        } catch (const std::exception &e) {
-            LOGERROR(e.what());
-            LOGERROR("Unable to load resource data");
-
-            quit();
-        }
-    }
-
     void Engine::quit() {
         _quit = true;
     }
@@ -74,6 +51,29 @@ namespace engine {
 
     const std::shared_ptr<Camera> &Engine::getCamera() const {
         return _camera;
+    }
+
+    Engine::Engine(float screen_x_min, float screen_x_max, float screen_y_min, float screen_y_max,
+                   std::shared_ptr<IResourceManager> resource_manager,
+                   std::shared_ptr<IViewComponentCreator> view_component_creator,
+                   std::shared_ptr<IAudioComponentCreator> audio_component_creator)
+            : _resource_manager(std::move(resource_manager)),
+              _view_component_creator(std::move(view_component_creator)),
+              _audio_component_creator(std::move(audio_component_creator)),
+              _camera(std::make_shared<Camera>(screen_x_min, screen_x_max, screen_y_min, screen_y_max)),
+              _quit(false),
+              _physics_delta_time(1.f / constants::physics_framerate_limit), _physics_time(0.f),
+              _accumulator(0.f), _physics_speed(1.f) {
+        _view_component_creator->setCamera(_camera);
+
+        try {
+            _resource_manager->loadResources("data/resource-info/resources.json");
+        } catch (const std::exception &e) {
+            LOGERROR(e.what());
+            LOGERROR("Unable to load resource data");
+
+            quit();
+        }
     }
 
     void Engine::initSidebars(unsigned int layer) {

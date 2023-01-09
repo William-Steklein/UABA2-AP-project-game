@@ -7,6 +7,9 @@
 
 namespace engine {
 
+    /**
+     * Singleton class that logs messages to output-streams.
+     */
     class Logger {
     public:
         Logger(const Logger &) = delete;
@@ -37,6 +40,7 @@ namespace engine {
 
 } // engine
 
+// remove debug logs in release builds
 #ifndef NDEBUG
 #define LOGDEBUG(message) *engine::Logger::getInstance().getDebugStream() << message << std::endl
 #else

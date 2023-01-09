@@ -31,8 +31,6 @@ namespace game {
         Player(engine::Transform transform,
                std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite);
 
-        ~Player() override = default;
-
         void physicsUpdate(double t, float dt) override;
 
         void graphicsUpdate(double t, float dt) override;

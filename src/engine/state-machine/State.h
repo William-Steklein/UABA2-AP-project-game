@@ -7,6 +7,15 @@
 
 namespace engine {
 
+    /**
+     * Generic interface state class that implements the state design pattern.
+     * @tparam StateMachine state machine class that will use concrete states of this class
+     * @tparam Input input type used for the state machine
+     *
+     * Used as reference:
+     * - "https://codereview.stackexchange.com/questions/40686/state-pattern-c-template"
+     * - "https://gameprogrammingpatterns.com/state.html"
+     */
     template<typename StateMachine, class Input>
     class State {
     public:

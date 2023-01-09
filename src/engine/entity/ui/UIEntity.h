@@ -6,11 +6,16 @@
 
 namespace engine {
 
+    /**
+     * Represents an UI entity.
+     * Contains a list of UIEntity child pointers and an UIEntity parent pointer.
+     *
+     * This class uses the composite design pattern to manage the state of it's ui children recursively.
+     * This allow for composite ui design.
+     */
     class UIEntity : public Entity {
     public:
         UIEntity(Transform transform, const std::vector<std::shared_ptr<IComponent>> &components = {});
-
-        ~UIEntity() override = default;
 
         void graphicsUpdate(double t, float dt) override;
 

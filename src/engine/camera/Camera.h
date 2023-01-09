@@ -11,6 +11,11 @@
 
 namespace engine {
 
+    /**
+     * Represents a camera for the 2d view of the game.
+     * Manages the projection of world coordinates to the renderer view,
+     * relative to the camera position and camera boundaries.
+     */
     class Camera {
     public:
         struct ViewBoundaries {
@@ -54,22 +59,29 @@ namespace engine {
 
         std::tuple<Vector2f, Vector2f, Vector2f> getSidebarData() const;
 
+        /**
+         * Updates sub screen boundaries and sidebars position and size.
+         */
         void updateSubScreenResolution();
 
+        // project coord world to renderer
         Vector2f projectCoordWorldToSubScreen(const Vector2f &coord, bool ui_space = false) const;
 
         float projectVerticalSizeWorldToSubScreen(float vertical_size) const;
 
         float projectHorizontalSizeWorldToSubScreen(float horizontal_size) const;
 
+        // project size world to renderer
         Vector2f projectSizeWorldToSubScreen(const Vector2f &size) const;
 
         Vector2f projectCoordScreenToWorld(const Vector2f &coord) const;
 
         Vector2f projectSizeScreenToWorld(const Vector2f &size) const;
 
+        // project coord renderer to world
         Vector2f projectCoordSubScreenToWorld(const Vector2f &coord) const;
 
+        // project size renderer to world
         Vector2f projectSizeSubScreenToWorld(const Vector2f &size) const;
 
         bool isInView(const Vector2f &point) const;

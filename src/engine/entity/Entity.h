@@ -12,11 +12,18 @@
 
 namespace engine {
 
+    /**
+     * Represents a game entity.
+     * Contains a Transform object and a list of components that define its behaviour.
+     *
+     * This class uses composition over inheritance to implement it's behaviour, but can still be inherited from
+     * to add behaviour outside of the components.
+     *
+     * The physics and the graphics components are only updated in their respective update functions.
+     */
     class Entity {
     public:
         Entity(Transform transform, const std::vector<std::shared_ptr<IComponent>> &components = {});
-
-        virtual ~Entity() = default;
 
         virtual void physicsUpdate(double t, float dt);
 

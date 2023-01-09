@@ -7,6 +7,9 @@
 
 namespace engine {
 
+    /**
+     * Represents a 2D vector with x and y components of floating point type.
+     */
     class Vector2f {
     public:
         float x;

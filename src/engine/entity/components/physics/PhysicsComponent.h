@@ -13,6 +13,11 @@ namespace engine {
 
         ~PhysicsComponent() override = default;
 
+        /**
+         * Physics integration, reference "https://gafferongames.com/post/integration_basics/"
+         * @param t
+         * @param dt
+         */
         void update(double t, float dt) override;
 
         float getMass() const;

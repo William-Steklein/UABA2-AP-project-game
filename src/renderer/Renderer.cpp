@@ -22,8 +22,6 @@ namespace renderer {
         }
     }
 
-    Renderer::~Renderer() = default;
-
     void Renderer::run() {
         while (_running) {
             // engine sleep

@@ -42,10 +42,6 @@ namespace game {
         }
     }
 
-    void Game::update() {
-        Engine::update();
-    }
-
     void Game::handleInputs(const std::vector<engine::Input> &inputs) {
         for (const auto &input: inputs) {
             game::InputEvent input_event{};
@@ -92,10 +88,6 @@ namespace game {
 
     const std::vector<std::shared_ptr<LevelData>> &Game::getLevelData() const {
         return _level_data;
-    }
-
-    const std::shared_ptr<LevelData> &Game::getLevelDataPoint(unsigned int level_id) const {
-        return _level_data[level_id];
     }
 
     const std::shared_ptr<LevelData> &Game::getCurrentLevelDataPoint() const {

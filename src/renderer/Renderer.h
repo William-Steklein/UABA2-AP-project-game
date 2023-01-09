@@ -19,12 +19,19 @@
 
 namespace renderer {
 
+    /**
+     * Manages the rendering of a game using the SFML library.
+     */
     class Renderer {
     public:
+        /**
+         * Default constructor
+         */
         Renderer();
 
-        ~Renderer();
-
+        /**
+         * The main game loop. This function handles events, updates the game state, and draws the game.
+         */
         void run();
 
     private:
@@ -42,12 +49,26 @@ namespace renderer {
 
         std::unique_ptr<game::Game> _game;
 
+        /**
+         * Clears the window and draws the view components.
+         */
         void draw();
 
+        /**
+         * Handles SFML events and passes user input to the game.
+         */
         void handleEvents();
 
+        /**
+         * Closes the window and quits the main game loop.
+         */
         void quit();
 
+        /**
+         * Handles a SFML window resize event and passes the data to the game.
+         * @param screen_width
+         * @param screen_height
+         */
         void resizeWindow(unsigned int screen_width, unsigned int screen_height);
     };
 

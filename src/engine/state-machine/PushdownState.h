@@ -5,6 +5,12 @@
 
 namespace engine {
 
+    /**
+     * Interface for pushdown automaton state machine state class.
+     * @tparam PushdownAutomaton
+     * @tparam BaseState
+     * @tparam Input
+     */
     template<typename PushdownAutomaton, class BaseState, class Input>
     class PushdownState : public State<PushdownAutomaton, Input> {
     public:

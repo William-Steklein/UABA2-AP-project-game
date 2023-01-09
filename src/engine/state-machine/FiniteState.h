@@ -5,6 +5,12 @@
 
 namespace engine {
 
+    /**
+     * Interface for finite state machine state class.
+     * @tparam FiniteStateMachine
+     * @tparam BaseState
+     * @tparam Input
+     */
     template<typename FiniteStateMachine, class BaseState, class Input>
     class FiniteState : public State<FiniteStateMachine, Input> {
     public:
