@@ -37,25 +37,41 @@ namespace game {
         namespace size {
 
             const engine::Vector2f player = {0.60f, 0.444f};
-            const engine::Vector2f finish = {0.25,0.25};
-            const engine::Vector2f wall = {0.25,0.25};
-            const engine::Vector2f tile = {0.25,0.25};
+            const engine::Vector2f finish = {0.25, 0.25};
+            const engine::Vector2f wall = {0.25, 0.25};
+            const engine::Vector2f tile = {0.25, 0.25};
 
         }
 
         namespace player {
 
+
+            const float mass = 20;
+
             const float jump_dt = 0.5;
             const float jump_height = 1;
 
-            const float mass = 20;
             const float horizontal_movement_force = 200;
+            const float initial_jump_velocity = 2 * jump_height / jump_dt;
+
+            const float wall_horizontal_jump_velocity = initial_jump_velocity * 0.75f;
+            const engine::Vector2f gravitational_acceleration = {0, -2 * jump_height / (jump_dt * jump_dt)};;
+
+            const engine::Vector2f horizontal_velocity_cap = {-3.5f, 3.5f};
+            const engine::Vector2f vertical_velocity_cap = {-initial_jump_velocity * 1.25f,
+                                                            initial_jump_velocity * 1.25f};
+
+            const engine::Vector2f wall_vertical_velocity_cap = {-initial_jump_velocity * 0.5f,
+                                                                 initial_jump_velocity * 0.5f};
+
+            extern const float stopping_friction = 250.f;
+            extern const float sliding_friction = 50.f;
 
         } // player
 
         namespace ui {
 
-                const float scale_factor = 1.55f;
+            const float scale_factor = 1.55f;
 
             namespace menu {
 

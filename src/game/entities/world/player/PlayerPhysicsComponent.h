@@ -11,8 +11,7 @@ namespace game {
 
     class PlayerPhysicsComponent : public engine::PhysicsComponent {
     public:
-        PlayerPhysicsComponent(float jump_dt = constants::player::jump_dt,
-                               float jump_height = constants::player::jump_height);
+        PlayerPhysicsComponent();
 
         ~PlayerPhysicsComponent() override = default;
 

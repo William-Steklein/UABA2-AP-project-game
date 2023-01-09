@@ -7,6 +7,7 @@
 #include "engine/math/math_utils.h"
 #include "engine/math/Vector2f.h"
 #include "engine/logging/Logger.h"
+#include "engine/constants/constants.h"
 
 namespace engine {
 

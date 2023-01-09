@@ -5,8 +5,11 @@ namespace engine {
 
     Camera::Camera(float left, float right, float bottom, float top)
             : _position(0, 0),
-              _boundaries({-2.5, 2.5, -1.5, 1.5}), _screen_boundaries({left, right, bottom, top}),
-              _sub_screen_aspect_ratio({5, 3}), _sub_screen_boundaries({left, right, bottom, top}) {
+              _boundaries({constants::camera::x_boundary.x, constants::camera::x_boundary.y,
+                           constants::camera::y_boundary.x, constants::camera::y_boundary.y}),
+              _screen_boundaries({left, right, bottom, top}),
+              _sub_screen_aspect_ratio(constants::camera::aspect_ratio),
+              _sub_screen_boundaries({left, right, bottom, top}) {
         if (getWidth() == 0 || getHeight() == 0) {
             throw std::runtime_error("Invalid camera boundaries");
         } else if (getScreenWidth() == 0 || getScreenHeight() == 0) {
@@ -184,7 +187,7 @@ namespace engine {
     }
 
     bool Camera::isInView(const Vector2f &point) const {
-        return !(point.x < _boundaries.x_min + _position.x || point.x > _boundaries.x_max+ _position.x ||
-               point.y < _boundaries.y_min + _position.y || point.y > _boundaries.y_max + _position.y);
+        return !(point.x < _boundaries.x_min + _position.x || point.x > _boundaries.x_max + _position.x ||
+                 point.y < _boundaries.y_min + _position.y || point.y > _boundaries.y_max + _position.y);
     }
 } // engine

@@ -22,6 +22,16 @@ namespace engine {
         // velocities under this value are set to zero
         extern const float velocity_epsilon;
 
+        namespace camera {
+
+            extern const Vector2f x_boundary;
+            extern const Vector2f y_boundary;
+
+            extern const Vector2f aspect_ratio;
+
+        }
+
+
     } // constants
 
 } // engine

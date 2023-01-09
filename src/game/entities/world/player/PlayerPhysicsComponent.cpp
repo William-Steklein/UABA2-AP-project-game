@@ -1,23 +1,19 @@
 #include "PlayerPhysicsComponent.h"
 
 namespace game {
-    PlayerPhysicsComponent::PlayerPhysicsComponent(float jump_dt, float jump_height)
-            : engine::PhysicsComponent(false) {
+    PlayerPhysicsComponent::PlayerPhysicsComponent()
+            : engine::PhysicsComponent(false),
+              _horizontal_movement_force(constants::player::horizontal_movement_force),
+              _initial_jump_velocity(constants::player::initial_jump_velocity),
+              _wall_horizontal_jump_velocity(constants::player::wall_horizontal_jump_velocity),
+              _gravitational_acceleration(constants::player::gravitational_acceleration),
+              _wall_vertical_velocity_cap(constants::player::wall_vertical_velocity_cap),
+              _wall_velocity_clamp(false),
+              _stopping_friction(constants::player::stopping_friction),
+              _sliding_friction(constants::player::sliding_friction) {
         _mass = constants::player::mass;
-        _initial_jump_velocity = 2 * jump_height / jump_dt;
-        _wall_horizontal_jump_velocity = _initial_jump_velocity * 0.75f;
-        _horizontal_movement_force = constants::player::horizontal_movement_force;
-
-        _gravitational_acceleration = {0, -2 * jump_height / (jump_dt * jump_dt)};
-
-        _horizontal_velocity_cap = {-3.5f, 3.5f};
-        _vertical_velocity_cap = {-_initial_jump_velocity * 1.25f, _initial_jump_velocity * 1.25f};
-
-        _stopping_friction = 250.f;
-        _sliding_friction = 50.f;
-
-        _wall_velocity_clamp = false;
-        _wall_vertical_velocity_cap = {-_initial_jump_velocity * 0.5f, _initial_jump_velocity * 0.5f};
+        _horizontal_velocity_cap = constants::player::horizontal_velocity_cap;
+        _vertical_velocity_cap = constants::player::vertical_velocity_cap;
     }
 
     void PlayerPhysicsComponent::update(double t, float dt) {

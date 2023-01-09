@@ -50,11 +50,24 @@ namespace game {
 
         namespace player {
 
+            extern const float mass;
+
             extern const float jump_dt;
             extern const float jump_height;
 
-            extern const float mass;
             extern const float horizontal_movement_force;
+            extern const float initial_jump_velocity;
+
+            extern const float wall_horizontal_jump_velocity;
+            extern const engine::Vector2f gravitational_acceleration;
+
+            extern const engine::Vector2f horizontal_velocity_cap;
+            extern const engine::Vector2f vertical_velocity_cap;
+
+            extern const engine::Vector2f wall_vertical_velocity_cap;
+
+            extern const float stopping_friction;
+            extern const float sliding_friction;
 
         } // player
 
