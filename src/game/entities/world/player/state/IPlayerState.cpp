@@ -7,6 +7,10 @@ namespace game {
 
     }
 
+    void IPlayerState::physicsUpdate(double t, float dt) {
+        State::physicsUpdate(t, dt);
+    }
+
     void IPlayerState::handleInput(const InputEvent &input) {
         if (input.state == InputEvent::State::ENTERED || input.state == InputEvent::State::ACTIVE) {
             switch (input.type) {

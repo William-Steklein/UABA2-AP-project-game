@@ -10,13 +10,14 @@ namespace engine {
               _audio_component_creator(std::move(audio_component_creator)),
               _camera(std::make_shared<Camera>(screen_x_min, screen_x_max, screen_y_min, screen_y_max)),
               _quit(false),
-              _physics_delta_time(constants::physics_delta_time), _physics_time(0.f),
+              _physics_delta_time(1.f / constants::physics_framerate_limit), _physics_time(0.f),
               _accumulator(0.f), _physics_speed(1.f) {
         _view_component_creator->setCamera(_camera);
 
         try {
             _resource_manager->loadResources("data/resource-info/resources.json");
-        } catch (const std::runtime_error &e) {
+        } catch (const std::exception &e) {
+            LOGERROR(e.what());
             LOGERROR("Unable to load resource data");
 
             quit();

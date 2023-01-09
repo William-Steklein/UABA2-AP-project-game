@@ -28,7 +28,7 @@ namespace game {
             return;
         }
 
-        IPlayerState::physicsUpdate(0, 0);
+        IPlayerState::physicsUpdate(t, dt);
     }
 
     void InAirState::handleInput(const InputEvent &input) {

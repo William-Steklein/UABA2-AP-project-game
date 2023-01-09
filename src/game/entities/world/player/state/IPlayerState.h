@@ -12,6 +12,8 @@ namespace game {
     public:
         IPlayerState(Player &state_machine, std::unique_ptr<IPlayerState> &state);
 
+        void physicsUpdate(double t, float dt) override;
+
         void handleInput(const InputEvent &input) override;
     };
 

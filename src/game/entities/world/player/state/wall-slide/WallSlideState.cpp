@@ -31,18 +31,20 @@ namespace game {
             return set<IdleState>();
         }
 
-        IPlayerState::physicsUpdate(0, 0);
+        IPlayerState::physicsUpdate(t, dt);
     }
 
     void WallSlideState::handleInput(const InputEvent &input) {
         if ((input.type == InputEvent::Type::LEFT && _state_machine.isFacingLeft()) ||
             (input.type == InputEvent::Type::RIGHT && !_state_machine.isFacingLeft())) {
+//            _changeable = false;
             return set<FallState>();
         }
 
         if (input.type == InputEvent::Type::JUMP) {
             if (input.state == InputEvent::State::ENTERED) {
                 _state_machine._physics_component->setVelocity({0, 0});
+//                _changeable = false;
                 return set<WallJumpState>();
             }
         }

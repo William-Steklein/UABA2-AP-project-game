@@ -60,9 +60,11 @@ namespace game {
         if (_level_data->camera_move_time != 0) {
             _camera_start = _level_data->camera_start;
 
-            float move_amount = _level_data->camera_move_time / engine::constants::physics_delta_time;
+            float total_frames = _level_data->camera_move_time * engine::constants::physics_framerate_limit;
 
-            _camera_move_vector = (_level_data->camera_end - _level_data->camera_start) / move_amount;
+            engine::Vector2f distance_vector = _level_data->camera_end - _level_data->camera_start;
+
+            _camera_move_vector = (distance_vector) / total_frames;
         }
 
         _camera_pos_y_lock = _level_data->camera_pos_y_lock;

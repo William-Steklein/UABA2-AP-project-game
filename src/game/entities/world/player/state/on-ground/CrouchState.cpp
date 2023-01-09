@@ -9,7 +9,7 @@ namespace game {
     void CrouchState::physicsUpdate(double t, float dt) {
         _state_machine._physics_component->applyStoppingFrictionForce();
 
-        OnGroundState::physicsUpdate(0, 0);
+        OnGroundState::physicsUpdate(t, dt);
     }
 
     void CrouchState::handleInput(const InputEvent &input) {

@@ -4,11 +4,12 @@ namespace engine {
     namespace constants {
 
         const float framerate_limit = 60.f;
-        const bool cap_framerate = true;
+        const bool framerate_cap = true;
+        const bool show_framerate = false;
 
         const float sample_duration = 0.5f;
 
-        const float physics_delta_time = 1 / 60.f;
+        const float physics_framerate_limit = 60.f;
 
         const float animation_frame_time_minimum = 0.001f;
 

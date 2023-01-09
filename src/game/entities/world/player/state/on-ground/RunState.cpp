@@ -16,7 +16,7 @@ namespace game {
         _state_machine._physics_component->applyHorizontalMovementForce(_state_machine.isFacingLeft());
 
 
-        OnGroundState::physicsUpdate(0, 0);
+        OnGroundState::physicsUpdate(t, dt);
     }
 
     void RunState::handleInput(const InputEvent &input) {

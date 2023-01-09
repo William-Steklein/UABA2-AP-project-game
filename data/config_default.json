@@ -4,12 +4,17 @@
       "left": "a",
       "right": "d",
       "down": "s",
-      "jump": "space"
+      "jump": "space",
+
+      "debug_view": "h"
     }
   },
   "audio": {
     "master": 100,
     "sfx": 100,
     "music": 100
-  }
+  },
+  "show_framerate": false,
+  "framerate_cap": true,
+  "framerate_limit": 60
 }

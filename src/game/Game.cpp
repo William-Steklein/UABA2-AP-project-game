@@ -19,7 +19,10 @@ namespace game {
         // load data
         try {
             _config = parseConfig("data/config_default.json");
-        } catch (const std::runtime_error &e) {
+            engine::Stopwatch::getInstance().setCapFramerate(_config.framerate_cap);
+            engine::Stopwatch::getInstance().setFramerateLimit(_config.framerate_limit);
+        } catch (const std::exception &e) {
+            LOGERROR(e.what());
             LOGERROR("Unable to load config data");
 
             quit();
@@ -27,7 +30,8 @@ namespace game {
 
         try {
             _level_data = levelsDataParser("data/levels/levels.json");
-        } catch (const std::runtime_error &e) {
+        } catch (const std::exception &e) {
+            LOGERROR(e.what());
             LOGERROR("Unable to load level data");
 
             quit();
@@ -108,6 +112,10 @@ namespace game {
         } else {
             _current_level_id++;
         }
+    }
+
+    bool Game::showFramerate() const {
+        return _config.show_framerate;
     }
 
     void Game::graphicsUpdate(double t, float dt) {

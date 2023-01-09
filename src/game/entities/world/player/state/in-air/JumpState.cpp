@@ -16,7 +16,7 @@ namespace game {
             return;
         }
 
-        InAirState::physicsUpdate(0, 0);
+        InAirState::physicsUpdate(t, dt);
     }
 
     void WallJumpState::enter() {
@@ -24,5 +24,7 @@ namespace game {
 
         _state_machine._physics_component->walljump(_state_machine.isFacingLeft());
         _state_machine._standing_ray->reset();
+        _state_machine._right_wall_slide_ray->reset();
+        _state_machine._left_wall_slide_ray->reset();
     }
 } // game

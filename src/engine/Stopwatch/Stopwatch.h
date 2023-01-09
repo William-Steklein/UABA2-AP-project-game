@@ -32,7 +32,7 @@ namespace engine {
 
         float getFramerateLimit() const;
 
-        void setFramerateLimit(float frame_duration_limit);
+        void setFramerateLimit(float framerate_limit);
 
         float getAverageFps() const;
 

@@ -19,15 +19,17 @@ namespace game {
             throw std::runtime_error("Loaded world has no player");
         }
 
-        _fps_counter_text = _state_machine.getViewComponentCreator()->createTextBox(
-                {0.5f, 0.25f}, constants::layer::ui_text, true, "PTSans-bold");
-        _fps_counter_text->setFontSize(0.08f * constants::ui::scale_factor);
+        if (_state_machine.showFramerate()) {
+            _fps_counter_text = _state_machine.getViewComponentCreator()->createTextBox(
+                    {0.5f, 0.25f}, constants::layer::ui_text, true, "PTSans-bold");
+            _fps_counter_text->setFontSize(0.08f * constants::ui::scale_factor);
 
-        _fps_counter = std::make_shared<engine::Entity>(engine::Entity(
-                {engine::Vector2f(-1.25, 0.9) * constants::ui::scale_factor, {1, 1}, 0},
-                {_fps_counter_text}
-        ));
-        _entities.push_back(_fps_counter);
+            _fps_counter = std::make_shared<engine::Entity>(engine::Entity(
+                    {engine::Vector2f(-1.25, 0.9) * constants::ui::scale_factor, {1, 1}, 0},
+                    {_fps_counter_text}
+            ));
+            _entities.push_back(_fps_counter);
+        }
 
         createBackgroundBackground();
 
@@ -247,7 +249,9 @@ namespace game {
     }
 
     void WorldState::updateFpsCounterText() {
-        _fps_counter_text->setText(std::to_string(engine::Stopwatch::getInstance().getAverageFps()));
+        if (_fps_counter_text.get()) {
+            _fps_counter_text->setText(std::to_string(engine::Stopwatch::getInstance().getAverageFps()));
+        }
     }
 
     void WorldState::createBackgroundBackground() {

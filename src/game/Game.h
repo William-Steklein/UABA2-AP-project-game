@@ -43,12 +43,15 @@ namespace game {
 
         void advanceCurrentLevel();
 
+        bool showFramerate() const;
+
     private:
         void graphicsUpdate(double t, float dt) override;
 
         void physicsUpdate(double t, float dt) override;
 
         Config _config;
+
         std::shared_ptr<engine::Vector2f> _mouse_position;
 
         std::stack<std::unique_ptr<IGameState>> _states;

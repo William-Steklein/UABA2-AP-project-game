@@ -9,7 +9,7 @@ namespace game {
     void IdleState::physicsUpdate(double t, float dt) {
         _state_machine._physics_component->applyStoppingFrictionForce();
 
-        OnGroundState::physicsUpdate(0, 0);
+        OnGroundState::physicsUpdate(t, dt);
     }
 
     void IdleState::handleInput(const InputEvent &input) {

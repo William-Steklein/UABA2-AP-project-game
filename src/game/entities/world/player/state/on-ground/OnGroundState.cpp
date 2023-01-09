@@ -9,7 +9,7 @@ namespace game {
             set<FallState>();
         }
 
-        IPlayerState::physicsUpdate(0, 0);
+        IPlayerState::physicsUpdate(t, dt);
     }
 
     void OnGroundState::handleInput(const InputEvent &input) {

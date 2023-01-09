@@ -11,16 +11,21 @@ namespace game {
         config.button_map.keyboard[engine::stringToInputButton(k_map["right"])] = game::InputEvent::Type::RIGHT;
         config.button_map.keyboard[engine::stringToInputButton(k_map["down"])] = game::InputEvent::Type::DOWN;
         config.button_map.keyboard[engine::stringToInputButton(k_map["jump"])] = game::InputEvent::Type::JUMP;
+        config.button_map.keyboard[engine::stringToInputButton(
+                k_map["debug_view"])] = game::InputEvent::Type::DEBUGVIEW;
 
         config.button_map.keyboard[engine::Input::Button::ENTER] = game::InputEvent::Type::ACCEPT;
         config.button_map.keyboard[engine::Input::Button::ESCAPE] = game::InputEvent::Type::RETURN;
 
-        config.button_map.keyboard[engine::Input::Button::H] = game::InputEvent::Type::DEBUGVIEW;
 
         nlohmann::json audio = j["audio"];
         config.audio.master = audio["master"];
         config.audio.sfx = audio["sfx"];
         config.audio.music = audio["music"];
+
+        config.show_framerate = j["show_framerate"];
+        config.framerate_cap = j["framerate_cap"];
+        config.framerate_limit = j["framerate_limit"];
 
         return config;
     }

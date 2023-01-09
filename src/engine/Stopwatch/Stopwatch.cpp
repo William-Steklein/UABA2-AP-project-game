@@ -3,7 +3,7 @@
 namespace engine {
     Stopwatch::Stopwatch()
             : _a(std::chrono::steady_clock::now()), _b(std::chrono::steady_clock::now()),
-              _frame_duration_limit(1.f / constants::framerate_limit), _cap_framerate(constants::cap_framerate),
+              _frame_duration_limit(1.f / constants::framerate_limit), _cap_framerate(constants::framerate_cap),
               _delta_time(0.f), _time(0.f),
               _sample_duration(constants::sample_duration), _duration(0.f), _frame_count(0.f),
               _average_framerate(-1.f) {
@@ -68,8 +68,8 @@ namespace engine {
         return _frame_duration_limit;
     }
 
-    void Stopwatch::setFramerateLimit(float frame_duration_limit) {
-        _frame_duration_limit = frame_duration_limit;
+    void Stopwatch::setFramerateLimit(float framerate_limit) {
+        _frame_duration_limit = 1.f / framerate_limit;
     }
 
     float Stopwatch::getAverageFps() const {
