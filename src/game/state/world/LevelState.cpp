@@ -54,11 +54,6 @@ namespace game {
                                  _level_data->origin.y - camera_limit.y / 2};
             _camera_max_limit = {_level_data->origin.x + camera_limit.x / 2,
                                  _level_data->origin.y + camera_limit.y / 2};
-
-            _level_min_limit = {_level_data->origin.x - _level_data->limit.x / 2,
-                                 _level_data->origin.y - _level_data->limit.y / 2};
-            _level_max_limit = {_level_data->origin.x + _level_data->limit.x / 2,
-                                 _level_data->origin.y + _level_data->limit.y / 2};
         }
 
         // camera move
@@ -86,11 +81,9 @@ namespace game {
                 case 0:
                     layer = constants::layer::tile_bg;
                     break;
-
                 case 1:
                     layer = constants::layer::tile_prop;
                     break;
-
                 case 2:
                     layer = constants::layer::tile_fg;
                     break;

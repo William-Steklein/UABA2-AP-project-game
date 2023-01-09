@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics/Color.hpp>
 
-#include <engine/Color.h>
+#include "engine/utils/Color.h"
 
 namespace renderer {
 

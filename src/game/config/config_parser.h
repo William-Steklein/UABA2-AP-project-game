@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "engine/Input.h"
+#include "engine/input/Input.h"
 
 #include "Config.h"
 

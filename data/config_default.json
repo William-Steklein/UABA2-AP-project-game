@@ -4,17 +4,8 @@
       "left": "a",
       "right": "d",
       "down": "s",
-      "up": "w",
-      "jump": "space",
-      "special": "shift"
-    },
-    "controller": {
+      "jump": "space"
     }
-  },
-  "video": {
-    "width": 1280,
-    "height": 720,
-    "full_screen": false
   },
   "audio": {
     "master": 100,

@@ -1,5 +1,5 @@
-#ifndef GAME_ENGINE_INPUTMAPPER_H
-#define GAME_ENGINE_INPUTMAPPER_H
+#ifndef GAME_ENGINE_INPUTCHECKER_H
+#define GAME_ENGINE_INPUTCHECKER_H
 
 
 #include <memory>
@@ -8,13 +8,13 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include <engine/Input.h>
+#include "engine/input/Input.h"
 
 namespace renderer {
 
-    class InputMapper {
+    class InputChecker {
     public:
-        InputMapper(const std::shared_ptr<sf::RenderWindow> &window);
+        InputChecker(const std::shared_ptr<sf::RenderWindow> &window);
 
         void checkMouseButtonInput();
 
@@ -34,4 +34,4 @@ namespace renderer {
 
 } // renderer
 
-#endif //GAME_ENGINE_INPUTMAPPER_H
+#endif //GAME_ENGINE_INPUTCHECKER_H

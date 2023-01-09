@@ -12,10 +12,6 @@ namespace game {
         OnGroundState::physicsUpdate(0, 0);
     }
 
-    void IdleState::graphicsUpdate(double t, float dt) {
-
-    }
-
     void IdleState::handleInput(const InputEvent &input) {
         switch (input.type) {
             case InputEvent::Type::LEFT:

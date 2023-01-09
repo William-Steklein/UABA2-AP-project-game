@@ -1,6 +1,8 @@
 #ifndef GAME_ENGINE_CONSTANTS_ENGINE_H
 #define GAME_ENGINE_CONSTANTS_ENGINE_H
 
+#include "engine/math/Vector2f.h"
+
 namespace engine {
 
     namespace constants {

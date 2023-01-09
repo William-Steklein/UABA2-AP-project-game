@@ -5,7 +5,7 @@
 #include <string>
 #include <map>
 
-#include "engine/Input.h"
+#include "engine/input/Input.h"
 
 #include "game/input/InputEvent.h"
 
@@ -14,13 +14,6 @@ namespace game {
     struct Config {
         struct ButtonMap {
             std::map<engine::Input::Button, game::InputEvent::Type> keyboard;
-//            std::map<engine::Input::Button, game::InputEvent::Type> controller;
-        };
-
-        struct Video {
-            unsigned int width;
-            unsigned int height;
-            bool full_screen;
         };
 
         struct Audio {
@@ -30,7 +23,6 @@ namespace game {
         };
 
         ButtonMap button_map;
-        Video video;
         Audio audio;
     };
 

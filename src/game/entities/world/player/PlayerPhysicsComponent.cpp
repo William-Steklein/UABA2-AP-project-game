@@ -10,7 +10,7 @@ namespace game {
 
         _gravitational_acceleration = {0, -2 * jump_height / (jump_dt * jump_dt)};
 
-        _horizontal_velocity_cap = {-4.f, 4.f};
+        _horizontal_velocity_cap = {-3.5f, 3.5f};
         _vertical_velocity_cap = {-_initial_jump_velocity * 1.25f, _initial_jump_velocity * 1.25f};
 
         _stopping_friction = 250.f;

@@ -60,7 +60,6 @@ namespace game {
                     break;
 
                 case InputEvent::Type::MOUSECLICK:
-//                    case InputEvent::Type::ACCEPT:
                     if (input.state == InputEvent::State::ENTERED) {
                         set<Clicking>();
                     }
@@ -88,7 +87,6 @@ namespace game {
                     break;
 
                 case InputEvent::Type::MOUSECLICK:
-//                    case InputEvent::Type::ACCEPT:
                     if (input.state == InputEvent::State::EXITED) {
                         set<Clicked>();
                     }

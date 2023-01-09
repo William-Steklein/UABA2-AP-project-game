@@ -27,9 +27,6 @@ namespace game {
     private:
         std::shared_ptr<LevelData> _level_data;
 
-        engine::Vector2f _level_min_limit;
-        engine::Vector2f _level_max_limit;
-
         std::shared_ptr<Finish> _finish;
         bool _finished;
 

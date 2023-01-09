@@ -11,11 +11,11 @@
 #include <game/state/IGameState.h>
 
 #include "renderer/constants/constants.h"
-#include "renderer/utils.h"
+#include "renderer/utils/utils.h"
 #include "renderer/resources/ResourceManager.h"
 #include "renderer/components/view/ViewComponentCreator.h"
 #include "renderer/components/audio/AudioComponentCreator.h"
-#include "renderer/InputMapper.h"
+#include "renderer/input/InputChecker.h"
 
 namespace renderer {
 
@@ -34,7 +34,7 @@ namespace renderer {
 
         std::shared_ptr<sf::RenderWindow> _window;
 
-        std::unique_ptr<InputMapper> _input_mapper;
+        std::unique_ptr<InputChecker> _input_mapper;
 
         std::shared_ptr<ResourceManager> _resource_manager;
         std::shared_ptr<ViewComponentCreator> _view_component_creator;

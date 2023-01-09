@@ -2,7 +2,7 @@
 #define GAME_ENGINE_INPUTEVENT_H
 
 
-#include <engine/Input.h>
+#include "engine/input/Input.h"
 
 namespace game {
 
@@ -13,13 +13,11 @@ namespace game {
             LEFT,
             RIGHT,
             DOWN,
-            UP,
 
             ACCEPT,
             RETURN,
 
             JUMP,
-            SPECIAL,
 
             MOUSEMOVED,
             MOUSECLICK,

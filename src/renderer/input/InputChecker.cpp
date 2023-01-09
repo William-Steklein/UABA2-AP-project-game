@@ -1,12 +1,12 @@
-#include "InputMapper.h"
+#include "InputChecker.h"
 
 namespace renderer {
-    InputMapper::InputMapper(const std::shared_ptr<sf::RenderWindow> &window)
-            : _window(std::move(window)) {
+    InputChecker::InputChecker(const std::shared_ptr<sf::RenderWindow> &window)
+            : _window(window) {
 
     }
 
-    void InputMapper::checkMouseButtonInput() {
+    void InputChecker::checkMouseButtonInput() {
         std::map<sf::Mouse::Button, engine::Input::Button> keyboard_button_map = {
                 {sf::Mouse::Left,   engine::Input::Button::MOUSELEFT},
                 {sf::Mouse::Middle, engine::Input::Button::MOUSEMIDDLE},
@@ -40,7 +40,7 @@ namespace renderer {
         }
     }
 
-    void InputMapper::checkKeyboardButtonInput() {
+    void InputChecker::checkKeyboardButtonInput() {
         std::map<sf::Keyboard::Key, engine::Input::Button> keyboard_button_map = {
                 {sf::Keyboard::A,        engine::Input::Button::A},
                 {sf::Keyboard::B,        engine::Input::Button::B},
@@ -105,7 +105,7 @@ namespace renderer {
         }
     }
 
-    void InputMapper::checkMouseMovement() {
+    void InputChecker::checkMouseMovement() {
         sf::Vector2<int> mouse_position = sf::Mouse::getPosition(*_window);
         if (_mouse_position != mouse_position) {
             _mouse_position = mouse_position;
@@ -119,7 +119,7 @@ namespace renderer {
         }
     }
 
-    std::vector<engine::Input> InputMapper::getCurrentInput() {
+    std::vector<engine::Input> InputChecker::getCurrentInput() {
         _current_input.clear();
 
         checkMouseButtonInput();

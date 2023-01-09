@@ -6,7 +6,7 @@ namespace renderer {
         _window = std::make_shared<sf::RenderWindow>(sf::VideoMode(_screen_width, _screen_height),
                                                      constants::window_title);
 
-        _input_mapper = std::make_unique<InputMapper>(_window);
+        _input_mapper = std::make_unique<InputChecker>(_window);
 
         _resource_manager = std::make_shared<ResourceManager>();
         _view_component_creator = std::make_shared<ViewComponentCreator>(_resource_manager);

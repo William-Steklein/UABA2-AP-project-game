@@ -1,6 +1,6 @@
 #include "WorldState.h"
 #include "game/state/menu/PauzeOverlayState.h"
-#include "engine/Stopwatch.h"
+#include "engine/Stopwatch/Stopwatch.h"
 #include "game/entities/world/player/Player.h"
 #include "game/entities/world/player/state/IPlayerState.h"
 
@@ -260,8 +260,7 @@ namespace game {
         _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
                 {{1.25, 0.25}, {1, 1}, 0},
                 {_state_machine.getViewComponentCreator()->createSprite({2.5, 2.5}, constants::layer::bg_1, true,
-                                                                        "bg-sky")}
-        )));
+                                                                        "bg-sky")})));
 
         _entities.push_back(std::make_shared<engine::Entity>(engine::Entity(
                 {{0, 0}, {1, 1}, 0},

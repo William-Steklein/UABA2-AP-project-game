@@ -3,7 +3,7 @@
 
 
 #include "engine/entity/components/view/IViewComponent.h"
-#include "engine/Color.h"
+#include "engine/utils/Color.h"
 
 namespace engine {
 

@@ -1,5 +1,4 @@
 #include "engine/constants/constants.h"
-#include "engine/math/Vector2f.h"
 
 namespace engine {
     namespace constants {

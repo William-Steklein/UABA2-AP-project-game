@@ -7,13 +7,13 @@
 #include <utility>
 
 #include "engine/logging/Logger.h"
-#include "engine/Stopwatch.h"
+#include "engine/Stopwatch/Stopwatch.h"
 #include "engine/resources/IResourceManager.h"
 #include "engine/entity/components/view/IViewComponentCreator.h"
 #include "engine/entity/components/audio/IAudioComponentCreator.h"
 #include "engine/entity/Entity.h"
 #include "engine/camera/Camera.h"
-#include "engine/Input.h"
+#include "engine/input/Input.h"
 
 namespace engine {
 
