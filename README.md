@@ -9,7 +9,7 @@ This project is part of an advanced programming course at the University of Antw
 
 ```
 git clone https://github.com/William-Steklein/UABA2-AP-project-game.git
-cd 2022-project-William-Steklein
+cd UABA2-AP-project-game
 git submodule update --init --recursive --depth 1
 
 mkdir build
