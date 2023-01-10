@@ -8,7 +8,7 @@ This project is part of an advanced programming course at the University of Antw
 ### Clone & compile this project:
 
 ```
-git clone https://github.com/William-Steklein/UABA2-AP-game-engine.git
+git clone https://github.com/William-Steklein/UABA2-AP-project-game.git
 cd 2022-project-William-Steklein
 git submodule update --init --recursive --depth 1
 
