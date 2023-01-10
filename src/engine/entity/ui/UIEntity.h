@@ -10,8 +10,8 @@ namespace engine {
      * Represents an UI entity.
      * Contains a list of UIEntity child pointers and an UIEntity parent pointer.
      *
-     * This class uses the composite design pattern to manage the state of it's ui children recursively.
-     * This allow for composite ui design.
+     * This class uses the composite design pattern to manage the state of its ui children recursively.
+     * This allow for uniform and composite ui design.
      */
     class UIEntity : public Entity {
     public:
