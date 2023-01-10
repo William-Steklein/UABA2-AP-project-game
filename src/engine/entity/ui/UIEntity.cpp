@@ -111,6 +111,6 @@ namespace engine {
         if (relative_positioning) {
             child->setRelativePosition(child->getPosition());
         }
-        child->graphicsUpdate(0,0);
+        child->graphicsUpdate(0, 0);
     }
 } // engine

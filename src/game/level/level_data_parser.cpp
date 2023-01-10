@@ -115,24 +115,23 @@ namespace game {
                 case UNDEFINED:
                     throw std::runtime_error("No header defined while parsing \"" + filepath + "\"");
 
-                case META:
-                    {
-                        std::pair<std::string, std::string> meta_pair = parseMetaLine(line);
+                case META: {
+                    std::pair<std::string, std::string> meta_pair = parseMetaLine(line);
 
-                        if (meta_pair.first == "origin") {
-                            level_data->origin = parseVector2fString(meta_pair.second);
-                        } else if (meta_pair.first == "limit") {
-                            level_data->limit = parseVector2fString(meta_pair.second);
-                        } else if (meta_pair.first == "camera_move_time") {
-                            level_data->camera_move_time = parseFloatString(meta_pair.second);
-                        } else if (meta_pair.first == "camera_start") {
-                            level_data->camera_start = parseVector2fString(meta_pair.second);
-                        } else if (meta_pair.first == "camera_end") {
-                            level_data->camera_end = parseVector2fString(meta_pair.second);
-                        } else if (meta_pair.first == "camera_pos_y_lock") {
-                            level_data->camera_pos_y_lock = parseBoolString(meta_pair.second);
-                        }
+                    if (meta_pair.first == "origin") {
+                        level_data->origin = parseVector2fString(meta_pair.second);
+                    } else if (meta_pair.first == "limit") {
+                        level_data->limit = parseVector2fString(meta_pair.second);
+                    } else if (meta_pair.first == "camera_move_time") {
+                        level_data->camera_move_time = parseFloatString(meta_pair.second);
+                    } else if (meta_pair.first == "camera_start") {
+                        level_data->camera_start = parseVector2fString(meta_pair.second);
+                    } else if (meta_pair.first == "camera_end") {
+                        level_data->camera_end = parseVector2fString(meta_pair.second);
+                    } else if (meta_pair.first == "camera_pos_y_lock") {
+                        level_data->camera_pos_y_lock = parseBoolString(meta_pair.second);
                     }
+                }
 
                     break;
 

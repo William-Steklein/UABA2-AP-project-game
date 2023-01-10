@@ -3,7 +3,7 @@
 namespace game {
     Finish::Finish(engine::Transform transform, std::shared_ptr<engine::IAnimatedSpriteComponent> animated_sprite)
             : engine::Entity(std::move(transform)),
-            _animated_sprite(std::move(animated_sprite)) {
+              _animated_sprite(std::move(animated_sprite)) {
         addComponent(_animated_sprite, false);
 
         _hit_box = std::make_shared<engine::HitBox>(_animated_sprite->getSize() * 0.75f);

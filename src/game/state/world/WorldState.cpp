@@ -1,5 +1,5 @@
 #include "WorldState.h"
-#include "game/state/menu/PauzeOverlayState.h"
+#include "game/state/menu/PauseOverlayState.h"
 #include "engine/Stopwatch/Stopwatch.h"
 #include "game/entities/world/player/Player.h"
 #include "game/entities/world/player/state/IPlayerState.h"
@@ -89,7 +89,7 @@ namespace game {
         switch (input.type) {
             case InputEvent::Type::RETURN:
                 if (input.state == InputEvent::State::ENTERED) {
-                    push<PauzeOverlayState>();
+                    push<PauseOverlayState>();
                 }
 
                 break;

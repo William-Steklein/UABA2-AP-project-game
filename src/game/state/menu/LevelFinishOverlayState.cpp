@@ -14,16 +14,19 @@ namespace game {
         _entities.push_back(menu_background);
 
         if (!_last_level) {
-            _next_level_button = createMenuButton("next level", constants::ui::menu::button_position_1, menu_background);
+            _next_level_button = createMenuButton("next level", constants::ui::menu::button_position_1,
+                                                  menu_background);
             _restart_button = createMenuButton("restart", constants::ui::menu::button_position_2, menu_background);
 
-            _level_menu_button = createMenuButton("level menu", constants::ui::menu::button_position_3, menu_background);
+            _level_menu_button = createMenuButton("level menu", constants::ui::menu::button_position_3,
+                                                  menu_background);
             _main_menu_button = createMenuButton("main menu", constants::ui::menu::button_position_4, menu_background);
         } else {
             _next_level_button = nullptr;
             _restart_button = createMenuButton("restart", constants::ui::menu::button_position_1, menu_background);
 
-            _level_menu_button = createMenuButton("level menu", constants::ui::menu::button_position_2, menu_background);
+            _level_menu_button = createMenuButton("level menu", constants::ui::menu::button_position_2,
+                                                  menu_background);
             _main_menu_button = createMenuButton("main menu", constants::ui::menu::button_position_3, menu_background);
         }
 

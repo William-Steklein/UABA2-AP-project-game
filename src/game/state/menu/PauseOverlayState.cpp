@@ -1,9 +1,9 @@
-#include "PauzeOverlayState.h"
+#include "PauseOverlayState.h"
 #include "MainMenuState.h"
 #include "LevelMenuState.h"
 
 namespace game {
-    void PauzeOverlayState::enter() {
+    void PauseOverlayState::enter() {
         std::shared_ptr<engine::UIEntity> menu_background = createMenuBackground({0, 0});
         _entities.push_back(menu_background);
 
@@ -15,7 +15,7 @@ namespace game {
         MenuState::enter();
     }
 
-    void PauzeOverlayState::graphicsUpdate(double t, float dt) {
+    void PauseOverlayState::graphicsUpdate(double t, float dt) {
         if (_resume_button->isActive()) {
             pop();
         } else if (_restart_button->isActive()) {
@@ -29,7 +29,7 @@ namespace game {
         }
     }
 
-    void PauzeOverlayState::handleInput(const InputEvent &input) {
+    void PauseOverlayState::handleInput(const InputEvent &input) {
         switch (input.type) {
             case InputEvent::Type::RETURN:
                 if (input.state == InputEvent::State::ENTERED) {

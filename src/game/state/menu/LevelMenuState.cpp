@@ -20,7 +20,8 @@ namespace game {
         ));
         _entities.push_back(_menu_background);
 
-        _return_button = createMenuButton("return", constants::ui::level_menu::return_button_position, _menu_background);
+        _return_button = createMenuButton("return", constants::ui::level_menu::return_button_position,
+                                          _menu_background);
 
         if (_panel_amount == 0) {
             std::shared_ptr<engine::ITextBoxComponent> text =
@@ -96,7 +97,8 @@ namespace game {
         }
 
         if (_current_panel != _panel_amount - 1) {
-            _right_arrow_button = createArrowButton(engine::Vector2f(1, 0) * constants::ui::scale_factor, false, _panel);
+            _right_arrow_button = createArrowButton(engine::Vector2f(1, 0) * constants::ui::scale_factor, false,
+                                                    _panel);
             _weak_entities.push_back(_right_arrow_button);
         }
 

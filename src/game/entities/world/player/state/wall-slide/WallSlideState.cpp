@@ -6,7 +6,8 @@
 namespace game {
     void WallSlideState::enter() {
         // reverse direction
-        _state_machine.updateDirection(_state_machine.isFacingLeft() ? Player::Direction::RIGHT : Player::Direction::LEFT);
+        _state_machine.updateDirection(
+                _state_machine.isFacingLeft() ? Player::Direction::RIGHT : Player::Direction::LEFT);
 
         _state_machine._animated_sprite->start("wall_slide", true, _state_machine.isFacingLeft(), false);
 

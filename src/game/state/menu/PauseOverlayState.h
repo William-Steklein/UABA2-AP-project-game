@@ -1,12 +1,12 @@
-#ifndef GAME_ENGINE_PAUZEOVERLAYSTATE_H
-#define GAME_ENGINE_PAUZEOVERLAYSTATE_H
+#ifndef GAME_ENGINE_PAUSEOVERLAYSTATE_H
+#define GAME_ENGINE_PAUSEOVERLAYSTATE_H
 
 
 #include "game/state/menu/MenuState.h"
 
 namespace game {
 
-    class PauzeOverlayState : public MenuState {
+    class PauseOverlayState : public MenuState {
     public:
         using MenuState::MenuState;
 
@@ -25,4 +25,4 @@ namespace game {
 
 } // game
 
-#endif //GAME_ENGINE_PAUZEOVERLAYSTATE_H
+#endif //GAME_ENGINE_PAUSEOVERLAYSTATE_H

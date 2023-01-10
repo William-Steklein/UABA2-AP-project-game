@@ -9,7 +9,7 @@ namespace game {
 
     class Tile : public engine::Entity {
     public:
-        Tile(engine::Transform transform, const std::shared_ptr<engine::ISpriteComponent>& sprite);
+        Tile(engine::Transform transform, const std::shared_ptr<engine::ISpriteComponent> &sprite);
     };
 
 } // game
